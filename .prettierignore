@@ -1,0 +1,10 @@
+# Prettier reformats fenced code blocks inside markdown. Some snippets in the
+# project spec are intentionally compact (e.g. `sr: …, en: …, ru: …` on one line),
+# so readability of the spec wins over a clean --check status.
+context/
+
+# Claude Code tooling, not project source.
+.claude/
+
+# Note: Prettier 3 also reads .gitignore by default, so .next/ and
+# src/generated/prisma/ are already excluded.
