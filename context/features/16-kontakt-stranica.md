@@ -2,7 +2,7 @@
 
 ## Pregled
 
-Faza 3, fajl 3/5. `/kontakt` — kompletna stranica i forma sa validacijom, ALI bez slanja (backend u featureu 17; submit za sada radi lokalnu validaciju i loguje).
+Faza 3, fajl 2/4. `/kontakt` — kompletna stranica i forma sa validacijom, ALI bez slanja (backend u featureu 17; submit za sada radi lokalnu validaciju i loguje).
 
 ## Zahtevi
 
@@ -16,6 +16,7 @@ Faza 3, fajl 3/5. `/kontakt` — kompletna stranica i forma sa validacijom, ALI 
 - Stanja UI: uspeh ("Hvala! Odgovaramo u roku od 24h." + reset forme), greška (podaci ostaju), rate-limit poruka ("Previše pokušaja — pokušajte za nekoliko minuta.") — stanja postoje, feature 17 ih povezuje
 - Kontakt info kartica: **telefon klik-za-prikaz** — dugme "Prikaži broj telefona"; broj se drži u klijentskoj komponenti i renderuje kao `tel:` link tek nakon klika; broj NE sme biti u inicijalnom HTML-u (poglavlje 12); `// TODO(vlasnik): upisati broj`. Plus Instagram/YouTube linkovi, radno područje ("Beograd i okolina · šire uz dogovor"), email (`// TODO: kasnije info@cameramotion.net`)
 - Validacione poruke u `contact` namespace-u (sr + en)
+- **Bez mape.** Dizajn `1c` ima zaseban blok „Područje rada" sa placeholderom `mapa: područje rada` — on se svesno preskače (odluka vlasnika). Područje rada ostaje samo kao rečenica u kontakt kartici, kako stoji gore
 
 ## Testiranje
 

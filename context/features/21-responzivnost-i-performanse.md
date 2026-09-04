@@ -23,7 +23,7 @@ Faza 4, fajl 3/3 (kraj projekta). Završni prolaz kroz ceo sajt + čišćenje + 
 ### Čišćenje i dokumentacija
 - Obrisati `/dev-ui`
 - 404 stranica: lokalizovana, sa linkom na početnu
-- README dopuniti: pregled projekta, instalacija, env varijable, komande, ručni deploy na Vercel, gde se menjaju cene (packages.ts), recenzije (testimonials.ts), video ID-jevi (services.ts), hero video (uputstvo iz feature-a 06), troubleshooting — dovoljno da se vlasnik posle pauze od par meseci brzo snađe
+- README dopuniti: pregled projekta, instalacija, env varijable, komande, ručni deploy na Vercel, gde se menjaju cene (`PRICES` blok u packages.ts), ekipa (team.ts), video ID-jevi (services.ts), hero brojke, hero video (uputstvo iz feature-a 06), troubleshooting — dovoljno da se vlasnik posle pauze od par meseci brzo snađe
 
 ## Testiranje
 

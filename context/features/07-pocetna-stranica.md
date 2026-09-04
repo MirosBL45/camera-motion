@@ -10,13 +10,14 @@ Redosled sekcija (uskladiti sa dizajn referencom; ako dizajn ima drugačiji redo
 1. Hero (feature 06)
 2. **Pregled usluga** — 5 kartica iz `services.ts` (kadar placeholder, naziv, rečenica, link); FPV kartica istaknuta (zlatna bordura) kao diferencijator
 3. **"Radimo drugačije"** — na `surface-warm` pozadini: čuvanje emocija, filmski izgled, glatki gimbal kadrovi, čist zvuk; tekst + fotka placeholder
-4. **Recenzije** — placeholder sekcija sa TODO komentarom; prava komponenta dolazi u featureu 14 i ovde se samo uključuje (ostaviti jasno mesto)
-5. **Traka poverenja** — jedan red sitno: "Snimanje u skladu sa regulativom DCV · DJI dronovi · Montaža u Adobe Premiere Pro"
-6. **Završni CTA** — `primary` zelena pozadina, svetli tekst, dugme ka /kontakt
+4. **Traka poverenja** — jedan red sitno: "Snimanje u skladu sa regulativom DCV · DJI dronovi · Montaža u Adobe Premiere Pro"
+5. **Završni CTA** — `primary` zelena pozadina, svetli tekst, dugme ka /kontakt
+
+**Recenzije se NE prave** (feature 14 otkazan). Dizajn između „Radimo drugačije" i trake poverenja ima sekciju „Šta kažu mladenci" — ona se preskače, bez placeholdera i bez ostavljenog mesta. Sekcije se spajaju kao da je nikad nije ni bilo.
 
 ## Napomene
 
-- Bez sekcije sa brojkama/statistikama (mlad brend — ne isticati male brojke)
+- Brojke stoje samo u traci unutar heroa (feature 06, po dizajnu) — ispod heroa nema zasebne sekcije sa statistikama
 - Svi tekstovi u `home` namespace-u; bez scroll animacija
 
 ## Testiranje
@@ -33,7 +34,7 @@ Redosled sekcija (uskladiti sa dizajn referencom; ako dizajn ima drugačiji redo
 ## Reference
 
 - @context/project-overview.md (poglavlja 2, 5, 9, 10)
-- @context/features/06-hero.md, @context/features/14-recenzije.md
+- @context/features/06-hero.md
 
 ## Referenca dizajna
 

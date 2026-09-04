@@ -67,13 +67,13 @@ src/
   components/
     ui/                      # shadcn komponente
     layout/                  # header, footer, nav
-    sections/                # hero, recenzije, CTA, service-cards...
+    sections/                # hero, CTA, service-cards, paketi...
     mdx/                     # custom MDX komponente (YouTube embed...)
   content/
     blog/
       sr/  en/               # MDX članci
   data/
-    services.ts  packages.ts  testimonials.ts
+    services.ts  packages.ts  team.ts
   i18n/
     routing.ts  navigation.ts  request.ts
     messages/
@@ -152,10 +152,57 @@ Organizacija: `src/i18n/messages/sr/*.json` (fajl po namespace-u) + `index.ts` k
 
 Jedan izvor istine za sadržaj koji se ponavlja; komponente ga čitaju, i18n tekstovi po `id`-u.
 
-- `src/data/services.ts`: `{ id, routeKey (iz 7.2), icon, order, priceFrom?: string }` — nazivi/opisi u `services` namespace-u po `id`
-- `src/data/packages.ts`: svadbeni paketi `{ id: "osnovni" | "standard" | "premium", priceFrom: "X", featured?: boolean, features: string[] (i18n ključevi) }` — cene kao `"X"` placeholder, vlasnik menja na jednom mestu
-- `src/data/testimonials.ts`: `{ id, name, eventTypeKey, year, textKey, serviceId? }` — 2 placeholder recenzije sa TODO
+- `src/data/services.ts`: `{ id, routeKey (iz 7.2), icon, order, priceFrom?: number }` — nazivi/opisi u `services` namespace-u po `id`
+- `src/data/packages.ts`: paketi grupisani **po usluzi**, model proširiv na nove usluge bez menjanja komponenti (vidi 9.1)
+- `src/data/team.ts`: članovi ekipe, niz objekata koji se mapira u kartice (vidi 9.2)
 - YouTube ID-jevi po usluzi: u `services.ts` polje `videoIds: string[]` (placeholder ID + TODO)
+
+**Recenzija nema** — nikakav `testimonials.ts` se ne pravi (odluka vlasnika, feature 14 je otkazan). Dizajn ima sekciju „Šta kažu mladenci"; ona se svesno preskače i to je jedini izuzetak od pravila da dizajn pobeđuje za izgled.
+
+### 9.1 Paketi
+
+```ts
+type PackageType = {
+  id: string;              // stabilan ključ, koristi se i za i18n
+  priceFrom: number;       // gola brojka, bez valute i bez formatiranja
+  featured?: boolean;      // zlatna bordura + badge "najpopularniji"
+  features: string[];      // i18n ključevi
+};
+
+// packages: Partial<Record<ServiceIdType, PackageType[]>>
+```
+
+Pravila:
+
+- **Cene se drže u jednom označenom bloku na vrhu `packages.ts`** (`const PRICES = { ... }`), sa komentarom da je to jedino mesto koje vlasnik menja. Nigde drugde u projektu ne sme da stoji iznos.
+- `priceFrom` je `number`; formatiranje ide kroz `Intl.NumberFormat` po locale-u (`sr-Latn-RS` → `1.150`, `en-GB` → `1,150`), valuta iz i18n poruke. Nikad konkatenacija stringova.
+- Ključ usluge koja nema pakete se izostavlja — komponenta paketa se tada ne renderuje. Dodavanje paketa za Eventi/Promo/FPV je dodavanje ključa, bez izmena komponenti.
+
+Početne vrednosti (iz dizajn reference, vlasnik ih menja u `PRICES`):
+
+| Usluga | `id` paketa | `priceFrom` | featured |
+|---|---|---|---|
+| `weddings` | `osnovni` | 450 | |
+| `weddings` | `standard` | 750 | ✓ |
+| `weddings` | `premium` | 1150 | |
+| `realEstate` | `oglas` | 120 | |
+| `realEstate` | `apartman` | 250 | ✓ |
+| `realEstate` | `vila` | 450 | |
+
+### 9.2 Ekipa
+
+```ts
+type TeamMemberType = {
+  id: string;              // stabilan ključ, koristi se za i18n (uloga i bio)
+  name: string;            // samo ime, bez prezimena — vlastito ime, ne prevodi se
+  image?: StaticImageData; // dok ne postoji → placeholder iz dizajna
+};
+```
+
+- Niz `team` se mapira u kartice; vlasnik dodaje/uklanja članove isključivo u tom nizu.
+- Početni sastav: Miroslav, Bojan, Nikola, Marko, Petar, Nina.
+- Uloga i opis idu kroz `about` namespace po `id` (`about.team.{id}.role` / `about.team.{id}.bio`) — polazni tekstovi su generički iz dizajn reference + `// TODO(vlasnik): tekst po osobi`.
+- Slike: `src/assets/team/*.jpg` sa statičkim importom (daje dimenzije i automatski `placeholder="blur"`). U `team.ts` stoji zakomentarisan primer importa za jednog člana kao šablon; dok slike ne postoje, kartica koristi placeholder iz dizajna.
 
 ## 10. Dizajn sistem
 
@@ -171,21 +218,38 @@ Jedan izvor istine za sadržaj koji se ponavlja; komponente ga čitaju, i18n tek
 | `accent-gold` | `#A9873F` | zlatni detalji, ikonice, hover, istaknute bordure |
 | `accent-gold-soft` | `#E5D9BC` | zlatna u pozadinskim tonovima |
 | `primary` | `#1E3B2A` | tamnozelena dugmad, jaki akcenti |
+| `primary-hover` | `#16301F` | hover primarnog dugmeta |
 | `primary-foreground` | `#FAF8F4` | tekst na zelenom |
 | `border` | `#E6E0D3` | bordure, separatori |
 
-Ako se uvezeni dizajn (poglavlje 11) u nijansama razlikuje — **vrednosti iz dizajna pobeđuju**; tokene uskladiti sa dizajnom pri implementaciji dizajn sistema. Zlatna se ne koristi za duže tekstove na svetlom (kontrast); sav tekst min WCAG AA.
+Paleta je **potvrđena 1:1 sa dizajn referencom** — nema odstupanja u nijansama. Ako se dizajn (poglavlje 11) ipak negde razlikuje, **vrednosti iz dizajna pobeđuju**; tokene uskladiti sa dizajnom pri implementaciji dizajn sistema.
+
+Pomoćne vrednosti iz dizajna koje nisu tokeni palete, nego deo placeholder obrasca za slike: `#EAE1CF`, `#EFE6D2` (pruge), `#F6F1E7` (traka poverenja). Detalji u `context/design-reference/NOTES.md`. Zlatna se ne koristi za duže tekstove na svetlom (kontrast); sav tekst min WCAG AA.
 
 ### 10.2 Tipografija
 
-- Naslovi: Outfit (500-700), krupni naslovi letter-spacing `-0.02em`; tekst: Source Sans 3 (400/600)
+- Naslovi: Outfit (400-700); h1/h2 weight 600, h3 weight 500. Tekst: Source Sans 3 (400/600)
 - Subsets `["latin", "latin-ext"]` (š đ č ć ž), `display: "swap"`, CSS varijable `--font-heading` / `--font-body`
-- h1 `clamp(2.4rem, 5vw, 3.75rem)`, body 1.0625rem / line-height 1.65, tekst max ~70ch
+- letter-spacing: h1 `-0.025em`, h2 `-0.02em`, h3 bez
+- h1 `clamp(2.25rem, 5vw, 3.875rem)` (36px mobilni → 62px hero), h2 40-42px desktop / 30px mobilni, h3 21-26px
+- body 1.0625rem / line-height 1.65; širina pasusa po dizajnu (`max-width` 400-560px), ne ~70ch
+- Naslovi koriste `text-wrap: pretty`
 - Bez ALL-CAPS eyebrow labela; bez bojenja jedne reči naslova u drugu boju
+
+Outfit se u dizajnu koristi šire nego samo za naslove — nosi i dugmad, badge-ove, cene i tekst recenzija. Source Sans 3 ostaje za `<p>` i sitni tekst. Tačna raspodela po sekcijama je u `context/design-reference/NOTES.md`.
 
 ### 10.3 Radijusi i senke
 
-Radius: 0.75rem kartice, 0.5rem dugmad/inputi. Senke suptilne i tople: `0 1px 3px rgba(38,36,31,.08)`.
+Radius: 0.75rem (12px) kartice i media, 0.5rem (8px) dugmad/inputi, `999px` pilule i badge-ovi.
+
+Senke po dizajn referenci — mekše i veće nego što je ranije stajalo u ovom poglavlju:
+
+| Token | Vrednost | Upotreba |
+|---|---|---|
+| `shadow-card` | `0 6px 18px rgba(38,36,31,.05)` | mirna kartica |
+| `shadow-card-hover` | `0 16px 34px rgba(38,36,31,.10)` | hover kartice |
+| `shadow-raised` | `0 24px 60px rgba(38,36,31,.10)` | veliki izdignuti blok |
+| `shadow-gold` | `0 16px 38px rgba(169,135,63,.18)` | istaknut paket, FPV kartica |
 
 ### 10.4 Motion pravila (STRIKTNO)
 
@@ -210,14 +274,18 @@ Dizajn je urađen u Claude Design i vlasnik ga **zadržava takav kakav je (1:1)*
 - Upstash `@upstash/ratelimit`: sliding window 3 zahteva / 10 min po IP + 10/dan po IP; specifičan error kod → UI poruka
 - Honeypot polje; popunjeno → tihi "uspeh" bez slanja
 - Telefon vlasnika NIKAD u inicijalnom HTML-u ni u JSON-LD — prikazuje se tek na klik (klijentska komponenta)
+- Pravilo važi **svuda gde se broj pojavljuje, uključujući footer**: mesto za broj postoji po dizajnu, ali sadrži dugme „Prikaži broj telefona"; sam broj ulazi u DOM tek posle klika. Ista komponenta se koristi na kontakt stranici i u footeru
 
 ## 13. Blog (MDX)
 
 - `src/content/blog/sr/*.mdx` i `en/*.mdx`; en verzija opciona — ako ne postoji, članak se ne prikazuje na `/en/blog` (nikad sr tekst na en listi)
 - Frontmatter: `title, description, date, slug, cover?, tags?, draft`
+- **Vreme čitanja se ne upisuje u frontmatter** — računa se iz dužine teksta pri build-u (utility u `src/lib/`, ~200 reči u minuti, zaokruženo naviše, min 1); prikazuje se kroz i18n sa ICU pluralom, ne konkatenacijom
 - SSG; `draft: true` ne izlazi u produkciju
 - Custom MDX komponente: YouTube lite embed, slika sa potpisom
 - 3 početna članka na srpskom (teme u featureu 18)
+- Lista `/blog` po dizajn referenci ima **filtere po kategorijama** (pilule: Sve / Venčanja / Nekretnine / Dron i FPV / Iza kadra) i dugme **„Prikaži još tekstova"**. Kategorije izviru iz `tags` u frontmatteru; nazivi kategorija idu kroz `blog` namespace, a vrednosti u `tags` su stabilni ključevi koji se NE prevode (princip 5)
+- Prvi članak na listi je istaknut (široka kartica sa naslovnom fotografijom), ostali u gridu 3×2
 
 ## 14. SEO
 
@@ -245,7 +313,7 @@ NEXT_PUBLIC_SITE_URL=https://cameramotion.net
 | 0 — Temelj | 00, 01, 02, 03 | dizajn import + pravila, init, dizajn sistem, i18n |
 | 1 — Layout i početna | 04, 05, 06, 07 | header, footer, hero, početna |
 | 2 — Usluge | 08–13 | pregled + 5 pojedinačnih stranica |
-| 3 — Sadržaj i kontakt | 14–18 | recenzije, o nama, kontakt UI, kontakt backend, blog |
+| 3 — Sadržaj i kontakt | 15–18 | o nama, kontakt UI, kontakt backend, blog (feature 14 otkazan) |
 | 4 — Završnica | 19, 20, 21 | SEO, pravne stranice, responzivnost i performanse |
 
 DoD svake faze naveden je u poslednjem feature fajlu te faze. Redosled unutar faze je obavezan (feature-i se naslanjaju jedni na druge).

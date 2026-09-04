@@ -7,7 +7,7 @@ Faza 1, fajl 2/4. Footer sa navigacijom, kontaktima i suptilnom napomenom o regu
 ## Zahtevi
 
 - 4 kolone na desktopu (naslagano na mobilnom): brend (logo + rečenica-dve), navigacija, usluge (svih 5 iz `services.ts`), kontakt (email, Instagram i YouTube ikonice — lucide-react)
-- Telefon se NE prikazuje u footeru (poglavlje 12) — link vodi na /kontakt
+- Telefon: mesto za broj postoji po dizajnu, ali broj se NE renderuje u inicijalnom HTML-u (poglavlje 12). Umesto broja stoji dugme „Prikaži broj telefona"; ista klijentska komponenta se koristi i na kontakt stranici (feature 16) — izdvojiti je da se ne duplira
 - Donja traka: `© {tekuća godina} Camera Motion. Sva prava zadržana.` + linkovi Politika privatnosti · Uslovi korišćenja + sitna napomena: "Snimanje dronom u skladu sa regulativom Direktorata civilnog vazduhoplovstva."
 - Pozadina `surface-warm` sa gornjom bordurom (ili tačno po dizajnu); hover na linkovima zlatna
 - Bez newslettera i formi

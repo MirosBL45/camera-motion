@@ -2,7 +2,7 @@
 
 ## Pregled
 
-Faza 3, fajl 4/5. Server Action + Resend + Upstash rate limit; povezivanje na formu iz feature-a 16.
+Faza 3, fajl 3/4. Server Action + Resend + Upstash rate limit; povezivanje na formu iz feature-a 16.
 
 ## Zahtevi
 

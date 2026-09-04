@@ -9,6 +9,7 @@ Faza 1, fajl 3/4. Prvi utisak: levo poruka i CTA, desno uspravni video 9:16. Bez
 - Layout tačno po dizajn referenci: desktop dve kolone (~55/45), leva vertikalno centrirana (h1, podnaslov, dva CTA), desna uspravni video okvir 9:16 (zaobljen, tanka zlatna bordura, max ~80vh)
 - Tablet: iste kolone, video manji; mobilni: naslagano — tekst pa video (max-width ~320px, centriran)
 - Tekstovi iz `home` namespace-a; polazni sadržaj: h1 "Vaši trenuci, snimljeni iz vazduha i iz srca.", podnaslov o snimanju venčanja, nekretnina i događaja dronom i kamerom (Beograd i okolina); CTA "Zatražite ponudu" → /kontakt, "Pogledajte usluge" → /usluge
+- **Traka sa brojkama** ispod CTA dugmadi (po dizajnu, tri stavke): `40+` snimljenih venčanja · `120+` objekata iz vazduha · `4K` isporuka svakog kadra. Vrednosti kao konstante na jednom mestu uz `// TODO(vlasnik): ažurirati brojke` — vlasnik ih menja kako brend raste. Na mobilnoj verziji traka se ne prikazuje (dizajn `1d` je nema)
 - Video: za sada statična placeholder slika 9:16 sa play ikonicom bez funkcije; komponenta strukturirana da primi `<video>` zamenom jednog bloka, sa komentarom:
 
 ```

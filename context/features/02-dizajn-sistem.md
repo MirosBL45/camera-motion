@@ -8,7 +8,8 @@ Faza 0, fajl 3/4. Tokeni iz dizajn reference u Tailwind/shadcn konfiguraciji + o
 
 - Tokene definisati u `globals.css` (CSS varijable) + Tailwind konfiguraciji prema poglavlju 10.1 — ali **prvo uporediti sa vrednostima iz `context/design-reference/`**: ako se dizajn u nijansama razlikuje od tabele, dizajn pobeđuje (uskladiti tabelu vrednostima iz dizajna i zabeležiti u NOTES.md šta je promenjeno)
 - shadcn init, prilagođen našim tokenima; instalirati odmah: Button, Input, Textarea, Select, Card, DropdownMenu (ili NavigationMenu), Sheet, Dialog, Checkbox, Label, Form
-- Tipografska skala i pravila iz poglavlja 10.2; radijusi i senke iz 10.3
+- Tipografska skala i pravila iz poglavlja 10.2; radijusi i senke iz 10.3 (obe tabele su već usklađene sa dizajn referencom — h1 ide do 62px, senke su mekše nego u prvoj verziji overview-a)
+- Token `primary-hover` (`#16301F`) je obavezan — koristi ga svako primarno dugme u dizajnu
 - Vidljiv fokus na svemu interaktivnom: 2px ring (zlatna ili zelena — uskladiti sa dizajnom) + offset
 - Motion pravila iz 10.4 primenjena globalno (`prefers-reduced-motion` media query u globals.css)
 - Privremena stranica `/dev-ui` (van [locale] zahteva, samo development) koja prikazuje: paletu, naslove h1-h4, body tekst, sve komponente u svim stanjima (default/hover/focus/disabled) — briše se u featureu 21
