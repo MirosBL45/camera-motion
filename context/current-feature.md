@@ -1,4 +1,4 @@
-# Current Feature: 01 — Inicijalizacija projekta
+# Current Feature: 02 — Dizajn sistem i UI primitivi
 
 ## Status
 
@@ -10,35 +10,36 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Projekat je već inicijalizovan — proveriti da li nešto treba da se doradi, obavestiti šta fali i sačekati odobrenje pre bilo kakvog rada
-- `npx create-next-app@latest` — TypeScript, App Router, Tailwind, ESLint, `src/`, alias `@/*`, **npm**; dodati Prettier
-- Folder struktura iz poglavlja 6 (napraviti foldere; prazni placeholder fajlovi gde ima smisla)
-- Fontovi kroz `next/font/google`: Outfit (400, 500, 600, 700) + Source Sans 3 (400, 600), subsets `["latin", "latin-ext"]`, `display: "swap"`, vezani na `--font-heading` / `--font-body` (poglavlje 10.2)
-- `src/lib/utils.ts` sa `cn()` helperom
-- `.env.example` sa svim varijablama iz poglavlja 15 (prazne vrednosti + komentari); `.env*` u `.gitignore`
-- Zavisnosti instalirati odmah: `next-intl`, `zod`, `lucide-react` (ostale — resend, upstash, MDX — u svojim feature-ima)
-- README skelet: pokretanje, env, deploy (dopunjava se u featureu 21)
+- Tokene definisati u `globals.css` (CSS varijable) + Tailwind konfiguraciji prema poglavlju 10.1 — ali **prvo uporediti sa vrednostima iz `context/design-reference/`**: ako se dizajn u nijansama razlikuje od tabele, dizajn pobeđuje (uskladiti tabelu vrednostima iz dizajna i zabeležiti u NOTES.md šta je promenjeno)
+- shadcn init, prilagođen našim tokenima; instalirati odmah: Button, Input, Textarea, Select, Card, DropdownMenu (ili NavigationMenu), Sheet, Dialog, Checkbox, Label, Form
+- Tipografska skala i pravila iz poglavlja 10.2; radijusi i senke iz 10.3 (obe tabele su već usklađene sa dizajn referencom — h1 ide do 62px, senke su mekše nego u prvoj verziji overview-a)
+- Token `primary-hover` (`#16301F`) je obavezan — koristi ga svako primarno dugme u dizajnu
+- Vidljiv fokus na svemu interaktivnom: 2px ring (zlatna ili zelena — uskladiti sa dizajnom) + offset
+- Motion pravila iz 10.4 primenjena globalno (`prefers-reduced-motion` media query u globals.css)
+- Privremena stranica `/dev-ui` (van [locale] zahteva, samo development) koja prikazuje: paletu, naslove h1-h4, body tekst, sve komponente u svim stanjima (default/hover/focus/disabled) — briše se u featureu 21
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- shadcn se NE inicijalizuje ovde (feature 02)
-- `<html lang>` privremeno "sr" — pravu logiku donosi feature 03
-- Proveriti aktuelnu Next.js dokumentaciju (App Router konvencije) pre pisanja
+- Zlatna NIKAD kao boja dužeg teksta na svetloj podlozi (kontrast, poglavlje 10.1)
+- Sve labele primitiva parametrizovane — ništa hardkodovano
+- Proveriti aktuelnu shadcn dokumentaciju (setup se menja između verzija)
+- Referenca dizajna: `context/design-reference/` — tokeni, tipografija i komponente se čitaju direktno iz dizajna (1:1)
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. `npm run build` prolazi bez grešaka; dev server se diže
-2. Test element renderuje oba fonta (uklj. š đ č ć ž)
-3. ESLint i Prettier rade
+1. `/dev-ui` prikazuje sve tokene i komponente; vizuelno poklapanje sa dizajn referencom
+2. Tab navigacija kroz sve — fokus prsten vidljiv
+3. Kontrast: tekst na dugmadima i sve kombinacije iz palete prolaze AA
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 4, 5, 6, 10.2, 15)
-- https://nextjs.org/docs (proveriti najnoviju verziju)
+- @context/project-overview.md (poglavlja 5, 10, 11)
+- @context/features/00-dizajn-referenca-i-pravila.md
+- https://ui.shadcn.com/docs (proveriti najnoviju verziju)
 
 ## History
 
@@ -59,3 +60,7 @@ Recenzije uklonjene iz celog opsega projekta: feature otkazan uz očuvan sadrža
 ### Monday, 14.09.2026. | 11:59 — 01 Inicijalizacija projekta
 
 Proverena postojeća inicijalizacija projekta i utvrđeno šta fali; posle odobrenja dorađeno na feature grani. Povezani fontovi za naslove i tekst preko next/font/google i CSS varijabli, uz privremeno fiksiran jezik dokumenta do prave i18n logike. Napravljena folder struktura iz project overview-a, uz dogovor da delovi vezani za lokalizovano rutiranje sačekaju svoj feature. Dodat helper za spajanje Tailwind klasa, primer environment fajla sa svim potrebnim varijablama i uvod ključnih zavisnosti. Napisan README skelet za pokretanje projekta i environment varijable. Tokom review-a pronađen i ispravljen inline style koji je kršio coding standarde. Build, lint, Prettier i dev server provereni i prolaze.
+
+### Monday, 14.09.2026. | 13:17 — 02 Dizajn sistem i UI primitivi
+
+Uvedeni tokeni dizajn sistema (paleta, tipografija, radijusi, senke, motion pravila) u skladu sa dizajn referencom, uz shadcn inicijalizaciju na Radix bazi (odluka vlasnika) i instalaciju osnovnih UI primitiva. Form komponenta svesno preskočena jer nova shadcn arhitektura više ne isporučuje gotov fajl baziran na react-hook-form, a projekat trenutno ne predviđa tu biblioteku — odluka ostaje za feature kontakt forme. Fokus prsten usklađen na zelenu boju umesto zlatne zbog nedovoljnog kontrasta na toploj pozadini, a senke floating komponenti (dropdown, dialog, sheet, select) mapirane na tokene iz dizajna umesto generičkih Tailwind vrednosti. Napravljena privremena /dev-ui stranica dostupna samo u razvoju za pregled celog sistema. Tokom review-a pronađen i ispravljen propust gde primarno dugme nije koristilo obavezan hover token, kao i nekoliko manjih neusklađenosti sa preporučenim kanonskim Tailwind klasama. Build, lint i Prettier prolaze; vizuelno provereno u browseru uključujući fokus stanja i otvorene overlay komponente.
