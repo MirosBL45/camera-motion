@@ -1,3 +1,13 @@
 export default function Home() {
-  return <h1>Camera motion</h1>;
+  return (
+    <main className="flex flex-col gap-2 p-8">
+      {/* TODO(feature 02+): privremen test element za fontove, uklanja se kad stigne prava početna */}
+      <h1 className="font-heading text-4xl font-semibold">
+        Camera motion — Šampinjoni, žeđ, čačkalica
+      </h1>
+      <p className="font-body">
+        Snimanje dronom i kamerom — đurđevak, ćevapčići, ovčar i planinar.
+      </p>
+    </main>
+  );
 }

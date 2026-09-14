@@ -25,6 +25,7 @@ Read the following to get the full context of the project:
 - **Lint**: `npm run lint`
 
 **IMPORTANT:** Do not add Claude or Codex or any AI to any commit messages
+**INFO:** If there is changed name of some files, I done it, and that also goes to GitHub
 
 # Pravila implementacije — Camera Motion
 
