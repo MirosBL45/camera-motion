@@ -1,4 +1,4 @@
-# Current Feature: 00 — Dizajn referenca i radna pravila
+# Current Feature: 01 — Inicijalizacija projekta
 
 ## Status
 
@@ -10,34 +10,35 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Uvesti Claude Design projekat „Camera Motion prezentacioni sajt" preko claude_design MCP-a
-- Sačuvati lokalnu kopiju dizajna u `context/design-reference/` kao izvor istine za izgled
-- Napisati sažetak dizajna (artboardi, tokeni, tipografija, komponente) za brzu orijentaciju u kasnijim sesijama
-- U ovoj sesiji se NIŠTA ne gradi — nema komponenti, nema stranica
+- Projekat je već inicijalizovan — proveriti da li nešto treba da se doradi, obavestiti šta fali i sačekati odobrenje pre bilo kakvog rada
+- `npx create-next-app@latest` — TypeScript, App Router, Tailwind, ESLint, `src/`, alias `@/*`, **npm**; dodati Prettier
+- Folder struktura iz poglavlja 6 (napraviti foldere; prazni placeholder fajlovi gde ima smisla)
+- Fontovi kroz `next/font/google`: Outfit (400, 500, 600, 700) + Source Sans 3 (400, 600), subsets `["latin", "latin-ext"]`, `display: "swap"`, vezani na `--font-heading` / `--font-body` (poglavlje 10.2)
+- `src/lib/utils.ts` sa `cn()` helperom
+- `.env.example` sa svim varijablama iz poglavlja 15 (prazne vrednosti + komentari); `.env*` u `.gitignore`
+- Zavisnosti instalirati odmah: `next-intl`, `zod`, `lucide-react` (ostale — resend, upstash, MDX — u svojim feature-ima)
+- README skelet: pokretanje, env, deploy (dopunjava se u featureu 21)
 
 ## Notes
 
 <!-- Any extra notes -->
 
-Autorizacija preko `/design-login` je bila preduslov — claude.ai OAuth token nema design scopes po defaultu.
-
-Dizajn pokriva 7 artboarda: početna (desktop i mobilna 390px), venčanja, nekretnine, o nama, blog lista, kontakt. Sve na 1440px osim mobilne.
-
-Dizajn je usklađen sa motion pravilima iz overview 10.4 — nema animacija, samo hover tranzicije 0.2s.
-
-Svih trinaest otvorenih pitanja je rešeno odlukama vlasnika i odluke su upisane u overview i feature fajlove. Nema više nerešenih neusklađenosti između dizajna i feature fajlova.
-
-Najveća odluka: **recenzija nema u bilo kom obliku**. Feature 14 je otkazan, ali fajl nije obrisan — označen je kao otkazan sa sačuvanim originalnim zahtevima. To je i jedino mesto gde svesno ne slušamo dizajn referencu.
-
-Dizajn ne pokriva: pregled usluga, usluge Eventi/Promo/FPV, blog članak, pravne stranice, 404, mobilne verzije podstranica. Dogovor: izgled se izvodi iz postojećih obrazaca dizajna, a ako zatreba dopuna radi se u Claude Design pa se ovde ponovo uvozi.
+- shadcn se NE inicijalizuje ovde (feature 02)
+- `<html lang>` privremeno "sr" — pravu logiku donosi feature 03
+- Proveriti aktuelnu Next.js dokumentaciju (App Router konvencije) pre pisanja
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-- `context/design-reference/` sadrži dc.html, support.js i NOTES.md — potvrđeno, oba uvezena fajla `truncated=false`
-- Nijedna komponenta ni stranica nije napravljena
-- Build nije pokretan jer nema promena u `src/`
+1. `npm run build` prolazi bez grešaka; dev server se diže
+2. Test element renderuje oba fonta (uklj. š đ č ć ž)
+3. ESLint i Prettier rade
+
+### Reference
+
+- @context/project-overview.md (poglavlja 4, 5, 6, 10.2, 15)
+- https://nextjs.org/docs (proveriti najnoviju verziju)
 
 ## History
 
@@ -54,3 +55,7 @@ Vlasnik odlučio po svih osam otvorenih pitanja i odluke su prenete u overview i
 ### Friday, 04.09.2026. | 16:53 — Odluke po drugom krugu pitanja
 
 Recenzije uklonjene iz celog opsega projekta: feature otkazan uz očuvan sadržaj, model podataka izbačen, sekcija skinuta sa početne, faza 3 prebrojana na četiri fajla, a README podsetnik za vlasnika ažuriran. Zabeleženo da je to jedini svesni otklon od dizajn reference. Sekcija sa četiri koraka procesa dodata na stranicu o nama po dizajnu. Mapa na kontaktu odbačena, uz izričitu napomenu da se ne dodaje iz dizajna u kasnijim sesijama. Vreme čitanja članka definisano kao izračunato iz teksta, sa prikazom kroz ICU plural.
+
+### Monday, 14.09.2026. | 11:59 — 01 Inicijalizacija projekta
+
+Proverena postojeća inicijalizacija projekta i utvrđeno šta fali; posle odobrenja dorađeno na feature grani. Povezani fontovi za naslove i tekst preko next/font/google i CSS varijabli, uz privremeno fiksiran jezik dokumenta do prave i18n logike. Napravljena folder struktura iz project overview-a, uz dogovor da delovi vezani za lokalizovano rutiranje sačekaju svoj feature. Dodat helper za spajanje Tailwind klasa, primer environment fajla sa svim potrebnim varijablama i uvod ključnih zavisnosti. Napisan README skelet za pokretanje projekta i environment varijable. Tokom review-a pronađen i ispravljen inline style koji je kršio coding standarde. Build, lint, Prettier i dev server provereni i prolaze.
