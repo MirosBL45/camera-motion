@@ -1,0 +1,18 @@
+{
+  "title": "Usluge",
+  "weddings": {
+    "title": "Snimanje venčanja"
+  },
+  "realEstate": {
+    "title": "Snimanje nekretnina"
+  },
+  "events": {
+    "title": "Eventi i proslave"
+  },
+  "promo": {
+    "title": "Promo video"
+  },
+  "fpv": {
+    "title": "FPV snimci"
+  }
+}
