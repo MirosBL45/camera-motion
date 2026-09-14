@@ -1,1 +1,144 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-body);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-warm: var(--surface-warm);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-gold-soft: var(--accent-gold-soft);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-card-hover: var(--shadow-card-hover);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-gold: var(--shadow-gold);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-xl: var(--radius-card);
+  --radius-2xl: var(--radius-card);
+}
+
+:root {
+  /* Paleta — poglavlje 10.1, potvrđena 1:1 sa context/design-reference/ */
+  --background: #faf8f4;
+  --foreground: #26241f;
+  --surface: #ffffff;
+  --surface-warm: #f1ebdf;
+  --muted-foreground: #6e685c;
+  --accent-gold: #a9873f;
+  --accent-gold-soft: #e5d9bc;
+  --primary: #1e3b2a;
+  --primary-hover: #16301f;
+  --primary-foreground: var(--background);
+  --border: #e6e0d3;
+
+  /* shadcn semantic slotovi — mapirani na tokene iznad, isti izvor vrednosti */
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --secondary: var(--surface-warm);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--surface-warm);
+  --accent: var(--accent-gold-soft);
+  --accent-foreground: var(--foreground);
+  --input: var(--border);
+  /* Fokus prsten: zelena (primary), ne zlatna — zlatna pada ispod 3:1 na surface-warm pozadini */
+  --ring: var(--primary);
+  /* Nije deo palete (poglavlje 10.1) — standardna greška-boja do feature-a za kontakt formu */
+  --destructive: oklch(0.577 0.245 27.325);
+
+  /* Radijusi — poglavlje 10.3: 8px dugmad/inputi, 12px kartice/media */
+  --radius: 0.5rem;
+  --radius-card: 0.75rem;
+
+  /* Senke — poglavlje 10.3, usklađeno sa dizajn referencom */
+  --shadow-card: 0 6px 18px rgba(38, 36, 31, 0.05);
+  --shadow-card-hover: 0 16px 34px rgba(38, 36, 31, 0.1);
+  --shadow-raised: 0 24px 60px rgba(38, 36, 31, 0.1);
+  --shadow-gold: 0 16px 38px rgba(169, 135, 63, 0.18);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  html {
+    @apply font-sans;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    text-wrap: pretty;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 3.875rem);
+    font-weight: 600;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+  }
+
+  h2 {
+    font-size: clamp(1.875rem, 3.5vw, 2.625rem);
+    font-weight: 600;
+    line-height: 1.13;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-size: clamp(1.3125rem, 1.6vw, 1.625rem);
+    font-weight: 500;
+  }
+
+  h4 {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+}
+
+/* Motion — poglavlje 10.4: samo hover/focus/otvaranje; bez scroll/fade-in/parallax po pravilima projekta */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
