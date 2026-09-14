@@ -46,7 +46,7 @@ const eslintConfig = defineConfig([
   },
 
   // Override ignores
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "context/**"]),
 ]);
 
 export default eslintConfig;
