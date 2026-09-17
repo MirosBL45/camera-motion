@@ -8,6 +8,8 @@ export const routing = defineRouting({
   locales: SUPPORTED_LOCALES,
   defaultLocale: "sr",
   localePrefix: "as-needed",
+  // Sajt se uvek otvara na srpskom, bez obzira na jezik browsera; na engleski se prelazi ručno
+  localeDetection: false,
   pathnames: {
     [ROUTES.home]: "/",
     [ROUTES.services]: {
@@ -23,7 +25,7 @@ export const routing = defineRouting({
       en: "/services/real-estate-videography",
     },
     [ROUTES.servicesEvents]: {
-      sr: "/usluge/eventi-i-proslave",
+      sr: "/usluge/dogadjaji-i-proslave",
       en: "/services/events",
     },
     [ROUTES.servicesPromo]: {
