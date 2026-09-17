@@ -1,0 +1,18 @@
+{
+  "title": "Services",
+  "weddings": {
+    "title": "Wedding videography"
+  },
+  "realEstate": {
+    "title": "Real estate videography"
+  },
+  "events": {
+    "title": "Events"
+  },
+  "promo": {
+    "title": "Promo video"
+  },
+  "fpv": {
+    "title": "FPV footage"
+  }
+}

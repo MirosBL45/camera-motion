@@ -1,4 +1,4 @@
-# Current Feature: 02 — Dizajn sistem i UI primitivi
+# Current Feature: 03 — i18n i tipizirane rute
 
 ## Status
 
@@ -10,36 +10,47 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Tokene definisati u `globals.css` (CSS varijable) + Tailwind konfiguraciji prema poglavlju 10.1 — ali **prvo uporediti sa vrednostima iz `context/design-reference/`**: ako se dizajn u nijansama razlikuje od tabele, dizajn pobeđuje (uskladiti tabelu vrednostima iz dizajna i zabeležiti u NOTES.md šta je promenjeno)
-- shadcn init, prilagođen našim tokenima; instalirati odmah: Button, Input, Textarea, Select, Card, DropdownMenu (ili NavigationMenu), Sheet, Dialog, Checkbox, Label, Form
-- Tipografska skala i pravila iz poglavlja 10.2; radijusi i senke iz 10.3 (obe tabele su već usklađene sa dizajn referencom — h1 ide do 62px, senke su mekše nego u prvoj verziji overview-a)
-- Token `primary-hover` (`#16301F`) je obavezan — koristi ga svako primarno dugme u dizajnu
-- Vidljiv fokus na svemu interaktivnom: 2px ring (zlatna ili zelena — uskladiti sa dizajnom) + offset
-- Motion pravila iz 10.4 primenjena globalno (`prefers-reduced-motion` media query u globals.css)
-- Privremena stranica `/dev-ui` (van [locale] zahteva, samo development) koja prikazuje: paletu, naslove h1-h4, body tekst, sve komponente u svim stanjima (default/hover/focus/disabled) — briše se u featureu 21
+- `src/lib/types/i18n.ts` — SUPPORTED_LOCALES, Locale, LOCALE_LABELS, format mapa — tačno iz poglavlja 8.1
+- `src/constants/routes.ts` + `src/types/routes.type.ts` (AppRoute) — obrazac iz poglavlja 7.2
+- `src/i18n/routing.ts` — `defineRouting` sa `localePrefix: "as-needed"` i `pathnames` za SVE rute iz tabele 7.1
+- Middleware (next-intl `createMiddleware`); `/sr/...` redirektuje na verziju bez prefiksa
+- `src/i18n/navigation.ts` — `createNavigation` → Link, redirect, usePathname, useRouter, getPathname
+- `src/i18n/request.ts`; skelet JSON fajlova za SVE namespace-ove iz poglavlja 8.2 u `sr/` i `en/` (minimalni ključevi — bar naslov svake stranice), `index.ts` po jezičkom folderu
+- Validator prevoda (poglavlje 8.3): puca u build-u ako sr/en nemaju iste ključeve
+- `src/types/i18n.d.ts` za autocomplete ključeva poruka
+- `app/[locale]/layout.tsx` (fontovi, html lang, provider po potrebi) + prazne `page.tsx` za sve rute iz 7.1 — svaka renderuje H1 iz messages
+- Language switcher još NE — dolazi sa headerom (feature 04); ali `getPathname` logika za prebacivanje mora raditi
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Zlatna NIKAD kao boja dužeg teksta na svetloj podlozi (kontrast, poglavlje 10.1)
-- Sve labele primitiva parametrizovane — ništa hardkodovano
-- Proveriti aktuelnu shadcn dokumentaciju (setup se menja između verzija)
-- Referenca dizajna: `context/design-reference/` — tokeni, tipografija i komponente se čitaju direktno iz dizajna (1:1)
+- Query parametri se ne prevode (princip 5; `?usluga=` vrednosti iz poglavlja 7.3)
+- Nikad `next/link` direktno — samo `Link` iz `@/i18n/navigation` (princip 4)
+- Proveriti aktuelnu next-intl dokumentaciju (pathnames, createNavigation API se menjao između verzija)
+- Ovo je poslednji fajl faze 0 — nakon ovog featurea ide zbirna provera DoD faze 0
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. `/dev-ui` prikazuje sve tokene i komponente; vizuelno poklapanje sa dizajn referencom
-2. Tab navigacija kroz sve — fokus prsten vidljiv
-3. Kontrast: tekst na dugmadima i sve kombinacije iz palete prolaze AA
+1. `/usluge` i `/en/services` (i sve ostale rute iz 7.1) renderuju istu stranicu na oba jezika sa ispravnim segmentima
+2. `/sr/usluge` → redirect na `/usluge`; `/` renderuje srpsku početnu bez prefiksa
+3. `getPathname` daje ispravne URL-ove za obe varijante svake rute
+4. Build prolazi; validator puca ako en nema ključ koji sr ima (namerno probati pa vratiti)
+
+### DoD Faze 0 (zbirna provera)
+
+- [ ] Dizajn referenca lokalno + CLAUDE.md postoje (00)
+- [ ] Sve rute renderuju prazne stranice na 2 jezika sa ispravnim segmentima; sr bez prefiksa, `/sr/...` redirektuje
+- [ ] Tokeni i primitivi na `/dev-ui` odgovaraju dizajnu
+- [ ] Build zelen, validator prevoda aktivan
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 5, 10, 11)
-- @context/features/00-dizajn-referenca-i-pravila.md
-- https://ui.shadcn.com/docs (proveriti najnoviju verziju)
+- @context/project-overview.md (poglavlja 5, 6, 7, 8)
+- @context/features/01-inicijalizacija-projekta.md
+- https://next-intl.dev/docs (routing, pathnames — proveriti najnoviju verziju)
 
 ## History
 
@@ -64,3 +75,7 @@ Proverena postojeća inicijalizacija projekta i utvrđeno šta fali; posle odobr
 ### Monday, 14.09.2026. | 13:17 — 02 Dizajn sistem i UI primitivi
 
 Uvedeni tokeni dizajn sistema (paleta, tipografija, radijusi, senke, motion pravila) u skladu sa dizajn referencom, uz shadcn inicijalizaciju na Radix bazi (odluka vlasnika) i instalaciju osnovnih UI primitiva. Form komponenta svesno preskočena jer nova shadcn arhitektura više ne isporučuje gotov fajl baziran na react-hook-form, a projekat trenutno ne predviđa tu biblioteku — odluka ostaje za feature kontakt forme. Fokus prsten usklađen na zelenu boju umesto zlatne zbog nedovoljnog kontrasta na toploj pozadini, a senke floating komponenti (dropdown, dialog, sheet, select) mapirane na tokene iz dizajna umesto generičkih Tailwind vrednosti. Napravljena privremena /dev-ui stranica dostupna samo u razvoju za pregled celog sistema. Tokom review-a pronađen i ispravljen propust gde primarno dugme nije koristilo obavezan hover token, kao i nekoliko manjih neusklađenosti sa preporučenim kanonskim Tailwind klasama. Build, lint i Prettier prolaze; vizuelno provereno u browseru uključujući fokus stanja i otvorene overlay komponente.
+
+### Monday, 14.09.2026. | 14:01 — 03 i18n i tipizirane rute
+
+Postavljena kompletna next-intl infrastruktura sa svih 13 prevedenih ruta iz tabele 7.1, uz otkriveno da Next.js 16 preimenuje middleware.ts u proxy.ts i dozvoljava više nezavisnih root layout-a — iskorišćeno da /dev-ui (van [locale] stabla) ostane sopstveni root layout dok [locale]/layout.tsx konačno prati aktivni jezik umesto fiksnog "sr" iz feature-a 01. Dodati tipizirani ROUTES/AppRoute, routing/navigation/request moduli, i 11 message namespace-ova po jeziku sa minimalnim skeletom (bar naslov po stranici). Napisan validator koji upoređuje sr/en ključeve i puca već pri učitavanju next.config.ts, testirano namernim brisanjem ključa. Usput otkriveno da Vitest nije bio postavljen u projektu iako ga standardi zahtevaju za utilities — dodat kao dev-dependency uz podizanje @types/node na verziju koja odgovara stvarnom Node runtime-u, i napisani testovi za validator. Tokom review-a pronađen i ispravljen bug gde je proxy hvatao /dev-ui u i18n rewrite logiku i vraćao 404. Build, lint i testovi prolaze; svih 13 ruta provereno uživo na oba jezika uključujući redirekte i html lang.
