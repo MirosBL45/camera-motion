@@ -1,1 +1,8 @@
-{ "brandName": "Camera motion" }
+{
+  "brandName": "Camera motion",
+  "phone": {
+    "reveal": "Show phone number",
+    "loading": "Loading…",
+    "unavailable": "The number is currently unavailable — please email us."
+  }
+}

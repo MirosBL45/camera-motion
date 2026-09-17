@@ -283,7 +283,7 @@ Dizajn je urađen u Claude Design i vlasnik ga **zadržava takav kakav je (1:1)*
 - Resend: slanje na `CONTACT_EMAIL` (Gmail); From za start `onboarding@resend.dev` (TODO: verifikovati domen → `upiti@cameramotion.net`); Reply-To = email klijenta
 - Upstash `@upstash/ratelimit`: sliding window 3 zahteva / 10 min po IP + 10/dan po IP; specifičan error kod → UI poruka
 - Honeypot polje; popunjeno → tihi "uspeh" bez slanja
-- Telefon vlasnika NIKAD u inicijalnom HTML-u ni u JSON-LD — prikazuje se tek na klik (klijentska komponenta)
+- Telefon vlasnika NIKAD u inicijalnom HTML-u, JS bundle-u ni u JSON-LD — prikazuje se tek na klik (klijentska komponenta); broj živi samo u env varijabli `CONTACT_PHONE`, a klijentska komponenta ga dobija pozivom Server Action-a `getPhoneNumber`
 - Pravilo važi **svuda gde se broj pojavljuje, uključujući footer**: mesto za broj postoji po dizajnu, ali sadrži dugme „Prikaži broj telefona"; sam broj ulazi u DOM tek posle klika. Ista komponenta se koristi na kontakt stranici i u footeru
 
 ## 13. Blog (MDX)
@@ -312,6 +312,7 @@ RESEND_API_KEY=            # server
 UPSTASH_REDIS_REST_URL=    # server
 UPSTASH_REDIS_REST_TOKEN=  # server
 CONTACT_EMAIL=             # server — Gmail vlasnika
+CONTACT_PHONE=             # server — telefon vlasnika, vraća ga Server Action tek na klik
 NEXT_PUBLIC_SITE_URL=https://cameramotion.net
 ```
 `.env.example` sa praznim vrednostima i komentarima; `.env*` u `.gitignore`. Ništa osetljivo pod `NEXT_PUBLIC_`.

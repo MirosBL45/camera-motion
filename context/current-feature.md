@@ -1,4 +1,4 @@
-# Current Feature: 04 — Header i navigacija
+# Current Feature: 05 — Footer
 
 ## Status
 
@@ -10,46 +10,44 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Sticky header (faza 1, fajl 1/4): logo, glavni meni sa padajućim menijem usluga, SR/EN prekidač i CTA dugme
-- Desktop: logo levo (placeholder `public/logo.svg` u duhu opisa iz poglavlja 2 + TODO za pravi fajl); meni Početna · Usluge · Blog · O nama · Kontakt; desno SR/EN prekidač + dugme "Zatražite ponudu" → `/kontakt`
-- „Usluge" je link ka `/usluge`; na desktopu hover (ili fokus tastature) otvara padajući meni, klik vodi na stranicu Usluge
-- Padajući meni: 5 stavki iz `services.ts` — naziv iz `services` namespace-a (isti kao naslov stranice usluge) + kratak opis u drugom redu iz `nav` namespace-a; pojavljivanje sa blagom animacijom (opacity + blagi pomak) od 200ms
-- Language switcher: prebacuje jezik i ZADRŽAVA trenutnu stranicu (getPathname iz feature-a 03)
-- Sajt se uvek otvara na srpskom, bez obzira na jezik browsera (`localeDetection: false`); na engleski se prelazi isključivo preko prekidača ili `/en` URL-a
-- Aktivna stavka glavnog menija NEMA zlatnu liniju (odluka vlasnika, odstupanje od dizajna); trenutna stranica je označena bež pozadinom samo u padajućem i mobilnom meniju
-- Usluga `events` na srpskom: „Događaji i proslave", URL `/usluge/dogadjaji-i-proslave` (ne „Eventi" / `eventi-i-proslave`)
-- Mobilni/tablet (< lg): logo + hamburger; hamburger otvara Sheet sa punom navigacijom („Usluge" link + usluge kao razgranata lista, ne ugnježden dropdown), SR/EN i CTA na dnu
-- Sticky ponašanje bez animacija pojavljivanja; touch mete ≥ 44px; tastaturna navigacija kroz padajući meni (Tab ulazi u stavke, Escape zatvara)
+- Footer (faza 1, fajl 2/4) sa navigacijom, kontaktima i suptilnom napomenom o regulativi DCV
+- 4 kolone na desktopu (naslagano na mobilnom): brend (logo + rečenica-dve), navigacija, usluge (svih 5 iz `services.ts`), kontakt (email, Instagram i YouTube ikonice)
+- Telefon: mesto za broj postoji po dizajnu, ali broj se NE renderuje u inicijalnom HTML-u — umesto broja dugme „Prikaži broj telefona"; izdvojena klijentska komponenta koju će deliti i kontakt stranica (feature 16)
+- Donja traka: `© {tekuća godina} Camera Motion. Sva prava zadržana.` + linkovi Politika privatnosti · Uslovi korišćenja + sitna napomena „Snimanje dronom u skladu sa regulativom Direktorata civilnog vazduhoplovstva."
+- Pozadina `surface-warm` (gornja bordura ili tačno po dizajnu); hover na linkovima zlatna
+- Bez newslettera i formi
+- Sav tekst kroz `footer` namespace (sr + en); linkovi kroz `Link` iz `@/i18n/navigation` i `ROUTES`
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Stavke menija i linkovi usluga se izvode iz `routes` konstanti i `services.ts` — bez dupliranja putanja
-- Referenca dizajna: `context/design-reference/` — header sekcija (1:1); element u dizajnu koji ovde nije opisan → pitati pre implementacije
-- Odluke vlasnika tokom implementacije (odstupanja od dizajna i prvobitnog speca):
-  - Opis usluge u drugom redu padajućeg menija ostaje po specu, iako ga dizajn nema
-  - Nazivi usluga u meniju iz `services.json`, ne posebni nazivi iz dizajna
-  - „Usluge" je link sa hover menijem umesto dugmeta koje samo otvara meni — inače stranica Usluge nije dostupna iz navigacije
-  - Zlatna linija ispod aktivne stavke uklonjena
-  - Animacija padajućeg menija 200ms (u granicama overview 10.4)
-  - Automatsko prepoznavanje jezika browsera isključeno — upisano u overview 7.3 i 8.1
-  - „Eventi i proslave" → „Događaji i proslave", slug `dogadjaji-i-proslave` — upisano u overview 7.1 i 8.3
-- Na tabletu ≥ lg bez miša padajući meni se ne otvara na dodir; dodir na „Usluge" vodi na stranicu Usluge
+- Instagram/YouTube URL-ovi kao konstante u `src/constants/` sa TODO da vlasnik upiše tačne profile
+- Referenca dizajna: `context/design-reference/` — footer sekcija (1:1): grid `1.4fr 1fr 1fr 1.2fr` gap 40px, padding `56px 48px 0`, donja traka sa `border-top` i tri elementa u redu
+- Element u dizajnu koji spec ne opisuje → pitati pre implementacije
+- Odluke vlasnika pri učitavanju (dopune i odstupanja od speca/dizajna):
+  - Instagram/YouTube ikonice kao sopstvene TSX SVG komponente (lucide-react 1.x nema ikonice brendova), umesto „IG"/„YT" teksta iz dizajna
+  - Red „Beograd, Srbija" iz dizajna se implementira (kroz i18n, en: „Belgrade, Serbia")
+  - Prikazani email: `camera.motion.office@gmail.com` (konstanta u `src/constants/`, `mailto:` link), ne `info@cameramotion.net` iz dizajna
+  - Nazivi usluga iz `services` namespace-a, isti kao u headeru („Događaji i proslave", ne „Eventi i proslave")
+  - Footer bez gornje bordure, tačno po dizajnu; `border-top` samo na donjoj traci
+  - IG/YT dugmići 44×44px (touch mete), umesto 38px iz dizajna
+- Odluke vlasnika pri startu:
+  - Mobilni footer prikazuje sve 4 kolone naslagane + punu donju traku (po specu), a ne skraćenu verziju iz artboarda 1d
+  - Telefon se čuva samo u env varijabli `CONTACT_PHONE`; klijentska komponenta ga dobija na klik preko Server Action-a — nije ni u HTML-u ni u JS bundle-u (upisano u overview 12 i 15, `.env.example`, README)
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Sve stavke rade na oba jezika sa lokalizovanim putanjama; switcher zadržava kontekst na svakoj stranici
-2. Dropdown i Sheet pristupačni tastaturom; aktivno stanje tačno
-3. Header ispravan na 360px, 768px, 1024px, 1440px
+1. Svi linkovi lokalizovani i ispravni na oba jezika (uklj. pravne stranice — postoje kao prazne rute iz feature-a 03)
+2. Responzivan raspored na svim širinama
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 5, 7, 8.2, 9)
-- @context/features/03-i18n-i-tipizirane-rute.md
+- @context/project-overview.md (poglavlja 2, 7, 12)
 - @context/features/04-header-navigacija-done.md
+- @context/features/05-footer-done.md
 
 ## History
 
@@ -82,3 +80,7 @@ Postavljena kompletna next-intl infrastruktura sa svih 13 prevedenih ruta iz tab
 ### Thursday, 17.09.2026. | 10:27 — 04 Header i navigacija
 
 Napravljen sticky header po dizajnu sa logom (privremeni placeholder), glavnim menijem, prekidačem jezika koji zadržava trenutnu stranicu i dugmetom za ponudu, uz mobilni meni u bočnom panelu sa razgranatom listom usluga. Uveden minimalni model podataka za usluge koji meni čita, bez dupliranja putanja. Tokom rada vlasnik je doneo više odluka koje odstupaju od dizajna: „Usluge" je postao link ka pregledu usluga sa padajućim menijem na hover i blagom animacijom od 200ms, stavke menija imaju kratak opis u drugom redu, a zlatna linija ispod aktivne stavke je uklonjena. Isključeno automatsko prepoznavanje jezika browsera, pa se sajt uvek otvara na srpskom. Usluga „Eventi i proslave" preimenovana u „Događaji i proslave", zajedno sa adresom. Sve odluke upisane u overview, uključujući novi spisak svesnih odstupanja od dizajna, i u belešku dizajn reference. Tokom review-a ispravljeni gubitak fokusa tastature kada miš napusti otvoren meni, netačno označavanje trenutne stranice za čitače ekrana i neiskorišćen kod. Lint, testovi i build prolaze; provereno u browseru na četiri širine, tastaturom i sa browserom podešenim na engleski.
+
+### Thursday, 17.09.2026. | 13:58 — 05 Footer
+
+Napravljen footer po dizajnu sa brendom, navigacijom, svim uslugama, kontaktom i donjom trakom sa pravnim linkovima i napomenom o regulativi DCV. Vlasnik je pre implementacije odlučio o više odstupanja od dizajna: ikonice društvenih mreža kao sopstvene SVG komponente jer biblioteka ikonica više nema brendove, prikazana Gmail adresa umesto adrese sa domena, dugmići mreža povećani na veličinu pogodnu za dodir, a na mobilnom se prikazuju sve kolone umesto skraćene verzije iz dizajna. Broj telefona čuva se isključivo u environment varijabli i do stranice stiže tek na klik preko Server Action-a, pa ga nema ni u HTML-u ni u JavaScript kodu koji se šalje browseru — odluka upisana u overview, primer environment fajla i README. Dugme za prikaz broja izdvojeno kao zajednička komponenta za kasniju kontakt stranicu, a logo dobio varijantu za footer. Tokom review-a ispravljeni pad stranice pri mrežnoj grešci na klik, gubitak fokusa tastature tokom učitavanja broja i fokus prsten loga koji se nije uklapao u pozadinu footera. Lint, testovi, provera tipova i build prolaze; provereno u browseru na četiri širine i oba jezika, uključujući prikaz broja tastaturom.
