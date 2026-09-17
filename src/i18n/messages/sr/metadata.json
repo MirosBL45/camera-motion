@@ -1,0 +1,38 @@
+{
+  "home": {
+    "title": "Početna"
+  },
+  "services": {
+    "title": "Usluge"
+  },
+  "servicesWeddings": {
+    "title": "Snimanje venčanja"
+  },
+  "servicesRealEstate": {
+    "title": "Snimanje nekretnina"
+  },
+  "servicesEvents": {
+    "title": "Eventi i proslave"
+  },
+  "servicesPromo": {
+    "title": "Promo video"
+  },
+  "servicesFpv": {
+    "title": "FPV snimci"
+  },
+  "blog": {
+    "title": "Blog"
+  },
+  "about": {
+    "title": "O nama"
+  },
+  "contact": {
+    "title": "Kontakt"
+  },
+  "privacy": {
+    "title": "Politika privatnosti"
+  },
+  "terms": {
+    "title": "Uslovi korišćenja"
+  }
+}

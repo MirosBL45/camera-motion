@@ -1,0 +1,38 @@
+{
+  "home": {
+    "title": "Home"
+  },
+  "services": {
+    "title": "Services"
+  },
+  "servicesWeddings": {
+    "title": "Wedding videography"
+  },
+  "servicesRealEstate": {
+    "title": "Real estate videography"
+  },
+  "servicesEvents": {
+    "title": "Events"
+  },
+  "servicesPromo": {
+    "title": "Promo video"
+  },
+  "servicesFpv": {
+    "title": "FPV footage"
+  },
+  "blog": {
+    "title": "Blog"
+  },
+  "about": {
+    "title": "About us"
+  },
+  "contact": {
+    "title": "Contact"
+  },
+  "privacy": {
+    "title": "Privacy policy"
+  },
+  "terms": {
+    "title": "Terms of use"
+  }
+}
