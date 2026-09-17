@@ -1,8 +1,8 @@
-# 11 — Usluga: Eventi i proslave
+# 11 — Usluga: Događaji i proslave
 
 ## Pregled
 
-Faza 2, fajl 4/6. `/usluge/eventi-i-proslave` — rođendani, krštenja, punoletstva, sportski i korporativni događaji.
+Faza 2, fajl 4/6. `/usluge/dogadjaji-i-proslave` — rođendani, krštenja, punoletstva, sportski i korporativni događaji.
 
 ## Zahtevi
 

@@ -216,9 +216,11 @@ Nađeno pri unakrsnoj proveri dizajna i feature fajlova; sve je odlučeno i upis
 | 3 | Blok „Područje rada" sa mapom na kontaktu | **Bez mape** — ostaje samo rečenica o području u kontakt kartici, kako kaže feature 16 | feature 16 |
 | 4 | Vreme čitanja članka | **Računa se iz dužine teksta** (~200 reči/min, zaokruženo naviše, min 1), ne upisuje se u frontmatter; prikaz kroz ICU plural | overview 13, feature 18 |
 
-### ⚠ Jedini izuzetak od pravila „dizajn pobeđuje"
+### ⚠ Izuzeci od pravila „dizajn pobeđuje"
 
-Sekcija **„Šta kažu mladenci"** na artboardima `1a` i `1d` se **svesno ne implementira**. Ovo je jedino mesto gde odluka vlasnika nadjačava dizajn referencu — svuda drugde važi overview 11. Ako u kasnijoj sesiji naiđeš na tu sekciju u dizajnu: preskoči je, nije previd.
+Sekcija **„Šta kažu mladenci"** na artboardima `1a` i `1d` se **svesno ne implementira**. Ako u kasnijoj sesiji naiđeš na tu sekciju u dizajnu: preskoči je, nije previd.
+
+Odluke iz feature-a 04 (header) takođe odstupaju od dizajna: „Usluge" je link sa hover menijem, aktivna stavka nema zlatnu liniju, stavke menija imaju opis u drugom redu. Kompletan spisak izuzetaka je u overview poglavlju 11 — svuda drugde važi „dizajn pobeđuje".
 
 ---
 
