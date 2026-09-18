@@ -27,13 +27,14 @@ Kopirati `.env.example` u `.env.local` i popuniti vrednosti:
 cp .env.example .env.local
 ```
 
-| Varijabla                  | Opis                                                    |
-| -------------------------- | ------------------------------------------------------- |
-| `RESEND_API_KEY`           | Resend API ključ za slanje kontakt forme                |
-| `UPSTASH_REDIS_REST_URL`   | Upstash Redis URL za rate limit kontakt forme           |
-| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis token                                     |
-| `CONTACT_EMAIL`            | Gmail adresa vlasnika, primalac poruka sa kontakt forme |
-| `NEXT_PUBLIC_SITE_URL`     | Javni URL sajta, koristi se za canonical/OG             |
+| Varijabla                  | Opis                                                                 |
+| -------------------------- | -------------------------------------------------------------------- |
+| `RESEND_API_KEY`           | Resend API ključ za slanje kontakt forme                             |
+| `UPSTASH_REDIS_REST_URL`   | Upstash Redis URL za rate limit kontakt forme                        |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis token                                                  |
+| `CONTACT_EMAIL`            | Gmail adresa vlasnika, primalac poruka sa kontakt forme              |
+| `CONTACT_PHONE`            | Telefon vlasnika, prikazuje se tek na klik (npr. `+381 60 123 4567`) |
+| `NEXT_PUBLIC_SITE_URL`     | Javni URL sajta, koristi se za canonical/OG                          |
 
 ## Deploy
 

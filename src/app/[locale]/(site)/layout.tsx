@@ -1,3 +1,4 @@
+import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 
 export default function SiteLayout({ children }: LayoutProps<"/[locale]">) {
@@ -5,6 +6,7 @@ export default function SiteLayout({ children }: LayoutProps<"/[locale]">) {
     <>
       <Header />
       {children}
+      <Footer />
     </>
   );
 }

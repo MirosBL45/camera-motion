@@ -1,1 +1,21 @@
-{}
+{
+  "description": "Video produkcija iz Beograda. Snimanje dronom i kamerom za venčanja, nekretnine i događaje.",
+  "headings": {
+    "navigation": "Navigacija",
+    "services": "Usluge",
+    "contact": "Kontakt"
+  },
+  "location": "Beograd, Srbija",
+  "social": {
+    "label": "Društvene mreže",
+    "instagram": "Camera Motion na Instagramu",
+    "youtube": "Camera Motion na YouTube-u"
+  },
+  "copyright": "© {year} Camera Motion. Sva prava zadržana.",
+  "legalLabel": "Pravne informacije",
+  "legal": {
+    "privacy": "Politika privatnosti",
+    "terms": "Uslovi korišćenja"
+  },
+  "regulationNote": "Snimanje dronom u skladu sa regulativom Direktorata civilnog vazduhoplovstva."
+}
