@@ -36,6 +36,7 @@
   --shadow-card-hover: var(--shadow-card-hover);
   --shadow-raised: var(--shadow-raised);
   --shadow-gold: var(--shadow-gold);
+  --shadow-gold-soft: var(--shadow-gold-soft);
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) * 0.75);
@@ -74,8 +75,12 @@
   /* Nije deo palete (poglavlje 10.1) — standardna greška-boja do feature-a za kontakt formu */
   --destructive: oklch(0.577 0.245 27.325);
 
-  /* Pruga u placeholder obrascu za slike i video — dizajn referenca NOTES 5, nije deo palete 10.1 */
+  /* Pruge u placeholder obrascu za slike i video — dizajn referenca NOTES 5, nisu deo palete 10.1.
+     Topla varijanta ide preko `surface-warm`, svetla preko `surface`, a zlatna preko sopstvene
+     osnove sa `accent-gold-soft` kao prugom. */
   --placeholder-stripe: #eae1cf;
+  --placeholder-stripe-light: #f6f1e7;
+  --placeholder-base-gold: #efe6d2;
 
   /* Radijusi — poglavlje 10.3: 8px dugmad/inputi, 12px kartice/media */
   --radius: 0.5rem;
@@ -86,6 +91,8 @@
   --shadow-card-hover: 0 16px 34px rgba(38, 36, 31, 0.1);
   --shadow-raised: 0 24px 60px rgba(38, 36, 31, 0.1);
   --shadow-gold: 0 16px 38px rgba(169, 135, 63, 0.18);
+  /* Mirno stanje zlatno istaknute kartice (FPV) — hover prelazi na `shadow-gold` */
+  --shadow-gold-soft: 0 10px 28px rgba(169, 135, 63, 0.14);
 }
 
 @layer base {
