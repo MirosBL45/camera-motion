@@ -1,4 +1,4 @@
-# Current Feature: 05 — Footer
+# Current Feature: 06 — Split hero (početna)
 
 ## Status
 
@@ -10,44 +10,45 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Footer (faza 1, fajl 2/4) sa navigacijom, kontaktima i suptilnom napomenom o regulativi DCV
-- 4 kolone na desktopu (naslagano na mobilnom): brend (logo + rečenica-dve), navigacija, usluge (svih 5 iz `services.ts`), kontakt (email, Instagram i YouTube ikonice)
-- Telefon: mesto za broj postoji po dizajnu, ali broj se NE renderuje u inicijalnom HTML-u — umesto broja dugme „Prikaži broj telefona"; izdvojena klijentska komponenta koju će deliti i kontakt stranica (feature 16)
-- Donja traka: `© {tekuća godina} Camera Motion. Sva prava zadržana.` + linkovi Politika privatnosti · Uslovi korišćenja + sitna napomena „Snimanje dronom u skladu sa regulativom Direktorata civilnog vazduhoplovstva."
-- Pozadina `surface-warm` (gornja bordura ili tačno po dizajnu); hover na linkovima zlatna
-- Bez newslettera i formi
-- Sav tekst kroz `footer` namespace (sr + en); linkovi kroz `Link` iz `@/i18n/navigation` i `ROUTES`
+- Split hero na početnoj (faza 1, fajl 3/4): levo poruka i CTA, desno uspravni video 9:16. Bez ijedne animacije pri učitavanju
+- Desktop: dve kolone `55fr 45fr`, gap 56px, padding `76px 48px 84px`, leva kolona vertikalno centrirana (h1 62px, podnaslov 20px `max-width:560px`, dva CTA dugmeta)
+- Tablet: iste dve kolone, video manji; mobilni: naslagano — h1, podnaslov, CTA dugmad (puna širina, jedno ispod drugog), pa video
+- Desni okvir: 9:16, radius 12px, bordura `1.5px accent-gold`, `max-width:400px` i `max-height:660px` na desktopu, poravnat desno; unutra play ikonica (krug 74px, `rgba(255,255,255,0.92)`, zlatna bordura) i monospace opis kadra
+- Tekstovi iz `home` namespace-a (sr + en); h1 „Vaši trenuci, snimljeni iz vazduha i iz srca.", CTA „Zatražite ponudu" → `ROUTES.contact`, „Pogledajte usluge" → `ROUTES.services`
+- **Traka sa brojkama** ispod CTA dugmadi (`margin-top:52px`, `padding-top:26px`, `border-top`, gap 34px): `40+` snimljenih venčanja · `120+` objekata iz vazduha · `4K` isporuka svakog kadra. Vrednosti kao konstante na jednom mestu uz `// TODO(vlasnik): ažurirati brojke`; labele kroz i18n. Na mobilnom se traka ne prikazuje (artboard `1d` je nema)
+- Video: za sada statičan placeholder sa play ikonicom bez funkcije; komponenta strukturirana tako da pravi `<video>` zamenjuje jedan blok, sa TODO komentarom iz feature fajla (izvoz 9:16, 8–12s, bez tona, H.264 MP4 + WebM, obavezan poster, NE YouTube embed)
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Instagram/YouTube URL-ovi kao konstante u `src/constants/` sa TODO da vlasnik upiše tačne profile
-- Referenca dizajna: `context/design-reference/` — footer sekcija (1:1): grid `1.4fr 1fr 1fr 1.2fr` gap 40px, padding `56px 48px 0`, donja traka sa `border-top` i tri elementa u redu
+- Referenca dizajna: `context/design-reference/Camera Motion Sajt.dc.html` — artboard `1a` (linija 570, hero od linije ~607) i `1d` (linija 814). Inline stilovi su izvor istine za izgled
 - Element u dizajnu koji spec ne opisuje → pitati pre implementacije
 - Odluke vlasnika pri učitavanju (dopune i odstupanja od speca/dizajna):
-  - Instagram/YouTube ikonice kao sopstvene TSX SVG komponente (lucide-react 1.x nema ikonice brendova), umesto „IG"/„YT" teksta iz dizajna
-  - Red „Beograd, Srbija" iz dizajna se implementira (kroz i18n, en: „Belgrade, Serbia")
-  - Prikazani email: `camera.motion.office@gmail.com` (konstanta u `src/constants/`, `mailto:` link), ne `info@cameramotion.net` iz dizajna
-  - Nazivi usluga iz `services` namespace-a, isti kao u headeru („Događaji i proslave", ne „Eventi i proslave")
-  - Footer bez gornje bordure, tačno po dizajnu; `border-top` samo na donjoj traci
-  - IG/YT dugmići 44×44px (touch mete), umesto 38px iz dizajna
-- Odluke vlasnika pri startu:
-  - Mobilni footer prikazuje sve 4 kolone naslagane + punu donju traku (po specu), a ne skraćenu verziju iz artboarda 1d
-  - Telefon se čuva samo u env varijabli `CONTACT_PHONE`; klijentska komponenta ga dobija na klik preko Server Action-a — nije ni u HTML-u ni u JS bundle-u (upisano u overview 12 i 15, `.env.example`, README)
+  - Mobilni video okvir: `max-width` 320px i centriran (po specu), ne puna širina iz artboarda `1d`
+  - Podnaslov: jedan i18n ključ za sve širine — duža, desktop verzija (dve rečenice); kraća mobilna varijanta iz `1d` se ne pravi
+  - Sekundarno CTA dugme dobija novu varijantu u `button.tsx` (bela pozadina, zlatna bordura, hover `surface-warm`) umesto override klasa nad `outline` varijantom — biće ponovo upotrebljena tamo gde dizajn traži isti izgled
+  - Monospace opis kadra u placeholderu ide kroz `home` namespace (sr + en), ne hardkodovan; ključevi se brišu kad stigne pravi video
+- Pretpostavke za implementaciju (ako nešto ne odgovara, reci pre starta):
+  - Traka sa brojkama skrivena ispod `md` (768px), jer od tog breakpointa hero prelazi u dve kolone
+  - Play ikonica: `Play` iz `lucide-react` (već u projektu), umesto CSS trougla iz dizajna
+  - Senka okvira videa: postojeći token `shadow-raised` umesto uvođenja novog tokena za `0 20px 44px rgba(38,36,31,0.12)` iz dizajna
+  - Sekcija „Šta snimamo" i sve ispod hero-a na artboardu `1a` pripadaju featureu 07 — ne diraju se u ovoj sesiji
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Svi linkovi lokalizovani i ispravni na oba jezika (uklj. pravne stranice — postoje kao prazne rute iz feature-a 03)
-2. Responzivan raspored na svim širinama
+1. Hero uravnotežen na 360px, 390px, 768px, 1024px, 1440px; odnos 9:16 očuvan na svim širinama
+2. Oba CTA vode na lokalizovane rute; tekstovi provereni na oba jezika
+3. Traka sa brojkama vidljiva od 768px naviše, skrivena ispod
+4. Placeholder jasno obeležen TODO komentarom sa uputstvom za izvoz videa
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 2, 7, 12)
-- @context/features/04-header-navigacija-done.md
-- @context/features/05-footer-done.md
+- @context/project-overview.md (poglavlja 5, 10.2, 10.4)
+- @context/features/06-hero-done.md
+- @context/features/02-dizajn-sistem.md
 
 ## History
 
@@ -84,3 +85,7 @@ Napravljen sticky header po dizajnu sa logom (privremeni placeholder), glavnim m
 ### Thursday, 17.09.2026. | 13:58 — 05 Footer
 
 Napravljen footer po dizajnu sa brendom, navigacijom, svim uslugama, kontaktom i donjom trakom sa pravnim linkovima i napomenom o regulativi DCV. Vlasnik je pre implementacije odlučio o više odstupanja od dizajna: ikonice društvenih mreža kao sopstvene SVG komponente jer biblioteka ikonica više nema brendove, prikazana Gmail adresa umesto adrese sa domena, dugmići mreža povećani na veličinu pogodnu za dodir, a na mobilnom se prikazuju sve kolone umesto skraćene verzije iz dizajna. Broj telefona čuva se isključivo u environment varijabli i do stranice stiže tek na klik preko Server Action-a, pa ga nema ni u HTML-u ni u JavaScript kodu koji se šalje browseru — odluka upisana u overview, primer environment fajla i README. Dugme za prikaz broja izdvojeno kao zajednička komponenta za kasniju kontakt stranicu, a logo dobio varijantu za footer. Tokom review-a ispravljeni pad stranice pri mrežnoj grešci na klik, gubitak fokusa tastature tokom učitavanja broja i fokus prsten loga koji se nije uklapao u pozadinu footera. Lint, testovi, provera tipova i build prolaze; provereno u browseru na četiri širine i oba jezika, uključujući prikaz broja tastaturom.
+
+### Monday, 21.09.2026. | 14:23 — 06 Split hero (početna)
+
+Napravljen hero na početnoj stranici po dizajnu: levo naslov, podnaslov i dva dugmeta sa trakom od tri brojke ispod, desno uspravni okvir za video u odnosu 9:16 sa zlatnom bordurom i privremenim ispunom. Na mobilnom se sve slaže jedno ispod drugog, a traka sa brojkama se skriva, kako i dizajn predviđa. Vlasnik je pre implementacije odlučio o četiri stvari: mobilni okvir za video ostaje uži i centriran po specu umesto pune širine iz dizajna, podnaslov ima jedan tekst na svim širinama, sekundarno dugme dobija novu varijantu sa belom pozadinom i zlatnom bordurom umesto ponavljanja stilova na svakom mestu, a opis budućeg kadra u okviru ide kroz prevode. Brojke stoje na jednom mestu uz napomenu da ih vlasnik menja kako brend raste, a okvir za video nosi detaljno uputstvo za izvoz pravog snimka — ceo blok koji se tada briše je jasno označen. Uz hero je dodat i glavni landmark stranice, koji do sada nije postojao. Tokom rada ispravljeno je to što dizajn okviru zadaje i širinu i visinu koje se međusobno isključuju, pa je širina izvedena iz visine da bi odnos 9:16 ostao tačan, kao i to što Tailwind ne prima proizvoljne decimale u razmacima. Tokom review-a nađeno je i rešeno izlaženje dugmadi i trake sa brojkama izvan kolone na tablet širinama. Lint, provera tipova, testovi i build prolaze; klik na mobilni meni dodatno proveren automatski na tri scenarija jer je prijavljen kao sumnjiv, i radi i na dev i na produkcijskom buildu.

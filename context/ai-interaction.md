@@ -1,5 +1,7 @@
 # AI Interaction Guidelines
 
+**IMPORTANT:** Do not add Claude or Codex or any AI to any commit messages
+
 ## VERY IMPORTANT
 
 - Ako ima nekih nesuglasica oko uputstava, features fajlova, project-overview fajla ili bilo čega, uvek pitaj, nemoj na nagađaš, nemoj da izmišljaš neka uputstva koja nemaš, navedi šta te buni, i ja ti onda kažem šta će i kako da bude
@@ -33,7 +35,7 @@ This is the common workflow that we will use for every single feature/fix:
 3. **Implement** - Implement the feature/fix described in @context/current-feature.md.
 4. **Test** - Verify it works in the browser. Add or update unit tests (Vitest) for any new server actions or utilities, run `npm run test`, then run `npm run build` and fix any errors.
 5. **Iterate** - Iterate and improve the implementation if needed.
-6. **Commit** - Commit only after the build passes and everything works correctly.
+6. **Commit** - Do not add Claude or Codex or any AI to any commit messages. Commit only after the build passes and everything works correctly.
 7. **Push** - Push the branch to GitHub (I will create the Pull Request on GitHub).
 8. **Delete Branch** - Delete the branch after it has been pushed.
 9. **Review** - Review AI-generated code periodically and on demand.

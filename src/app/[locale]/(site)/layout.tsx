@@ -5,7 +5,7 @@ export default function SiteLayout({ children }: LayoutProps<"/[locale]">) {
   return (
     <>
       <Header />
-      {children}
+      <main className="flex-1">{children}</main>
       <Footer />
     </>
   );
