@@ -14,5 +14,75 @@
       "format": "vertical reel 9:16",
       "shot": "wedding shot"
     }
+  },
+  "services": {
+    "heading": "What we film",
+    "intro": "One crew, one tone, five kinds of stories. For each of them we know the right lens and the right flight.",
+    "featuredBadge": "our specialty",
+    "items": {
+      "weddings": {
+        "title": "Weddings",
+        "excerpt": "A whole day in a cinematic rhythm — from getting ready to the first dance, with clean audio of the vows.",
+        "excerptShort": "A whole day in a cinematic rhythm, with clean audio of the vows.",
+        "placeholder": "shot: wedding"
+      },
+      "realEstate": {
+        "title": "Real estate",
+        "excerpt": "Apartments and houses for Booking and Airbnb — the space, the surroundings and the view in a single film.",
+        "excerptShort": "Apartments and houses for Booking and Airbnb.",
+        "placeholder": "shot: property"
+      },
+      "events": {
+        "title": "Events and celebrations",
+        "excerpt": "Christenings, birthdays, conferences and performances — a film that still holds up a year later.",
+        "excerptShort": "Christenings, birthdays, conferences and performances.",
+        "placeholder": "shot: celebration"
+      },
+      "promo": {
+        "title": "Promo video",
+        "excerpt": "For restaurants, salons, building sites and production floors — a short spot for your website and social media.",
+        "excerptShort": "A short spot for your website and social media.",
+        "placeholder": "shot: company promo"
+      },
+      "fpv": {
+        "title": "FPV footage",
+        "excerpt": "One unbroken flight through a space — the shot guests remember and share.",
+        "excerptShort": "One unbroken flight through a space, in a single take.",
+        "placeholder": "shot: FPV flight through a space"
+      }
+    }
+  },
+  "whyUs": {
+    "heading": "We work differently",
+    "lead": "We don't film a checklist of obligatory shots. We film what actually happens that day — a glance, a tear, a laugh that never repeats.",
+    "leadShort": "We film what actually happens that day — a glance, a tear, a laugh that never repeats.",
+    "items": {
+      "cinematic": {
+        "title": "A cinematic look, not “phone footage”",
+        "description": "Consistent color grading and warm tones across the whole film."
+      },
+      "gimbal": {
+        "title": "Smooth gimbal moves",
+        "description": "The camera moves calmly and quietly, without shake and without stepping into the frame."
+      },
+      "sound": {
+        "title": "Clean audio of vows and speeches",
+        "description": "Wireless microphones on the couple and the witnesses — every word comes through."
+      }
+    },
+    "placeholder": "photo: crew filming with a gimbal"
+  },
+  "trust": {
+    "label": "How we work",
+    "items": {
+      "regulation": "Filming in compliance with Civil Aviation Directorate rules",
+      "drones": "DJI drones",
+      "editing": "Editing in Adobe Premiere Pro"
+    }
+  },
+  "cta": {
+    "heading": "Tell us the date — we'll check whether we're free.",
+    "subheading": "We reply the same day, usually within a couple of hours.",
+    "button": "Request a quote"
   }
 }

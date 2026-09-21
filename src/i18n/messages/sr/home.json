@@ -14,5 +14,75 @@
       "format": "vertikalni reel 9:16",
       "shot": "kadar sa venčanja"
     }
+  },
+  "services": {
+    "heading": "Šta snimamo",
+    "intro": "Jedna ekipa, jedan ton, pet vrsta priča. Za svaku znamo koji objektiv i koji let odgovaraju.",
+    "featuredBadge": "naša specijalnost",
+    "items": {
+      "weddings": {
+        "title": "Venčanja",
+        "excerpt": "Ceo dan u filmskom ritmu — od pripreme do prvog plesa, sa čistim zvukom zaveta.",
+        "excerptShort": "Ceo dan u filmskom ritmu, sa čistim zvukom zaveta.",
+        "placeholder": "kadar: venčanje"
+      },
+      "realEstate": {
+        "title": "Nekretnine",
+        "excerpt": "Apartmani i kuće za Booking i Airbnb — prostor, okolina i pogled u jednom snimku.",
+        "excerptShort": "Apartmani i kuće za Booking i Airbnb.",
+        "placeholder": "kadar: nekretnina"
+      },
+      "events": {
+        "title": "Događaji i proslave",
+        "excerpt": "Krštenja, rođendani, konferencije i nastupi — snimak koji se gleda i posle godinu dana.",
+        "excerptShort": "Krštenja, rođendani, konferencije i nastupi.",
+        "placeholder": "kadar: proslava"
+      },
+      "promo": {
+        "title": "Promo video",
+        "excerpt": "Za restorane, salone, gradilišta i proizvodnju — kratki spot za sajt i mreže.",
+        "excerptShort": "Kratki spot za sajt i mreže.",
+        "placeholder": "kadar: promo za firmu"
+      },
+      "fpv": {
+        "title": "FPV snimci",
+        "excerpt": "Jedan neprekinut prolet kroz objekat — kadar koji gosti pamte i dele.",
+        "excerptShort": "Neprekinut prolet kroz objekat u jednom kadru.",
+        "placeholder": "kadar: FPV prolet kroz prostor"
+      }
+    }
+  },
+  "whyUs": {
+    "heading": "Radimo drugačije",
+    "lead": "Ne snimamo listu obaveznih kadrova. Snimamo ono što se tog dana zaista dešava — pogled, suzu, smeh koji se ne ponavlja.",
+    "leadShort": "Snimamo ono što se tog dana zaista dešava — pogled, suzu, smeh koji se ne ponavlja.",
+    "items": {
+      "cinematic": {
+        "title": "Filmski izgled, ne „snimak sa telefona“",
+        "description": "Ujednačena kolor korekcija i topli tonovi kroz ceo snimak."
+      },
+      "gimbal": {
+        "title": "Glatki gimbal kadrovi",
+        "description": "Kamera se kreće mirno i tiho, bez trzaja i bez upadanja u kadar."
+      },
+      "sound": {
+        "title": "Čist zvuk zaveta i govora",
+        "description": "Bežični mikrofoni na mladencima i kumovima — svaka reč se razume."
+      }
+    },
+    "placeholder": "fotografija: ekipa na snimanju sa gimbalom"
+  },
+  "trust": {
+    "label": "Kako radimo",
+    "items": {
+      "regulation": "Snimanje u skladu sa regulativom DCV",
+      "drones": "DJI dronovi",
+      "editing": "Montaža u Adobe Premiere Pro"
+    }
+  },
+  "cta": {
+    "heading": "Recite nam datum — proverićemo da li smo slobodni.",
+    "subheading": "Odgovaramo istog dana, obično u par sati.",
+    "button": "Zatražite ponudu"
   }
 }
