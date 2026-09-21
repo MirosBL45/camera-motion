@@ -1,1 +1,21 @@
-{}
+{
+  "description": "Video production from Belgrade. Drone and camera filming for weddings, real estate and events.",
+  "headings": {
+    "navigation": "Navigation",
+    "services": "Services",
+    "contact": "Contact"
+  },
+  "location": "Belgrade, Serbia",
+  "social": {
+    "label": "Social media",
+    "instagram": "Camera Motion on Instagram",
+    "youtube": "Camera Motion on YouTube"
+  },
+  "copyright": "© {year} Camera Motion. All rights reserved.",
+  "legalLabel": "Legal information",
+  "legal": {
+    "privacy": "Privacy policy",
+    "terms": "Terms of use"
+  },
+  "regulationNote": "Drone filming in compliance with the regulations of the Civil Aviation Directorate of Serbia."
+}

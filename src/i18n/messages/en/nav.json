@@ -1,1 +1,27 @@
-{}
+{
+  "mainLabel": "Main navigation",
+  "links": {
+    "home": "Home",
+    "services": "Services",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "serviceDescriptions": {
+    "weddings": "The whole day, from getting ready to first dance",
+    "realEstate": "Apartments and homes for Booking and Airbnb",
+    "events": "Christenings, birthdays and conferences",
+    "promo": "Short spots for your website and social media",
+    "fpv": "One unbroken flight through a space"
+  },
+  "cta": "Request a quote",
+  "homeLink": "Camera motion — home",
+  "openMenu": "Open menu",
+  "closeMenu": "Close menu",
+  "menuTitle": "Menu",
+  "languageLabel": "Language",
+  "languages": {
+    "sr": "Srpski",
+    "en": "English"
+  }
+}

@@ -1,3 +1,18 @@
 {
-  "title": "Home"
+  "title": "Home",
+  "hero": {
+    "heading": "Your moments, filmed from the air and from the heart.",
+    "subheading": "We film weddings, properties and events with drone and camera — in Belgrade and the surrounding area. Cinematic shots, a warm tone and editing that keeps the emotion of the day.",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See our services",
+    "stats": {
+      "weddings": "weddings filmed",
+      "aerial": "properties from the air",
+      "delivery": "delivery of every shot"
+    },
+    "videoPlaceholder": {
+      "format": "vertical reel 9:16",
+      "shot": "wedding shot"
+    }
+  }
 }

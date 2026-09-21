@@ -1,1 +1,27 @@
-{}
+{
+  "mainLabel": "Glavna navigacija",
+  "links": {
+    "home": "Početna",
+    "services": "Usluge",
+    "blog": "Blog",
+    "about": "O nama",
+    "contact": "Kontakt"
+  },
+  "serviceDescriptions": {
+    "weddings": "Ceo dan, od pripreme do prvog plesa",
+    "realEstate": "Apartmani i kuće za Booking i Airbnb",
+    "events": "Krštenja, rođendani i konferencije",
+    "promo": "Kratki spotovi za sajt i mreže",
+    "fpv": "Neprekinut prolet kroz objekat"
+  },
+  "cta": "Zatražite ponudu",
+  "homeLink": "Camera motion — početna",
+  "openMenu": "Otvori meni",
+  "closeMenu": "Zatvori meni",
+  "menuTitle": "Meni",
+  "languageLabel": "Izbor jezika",
+  "languages": {
+    "sr": "Srpski",
+    "en": "English"
+  }
+}

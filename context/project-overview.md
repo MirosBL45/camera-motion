@@ -98,7 +98,7 @@ context/
 | `/services` | `/usluge` | `/en/services` |
 | `/services/weddings` | `/usluge/snimanje-vencanja` | `/en/services/wedding-videography` |
 | `/services/real-estate` | `/usluge/snimanje-nekretnina` | `/en/services/real-estate-videography` |
-| `/services/events` | `/usluge/eventi-i-proslave` | `/en/services/events` |
+| `/services/events` | `/usluge/dogadjaji-i-proslave` | `/en/services/events` |
 | `/services/promo` | `/usluge/promo-video` | `/en/services/promo-video` |
 | `/services/fpv` | `/usluge/fpv-snimci` | `/en/services/fpv` |
 | `/blog` | `/blog` | `/en/blog` |
@@ -121,6 +121,7 @@ Blog slugovi se ne prevode automatski — svaki MDX članak nosi svoj slug po je
 - `src/i18n/routing.ts` — `defineRouting` sa `localePrefix: "as-needed"` i `pathnames` iz tabele 7.1
 - `src/i18n/navigation.ts` — `createNavigation` → `Link`, `redirect`, `usePathname`, `useRouter`, `getPathname`
 - Middleware: next-intl `createMiddleware`; `/sr/...` mora da redirektuje na verziju bez prefiksa
+- `localeDetection: false` — jezik browsera (Accept-Language) i kolačić se NE koriste za izbor jezika; URL bez prefiksa je uvek srpski (poglavlje 8.1)
 - Query param za pre-selekciju usluge na kontaktu: `?usluga=` sa stabilnim vrednostima `vencanje | nekretnine | event | promo | fpv | drugo` (iste vrednosti na en — princip 5)
 
 ## 8. i18n
@@ -134,6 +135,8 @@ Blog slugovi se ne prevode automatski — svaki MDX članak nosi svoj slug po je
 
 `SUPPORTED_LOCALES = ["sr", "en"]`, `defaultLocale = "sr"`, `LOCALE_LABELS = { sr: "SR", en: "EN" }`. `<html lang>` po aktivnom jeziku.
 
+**Sajt se uvek otvara na srpskom**, bez obzira na jezik browsera — veliki deo korisnika u Srbiji ima browser na engleskom, a očekuje srpski sajt. Automatsko prepoznavanje jezika je isključeno; na engleski se prelazi isključivo preko SR/EN prekidača ili direktnog `/en` URL-a.
+
 ### 8.2 Namespace-ovi poruka
 
 `common` (dugmad, opšte fraze), `nav`, `footer`, `home`, `services` (zajedničko + po usluzi: `services.weddings`, `services.realEstate`, `services.events`, `services.promo`, `services.fpv`), `about`, `contact` (uklj. validacione poruke forme), `blog`, `legal`, `notFound`, `metadata` (title/description po stranici).
@@ -143,6 +146,7 @@ Organizacija: `src/i18n/messages/sr/*.json` (fajl po namespace-u) + `index.ts` k
 ### 8.3 Pravila prevoda
 
 - Srpski: latinica, topao i direktan ton, obraćanje sa "vi"; bez agencijskog žargona
+- Bez anglicizama gde postoji domaća reč: usluga `events` je na srpskom „Događaji i proslave" (nikad „Eventi"), i u tekstu i u slugu
 - Engleski: prirodan prevod, ne bukvalan; nazivi usluga prilagođeni (wedding videography, real estate videography...)
 - Validator (`src/i18n/validator.ts` ili build skripta): puca ako `en` nema ključ koji `sr` ima (i obrnuto) — pokreće se u build-u
 - Datumi: `Intl.DateTimeFormat` po locale-u (`sr-Latn-RS` / `en-GB` format mapa)
@@ -157,7 +161,7 @@ Jedan izvor istine za sadržaj koji se ponavlja; komponente ga čitaju, i18n tek
 - `src/data/team.ts`: članovi ekipe, niz objekata koji se mapira u kartice (vidi 9.2)
 - YouTube ID-jevi po usluzi: u `services.ts` polje `videoIds: string[]` (placeholder ID + TODO)
 
-**Recenzija nema** — nikakav `testimonials.ts` se ne pravi (odluka vlasnika, feature 14 je otkazan). Dizajn ima sekciju „Šta kažu mladenci"; ona se svesno preskače i to je jedini izuzetak od pravila da dizajn pobeđuje za izgled.
+**Recenzija nema** — nikakav `testimonials.ts` se ne pravi (odluka vlasnika, feature 14 je otkazan). Dizajn ima sekciju „Šta kažu mladenci"; ona se svesno preskače (izuzetak od pravila da dizajn pobeđuje za izgled — spisak svih izuzetaka u poglavlju 11).
 
 ### 9.1 Paketi
 
@@ -267,13 +271,19 @@ Dizajn je urađen u Claude Design i vlasnik ga **zadržava takav kakav je (1:1)*
 - Element postoji u dizajnu, a nijedan feature ga ne opisuje → NE implementirati dok se ne pita vlasnik
 - Nedoumica ili sukob → PRVO PITATI sa objašnjenjem problematike, ne odlučivati samostalno
 
+**Svesni izuzeci od dizajna (odluke vlasnika)** — ako se u dizajnu naiđe na ove elemente, NE vraćati ih:
+- Sekcija recenzija „Šta kažu mladenci" se ne implementira (poglavlje 9)
+- Header: „Usluge" je link ka `/usluge`; padajući meni se na desktopu otvara na hover/fokus (animacija 200ms), a stavke imaju kratak opis u drugom redu
+- Header: aktivna stavka glavnog menija nema zlatnu liniju ispod
+- Nazivi usluga u meniju su isti kao naslovi stranica usluga (ne nazivi iz dizajna, npr. „Nekretnine i apartmani")
+
 ## 12. Kontakt i integracije
 
 - Server Action `submitContact` (bez javne API rute); Zod validacija na serveru identična klijentskoj
 - Resend: slanje na `CONTACT_EMAIL` (Gmail); From za start `onboarding@resend.dev` (TODO: verifikovati domen → `upiti@cameramotion.net`); Reply-To = email klijenta
 - Upstash `@upstash/ratelimit`: sliding window 3 zahteva / 10 min po IP + 10/dan po IP; specifičan error kod → UI poruka
 - Honeypot polje; popunjeno → tihi "uspeh" bez slanja
-- Telefon vlasnika NIKAD u inicijalnom HTML-u ni u JSON-LD — prikazuje se tek na klik (klijentska komponenta)
+- Telefon vlasnika NIKAD u inicijalnom HTML-u, JS bundle-u ni u JSON-LD — prikazuje se tek na klik (klijentska komponenta); broj živi samo u env varijabli `CONTACT_PHONE`, a klijentska komponenta ga dobija pozivom Server Action-a `getPhoneNumber`
 - Pravilo važi **svuda gde se broj pojavljuje, uključujući footer**: mesto za broj postoji po dizajnu, ali sadrži dugme „Prikaži broj telefona"; sam broj ulazi u DOM tek posle klika. Ista komponenta se koristi na kontakt stranici i u footeru
 
 ## 13. Blog (MDX)
@@ -302,6 +312,7 @@ RESEND_API_KEY=            # server
 UPSTASH_REDIS_REST_URL=    # server
 UPSTASH_REDIS_REST_TOKEN=  # server
 CONTACT_EMAIL=             # server — Gmail vlasnika
+CONTACT_PHONE=             # server — telefon vlasnika, vraća ga Server Action tek na klik
 NEXT_PUBLIC_SITE_URL=https://cameramotion.net
 ```
 `.env.example` sa praznim vrednostima i komentarima; `.env*` u `.gitignore`. Ništa osetljivo pod `NEXT_PUBLIC_`.

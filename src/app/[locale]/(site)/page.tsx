@@ -1,7 +1,5 @@
-import { getTranslations } from "next-intl/server";
+import { Hero } from "@/components/sections/Hero";
 
-export default async function HomePage() {
-  const t = await getTranslations("home");
-
-  return <h1>{t("title")}</h1>;
+export default function HomePage() {
+  return <Hero />;
 }

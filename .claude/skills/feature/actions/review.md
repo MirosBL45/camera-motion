@@ -1,5 +1,7 @@
 # Review Action
 
+**IMPORTANT:** Do not add Claude or Codex or any AI to any commit messages
+
 1. Read current-feature.md to understand the goals
 2. Review all code changes made for this feature
 3. Check for:
@@ -8,3 +10,5 @@
    - ⚠️ Code quality issues or bugs
    - 🚫 Scope creep (code beyond goals)
 4. Final verdict: Ready to complete or needs changes
+
+**IMPORTANT:** Do not add Claude or Codex or any AI to any commit messages

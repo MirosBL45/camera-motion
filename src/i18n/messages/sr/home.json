@@ -1,3 +1,18 @@
 {
-  "title": "Početna"
+  "title": "Početna",
+  "hero": {
+    "heading": "Vaši trenuci, snimljeni iz vazduha i iz srca.",
+    "subheading": "Snimamo venčanja, nekretnine i događaje dronom i kamerom — u Beogradu i okolini. Filmski kadrovi, topao ton i montaža koja čuva emociju dana.",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Pogledajte usluge",
+    "stats": {
+      "weddings": "snimljenih venčanja",
+      "aerial": "objekata iz vazduha",
+      "delivery": "isporuka svakog kadra"
+    },
+    "videoPlaceholder": {
+      "format": "vertikalni reel 9:16",
+      "shot": "kadar sa venčanja"
+    }
+  }
 }

@@ -74,6 +74,9 @@
   /* Nije deo palete (poglavlje 10.1) — standardna greška-boja do feature-a za kontakt formu */
   --destructive: oklch(0.577 0.245 27.325);
 
+  /* Pruga u placeholder obrascu za slike i video — dizajn referenca NOTES 5, nije deo palete 10.1 */
+  --placeholder-stripe: #eae1cf;
+
   /* Radijusi — poglavlje 10.3: 8px dugmad/inputi, 12px kartice/media */
   --radius: 0.5rem;
   --radius-card: 0.75rem;

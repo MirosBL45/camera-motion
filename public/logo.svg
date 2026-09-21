@@ -1,0 +1,5 @@
+<!-- TODO: pravi logo fajl — privremeni placeholder po opisu iz poglavlja 2 i dizajn reference -->
+<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" role="img" aria-hidden="true">
+  <circle cx="21" cy="21" r="20.25" fill="#26241F" stroke="#A9873F" stroke-width="1.5" />
+  <text x="21" y="21" fill="#FFFFFF" font-family="Outfit, ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="0.3" text-anchor="middle" dominant-baseline="central">CM</text>
+</svg>
