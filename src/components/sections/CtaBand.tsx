@@ -9,6 +9,8 @@ interface ICtaBandProps {
   subheading: string;
   buttonLabel: string;
   href?: Exclude<AppRoute, "/blog/[slug]">;
+  /** Query parametri se ne prevode — stabilni ključevi na oba jezika (poglavlje 7.3). */
+  query?: Record<string, string>;
 }
 
 // Zeleni band sa dna svakog artboarda — tekstovi stižu kroz props da bi se sekcija
@@ -18,6 +20,7 @@ export function CtaBand({
   subheading,
   buttonLabel,
   href = ROUTES.contact,
+  query,
 }: ICtaBandProps) {
   return (
     <section className="bg-primary px-5 py-10 md:px-12 md:py-21">
@@ -34,7 +37,7 @@ export function CtaBand({
           variant="onPrimary"
           className="h-auto w-full justify-center px-6.5 py-4 font-heading text-[1.0625rem] font-semibold md:w-auto md:shrink-0 md:px-7.5 md:py-4.25 md:text-lg"
         >
-          <Link href={href}>{buttonLabel}</Link>
+          <Link href={{ pathname: href, query }}>{buttonLabel}</Link>
         </Button>
       </div>
     </section>

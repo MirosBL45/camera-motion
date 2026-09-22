@@ -4,5 +4,8 @@
     "reveal": "Show phone number",
     "loading": "Loading…",
     "unavailable": "The number is currently unavailable — please email us."
+  },
+  "video": {
+    "play": "Play video: {title}"
   }
 }

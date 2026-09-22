@@ -23,5 +23,6 @@
   "languages": {
     "sr": "Srpski",
     "en": "English"
-  }
+  },
+  "breadcrumbLabel": "Breadcrumb"
 }

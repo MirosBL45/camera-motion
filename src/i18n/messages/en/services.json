@@ -1,5 +1,47 @@
 {
   "title": "Services",
+  "overview": {
+    "heading": "Drone and camera work — from weddings to business spaces.",
+    "lead": "Camera Motion is a video production crew from Belgrade. We film weddings, properties, celebrations and promo material for companies — with a drone from the air and a camera on the ground. We work in Belgrade and the surrounding area, and we arrange shoots elsewhere in Serbia and the region separately.",
+    "priceFrom": "from €{price}",
+    "priceOnRequest": "price on request",
+    "detailsCta": "See details",
+    "editingNote": "Every service includes full editing in Adobe Premiere Pro — the cut, the color and the sound. We can also edit footage you filmed yourself, by arrangement.",
+    "photographyNote": "Photography is coming to every service soon — get in touch if you need it on your next shoot.",
+    "items": {
+      "weddings": {
+        "excerpt": "The whole day, from getting ready to the first dance, in a cinematic rhythm. The camera catches the emotion, the drone the church, the venue and the landscape. Vows and speeches are recorded with wireless microphones.",
+        "placeholder": "shot: the couple in golden hour"
+      },
+      "realEstate": {
+        "excerpt": "Apartments, houses, villas and business spaces for Booking, Airbnb and agencies. One drone flight shows the location and the surroundings, while calm interior shots show the space as it really is. The material is ready for your listing and social media right away.",
+        "placeholder": "shot: drone flight over a villa with a pool"
+      },
+      "events": {
+        "excerpt": "Christenings, birthdays, conferences, performances and sports events. We film the flow and the atmosphere, without stepping into the frame and without interrupting the programme. You get a short spot and a longer film of the whole event.",
+        "placeholder": "shot: celebration in a hall"
+      },
+      "promo": {
+        "excerpt": "For restaurants, salons, building sites, production floors and small businesses. A short spot that shows the space, the people and what you do. We also make a vertical version for Reels and Stories.",
+        "placeholder": "shot: promo filming inside a venue"
+      },
+      "fpv": {
+        "excerpt": "One unbroken flight through a space — through doorways, hallways and between trees. A shot a standard drone and camera simply cannot make. We do it on its own or as an add-on to any other service.",
+        "placeholder": "shot: FPV flight through a house"
+      }
+    }
+  },
+  "featuredBadge": "our specialty",
+  "packages": {
+    "featuredBadge": "most popular",
+    "priceFrom": "from €{price}",
+    "cta": "Request a quote"
+  },
+  "cta": {
+    "heading": "Tell us what you're filming — we'll come back with a plan and a price.",
+    "subheading": "We reply the same day, usually within a couple of hours.",
+    "button": "Request a quote"
+  },
   "weddings": {
     "title": "Wedding videography"
   },
