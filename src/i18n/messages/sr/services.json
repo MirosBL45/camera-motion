@@ -43,7 +43,112 @@
     "button": "Zatražite ponudu"
   },
   "weddings": {
-    "title": "Snimanje venčanja"
+    "title": "Snimanje venčanja",
+    "heading": "Vaš dan zaslužuje snimak koji se gleda i za deset godina.",
+    "lead": "Dolazimo rano, ostajemo do prvog plesa i ceo dan smo tu — tiho. Kamerom snimamo emociju, dronom prostor i atmosferu, a montažom pravimo priču sa početkom i krajem.",
+    "placeholder": "fotografija: mladenci u zlatnom satu",
+    "ctaPrimary": "Proverite da li je vaš termin slobodan",
+    "ctaSecondary": "Pogledajte pakete",
+    "how": {
+      "heading": "Kako snimamo",
+      "items": {
+        "camera": {
+          "title": "Filmska kamera",
+          "description": "Svetli objektivi i mekana pozadina — lica u fokusu, gosti u atmosferi. Kamera drži kvalitet i kasno uveče, kad svetla u sali oslabe."
+        },
+        "gimbal": {
+          "title": "Gimbal",
+          "description": "Glatko kretanje kroz salu, bez trzaja i bez upadanja u kadar. Tako ostaju zabeleženi i spontani momenti, onakvi kakvi jesu."
+        },
+        "drone": {
+          "title": "Dron",
+          "description": "Crkva, restoran i pejzaž iz vazduha — legalno i u skladu sa DCV. Po želji dodajemo i FPV prolet kroz salu."
+        },
+        "sound": {
+          "title": "Čist zvuk",
+          "description": "Bežični mikrofoni na zavetima, govorima i zdravicama. Ton uzimamo i sa miksete benda, uz ambijentalne mikrofone, a sve miksujemo u postprodukciji — dovoljno je da bend obavestite unapred."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Paketi",
+      "intro": "Sve cene su početne i zavise od lokacije i trajanja dana. Ponudu pišemo posle kratkog razgovora.",
+      "note": "Ako vam treba nešto van paketa, javite se — pišemo posebnu ponudu. Kao snimatelji za svadbe radimo u Beogradu i okolini, a za venčanja dalje od grada dogovaramo se posebno.",
+      "osnovni": {
+        "name": "Osnovni",
+        "features": {
+          "camera": "Snimanje kamerom sa gimbalom",
+          "microphone": "Bežični mikrofon na zavetima",
+          "fullEdit": "Montiran ceo snimak dana",
+          "delivery": "Isporuka u 4K, do 3 nedelje"
+        }
+      },
+      "standard": {
+        "name": "Standard",
+        "features": {
+          "fromPrevious": "Sve iz Osnovnog paketa",
+          "drone": "Snimanje dronom (crkva, restoran, pejzaž)",
+          "highlights": "„Best moments“ spot 4–6 min uz muziku",
+          "reel": "Vertikalni reel za mreže"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "features": {
+          "fromPrevious": "Sve iz Standard paketa",
+          "fpv": "FPV prolet kroz salu i prvi ples",
+          "staticCamera": "Statična kamera u crkvi (ceo obred)",
+          "twoOperators": "Dva snimatelja ceo dan"
+        }
+      }
+    },
+    "options": {
+      "heading": "Dodatne opcije",
+      "intro": "Dodaju se uz bilo koji paket, po dogovoru — kao dopuna snimanju svadbe dronom i kamerom.",
+      "items": {
+        "prewedding": {
+          "title": "Prewedding snimanje",
+          "description": "Zaseban termin pre venčanja, kad na sam dan nema vremena za mirne kadrove udvoje. Datum biramo prema vremenskoj prognozi."
+        },
+        "staticCamera": {
+          "title": "Dodatna statična kamera",
+          "description": "Još jedan ugao koji snima bez prekida — obred, govore ili prvi ples, bez propuštenog trenutka."
+        },
+        "storage": {
+          "title": "Produženo čuvanje materijala",
+          "description": "Sirov materijal čuvamo i posle isporuke, pa naknadno možete da tražite dodatni rez ili pojedinačan kadar."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Isporuka",
+      "intro": "Montiran snimak dobijate digitalno — bez čekanja na poštu i bez dolaska po disk.",
+      "items": {
+        "digital": "Link za preuzimanje u punom kvalitetu, uz verzije spremne za društvene mreže.",
+        "backup": "Preporučujemo da snimak odmah prebacite na eksterni disk — link za preuzimanje ne stoji zauvek.",
+        "timeline": "Rok isporuke i avans dogovaramo pre snimanja i upisujemo u dogovor."
+      }
+    },
+    "works": {
+      "heading": "Naši radovi",
+      "items": {
+        "first": {
+          "title": "Jovana i Miloš — Zemun",
+          "meta": "Best moments spot · 5:20",
+          "placeholder": "snimak: best moments spot, venčanje u Zemunu"
+        },
+        "second": {
+          "title": "Ana i Nemanja — Avala",
+          "meta": "FPV prolet i prvi ples · 1:40",
+          "placeholder": "snimak: FPV prolet kroz salu i prvi ples"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Proverite da li je vaš termin slobodan",
+      "subheading": "Subote u sezoni se popune rano — pišite nam i pre nego što je sve dogovoreno.",
+      "button": "Pišite nam"
+    }
   },
   "realEstate": {
     "title": "Snimanje nekretnina"

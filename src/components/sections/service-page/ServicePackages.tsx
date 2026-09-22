@@ -20,6 +20,8 @@ export type ServicePackageContentType = {
 };
 
 interface IServicePackagesProps {
+  /** Meta sekcije za sidro iz uvodnog bloka („Pogledajte pakete"). */
+  id?: string;
   service: ServiceType;
   heading: string;
   intro?: string;
@@ -32,6 +34,7 @@ interface IServicePackagesProps {
 // Cene, redosled i istaknuti paket dolaze iz `packages.ts` (poglavlje 9.1) — iznos postoji samo
 // tamo i ovde se samo formatira. Tekstovi stižu kroz props, da šablon ne zavisi od naziva ključeva.
 export function ServicePackages({
+  id,
   service,
   heading,
   intro,
@@ -46,7 +49,8 @@ export function ServicePackages({
   if (!servicePackages?.length) return null;
 
   return (
-    <section className="px-5 py-10 md:px-12 md:py-20">
+    // `scroll-mt-*` drži naslov ispod sticky header-a kad se dođe preko sidra.
+    <section id={id} className="scroll-mt-20 px-5 py-10 md:scroll-mt-24 md:px-12 md:py-20">
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-10">
         <h2>{heading}</h2>
         {intro ? <p className="text-muted-foreground md:max-w-107.5 md:text-lg">{intro}</p> : null}

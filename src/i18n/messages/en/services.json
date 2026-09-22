@@ -43,7 +43,112 @@
     "button": "Request a quote"
   },
   "weddings": {
-    "title": "Wedding videography"
+    "title": "Wedding videography",
+    "heading": "Your day deserves a film you'll still watch in ten years.",
+    "lead": "We arrive early, stay until the first dance and spend the whole day with you — quietly. The camera captures the emotion, the drone the setting and the atmosphere, and the edit turns it into a story with a beginning and an end.",
+    "placeholder": "photo: the couple in golden hour",
+    "ctaPrimary": "Check if your date is free",
+    "ctaSecondary": "See the packages",
+    "how": {
+      "heading": "How we film",
+      "items": {
+        "camera": {
+          "title": "Cinematic camera",
+          "description": "Fast lenses and a soft background — faces in focus, guests in the atmosphere. The camera holds up late in the evening too, when the lights in the venue go down."
+        },
+        "gimbal": {
+          "title": "Gimbal",
+          "description": "Smooth movement through the venue, with no shake and without stepping into the frame. That way the spontaneous moments stay exactly as they happened."
+        },
+        "drone": {
+          "title": "Drone",
+          "description": "The church, the venue and the landscape from the air — legally and in line with Civil Aviation Directorate rules. On request we add an FPV flight through the venue."
+        },
+        "sound": {
+          "title": "Clean sound",
+          "description": "Wireless microphones on the vows, the speeches and the toasts. We also take the feed from the band's mixer, together with ambient microphones, and mix everything in post — just let the band know in advance."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Packages",
+      "intro": "All prices are starting prices and depend on the location and the length of the day. We put the quote together after a short conversation.",
+      "note": "If you need something outside the packages, get in touch — we'll write a separate quote. We film weddings in Belgrade and the surrounding area; for weddings further afield we arrange the details separately.",
+      "osnovni": {
+        "name": "Basic",
+        "features": {
+          "camera": "Camera work on a gimbal",
+          "microphone": "Wireless microphone on the vows",
+          "fullEdit": "Edited film of the whole day",
+          "delivery": "Delivered in 4K, within 3 weeks"
+        }
+      },
+      "standard": {
+        "name": "Standard",
+        "features": {
+          "fromPrevious": "Everything in the Basic package",
+          "drone": "Drone footage (church, venue, landscape)",
+          "highlights": "\"Best moments\" film, 4–6 min, set to music",
+          "reel": "Vertical reel for social media"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "features": {
+          "fromPrevious": "Everything in the Standard package",
+          "fpv": "FPV flight through the venue and the first dance",
+          "staticCamera": "Static camera in the church (the full ceremony)",
+          "twoOperators": "Two camera operators all day"
+        }
+      }
+    },
+    "options": {
+      "heading": "Add-ons",
+      "intro": "Added to any package by arrangement — alongside the drone and camera work on the day.",
+      "items": {
+        "prewedding": {
+          "title": "Pre-wedding shoot",
+          "description": "A separate session before the wedding, for when the day itself leaves no time for calm shots of just the two of you. We pick the date around the weather forecast."
+        },
+        "staticCamera": {
+          "title": "Extra static camera",
+          "description": "One more angle recording without a break — the ceremony, the speeches or the first dance, with nothing missed."
+        },
+        "storage": {
+          "title": "Extended footage storage",
+          "description": "We keep the raw footage after delivery too, so you can ask for another cut or a single shot later on."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Delivery",
+      "intro": "You get the edited film digitally — no waiting for the post and no picking up a drive.",
+      "items": {
+        "digital": "A download link in full quality, plus versions ready for social media.",
+        "backup": "We recommend copying the film to an external drive right away — the download link doesn't stay up forever.",
+        "timeline": "We agree the delivery time and the deposit before the shoot and put them in writing."
+      }
+    },
+    "works": {
+      "heading": "Our work",
+      "items": {
+        "first": {
+          "title": "Jovana and Miloš — Zemun",
+          "meta": "Best moments film · 5:20",
+          "placeholder": "video: best moments film, wedding in Zemun"
+        },
+        "second": {
+          "title": "Ana and Nemanja — Avala",
+          "meta": "FPV flight and first dance · 1:40",
+          "placeholder": "video: FPV flight through the venue and the first dance"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Check if your date is free",
+      "subheading": "Saturdays in season fill up early — write to us even before everything else is settled.",
+      "button": "Get in touch"
+    }
   },
   "realEstate": {
     "title": "Real estate videography"

@@ -10,6 +10,10 @@ import type { ServiceType } from "@/types/services.type";
 import { ROUTES } from "@/constants/routes";
 import { Link } from "@/i18n/navigation";
 
+/** Sekundarno dugme vodi ili na drugu stranicu, ili na sekciju iste stranice (`targetId`). */
+type SecondaryCtaType =
+  { label: string; href: Exclude<AppRoute, "/blog/[slug]"> } | { label: string; targetId: string };
+
 interface IServiceIntroProps {
   service: ServiceType;
   heading: string;
@@ -17,7 +21,7 @@ interface IServiceIntroProps {
   placeholderLabel: string;
   /** Vodi na kontakt sa `?usluga=` pre-selekcijom iz `service.contactParam`. */
   primaryCtaLabel: string;
-  secondaryCta?: { label: string; href: Exclude<AppRoute, "/blog/[slug]"> };
+  secondaryCta?: SecondaryCtaType;
 }
 
 const CTA_CLASSES =
@@ -72,7 +76,13 @@ export function ServiceIntro({
 
           {secondaryCta ? (
             <Button asChild variant="goldOutline" className={CTA_CLASSES}>
-              <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
+              {"targetId" in secondaryCta ? (
+                // Sidro ka sekciji iste stranice — obično `<a>`, bez smooth-scroll
+                // animacije (poglavlje 10.4).
+                <a href={`#${secondaryCta.targetId}`}>{secondaryCta.label}</a>
+              ) : (
+                <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
+              )}
             </Button>
           ) : null}
         </div>
