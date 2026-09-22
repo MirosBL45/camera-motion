@@ -17,7 +17,19 @@ Ostale komande:
 npm run build   # produkcioni build
 npm run start   # produkcioni server (posle build-a)
 npm run lint    # ESLint
+npm run test    # Vitest (jedan prolaz)
 ```
+
+## Sadržaj koji se menja u kodu
+
+Sajt nema bazu ni CMS — ovo su mesta gde se menjaju vrednosti:
+
+| Šta                       | Gde                                                                                    |
+| ------------------------- | -------------------------------------------------------------------------------------- |
+| Cene paketa               | `PRICES` blok na vrhu `src/data/packages.ts` — jedino mesto u projektu gde stoji iznos |
+| Brojke u hero traci       | `src/constants/hero-stats.ts`                                                          |
+| YouTube ID-jevi po usluzi | `videoIds` u `src/data/services.ts`                                                    |
+| Tekstovi                  | `src/i18n/messages/sr/` i `src/i18n/messages/en/` (isti ključevi na oba jezika)        |
 
 ## Environment varijable
 

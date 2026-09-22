@@ -1,5 +1,47 @@
 {
   "title": "Usluge",
+  "overview": {
+    "heading": "Snimanje dronom i kamerom — od venčanja do poslovnog prostora.",
+    "lead": "Camera Motion je video produkcija iz Beograda. Snimamo venčanja, nekretnine, proslave i promo materijal za firme — dronom iz vazduha i kamerom sa zemlje. Radimo u Beogradu i okolini, a za snimanja u ostatku Srbije i regiona dogovaramo se posebno.",
+    "priceFrom": "od {price} €",
+    "priceOnRequest": "cena po dogovoru",
+    "detailsCta": "Detaljnije",
+    "editingNote": "Svaka usluga uključuje kompletnu montažu u Adobe Premiere Pro — rez, kolor i zvuk. Po dogovoru montiramo i materijal koji ste sami snimili.",
+    "photographyNote": "Uskoro uz svaku uslugu i fotografija — javite nam se ako vam treba već na sledećem snimanju.",
+    "items": {
+      "weddings": {
+        "excerpt": "Ceo dan, od priprema do prvog plesa, u filmskom ritmu. Kamerom hvatamo emociju, dronom crkvu, restoran i pejzaž. Zavete i govore snimamo bežičnim mikrofonima.",
+        "placeholder": "kadar: mladenci u zlatnom satu"
+      },
+      "realEstate": {
+        "excerpt": "Stanovi, kuće, vile i poslovni prostori za Booking, Airbnb i agencije. Jedan prolet dronom pokazuje lokaciju i okolinu, a mirni kadrovi iznutra prostor takav kakav jeste. Materijal je odmah spreman za oglas i mreže.",
+        "placeholder": "kadar: prolet dronom iznad vile sa bazenom"
+      },
+      "events": {
+        "excerpt": "Krštenja, rođendani, konferencije, nastupi i sportski događaji. Snimamo tok i atmosferu, bez upadanja u kadar i bez prekidanja programa. Dobijate kratak spot i duži snimak celog događaja.",
+        "placeholder": "kadar: proslava u sali"
+      },
+      "promo": {
+        "excerpt": "Za restorane, salone, gradilišta, proizvodnju i male biznise. Kratak spot koji pokazuje prostor, ljude i ono što radite. Pravimo i vertikalnu verziju za Reels i Stories.",
+        "placeholder": "kadar: promo snimanje u lokalu"
+      },
+      "fpv": {
+        "excerpt": "Jedan neprekinut prolet kroz prostor — kroz vrata, hodnike i između drveća. Kadar koji klasičan dron i kamera ne mogu da naprave. Radimo ga samostalno ili kao dodatak uz bilo koju drugu uslugu.",
+        "placeholder": "kadar: FPV prolet kroz kuću"
+      }
+    }
+  },
+  "featuredBadge": "naša specijalnost",
+  "packages": {
+    "featuredBadge": "najpopularniji",
+    "priceFrom": "od {price} €",
+    "cta": "Zatražite ponudu"
+  },
+  "cta": {
+    "heading": "Recite nam šta snimate — javljamo se sa predlogom i cenom.",
+    "subheading": "Odgovaramo istog dana, obično u par sati.",
+    "button": "Zatražite ponudu"
+  },
   "weddings": {
     "title": "Snimanje venčanja"
   },

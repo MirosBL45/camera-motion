@@ -20,10 +20,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const { locale } = await params;
 
   return (
-    <html
-      lang={locale}
-      className={`${outfit.variable} ${sourceSans3.variable} h-full antialiased`}
-    >
+    <html lang={locale} className={`${outfit.variable} ${sourceSans3.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
