@@ -151,7 +151,107 @@
     }
   },
   "realEstate": {
-    "title": "Real estate videography"
+    "title": "Real estate videography",
+    "heading": "A film that shows the whole place — the space and the view.",
+    "lead": "We film apartments, houses, villas and business spaces for Booking, Airbnb, agencies and investors. One drone flight shows the location and the surroundings, while calm interior shots show the space exactly as it is.",
+    "placeholder": "shot: drone flight over a villa with a pool",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See examples",
+    "audience": {
+      "heading": "Who we film for",
+      "intro": "Video sells a property better than photos — buyers and guests see the space and everything around it before they ever arrive.",
+      "items": {
+        "sale": {
+          "title": "Selling apartments and houses",
+          "description": "A video that shows buyers the layout, the light and the neighbourhood of your apartment or house before the first viewing."
+        },
+        "rental": {
+          "title": "Renting on Booking and Airbnb",
+          "description": "Apartment videos for Booking and Airbnb — guests see the room, the terrace and the view, and book with more confidence."
+        },
+        "agencies": {
+          "title": "Agencies and investors",
+          "description": "Consistent material across several properties, ready for the agency website, listing portals and investor presentations."
+        },
+        "plots": {
+          "title": "Land plots",
+          "description": "From the air you can see the boundaries, the access road and the surroundings — everything that is hard to show from the ground."
+        }
+      }
+    },
+    "features": {
+      "heading": "What you get",
+      "intro": "The material is ready for your listing, website and social media straight away — no extra cropping or compression.",
+      "items": {
+        "droneFlight": {
+          "title": "Drone flight",
+          "description": "The property, the garden, the beach or the city centre — how close everything is, in a single shot. Aerial footage shows the location, the surroundings and the way in."
+        },
+        "interior": {
+          "title": "Interior walkthrough",
+          "description": "A smooth walk through the rooms on a gimbal, in the order a guest would see them. On request we add an FPV flight through the property, which gives the best sense of space."
+        },
+        "photos": {
+          "title": "Photos from the shoot",
+          "description": "10–20 edited photos for your listing, in the same tone as the video."
+        },
+        "social": {
+          "title": "Social media version",
+          "description": "A vertical 9:16 cut for Reels and Stories, alongside the horizontal one for your website. The spot runs 30–90 seconds, and the vertical cut is an option that works for TikTok too."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Packages",
+      "intro": "These are starting prices for properties in Belgrade and the surrounding area. We offer a discount for several properties at the same address.",
+      "oglas": {
+        "name": "Listing",
+        "features": {
+          "droneFlight": "Drone flight around the property",
+          "shortSpot": "30–45 s spot for your listing",
+          "aerialPhotos": "10 aerial photos",
+          "delivery": "Delivered in 4 days"
+        }
+      },
+      "apartman": {
+        "name": "Apartment",
+        "features": {
+          "droneAndInterior": "Drone and interior filming",
+          "spotAndVertical": "60–90 s spot + vertical cut",
+          "photos": "20 edited photos",
+          "subtitles": "Subtitles in Serbian and English"
+        }
+      },
+      "vila": {
+        "name": "Villa and business space",
+        "features": {
+          "fromPrevious": "Everything in the Apartment package",
+          "fpv": "FPV flight through the property",
+          "goldenHour": "Filming at golden hour and at night",
+          "twoDays": "Filming over two days if needed"
+        }
+      }
+    },
+    "works": {
+      "heading": "Examples",
+      "items": {
+        "first": {
+          "title": "A house rented out on Booking",
+          "meta": "FPV flight through the property",
+          "placeholder": "video: FPV flight through a rental house"
+        },
+        "second": {
+          "title": "Property in Sutomore",
+          "meta": "Listing spot",
+          "placeholder": "video: property in Sutomore, drone flight"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Send us the property address — we'll come back with a quote and a shot list.",
+      "subheading": "We usually schedule the shoot within a week.",
+      "button": "Request a quote"
+    }
   },
   "events": {
     "title": "Events"

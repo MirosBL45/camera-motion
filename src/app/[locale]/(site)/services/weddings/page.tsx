@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 
-import { CalendarCheck, Camera, HardDrive, Mic, Orbit, PlaneTakeoff, Video } from "lucide-react";
+import { CalendarCheck, Camera, Drone, HardDrive, Mic, Orbit, Video } from "lucide-react";
 
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ServiceDelivery } from "@/components/sections/service-page/ServiceDelivery";
@@ -18,7 +18,7 @@ const PACKAGES_SECTION_ID = "paketi";
 const HOW_ITEMS = [
   { id: "camera", Icon: Camera },
   { id: "gimbal", Icon: Orbit },
-  { id: "drone", Icon: PlaneTakeoff },
+  { id: "drone", Icon: Drone },
   { id: "sound", Icon: Mic },
 ] as const;
 

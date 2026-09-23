@@ -151,7 +151,107 @@
     }
   },
   "realEstate": {
-    "title": "Snimanje nekretnina"
+    "title": "Snimanje nekretnina",
+    "heading": "Apartman koji se na snimku vidi ceo — i prostor i pogled.",
+    "lead": "Snimamo stanove, kuće, vile i poslovne prostore za Booking, Airbnb, agencije i investitore. Jedan prolet dronom pokazuje lokaciju i okolinu, a mirni kadrovi iznutra prostor takav kakav zaista jeste.",
+    "placeholder": "kadar: prolet dronom iznad vile sa bazenom",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Vidite primere",
+    "audience": {
+      "heading": "Za koga snimamo",
+      "intro": "Video prodaje nekretninu bolje od fotografija — kupac ili gost pre dolaska vidi i prostor i ono što ga okružuje.",
+      "items": {
+        "sale": {
+          "title": "Prodaja stanova i kuća",
+          "description": "Video za prodaju stana ili kuće koji kupcu pokaže raspored, svetlo i komšiluk još pre prvog razgledanja."
+        },
+        "rental": {
+          "title": "Izdavanje na Bookingu i Airbnb-u",
+          "description": "Snimanje apartmana za Booking i Airbnb — gost vidi sobu, terasu i pogled, pa se lakše odluči za rezervaciju."
+        },
+        "agencies": {
+          "title": "Agencije i investitori",
+          "description": "Ujednačen materijal za više objekata, spreman za sajt agencije, oglasne portale i prezentaciju investitorima."
+        },
+        "plots": {
+          "title": "Placevi",
+          "description": "Iz vazduha se vide granice, prilaz i okolina placa — sve ono što se sa zemlje teško pokazuje."
+        }
+      }
+    },
+    "features": {
+      "heading": "Šta dobijate",
+      "intro": "Materijal je odmah spreman za oglas, sajt i mreže — bez dodatnog kropovanja i kompresije.",
+      "items": {
+        "droneFlight": {
+          "title": "Prolet dronom",
+          "description": "Objekat, dvorište, plaža ili centar grada — udaljenost do svega u jednom kadru. Snimanje nekretnina dronom pokazuje lokaciju, okruženje i prilaz."
+        },
+        "interior": {
+          "title": "Obilazak iznutra",
+          "description": "Glatka šetnja kroz prostorije na gimbalu, u rasporedu u kom gost i ulazi. Po želji i FPV prolet kroz objekat, koji najbolje daje osećaj prostora."
+        },
+        "photos": {
+          "title": "Fotografije iz snimanja",
+          "description": "10–20 obrađenih fotografija za oglas, u istom tonu kao video."
+        },
+        "social": {
+          "title": "Verzija za mreže",
+          "description": "Vertikalni rez 9:16 za Reels i Stories, uz horizontalni za sajt. Spot traje 30–90 sekundi, a vertikalni rez je opcija koja radi i za TikTok."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Paketi",
+      "intro": "Cene su početne, za objekte u Beogradu i okolini. Za više objekata na istoj adresi pravimo popust.",
+      "oglas": {
+        "name": "Oglas",
+        "features": {
+          "droneFlight": "Prolet dronom oko objekta",
+          "shortSpot": "Spot 30–45 s za oglas",
+          "aerialPhotos": "10 fotografija iz vazduha",
+          "delivery": "Isporuka u 4 dana"
+        }
+      },
+      "apartman": {
+        "name": "Apartman",
+        "features": {
+          "droneAndInterior": "Dron i snimanje unutrašnjosti",
+          "spotAndVertical": "Spot 60–90 s + vertikalni rez",
+          "photos": "20 obrađenih fotografija",
+          "subtitles": "Titlovi na srpskom i engleskom"
+        }
+      },
+      "vila": {
+        "name": "Vila i poslovni prostor",
+        "features": {
+          "fromPrevious": "Sve iz paketa Apartman",
+          "fpv": "FPV prolet kroz objekat",
+          "goldenHour": "Snimanje u zlatnom satu i noću",
+          "twoDays": "Snimanje u dva dana ako treba"
+        }
+      }
+    },
+    "works": {
+      "heading": "Primeri",
+      "items": {
+        "first": {
+          "title": "Kuća za izdavanje preko Bookinga",
+          "meta": "FPV prolet kroz objekat",
+          "placeholder": "snimak: FPV prolet kroz kuću za izdavanje"
+        },
+        "second": {
+          "title": "Nekretnina u Sutomoru",
+          "meta": "Spot za oglas",
+          "placeholder": "snimak: nekretnina u Sutomoru, prolet dronom"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Pošaljite adresu objekta — vraćamo ponudu i predlog kadrova.",
+      "subheading": "Snimanje obično zakazujemo u roku od nedelju dana.",
+      "button": "Zatražite ponudu"
+    }
   },
   "events": {
     "title": "Događaji i proslave"
