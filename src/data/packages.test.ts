@@ -19,23 +19,37 @@ function getMessage(tree: unknown, path: string[]): unknown {
 
 // Stranica usluge prosleđuje prevedene stavke kroz props (feature 08), pa svaki ključ iz
 // `features` mora da ima poruku na oba jezika — inače bi stavka nestala sa kartice.
-describe("PACKAGES weddings", () => {
-  const messages = { sr: sr.weddings, en: en.weddings };
-
-  it("ima redosled i cene iz dizajn reference", () => {
-    expect(PACKAGES.weddings?.map(({ id, priceFrom }) => [id, priceFrom])).toEqual([
+describe.each([
+  {
+    serviceId: "weddings",
+    prices: [
       ["osnovni", 450],
       ["standard", 750],
       ["premium", 1150],
-    ]);
+    ],
+  },
+  {
+    serviceId: "realEstate",
+    prices: [
+      ["oglas", 120],
+      ["apartman", 250],
+      ["vila", 450],
+    ],
+  },
+] as const)("PACKAGES $serviceId", ({ serviceId, prices }) => {
+  const servicePackages = PACKAGES[serviceId] ?? [];
+  const messages = { sr: sr[serviceId], en: en[serviceId] };
+
+  it("ima redosled i cene iz dizajn reference", () => {
+    expect(servicePackages.map(({ id, priceFrom }) => [id, priceFrom])).toEqual(prices);
   });
 
   it("ima tačno jedan istaknut paket", () => {
-    expect(PACKAGES.weddings?.filter(({ featured }) => featured)).toHaveLength(1);
+    expect(servicePackages.filter(({ featured }) => featured)).toHaveLength(1);
   });
 
   it.each(["sr", "en"] as const)("ima naziv i sve stavke paketa na %s", (locale) => {
-    for (const { id, features } of PACKAGES.weddings ?? []) {
+    for (const { id, features } of servicePackages) {
       expect(getMessage(messages[locale], ["packages", id, "name"])).toEqual(expect.any(String));
 
       for (const feature of features) {

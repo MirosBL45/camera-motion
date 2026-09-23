@@ -18,7 +18,7 @@
         "placeholder": "shot: drone flight over a villa with a pool"
       },
       "events": {
-        "excerpt": "Christenings, birthdays, conferences, performances and sports events. We film the flow and the atmosphere, without stepping into the frame and without interrupting the programme. You get a short spot and a longer film of the whole event.",
+        "excerpt": "Christenings, birthdays, conferences, performances and sports events. We film the flow and the atmosphere, without stepping into the frame and without interrupting the programme. You get a short spot, and by arrangement a longer film of the whole event.",
         "placeholder": "shot: celebration in a hall"
       },
       "promo": {
@@ -151,10 +151,184 @@
     }
   },
   "realEstate": {
-    "title": "Real estate videography"
+    "title": "Real estate videography",
+    "heading": "A film that shows the whole place — the space and the view.",
+    "lead": "We film apartments, houses, villas and business spaces for Booking, Airbnb, agencies and investors. One drone flight shows the location and the surroundings, while calm interior shots show the space exactly as it is.",
+    "placeholder": "shot: drone flight over a villa with a pool",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See examples",
+    "audience": {
+      "heading": "Who we film for",
+      "intro": "Video sells a property better than photos — buyers and guests see the space and everything around it before they ever arrive.",
+      "items": {
+        "sale": {
+          "title": "Selling apartments and houses",
+          "description": "A video that shows buyers the layout, the light and the neighbourhood of your apartment or house before the first viewing."
+        },
+        "rental": {
+          "title": "Renting on Booking and Airbnb",
+          "description": "Apartment videos for Booking and Airbnb — guests see the room, the terrace and the view, and book with more confidence."
+        },
+        "agencies": {
+          "title": "Agencies and investors",
+          "description": "Consistent material across several properties, ready for the agency website, listing portals and investor presentations."
+        },
+        "plots": {
+          "title": "Land plots",
+          "description": "From the air you can see the boundaries, the access road and the surroundings — everything that is hard to show from the ground."
+        }
+      }
+    },
+    "features": {
+      "heading": "What you get",
+      "intro": "The material is ready for your listing, website and social media straight away — no extra cropping or compression.",
+      "items": {
+        "droneFlight": {
+          "title": "Drone flight",
+          "description": "The property, the garden, the beach or the city centre — how close everything is, in a single shot. Aerial footage shows the location, the surroundings and the way in."
+        },
+        "interior": {
+          "title": "Interior walkthrough",
+          "description": "A smooth walk through the rooms on a gimbal, in the order a guest would see them. On request we add an FPV flight through the property, which gives the best sense of space."
+        },
+        "photos": {
+          "title": "Photos from the shoot",
+          "description": "10–20 edited photos for your listing, in the same tone as the video."
+        },
+        "social": {
+          "title": "Social media version",
+          "description": "A vertical 9:16 cut for Reels and Stories, alongside the horizontal one for your website. The spot runs 30–90 seconds, and the vertical cut is an option that works for TikTok too."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Packages",
+      "intro": "These are starting prices for properties in Belgrade and the surrounding area. We offer a discount for several properties at the same address.",
+      "oglas": {
+        "name": "Listing",
+        "features": {
+          "droneFlight": "Drone flight around the property",
+          "shortSpot": "30–45 s spot for your listing",
+          "aerialPhotos": "10 aerial photos",
+          "delivery": "Delivered in 4 days"
+        }
+      },
+      "apartman": {
+        "name": "Apartment",
+        "features": {
+          "droneAndInterior": "Drone and interior filming",
+          "spotAndVertical": "60–90 s spot + vertical cut",
+          "photos": "20 edited photos",
+          "subtitles": "Subtitles in Serbian and English"
+        }
+      },
+      "vila": {
+        "name": "Villa and business space",
+        "features": {
+          "fromPrevious": "Everything in the Apartment package",
+          "fpv": "FPV flight through the property",
+          "goldenHour": "Filming at golden hour and at night",
+          "twoDays": "Filming over two days if needed"
+        }
+      }
+    },
+    "works": {
+      "heading": "Examples",
+      "items": {
+        "first": {
+          "title": "A house rented out on Booking",
+          "meta": "FPV flight through the property",
+          "placeholder": "video: FPV flight through a rental house"
+        },
+        "second": {
+          "title": "Property in Sutomore",
+          "meta": "Listing spot",
+          "placeholder": "video: property in Sutomore, drone flight"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Send us the property address — we'll come back with a quote and a shot list.",
+      "subheading": "We usually schedule the shoot within a week.",
+      "button": "Request a quote"
+    }
   },
   "events": {
-    "title": "Events"
+    "title": "Events",
+    "heading": "Moments that don't happen twice — filmed the way they happened.",
+    "lead": "Filming celebrations and events: birthdays, christenings, coming-of-age parties, sports and corporate events. With a camera on the ground and a drone in the air, we capture the atmosphere, the emotions and the details nobody has time to notice on the day.",
+    "placeholder": "shot: celebration in a hall",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See examples",
+    "coverage": {
+      "heading": "What we cover",
+      "intro": "We make event videos in Belgrade and the surrounding area — from family celebrations to tournaments and conferences. For events further afield we arrange the details separately.",
+      "items": {
+        "private": {
+          "title": "Private celebrations",
+          "description": "Birthdays, christenings and coming-of-age parties — the toasts, the cake, the dancing and the guests, without staging or posing."
+        },
+        "sports": {
+          "title": "Sports events",
+          "description": "Tournaments and matches from several angles — we catch the action on the court with a camera, and the venue, the stands and the crowd from the air."
+        },
+        "corporate": {
+          "title": "Corporate gatherings",
+          "description": "Conferences, company celebrations and staff get-togethers — the speeches, the atmosphere and the people, ready for your website and social media."
+        },
+        "performances": {
+          "title": "Performances",
+          "description": "Concerts, plays and recitals — we film the programme without interrupting it or blocking the audience's view."
+        }
+      }
+    },
+    "how": {
+      "heading": "How we film",
+      "intro": "We follow the event quietly, from the side — guests relax and the footage stays natural.",
+      "items": {
+        "camera": {
+          "title": "Camera on a gimbal",
+          "description": "Smooth shots from the ground, close to the people: the emotions, the details and the moments that last a second."
+        },
+        "drone": {
+          "title": "Drone",
+          "description": "The location and the crowd from the air — the venue, the beach or the court in a single shot. Drone footage of birthdays and other celebrations is filmed in line with Civil Aviation Directorate rules."
+        },
+        "discreet": {
+          "title": "Discreet filming",
+          "description": "We don't interrupt the programme or ask guests to pose. The crew moves quietly, so the real atmosphere stays on film."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Delivery",
+      "intro": "After the event you get the edited film digitally, ready to share.",
+      "items": {
+        "highlight": "A short film of the best moments, set to music — ready to share with your guests and on social media.",
+        "longer": "A longer film by arrangement — the full programme, the speeches or the whole performance.",
+        "price": "The price is set by arrangement, based on the length, the location and what we're filming — get in touch for a quote."
+      }
+    },
+    "works": {
+      "heading": "Examples",
+      "items": {
+        "first": {
+          "title": "BeoSand — beach volleyball",
+          "meta": "Sports event · camera and drone",
+          "placeholder": "video: BeoSand beach volleyball"
+        },
+        "second": {
+          "title": "A yacht near Zadar",
+          "meta": "Filming at sea · travel",
+          "placeholder": "video: yacht near Zadar, drone flight"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Tell us the date and the place — we'll come back with a plan and a price.",
+      "subheading": "We reply the same day, usually within a couple of hours.",
+      "button": "Request a quote"
+    }
   },
   "promo": {
     "title": "Promo video"

@@ -29,6 +29,8 @@ interface IServicePackagesProps {
   packages: ServicePackageContentType[];
   /** Napomena ispod paketa (npr. da cene zavise od lokacije i trajanja). */
   note?: string;
+  /** `warm` prati artboard `2a`; `background` je za stranice sa dodatnim sekcijama (venčanja). */
+  tone?: "background" | "warm";
 }
 
 // Cene, redosled i istaknuti paket dolaze iz `packages.ts` (poglavlje 9.1) — iznos postoji samo
@@ -40,6 +42,7 @@ export function ServicePackages({
   intro,
   packages,
   note,
+  tone = "background",
 }: IServicePackagesProps) {
   const locale = useLocale();
   const t = useTranslations("services.packages");
@@ -50,7 +53,13 @@ export function ServicePackages({
 
   return (
     // `scroll-mt-*` drži naslov ispod sticky header-a kad se dođe preko sidra.
-    <section id={id} className="scroll-mt-20 px-5 py-10 md:scroll-mt-24 md:px-12 md:py-20">
+    <section
+      id={id}
+      className={cn(
+        "scroll-mt-20 px-5 py-10 md:scroll-mt-24 md:px-12 md:py-20",
+        tone === "warm" && "bg-surface-warm"
+      )}
+    >
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-10">
         <h2>{heading}</h2>
         {intro ? <p className="text-muted-foreground md:max-w-107.5 md:text-lg">{intro}</p> : null}
@@ -97,8 +106,10 @@ export function ServicePackages({
                 ))}
               </ul>
 
+              {/* Zeleno dugme samo na istaknutom paketu, ostali imaju zlatnu borduru (`1b`, `2a`). */}
               <Button
                 asChild
+                variant={featured ? "default" : "goldOutline"}
                 className="mt-6 h-auto w-full justify-center py-3.5 font-heading text-base"
               >
                 <Link href={{ pathname: ROUTES.contact, query: { usluga: service.contactParam } }}>

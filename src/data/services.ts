@@ -26,7 +26,7 @@ export const SERVICES_BY_ID = {
     routeKey: "servicesEvents",
     order: 3,
     contactParam: "event",
-    videoIds: [PLACEHOLDER_VIDEO_ID],
+    videoIds: [PLACEHOLDER_VIDEO_ID, PLACEHOLDER_VIDEO_ID],
   },
   promo: {
     id: "promo",
