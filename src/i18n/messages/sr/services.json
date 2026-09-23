@@ -18,7 +18,7 @@
         "placeholder": "kadar: prolet dronom iznad vile sa bazenom"
       },
       "events": {
-        "excerpt": "Krštenja, rođendani, konferencije, nastupi i sportski događaji. Snimamo tok i atmosferu, bez upadanja u kadar i bez prekidanja programa. Dobijate kratak spot i duži snimak celog događaja.",
+        "excerpt": "Krštenja, rođendani, konferencije, nastupi i sportski događaji. Snimamo tok i atmosferu, bez upadanja u kadar i bez prekidanja programa. Dobijate kratak spot, a po dogovoru i duži snimak celog događaja.",
         "placeholder": "kadar: proslava u sali"
       },
       "promo": {
@@ -254,7 +254,81 @@
     }
   },
   "events": {
-    "title": "Događaji i proslave"
+    "title": "Događaji i proslave",
+    "heading": "Trenuci koji se ne ponavljaju — snimljeni onako kako su se desili.",
+    "lead": "Snimanje proslava i događaja: rođendani, krštenja, punoletstva, sportski i korporativni događaji. Kamerom sa zemlje i dronom iz vazduha hvatamo atmosferu, emocije i detalje koje u toku dana niko ne stigne da zapazi.",
+    "placeholder": "kadar: proslava u sali",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Vidite primere",
+    "coverage": {
+      "heading": "Šta pokrivamo",
+      "intro": "Pravimo video sa događaja u Beogradu i okolini — od porodičnih proslava do turnira i konferencija. Za događaje van grada dogovaramo se posebno.",
+      "items": {
+        "private": {
+          "title": "Privatne proslave",
+          "description": "Rođendani, krštenja i punoletstva — zdravice, torta, ples i gosti, bez nameštanja i poziranja."
+        },
+        "sports": {
+          "title": "Sportski događaji",
+          "description": "Turniri i utakmice iz više uglova — akciju na terenu hvatamo kamerom, a teren, tribine i masu iz vazduha."
+        },
+        "corporate": {
+          "title": "Korporativna okupljanja",
+          "description": "Konferencije, proslave firmi i druženja zaposlenih — govori, atmosfera i ljudi, spremno za sajt i mreže."
+        },
+        "performances": {
+          "title": "Nastupi",
+          "description": "Koncerti, predstave i priredbe — snimamo program bez prekidanja i bez zaklanjanja pogleda publici."
+        }
+      }
+    },
+    "how": {
+      "heading": "Kako snimamo",
+      "intro": "Događaj pratimo tiho, sa strane — gosti se opuste, a snimak ostaje prirodan.",
+      "items": {
+        "camera": {
+          "title": "Kamera na gimbalu",
+          "description": "Glatki kadrovi sa zemlje, blizu ljudi: emocije, detalji i trenuci koji traju sekund."
+        },
+        "drone": {
+          "title": "Dron",
+          "description": "Lokacija i masa iz vazduha — sala, plaža ili teren u jednom kadru. Snimanje rođendana dronom i ostalih proslava radimo u skladu sa regulativom DCV."
+        },
+        "discreet": {
+          "title": "Diskretno snimanje",
+          "description": "Ne prekidamo program i ne tražimo od gostiju da poziraju. Ekipa se kreće tiho, pa na snimku ostaje prava atmosfera."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Isporuka",
+      "intro": "Posle događaja montiran snimak dobijate digitalno, spreman za deljenje.",
+      "items": {
+        "highlight": "Kratak spot sa najboljim trenucima, uz muziku — spreman za deljenje sa gostima i na mrežama.",
+        "longer": "Po dogovoru i duži snimak — ceo program, govori ili nastup u celini.",
+        "price": "Cenu određujemo po dogovoru, prema trajanju, lokaciji i onome što se snima — javite nam se za ponudu."
+      }
+    },
+    "works": {
+      "heading": "Primeri",
+      "items": {
+        "first": {
+          "title": "BeoSand — odbojka na pesku",
+          "meta": "Sportski događaj · kamera i dron",
+          "placeholder": "snimak: BeoSand, odbojka na pesku"
+        },
+        "second": {
+          "title": "Jahta kod Zadra",
+          "meta": "Snimanje na moru · putovanje",
+          "placeholder": "snimak: jahta kod Zadra, prolet dronom"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Recite nam datum i mesto — javljamo se sa predlogom i cenom.",
+      "subheading": "Odgovaramo istog dana, obično u par sati.",
+      "button": "Zatražite ponudu"
+    }
   },
   "promo": {
     "title": "Promo video"
