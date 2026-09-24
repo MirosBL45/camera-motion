@@ -411,6 +411,98 @@
     }
   },
   "fpv": {
-    "title": "FPV footage"
+    "title": "FPV footage",
+    "heading": "One shot that flies where others can't.",
+    "lead": "An FPV drone flies through doorways, down hallways and between trees — in one unbroken shot, with no cuts. We offer FPV filming in Belgrade and the surrounding area, on its own or as an add-on to any of our services.",
+    "placeholder": "shot: FPV flight through the front door of a house",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See examples",
+    "about": {
+      "heading": "What is FPV",
+      "intro": "FPV stands for first-person view: the pilot sees exactly what the drone's camera sees, as if sitting inside it.",
+      "items": {
+        "firstPerson": {
+          "title": "Flying in first person",
+          "description": "The pilot wears goggles with a live feed from the drone and guides it precisely, inch by inch, through narrow gaps."
+        },
+        "avata": {
+          "title": "DJI Avata 2",
+          "description": "A small drone with guards around the propellers, built for flying indoors and through tight spaces. When needed, it also flies classic shots outdoors."
+        },
+        "oneTake": {
+          "title": "One flight, one take",
+          "description": "Instead of a string of shots, one dynamic cinematic flight that takes the viewer through the space as if they were flying themselves."
+        }
+      }
+    },
+    "uses": {
+      "heading": "Where we use it",
+      "intro": "FPV drone footage works best wherever a space needs to be experienced, not just seen.",
+      "items": {
+        "realEstate": {
+          "title": "Property",
+          "description": "A drone flight through the building, from the entrance to the terrace in a single shot. Guests or buyers see the layout as if they were walking through it."
+        },
+        "celebrations": {
+          "title": "Weddings and celebrations",
+          "description": "The opening shot of the film — a flight through the hall, the church or the garden in one go, before the programme begins."
+        },
+        "venues": {
+          "title": "Venues and businesses",
+          "description": "A restaurant, hotel or gym from the entrance to the last corner. A short flight that instantly shows what it's like to visit you."
+        },
+        "sports": {
+          "title": "Sport",
+          "description": "An angle nobody else has — the drone follows the action from the side of the court or track and captures the speed and the excitement."
+        }
+      }
+    },
+    "works": {
+      "heading": "Examples",
+      "items": {
+        "first": {
+          "title": "A house rented out on Booking",
+          "meta": "FPV flight through the property",
+          "placeholder": "video: FPV flight through a rental house"
+        },
+        "second": {
+          "title": "FPV flight through a venue",
+          "meta": "FPV footage · showcasing a space",
+          "placeholder": "video: FPV flight through a venue"
+        }
+      }
+    },
+    "safety": {
+      "heading": "Safe and by the rules",
+      "intro": "Before every flight we check where, when and how we're allowed to fly.",
+      "items": {
+        "dcv": {
+          "title": "In line with Civil Aviation Directorate rules",
+          "description": "We fly by the rules of the Civil Aviation Directorate and check the flight zones for every location."
+        },
+        "location": {
+          "title": "Location assessment",
+          "description": "Before filming we visit the space, or go through it with you using photos, and agree on the flight path, the obstacles and where people will be."
+        },
+        "weather": {
+          "title": "Weather conditions",
+          "description": "Outdoors, a flight depends on wind and rain, so we check the forecast before the shoot and don't fly when conditions aren't safe."
+        }
+      }
+    },
+    "price": {
+      "heading": "Price",
+      "intro": "Every FPV shoot comes edited, ready for your website, listings and social media.",
+      "items": {
+        "standalone": "FPV filming on its own: from €{price}.",
+        "addon": "As an add-on to a wedding, property, event or promo shoot: from €{price}.",
+        "factors": "The final price depends on the location, how complex the flight is and the number of flights — get in touch for a quote."
+      }
+    },
+    "cta": {
+      "heading": "Tell us what to fly through — we'll come back with a flight plan and a price.",
+      "subheading": "We reply the same day, usually within a couple of hours.",
+      "button": "Request a quote"
+    }
   }
 }

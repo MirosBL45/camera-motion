@@ -20,10 +20,13 @@ Ovde idu samo ultrakratke teze — jedna odluka ili savet po redu, bez objašnja
 - Do klika se vidi sličica sa YouTube-a (custom thumbnail ako je postavljen)
 - Savet: video može da bude „Unlisted" — ne vidi se na kanalu, a radi na sajtu
 - Hero video na početnoj nije YouTube, nego MP4/WebM fajl u projektu
+- Video ID je deo linka posle v=, uvek 11 znakova. Iz `youtube.com/watch?v=dQw4w9WgXcQ` uzimaš samo `dQw4w9WgXcQ`. Kod linka oblika `youtu.be/dQw4w9WgXcQ` to je deo posle kose crte.
+- ID-jevi se upisuju u videoIds u services.ts, po usluzi. Sada su prazni (PLACEHOLDER_VIDEO_ID), pa se umesto sličice prikazuje opis kadra.
 
 ## Stranice usluga
 
 - Stranice bez artboarda (događaji, promo, FPV) se sklapaju iz postojećeg šablona
 - Primeri su placeholderi dok ne stignu pravi snimci
 - FPV stranica koristi isti snimak kao nekretnine, ali ima više teksta (SEO)
+- Taj zajednički video ID se upisuje jednom: `FPV_HOUSE_VIDEO_ID` u `src/data/services.ts`
 - Koraci saradnje: deljena komponenta `ProcessSteps` (promo, kasnije O nama)

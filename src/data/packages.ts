@@ -22,6 +22,8 @@ const PRICES = {
   events: 100,
   promo: 150,
   fpv: 200,
+  // FPV kao dodatak uz drugu uslugu (venčanje, nekretnina, događaj, promo).
+  fpvAddon: 250,
 } as const;
 
 // Polazna cena usluga bez paketa; usluge sa paketima uzimaju najnižu cenu paketa.
@@ -30,6 +32,8 @@ export const SERVICE_PRICES: Partial<Record<ServiceIdType, number>> = {
   promo: PRICES.promo,
   fpv: PRICES.fpv,
 };
+
+export const FPV_ADDON_PRICE = PRICES.fpvAddon;
 
 // Nazivi paketa i stavke iz `features` idu kroz i18n po `id` (poglavlje 9.1).
 // Usluge bez paketa (`events`, `promo`, `fpv`) se izostavljaju — dodavanje je dodavanje ključa.

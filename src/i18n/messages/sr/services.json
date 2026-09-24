@@ -411,6 +411,98 @@
     }
   },
   "fpv": {
-    "title": "FPV snimci"
+    "title": "FPV snimci",
+    "heading": "Jedan kadar koji leti tamo gde drugi ne mogu.",
+    "lead": "FPV dron prolazi kroz vrata, hodnike i između drveća — u jednom neprekinutom kadru, bez reza. FPV snimanje radimo u Beogradu i okolini, samostalno ili kao dodatak uz bilo koju našu uslugu.",
+    "placeholder": "kadar: FPV prolet kroz ulazna vrata kuće",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Vidite primere",
+    "about": {
+      "heading": "Šta je FPV",
+      "intro": "FPV znači let iz „prvog lica“: pilot vidi tačno ono što vidi kamera drona, kao da sedi u njemu.",
+      "items": {
+        "firstPerson": {
+          "title": "Let iz prvog lica",
+          "description": "Pilot nosi naočare sa slikom uživo iz drona i vodi ga precizno, centimetar po centimetar, kroz uske prolaze."
+        },
+        "avata": {
+          "title": "DJI Avata 2",
+          "description": "Mali dron sa zaštitom oko propelera, napravljen za letenje kroz zatvoren prostor i uske prolaze. Po potrebi leti i klasično, na otvorenom."
+        },
+        "oneTake": {
+          "title": "Prolet u jednom dahu",
+          "description": "Umesto niza kadrova, jedan dinamičan filmski prolet koji gledaoca vodi kroz prostor, kao da i sam leti."
+        }
+      }
+    },
+    "uses": {
+      "heading": "Gde ga koristimo",
+      "intro": "FPV dron snimci najbolje rade tamo gde prostor treba doživeti, a ne samo videti.",
+      "items": {
+        "realEstate": {
+          "title": "Nekretnine",
+          "description": "Prolet dronom kroz objekat, od ulaza do terase u jednom kadru. Gost ili kupac vidi raspored prostora kao da ga obilazi."
+        },
+        "celebrations": {
+          "title": "Venčanja i proslave",
+          "description": "Uvodni kadar filma — prolet kroz salu, crkvu ili vrt u jednom dahu, pre nego što počne program."
+        },
+        "venues": {
+          "title": "Lokali i firme",
+          "description": "Restoran, hotel ili teretana od ulaza do poslednjeg kutka. Kratak prolet koji odmah pokazuje kako izgleda kod vas."
+        },
+        "sports": {
+          "title": "Sport",
+          "description": "Ugao koji niko drugi nema — dron prati igru ili trku sa strane terena ili staze i prenosi brzinu i uzbuđenje."
+        }
+      }
+    },
+    "works": {
+      "heading": "Primeri",
+      "items": {
+        "first": {
+          "title": "Kuća za izdavanje preko Bookinga",
+          "meta": "FPV prolet kroz objekat",
+          "placeholder": "snimak: FPV prolet kroz kuću za izdavanje"
+        },
+        "second": {
+          "title": "FPV prolet kroz lokal",
+          "meta": "FPV snimak · predstavljanje prostora",
+          "placeholder": "snimak: FPV prolet kroz lokal"
+        }
+      }
+    },
+    "safety": {
+      "heading": "Bezbedno i po pravilima",
+      "intro": "Pre svakog leta proveravamo gde, kada i kako smemo da letimo.",
+      "items": {
+        "dcv": {
+          "title": "U skladu sa regulativom DCV",
+          "description": "Letimo po pravilima Direktorata civilnog vazduhoplovstva i za svaku lokaciju proveravamo zone leta."
+        },
+        "location": {
+          "title": "Procena lokacije",
+          "description": "Pre snimanja obilazimo prostor ili ga sa vama prolazimo preko fotografija i dogovaramo putanju leta, prepreke i gde će biti ljudi."
+        },
+        "weather": {
+          "title": "Vremenski uslovi",
+          "description": "Napolju let zavisi od vetra i kiše, pa prognozu proveravamo pre termina i ne letimo kada uslovi nisu bezbedni."
+        }
+      }
+    },
+    "price": {
+      "heading": "Cena",
+      "intro": "Svaki FPV snimak dobijate montiran, spreman za sajt, oglas i mreže.",
+      "items": {
+        "standalone": "Samostalno FPV snimanje: od {price} €.",
+        "addon": "Kao dodatak uz venčanje, nekretninu, događaj ili promo video: od {price} €.",
+        "factors": "Konačnu cenu određujemo prema lokaciji, složenosti leta i broju proleta — javite nam se za ponudu."
+      }
+    },
+    "cta": {
+      "heading": "Recite nam kroz šta da proletimo — javljamo se sa planom leta i cenom.",
+      "subheading": "Odgovaramo istog dana, obično u par sati.",
+      "button": "Zatražite ponudu"
+    }
   }
 }

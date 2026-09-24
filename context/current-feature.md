@@ -1,4 +1,4 @@
-# Current Feature: 12 — Usluga: Promo video za firme
+# Current Feature: 13 — Usluga: FPV snimci
 
 ## Status
 
@@ -10,79 +10,73 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 2, fajl 5/6. `/usluge/promo-video` (`/en/services/promo-video`), B2B: restorani, hoteli, teretane, lokalni biznisi. Gradi se kroz deljeni šablon iz feature-a 08; **dizajn nema artboard za ovu uslugu**, pa izgled prati obrasce sa `1b` i `2a` (kao događaji)
-- **Raspored stranice**: uvodni blok → „Šta radimo" → „Proces saradnje" (4 numerisana koraka) → Isporuka i cena → Primeri (2 embeda) → zeleni CTA band → footer
-  - **Uvodni blok** (`ServiceIntro`): breadcrumb „Usluge / Promo video", h1 i lead oko toga da je kratak promo video najjači format za predstavljanje biznisa — sajt, Instagram, oglasi; dva dugmeta: primarno „Zatražite ponudu" → `/kontakt?usluga=promo`, sekundarno „Vidite primere" → skok na `#primeri`; placeholder kadar desno
-  - **„Šta radimo"** (`ServiceFeatures`, `tone="warm"`): predstavljanje prostora (dron + gimbal), FPV prolet kao efekat, snimci procesa rada i ljudi, isporuka u formatima za kanale (16:9 za sajt i YouTube, 9:16 za Reels)
-  - **„Proces saradnje"**: 1) dogovor i kratka priprema scenarija, 2) snimanje na lokaciji, 3) montaža sa brendingom klijenta, 4) isporuka u svim formatima + jedna runda izmena. Sekvenca je ovde opravdana, pa koraci nose brojeve
-  - **Isporuka i cena** (`ServiceDelivery`): formati, jedna runda izmena, i polazna cena „od 150 €" iz `PRICES` (ICU `{price}`, formatirano po jeziku)
-  - **Primeri** (`ServiceWorks`, `id="primeri"`): 2 `YouTubeLite` placeholdera uz `TODO(vlasnik)`; `services.ts` za `promo` dobija drugi placeholder video ID
-  - **CTA band** → `/kontakt?usluga=promo`
-- **Cene svuda, bez „cena po dogovoru"** (odluka vlasnika): svaka usluga bez paketa dobija svoj ključ u bloku `PRICES` u `packages.ts`, sa različitim iznosom da vlasnik lako nađe šta menja
-  - `events` 100 €, `promo` 150 €, `fpv` 200 € (`fpvAddon` 250 € ulazi sa feature-om 13, gde se prvi put koristi)
-  - Venčanja i nekretnine ostaju na cenama paketa iz dizajna
-  - `getStartingPrice` vraća najnižu cenu paketa, a za usluge bez paketa njihovu polaznu cenu — uvek broj
-  - Kartice događaja, promo i FPV na /usluge dobijaju „od X €"; ključ `priceOnRequest` se briše (sr + en) zajedno sa granom u kartici
-  - Stranica događaja: rečenica „Cenu određujemo po dogovoru…" u isporuci postaje polazna cena kroz ICU `{price}` (sr + en)
-  - Iznos nikad ne stoji u prevodima ni u komponentama — samo u `PRICES`
-  - Testovi za `getStartingPrice` se ažuriraju
-- Svi tekstovi kroz `services.promo` namespace (sr + en); engleski je prirodan prevod, ne bukvalan. Bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije 200ms
-- Overview 9.1 dobija pravilo za polazne cene usluga bez paketa; napravi se `context/bitne-stvari.md` (ultrakratke teze o odlukama iz ove sesije + savet za „Unlisted" YouTube video)
+- Faza 2, fajl 6/6 (kraj faze). `/usluge/fpv-snimci` (`/en/services/fpv`) — stranica-diferencijator: malo ko nudi FPV prolete. Gradi se kroz deljeni šablon iz feature-a 08; **dizajn nema artboard za ovu uslugu**, pa izgled prati obrasce sa `1b` i `2a` (kao događaji i promo). Više teksta nego na ostalim stranicama — stranica služi i za SEO (odluka vlasnika)
+- **Raspored stranice** (predlog): uvodni blok → „Šta je FPV" → „Gde ga koristimo" (primene) → Primer → Bezbednost → Cena → zeleni CTA band → footer
+  - **Uvodni blok** (`ServiceIntro`): breadcrumb „Usluge / FPV snimci", h1 i lead oko toga da FPV dron leti gde klasičan dron i kamera ne mogu — kroz vrata, hodnike, između drveća, u jednom neprekinutom kadru; dva dugmeta: primarno „Zatražite ponudu" → `/kontakt?usluga=fpv`, sekundarno „Vidite primere" → skok na `#primeri`; placeholder kadar desno
+  - **„Šta je FPV"** (`ServiceFeatures`, `tone="warm"`, 3 kartice): kratko i laički — upravljanje iz „prvog lica" (naočare), DJI Avata 2, dinamičan filmski prolet u jednom dahu
+  - **„Gde ga koristimo"** (`ServiceFeatures`, 4 kartice): prolet kroz nekretninu (od ulaza do terase u jednom kadru), otvaranje proslave ili venčanja, predstavljanje lokala, sport iz ugla koji niko nema
+  - **Primer** (`ServiceWorks`, `id="primeri"`): FPV prolet kroz kuću — **isti snimak kao prvi primer na nekretninama**, isti YouTube ID (jedno mesto u `services.ts` za obe stranice) + `TODO(vlasnik)`
+  - **Bezbednost** (`ServiceFeatures`, 3 kartice): letenje u skladu sa regulativom DCV, procena lokacije pre leta, zavisnost od vremenskih uslova
+  - **Cena** (`ServiceDelivery`): samostalno „od 200 €" (`PRICES.fpv`) i kao dodatak uz drugu uslugu „od 250 €" (novi ključ `PRICES.fpvAddon`), oba kroz ICU `{price}` i formatirano po jeziku
+  - **CTA band** → `/kontakt?usluga=fpv`
+- Svi tekstovi kroz `services.fpv` namespace (sr + en); engleski je prirodan prevod, ne bukvalan. Bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije 200ms
+- **DoD Faze 2** (zbirna provera na kraju): /usluge + svih 5 stranica na oba jezika kroz deljeni šablon; svi podaci iz `services.ts`/`packages.ts`, cene izmenljive na jednom mestu; svi embed-ovi lite, svi TODO placeholderi obeleženi; build zelen
+- `context/bitne-stvari.md` se dopunjuje ako se donese nova odluka
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Dizajn nema artboard za promo (NOTES 1). Stranica se sklapa iz postojećih sekcija šablona
-- Grana `12-13-promo-i-fpv` iz `develop`; feature 12 i 13 dobijaju svaki svoj commit
-- Odluke vlasnika pri učitavanju:
-  - **Cene**: 100/150/200/250 po uslugama bez paketa, svaka u svom ključu; „cena po dogovoru" nestaje sa celog sajta; izmena na stranici događaja ulazi u ovaj commit
-  - **Raspored**: iz postojećeg šablona, kao događaji
-  - **Proces saradnje**: bira se ono što je jednostavnije i bolje se uklapa — `ServiceFeatures` sa brojevima ili nova komponenta po sekciji „Kako radimo" sa O nama (4 numerisana koraka iz dizajna, NOTES tabela odluka, red 2; u kodu još ne postoji, pravi se u feature-u 15). Komponenta koja se koristi na više mesta dobija smislenije ime — **pre toga pitati vlasnika za ime, uz predlog**, i ažurirati importe
-  - **Primeri**: placeholderi; vlasnik još nema videe
+- Dizajn nema artboard za FPV (NOTES 1). Stranica se sklapa iz postojećih sekcija šablona
+- Grana `12-13-promo-i-fpv` (feature 12 je već commit-ovan i push-ovan); feature 13 dobija svoj commit
+- Posle feature-a 13, na istoj grani i u posebnom commit-u: „Zatražite ponudu" u header-u i mobilnom meniju na stranici usluge vodi na kontakt sa `?usluga=` te usluge (odluka vlasnika) — nije deo ovog feature-a
+- Odluke vlasnika (ranije u sesiji):
+  - **Cene**: `fpv` 200 € već postoji; `fpvAddon` 250 € se dodaje sada, u istom `PRICES` bloku. Iznosi su namerno različiti da vlasnik lako nađe ključ (zato je dodatak za sada skuplji od samostalnog snimanja — vlasnik menja)
+  - **Raspored**: iz postojećeg šablona
+  - **Primer**: isti snimak kao na nekretninama; na FPV stranici više teksta o FPV-u (SEO)
+  - **Pri startu** (vlasnik pokrenuo start bez odgovora → idu preporuke): dva primera (kuća + placeholder „FPV prolet kroz lokal"), bez posebnog zlatnog isticanja, stavka sa cenom se ne izdvaja u zajednički deo
 - Pretpostavke za implementaciju (ako nešto ne odgovara, reci pre starta):
   - Tekstove pišem nove (dizajn ih nema), u tonu prethodnih stranica usluga; vlasnik ih pregleda u browseru
-  - Pozadine: uvod `background` → Šta radimo `surface-warm` → Proces saradnje `surface` → Isporuka i cena `background` → Primeri `surface` → CTA
-  - „Šta radimo" ima 4 kartice (pun red tek od `lg`)
-  - Primeri nemaju izmišljene klijente ni trajanja; naslov i meta red opisuju tip snimka (npr. „Predstavljanje lokala · dron i kamera") dok vlasnik ne upiše pravi
-  - „Brending" iz spec-a se na srpskom piše opisno (logo, boje i font firme) gde god prirodno ide, bez anglicizama (overview 8.3)
-  - Rok isporuke se ne navodi jer ga vlasnik nije odredio
-  - Komentari u `pricing.ts` i na stranici događaja koji kažu „cena po dogovoru" postaju netačni — ažuriram ih zajedno sa kodom na koji se odnose
+  - Pozadine: uvod `background` → Šta je FPV `surface-warm` → Gde ga koristimo `surface` → Primer `background` → Bezbednost `surface-warm` → Cena `background` → CTA
+  - FPV stranica nema posebno zlatno isticanje (badge „naša specijalnost" ostaje na karticama početne i /usluge); uvodni kadar već ima zlatnu borduru kao na ostalim stranicama usluga
+  - YouTube ID kuće se izdvaja u jednu konstantu u `services.ts` koju koriste i `realEstate` i `fpv`, da se upisuje na jednom mestu
+  - Stavka sa cenom se gradi u stranici kao na događajima i promo (bez novog zajedničkog dela — ponavlja se samo formatiranje cene)
+  - Rok isporuke i trajanje leta se ne navode jer ih vlasnik nije odredio
   - Ikonice iz `lucide-react`, potvrđuju se u browseru
   - Sidro `#primeri` se ne prevodi (princip 5)
-  - SEO fraze se utkivaju prirodno u tekst: promo video za firme, snimanje reklame dronom, video produkcija za mala preduzeća Beograd
+  - SEO fraze se utkivaju prirodno u tekst: FPV snimanje, FPV dron snimci, prolet dronom kroz objekat
   - `generateMetadata` i JSON-LD `Service` ostaju za feature 19
 - Odstupanja uočena tokom implementacije:
-  - **Proces saradnje** (odluka vlasnika): nova deljena komponenta `ProcessSteps` po sekciji „Kako radimo" sa O nama (naslov i pasus levo, koraci `01–04` desno), umesto `ServiceFeatures` sa brojevima; koristiće je i feature 15. Postojeći importi se ne menjaju
-  - **Pozadine** (odluka vlasnika): zamenjene da proces bude na `surface-warm` kao u dizajnu — uvod `background` → Šta radimo `surface` → Proces saradnje `surface-warm` → Isporuka i cena `background` → Primeri `surface` → CTA
-  - Polazne cene usluga bez paketa stoje u `PRICES` i izlaze kroz `SERVICE_PRICES`; `getStartingPrice` uvek vraća broj, a baca grešku (build puca) ako usluga nema ni pakete ni cenu
-  - Stavka sa cenom u isporuci (događaji i promo) gradi se posebno, jer tipizirane poruke ne primaju `{price}` za stavke bez argumenata
-  - Ikonice: `Drone`, `Rocket`, `Hammer`, `RectangleVertical` za „Šta radimo"
-  - Podnaslov CTA bande ponavlja potvrđenu rečenicu sa /usluge; muzika u montaži se pominje bez obećanja o licenci
-  - Ažurirani overview 9.1 i red o cenama u README-u; napravljen `context/bitne-stvari.md`
+  - Nijedna komponenta šablona nije menjana — stranica koristi `ServiceIntro`, `ServiceFeatures` (3×), `ServiceWorks`, `ServiceDelivery` i `CtaBand`
+  - `PRICES.fpvAddon` izlazi kao `FPV_ADDON_PRICE`; nije usluga, pa ne ulazi u `SERVICE_PRICES`
+  - YouTube ID kuće je konstanta `FPV_HOUSE_VIDEO_ID` u `services.ts`; prvi video i na nekretninama i na FPV-u
+  - Sekcija „Cena" koristi `ServiceDelivery` sa tri stavke: samostalno, kao dodatak, i od čega zavisi konačna cena
+  - Tekstovi o bezbednosti ne obećavaju pomeranje termina zbog vremena i ne tvrde da je pilot registrovan kod DCV — samo „u skladu sa regulativom" (overview 2)
+  - Ikonice: `Glasses`, `Drone`, `Clapperboard` (Šta je FPV); `House`, `PartyPopper`, `Store`, `Trophy` (Gde ga koristimo); `ShieldCheck`, `MapPinned`, `CloudSun` (Bezbednost)
 - Review:
-  - „Zaustavlja skrolovanje" (anglicizam) zamenjeno sa „zadržava pažnju" (overview 8.3)
-  - Uvod „Šta radimo": dvosmisleno „klijent" (naš ili njihov) zamenjeno sa „vaši kupci i gosti"
+  - „Prati akciju" (anglicizam u sportskom smislu) zamenjeno sa „prati igru ili trku" (overview 8.3)
+- DoD Faze 2: /usluge + 5 stranica na oba jezika prošle automatsku proveru na 5 širina (bez horizontalnog skrola, jedan h1, bez iframe-a pre klika, bez animacija, bez „cena po dogovoru"); sve cene iz `PRICES`; svi primeri i kadrovi imaju `TODO` oznake; build zelen
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
 1. Kompletno na oba jezika; responzivno na 360px, 390px, 768px, 1024px, 1440px — nema horizontalnog skrola
-2. CTA i primarno dugme vode na `/kontakt?usluga=promo` (`/en/contact?usluga=promo`)
+2. CTA i primarno dugme vode na `/kontakt?usluga=fpv` (`/en/contact?usluga=fpv`)
 3. „Vidite primere" skače na sekciju Primeri, bez animacije skrola, a naslov ne završava ispod sticky header-a
-4. Cena „od 150 €" na promo stranici i kartici; događaji „od 100 €", FPV „od 200 €" na /usluge; nigde „cena po dogovoru" (sr + en); iznos formatiran po jeziku
-5. `YouTubeLite` ne učitava `iframe` pre klika
+4. Cene „od 200 €" i „od 250 €" na stranici, „od 200 €" na kartici /usluge; iznos formatiran po jeziku
+5. `YouTubeLite` ne učitava `iframe` pre klika; FPV i nekretnine čitaju isti video ID
 6. Hover i fokus stanja rade i tastaturom; nema nijedne animacije pri učitavanju ili skrolu
-7. `npm run lint`, `npm run test` i `npm run build` prolaze
+7. DoD Faze 2 prođen na /usluge i svih 5 stranica
+8. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 3, 9, 14)
-- @context/features/12-usluga-promo.md
+- @context/project-overview.md (poglavlja 2, 9, 14)
+- @context/features/13-usluga-fpv.md
 - @context/features/08-usluge-pregled-done.md
-- @context/features/11-usluga-eventi-done.md
-- @context/design-reference/NOTES.md (sekcije 1, 5, 6; tabela odluka, red 2)
+- @context/features/10-usluga-nekretnine-done.md
+- @context/design-reference/NOTES.md (sekcije 1, 5, 6)
 
 ## History
 
@@ -147,3 +141,7 @@ Napravljena stranica za snimanje događaja i proslava — rođendana, krštenja,
 ### Thursday, 24.09.2026. | 10:46 — 12 Usluga: Promo video za firme
 
 Napravljena stranica za promo video namenjena firmama — restoranima, hotelima, teretanama i lokalnim biznisima. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena iz postojećih delova šablona: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa četiri bloka o tome šta se snima, koraci saradnje, isporuka sa cenom, dva primera i zeleni poziv na kontakt sa unapred izabranom uslugom. Za korake saradnje napravljena je nova zajednička sekcija po obrascu iz dizajna stranice o nama — naslov i pasus levo, četiri numerisana koraka desno — pa će je ta stranica kasnije samo preuzeti; vlasnik je izabrao ime, a pozadine su zamenjene da sekcija sa koracima stoji na toploj pozadini kao u dizajnu. Vlasnik je pre implementacije odlučio i da „cena po dogovoru" nestane sa celog sajta: svaka usluga sada ima polaznu cenu, a usluge bez paketa dobile su svaka svoj iznos na istom mestu gde stoje i cene paketa, namerno različit da bi se lako našlo šta se menja. Pregled usluga zato sada svuda ispisuje cenu, a stranica događaja umesto rečenice o dogovoru navodi polaznu cenu; iznos se nigde ne upisuje u tekst, nego se ubacuje sa tog jednog mesta i ispisuje po jeziku. Ako neka usluga ostane bez cene, build puca umesto da se na sajtu pojavi prazno mesto, a testovi proveravaju da svaka usluga ima cenu. Primeri su privremeni, bez izmišljenih klijenata i trajanja, sa napomenom gde se upisuju pravi snimci. Pravilo o cenama dopisano je u opis projekta i uputstvo za vlasnika, a napravljen je i kratak podsetnik sa odlukama iz ove sesije, uključujući savet da video na YouTube-u može biti sakriven sa kanala a ipak raditi na sajtu. Tokom review-a jedan anglicizam zamenjen je domaćim izrazom, a dvosmislena rečenica o tome ko su klijenti prepisana je jasnije. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, nijedan video se ne učitava pre klika, skok na primere radi i ne završava ispod zaglavlja, a cene na pregledu usluga i na stranicama događaja i promo videa ispisuju se tačno na oba jezika.
+
+### Thursday, 24.09.2026. | 11:47 — 13 Usluga: FPV snimci
+
+Napravljena stranica za FPV snimke, uslugu po kojoj se ekipa izdvaja, i time završena cela faza usluga. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena isključivo iz postojećih delova šablona, bez ijedne nove komponente: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa kratko i laičko objašnjenje šta je FPV, četiri primene, dva primera, blok o bezbednosti, cena i zeleni poziv na kontakt sa unapred izabranom uslugom. Stranica namerno ima više teksta od ostalih usluga jer služi i za pretragu, kako je vlasnik odlučio, pa su ključne fraze utkane u uvod, primene i opis proleta kroz nekretninu. Prvi primer je isti snimak kuće kao na stranici nekretnina, i njegov video ID se sada upisuje na jednom mestu koje čitaju obe stranice; drugi primer je privremen, bez izmišljenog klijenta. Cena navodi polazni iznos za samostalno snimanje i poseban iznos za FPV kao dodatak uz drugu uslugu, oba sa istog mesta gde stoje sve cene, ispisana po jeziku. Tekstovi o bezbednosti govore o poštovanju regulative, proceni lokacije i vremenskim uslovima, bez tvrdnje o registraciji i bez obećanja o pomeranju termina, jer to vlasnik nije potvrdio. Pošto vlasnik nije odgovorio na tri pitanja pre starta, primenjene su preporuke: dva primera umesto jednog, bez posebnog zlatnog isticanja stranice i bez izdvajanja stavke sa cenom u zajednički deo. Tokom review-a jedan anglicizam iz sportskog rečnika zamenjen je domaćim izrazom. Na kraju je prošla zbirna provera faze: pregled usluga i svih pet stranica na oba jezika i pet širina bez horizontalnog skrola, sa jednim glavnim naslovom, bez učitavanja videa pre klika, bez animacija i bez ijedne „cene po dogovoru", sa svim cenama sa jednog mesta i svim privremenim primerima i kadrovima jasno označenim. Lint, provera tipova, testovi i build prolaze.
