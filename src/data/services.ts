@@ -4,6 +4,10 @@ import type { ServiceIdType, ServiceType } from "@/types/services.type";
 // Dok su ID-jevi placeholder, `YouTubeLite` prikazuje opis kadra umesto thumbnail-a.
 export const PLACEHOLDER_VIDEO_ID = "";
 
+// FPV prolet kroz kuću za izdavanje — isti snimak na nekretninama i na FPV stranici,
+// pa se ID upisuje samo ovde.
+const FPV_HOUSE_VIDEO_ID = PLACEHOLDER_VIDEO_ID;
+
 // Nazivi i opisi usluga idu kroz i18n po `id` (poglavlje 9); ovde samo struktura.
 // Mapa po `id` da stranica usluge uzme svoj zapis bez pretrage po listi.
 export const SERVICES_BY_ID = {
@@ -19,7 +23,7 @@ export const SERVICES_BY_ID = {
     routeKey: "servicesRealEstate",
     order: 2,
     contactParam: "nekretnine",
-    videoIds: [PLACEHOLDER_VIDEO_ID, PLACEHOLDER_VIDEO_ID],
+    videoIds: [FPV_HOUSE_VIDEO_ID, PLACEHOLDER_VIDEO_ID],
   },
   events: {
     id: "events",
@@ -33,14 +37,14 @@ export const SERVICES_BY_ID = {
     routeKey: "servicesPromo",
     order: 4,
     contactParam: "promo",
-    videoIds: [PLACEHOLDER_VIDEO_ID],
+    videoIds: [PLACEHOLDER_VIDEO_ID, PLACEHOLDER_VIDEO_ID],
   },
   fpv: {
     id: "fpv",
     routeKey: "servicesFpv",
     order: 5,
     contactParam: "fpv",
-    videoIds: [PLACEHOLDER_VIDEO_ID],
+    videoIds: [FPV_HOUSE_VIDEO_ID, PLACEHOLDER_VIDEO_ID],
   },
 } satisfies Record<ServiceIdType, ServiceType>;
 

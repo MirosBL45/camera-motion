@@ -14,6 +14,7 @@ import { ROUTES } from "@/constants/routes";
 import { SERVICES } from "@/data/services";
 import { Link, usePathname } from "@/i18n/navigation";
 
+import { ContactCtaLink } from "./ContactCtaLink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const ITEM_CLASSES =
@@ -119,7 +120,7 @@ export function MobileNav() {
           <LanguageSwitcher />
           <SheetClose asChild>
             <Button asChild className="h-auto py-4 font-heading text-[1.0625rem]">
-              <Link href={ROUTES.contact}>{tNav("cta")}</Link>
+              <ContactCtaLink>{tNav("cta")}</ContactCtaLink>
             </Button>
           </SheetClose>
         </div>

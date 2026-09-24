@@ -23,4 +23,4 @@ Kroz deljeni šablon iz 08:
 ## Reference
 
 - @context/project-overview.md (poglavlja 3, 9, 14)
-- @context/features/08-usluge-pregled.md
+- @context/features/08-usluge-pregled-done.md

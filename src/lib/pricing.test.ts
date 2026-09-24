@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { PACKAGES } from "@/data/packages";
+import { PACKAGES, SERVICE_PRICES } from "@/data/packages";
+import { SERVICES } from "@/data/services";
 
 import { formatPrice, getStartingPrice } from "./pricing";
 
@@ -25,10 +26,16 @@ describe("getStartingPrice", () => {
     expect(getStartingPrice("realEstate")).toBe(120);
   });
 
-  it("vraća undefined za usluge bez paketa", () => {
-    expect(getStartingPrice("events")).toBeUndefined();
-    expect(getStartingPrice("promo")).toBeUndefined();
-    expect(getStartingPrice("fpv")).toBeUndefined();
+  it("vraća polaznu cenu za usluge bez paketa", () => {
+    expect(getStartingPrice("events")).toBe(SERVICE_PRICES.events);
+    expect(getStartingPrice("promo")).toBe(SERVICE_PRICES.promo);
+    expect(getStartingPrice("fpv")).toBe(SERVICE_PRICES.fpv);
+  });
+
+  it("svaka usluga ima pozitivnu polaznu cenu", () => {
+    for (const { id } of SERVICES) {
+      expect(getStartingPrice(id)).toBeGreaterThan(0);
+    }
   });
 
   it("prati izmenu iznosa u podacima, ne fiksiranu vrednost", () => {

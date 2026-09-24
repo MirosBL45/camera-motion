@@ -1,6 +1,6 @@
 import type { ServiceIdType } from "@/types/services.type";
 
-import { PACKAGES } from "@/data/packages";
+import { PACKAGES, SERVICE_PRICES } from "@/data/packages";
 
 import { INTL_LOCALE_MAP, type Locale } from "./types/i18n";
 
@@ -12,11 +12,20 @@ export function formatPrice(amount: number, locale: Locale): string {
   }).format(amount);
 }
 
-// Najniža polazna cena usluge; usluga bez paketa je nema (tada ide „cena po dogovoru").
-export function getStartingPrice(serviceId: ServiceIdType): number | undefined {
+// Najniža polazna cena usluge; usluga bez paketa uzima svoju cenu iz `SERVICE_PRICES`.
+// Svaka usluga mora da ima cenu — ako je nema, build puca umesto da se prikaže prazno.
+export function getStartingPrice(serviceId: ServiceIdType): number {
   const servicePackages = PACKAGES[serviceId];
 
-  if (!servicePackages?.length) return undefined;
+  if (servicePackages?.length) {
+    return Math.min(...servicePackages.map(({ priceFrom }) => priceFrom));
+  }
 
-  return Math.min(...servicePackages.map(({ priceFrom }) => priceFrom));
+  const servicePrice = SERVICE_PRICES[serviceId];
+
+  if (servicePrice === undefined) {
+    throw new Error(`Usluga "${serviceId}" nema ni pakete ni polaznu cenu u packages.ts.`);
+  }
+
+  return servicePrice;
 }

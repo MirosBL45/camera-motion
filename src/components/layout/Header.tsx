@@ -3,9 +3,8 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 import { MAIN_NAV_ITEMS } from "@/constants/navigation";
-import { ROUTES } from "@/constants/routes";
-import { Link } from "@/i18n/navigation";
 
+import { ContactCtaLink } from "./ContactCtaLink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Logo } from "./Logo";
 import { MobileNav } from "./MobileNav";
@@ -36,7 +35,7 @@ export function Header() {
           </nav>
           <LanguageSwitcher className="ml-0.5 border-l border-border pl-1.5" />
           <Button asChild className="h-auto px-5 py-2.75 font-heading text-base">
-            <Link href={ROUTES.contact}>{t("cta")}</Link>
+            <ContactCtaLink>{t("cta")}</ContactCtaLink>
           </Button>
         </div>
 
