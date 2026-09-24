@@ -4,7 +4,6 @@
     "heading": "Snimanje dronom i kamerom — od venčanja do poslovnog prostora.",
     "lead": "Camera Motion je video produkcija iz Beograda. Snimamo venčanja, nekretnine, proslave i promo materijal za firme — dronom iz vazduha i kamerom sa zemlje. Radimo u Beogradu i okolini, a za snimanja u ostatku Srbije i regiona dogovaramo se posebno.",
     "priceFrom": "od {price} €",
-    "priceOnRequest": "cena po dogovoru",
     "detailsCta": "Detaljnije",
     "editingNote": "Svaka usluga uključuje kompletnu montažu u Adobe Premiere Pro — rez, kolor i zvuk. Po dogovoru montiramo i materijal koji ste sami snimili.",
     "photographyNote": "Uskoro uz svaku uslugu i fotografija — javite nam se ako vam treba već na sledećem snimanju.",
@@ -306,7 +305,7 @@
       "items": {
         "highlight": "Kratak spot sa najboljim trenucima, uz muziku — spreman za deljenje sa gostima i na mrežama.",
         "longer": "Po dogovoru i duži snimak — ceo program, govori ili nastup u celini.",
-        "price": "Cenu određujemo po dogovoru, prema trajanju, lokaciji i onome što se snima — javite nam se za ponudu."
+        "price": "Cena počinje od {price} €, a konačnu određujemo prema trajanju, lokaciji i onome što se snima — javite nam se za ponudu."
       }
     },
     "works": {
@@ -331,7 +330,85 @@
     }
   },
   "promo": {
-    "title": "Promo video"
+    "title": "Promo video",
+    "heading": "Kratak video je najbrži način da ljudi upoznaju vaš biznis.",
+    "lead": "Pravimo promo video za firme — restorane, hotele, teretane i lokalne biznise iz Beograda i okoline. Jedan snimak koji pokazuje prostor, ljude i ono što radite, spreman za sajt, Instagram i oglase.",
+    "placeholder": "kadar: prolet dronom do ulaza u restoran",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Vidite primere",
+    "whatWeDo": {
+      "heading": "Šta radimo",
+      "intro": "Video produkcija za mala preduzeća i veće firme u Beogradu: snimamo ono što vaši kupci i gosti treba da vide pre nego što prvi put dođu kod vas.",
+      "items": {
+        "space": {
+          "title": "Prostor iz vazduha i sa zemlje",
+          "description": "Dron pokazuje lokaciju i okolinu, a kamera na gimbalu enterijer i detalje. Snimanje reklame dronom radimo u skladu sa regulativom DCV."
+        },
+        "fpv": {
+          "title": "FPV prolet kao efekat",
+          "description": "Jedan neprekinut prolet kroz vrata i između stolova — kadar koji već u prvim sekundama spota zadržava pažnju."
+        },
+        "work": {
+          "title": "Proces rada i ljudi",
+          "description": "Kuhinja u punom zamahu, trening, ruke majstora na poslu. Pokazujemo kako radite i ko stoji iza firme."
+        },
+        "formats": {
+          "title": "Format za svaki kanal",
+          "description": "Horizontalna verzija 16:9 za sajt i YouTube i vertikalna 9:16 za Reels i Stories — iz istog snimanja."
+        }
+      }
+    },
+    "process": {
+      "heading": "Kako sarađujemo",
+      "intro": "Četiri koraka od prvog razgovora do gotovog videa. Unapred znate šta ćemo snimiti i šta dobijate.",
+      "steps": {
+        "brief": {
+          "title": "Dogovor i priprema",
+          "description": "Čujemo šta želite da pokažete i kome se obraćate, pa pravimo kratak scenario i plan kadrova."
+        },
+        "shoot": {
+          "title": "Snimanje na lokaciji",
+          "description": "Dolazimo u dogovoreni termin i snimamo dronom i kamerom, tako da što manje ometamo vaš rad."
+        },
+        "edit": {
+          "title": "Montaža u vašem stilu",
+          "description": "Montiramo spot sa vašim logom, bojama i fontom, uz muziku koja odgovara vašem brendu."
+        },
+        "delivery": {
+          "title": "Isporuka i izmene",
+          "description": "Dobijate video u svim dogovorenim formatima, a jedna runda izmena je uključena u cenu."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Isporuka i cena",
+      "intro": "Gotov video dobijate digitalno, spreman za objavu.",
+      "items": {
+        "ready": "Spreman za objavu na sajtu, na mrežama i u plaćenim oglasima.",
+        "revisions": "Jedna runda izmena uključena je u cenu.",
+        "price": "Cena počinje od {price} €, a konačnu određujemo prema trajanju snimanja, lokaciji i broju formata — javite nam se za ponudu."
+      }
+    },
+    "works": {
+      "heading": "Primeri",
+      "items": {
+        "first": {
+          "title": "Predstavljanje lokala",
+          "meta": "Promo video · dron i kamera",
+          "placeholder": "snimak: promo video lokala"
+        },
+        "second": {
+          "title": "Proces rada",
+          "meta": "Promo video · kamera na gimbalu",
+          "placeholder": "snimak: proces rada u radionici"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Recite nam čime se bavite — javljamo se sa idejom i cenom.",
+      "subheading": "Odgovaramo istog dana, obično u par sati.",
+      "button": "Zatražite ponudu"
+    }
   },
   "fpv": {
     "title": "FPV snimci"

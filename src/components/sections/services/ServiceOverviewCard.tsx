@@ -63,9 +63,7 @@ export function ServiceOverviewCard({
         {/* „Detaljnije" je vizuelni element, ne ugnežđen link — cela kartica je link. */}
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
           <span className="font-heading text-[1.0625rem] font-medium">
-            {startingPrice === undefined
-              ? t("overview.priceOnRequest")
-              : t("overview.priceFrom", { price: formatPrice(startingPrice, locale) })}
+            {t("overview.priceFrom", { price: formatPrice(startingPrice, locale) })}
           </span>
           <span className="inline-flex items-center gap-1.5 font-heading text-[0.9375rem] font-medium text-primary">
             {t("overview.detailsCta")}

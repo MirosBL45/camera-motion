@@ -1,4 +1,4 @@
-# Current Feature: 11 — Usluga: Događaji i proslave
+# Current Feature: 12 — Usluga: Promo video za firme
 
 ## Status
 
@@ -10,65 +10,79 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 2, fajl 4/6. `/usluge/dogadjaji-i-proslave` (`/en/services/events`): rođendani, krštenja, punoletstva, sportski i korporativni događaji. Gradi se kroz deljeni šablon iz feature-a 08; **dizajn nema artboard za ovu uslugu**, pa izgled prati obrasce sa `1b` i `2a`
-- **Raspored stranice** (odluka vlasnika): uvodni blok → „Šta pokrivamo" (4 kartice) → „Kako snimamo" → Isporuka → Primeri (2 embeda) → zeleni CTA band → footer
-  - **Uvodni blok** (`ServiceIntro`): breadcrumb „Usluge / Događaji i proslave", h1 i lead oko toga da svaki događaj ima trenutke koji se ne ponavljaju (atmosfera, emocije, detalji), dva dugmeta: primarno „Zatražite ponudu" → `/kontakt?usluga=event`, sekundarno „Vidite primere" → skok na `#primeri`; placeholder kadar desno
-  - **„Šta pokrivamo"** (`ServiceFeatures`, `tone="warm"`): privatne proslave (rođendani, krštenja, punoletstva), sportski događaji, korporativna okupljanja, nastupi
-  - **„Kako snimamo"** (`ServiceFeatures`): kamera sa zemlje na gimbalu, dron za lokaciju i masu (u skladu sa DCV), diskretno snimanje koje ne ometa goste
-  - **Isporuka** (`ServiceDelivery`): highlight video, duži snimak po dogovoru, i rečenica da je cena po dogovoru (prema trajanju, lokaciji i tome šta se snima) — bez iznosa
-  - **Primeri** (`ServiceWorks`, `id="primeri"`): 2 `YouTubeLite` placeholdera — BeoSand odbojka na pesku i jahta kod Zadra (snimanje na moru/putovanja), uz `TODO(vlasnik)`; `services.ts` za `events` dobija drugi placeholder video ID
-  - **CTA band** → `/kontakt?usluga=event`
-- **Usklađivanje kartice na /usluge**: tekst kartice događaja kaže da se duži snimak dobija uvek — menja se u „po dogovoru" (sr + en), da se slaže sa stranicom
-- Svi tekstovi kroz `services.events` namespace (sr + en); engleski je prirodan prevod, ne bukvalan. Bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije 200ms
+- Faza 2, fajl 5/6. `/usluge/promo-video` (`/en/services/promo-video`), B2B: restorani, hoteli, teretane, lokalni biznisi. Gradi se kroz deljeni šablon iz feature-a 08; **dizajn nema artboard za ovu uslugu**, pa izgled prati obrasce sa `1b` i `2a` (kao događaji)
+- **Raspored stranice**: uvodni blok → „Šta radimo" → „Proces saradnje" (4 numerisana koraka) → Isporuka i cena → Primeri (2 embeda) → zeleni CTA band → footer
+  - **Uvodni blok** (`ServiceIntro`): breadcrumb „Usluge / Promo video", h1 i lead oko toga da je kratak promo video najjači format za predstavljanje biznisa — sajt, Instagram, oglasi; dva dugmeta: primarno „Zatražite ponudu" → `/kontakt?usluga=promo`, sekundarno „Vidite primere" → skok na `#primeri`; placeholder kadar desno
+  - **„Šta radimo"** (`ServiceFeatures`, `tone="warm"`): predstavljanje prostora (dron + gimbal), FPV prolet kao efekat, snimci procesa rada i ljudi, isporuka u formatima za kanale (16:9 za sajt i YouTube, 9:16 za Reels)
+  - **„Proces saradnje"**: 1) dogovor i kratka priprema scenarija, 2) snimanje na lokaciji, 3) montaža sa brendingom klijenta, 4) isporuka u svim formatima + jedna runda izmena. Sekvenca je ovde opravdana, pa koraci nose brojeve
+  - **Isporuka i cena** (`ServiceDelivery`): formati, jedna runda izmena, i polazna cena „od 150 €" iz `PRICES` (ICU `{price}`, formatirano po jeziku)
+  - **Primeri** (`ServiceWorks`, `id="primeri"`): 2 `YouTubeLite` placeholdera uz `TODO(vlasnik)`; `services.ts` za `promo` dobija drugi placeholder video ID
+  - **CTA band** → `/kontakt?usluga=promo`
+- **Cene svuda, bez „cena po dogovoru"** (odluka vlasnika): svaka usluga bez paketa dobija svoj ključ u bloku `PRICES` u `packages.ts`, sa različitim iznosom da vlasnik lako nađe šta menja
+  - `events` 100 €, `promo` 150 €, `fpv` 200 € (`fpvAddon` 250 € ulazi sa feature-om 13, gde se prvi put koristi)
+  - Venčanja i nekretnine ostaju na cenama paketa iz dizajna
+  - `getStartingPrice` vraća najnižu cenu paketa, a za usluge bez paketa njihovu polaznu cenu — uvek broj
+  - Kartice događaja, promo i FPV na /usluge dobijaju „od X €"; ključ `priceOnRequest` se briše (sr + en) zajedno sa granom u kartici
+  - Stranica događaja: rečenica „Cenu određujemo po dogovoru…" u isporuci postaje polazna cena kroz ICU `{price}` (sr + en)
+  - Iznos nikad ne stoji u prevodima ni u komponentama — samo u `PRICES`
+  - Testovi za `getStartingPrice` se ažuriraju
+- Svi tekstovi kroz `services.promo` namespace (sr + en); engleski je prirodan prevod, ne bukvalan. Bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije 200ms
+- Overview 9.1 dobija pravilo za polazne cene usluga bez paketa; napravi se `context/bitne-stvari.md` (ultrakratke teze o odlukama iz ove sesije + savet za „Unlisted" YouTube video)
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Dizajn nema artboard za događaje (NOTES 1). Izgled se sklapa iz postojećih sekcija šablona, bez novih komponenti
-- Radi se na grani `10-11-nekretnine-i-eventi`, posle commit-a feature-a 10; feature 11 dobija svoj commit
+- Dizajn nema artboard za promo (NOTES 1). Stranica se sklapa iz postojećih sekcija šablona
+- Grana `12-13-promo-i-fpv` iz `develop`; feature 12 i 13 dobijaju svaki svoj commit
 - Odluke vlasnika pri učitavanju:
-  - **Cena**: „cena po dogovoru", bez iznosa, isto kao kartica na /usluge. `events` i dalje nema ključ u `packages.ts`, pa se sekcija paketa ne renderuje; kad vlasnik odredi cenu ili pakete, dodaje se samo ključ
-  - **Raspored**: pun — Uvod → Šta pokrivamo → Kako snimamo → Isporuka → Primeri → CTA
-  - **Dugmad u uvodu**: kao na nekretninama — „Zatražite ponudu" + „Vidite primere" (`#primeri`)
-  - **Kartica na /usluge**: usklađuje se sa spec-om (duži snimak po dogovoru), u ovom commit-u
+  - **Cene**: 100/150/200/250 po uslugama bez paketa, svaka u svom ključu; „cena po dogovoru" nestaje sa celog sajta; izmena na stranici događaja ulazi u ovaj commit
+  - **Raspored**: iz postojećeg šablona, kao događaji
+  - **Proces saradnje**: bira se ono što je jednostavnije i bolje se uklapa — `ServiceFeatures` sa brojevima ili nova komponenta po sekciji „Kako radimo" sa O nama (4 numerisana koraka iz dizajna, NOTES tabela odluka, red 2; u kodu još ne postoji, pravi se u feature-u 15). Komponenta koja se koristi na više mesta dobija smislenije ime — **pre toga pitati vlasnika za ime, uz predlog**, i ažurirati importe
+  - **Primeri**: placeholderi; vlasnik još nema videe
 - Pretpostavke za implementaciju (ako nešto ne odgovara, reci pre starta):
-  - Tekstove pišem nove (dizajn ih nema), u tonu venčanja i nekretnina; vlasnik ih pregleda u browseru
-  - Pozadine: uvod `background` → Šta pokrivamo `surface-warm` → Kako snimamo `surface` → Isporuka `background` → Primeri `surface` → CTA
-  - „Kako snimamo" ima 3 kartice (pun red tek od `lg`, kao na venčanjima)
-  - Primeri nemaju izmišljeno trajanje; meta red opisuje tip snimka (npr. „Sportski događaj · dron i kamera") dok vlasnik ne upiše pravo trajanje
+  - Tekstove pišem nove (dizajn ih nema), u tonu prethodnih stranica usluga; vlasnik ih pregleda u browseru
+  - Pozadine: uvod `background` → Šta radimo `surface-warm` → Proces saradnje `surface` → Isporuka i cena `background` → Primeri `surface` → CTA
+  - „Šta radimo" ima 4 kartice (pun red tek od `lg`)
+  - Primeri nemaju izmišljene klijente ni trajanja; naslov i meta red opisuju tip snimka (npr. „Predstavljanje lokala · dron i kamera") dok vlasnik ne upiše pravi
+  - „Brending" iz spec-a se na srpskom piše opisno (logo, boje i font firme) gde god prirodno ide, bez anglicizama (overview 8.3)
+  - Rok isporuke se ne navodi jer ga vlasnik nije odredio
+  - Komentari u `pricing.ts` i na stranici događaja koji kažu „cena po dogovoru" postaju netačni — ažuriram ih zajedno sa kodom na koji se odnose
   - Ikonice iz `lucide-react`, potvrđuju se u browseru
   - Sidro `#primeri` se ne prevodi (princip 5)
-  - SEO fraze se utkivaju prirodno u tekst: snimanje proslava, snimanje rođendana dronom, video sa događaja Beograd
+  - SEO fraze se utkivaju prirodno u tekst: promo video za firme, snimanje reklame dronom, video produkcija za mala preduzeća Beograd
   - `generateMetadata` i JSON-LD `Service` ostaju za feature 19
 - Odstupanja uočena tokom implementacije:
-  - Nijedna komponenta šablona nije menjana — stranica koristi `ServiceFeatures`, `ServiceDelivery` i `ServiceWorks` kakvi su posle feature-a 10
-  - „Highlight video" iz spec-a je na srpskom „kratak spot sa najboljim trenucima" (overview 8.3, bez anglicizama); trajanje spota se ne navodi jer ga vlasnik nije odredio
-  - Podnaslov CTA bande ponavlja rečenicu sa /usluge („Odgovaramo istog dana, obično u par sati.") umesto novog obećanja koje vlasnik nije potvrdio
-  - Ikonice: `PartyPopper`, `Trophy`, `Presentation`, `Mic` za „Šta pokrivamo"; `Camera`, `Drone`, `EyeOff` za „Kako snimamo"
+  - **Proces saradnje** (odluka vlasnika): nova deljena komponenta `ProcessSteps` po sekciji „Kako radimo" sa O nama (naslov i pasus levo, koraci `01–04` desno), umesto `ServiceFeatures` sa brojevima; koristiće je i feature 15. Postojeći importi se ne menjaju
+  - **Pozadine** (odluka vlasnika): zamenjene da proces bude na `surface-warm` kao u dizajnu — uvod `background` → Šta radimo `surface` → Proces saradnje `surface-warm` → Isporuka i cena `background` → Primeri `surface` → CTA
+  - Polazne cene usluga bez paketa stoje u `PRICES` i izlaze kroz `SERVICE_PRICES`; `getStartingPrice` uvek vraća broj, a baca grešku (build puca) ako usluga nema ni pakete ni cenu
+  - Stavka sa cenom u isporuci (događaji i promo) gradi se posebno, jer tipizirane poruke ne primaju `{price}` za stavke bez argumenata
+  - Ikonice: `Drone`, `Rocket`, `Hammer`, `RectangleVertical` za „Šta radimo"
+  - Podnaslov CTA bande ponavlja potvrđenu rečenicu sa /usluge; muzika u montaži se pominje bez obećanja o licenci
+  - Ažurirani overview 9.1 i red o cenama u README-u; napravljen `context/bitne-stvari.md`
 - Review:
-  - „Team building" (anglicizam) zamenjen sa „druženja zaposlenih" (overview 8.3)
-  - Prepravljene dve rogobatne rečenice: opis sportskih događaja i rečenica o ceni („Cenu određujemo po dogovoru…")
+  - „Zaustavlja skrolovanje" (anglicizam) zamenjeno sa „zadržava pažnju" (overview 8.3)
+  - Uvod „Šta radimo": dvosmisleno „klijent" (naš ili njihov) zamenjeno sa „vaši kupci i gosti"
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
 1. Kompletno na oba jezika; responzivno na 360px, 390px, 768px, 1024px, 1440px — nema horizontalnog skrola
-2. CTA i primarno dugme vode na `/kontakt?usluga=event` (`/en/contact?usluga=event`)
+2. CTA i primarno dugme vode na `/kontakt?usluga=promo` (`/en/contact?usluga=promo`)
 3. „Vidite primere" skače na sekciju Primeri, bez animacije skrola, a naslov ne završava ispod sticky header-a
-4. Nema iznosa na stranici; sekcija paketa se ne renderuje
+4. Cena „od 150 €" na promo stranici i kartici; događaji „od 100 €", FPV „od 200 €" na /usluge; nigde „cena po dogovoru" (sr + en); iznos formatiran po jeziku
 5. `YouTubeLite` ne učitava `iframe` pre klika
-6. Kartica događaja na /usluge ima usklađen tekst na oba jezika
-7. Hover i fokus stanja rade i tastaturom; nema nijedne animacije pri učitavanju ili skrolu
-8. `npm run lint`, `npm run test` i `npm run build` prolaze
+6. Hover i fokus stanja rade i tastaturom; nema nijedne animacije pri učitavanju ili skrolu
+7. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 2, 3, 9, 14)
+- @context/project-overview.md (poglavlja 3, 9, 14)
+- @context/features/12-usluga-promo.md
+- @context/features/08-usluge-pregled-done.md
 - @context/features/11-usluga-eventi-done.md
-- @context/features/10-usluga-nekretnine-done.md
-- @context/design-reference/NOTES.md (sekcije 1, 5, 6)
+- @context/design-reference/NOTES.md (sekcije 1, 5, 6; tabela odluka, red 2)
 
 ## History
 
@@ -129,3 +143,7 @@ Napravljena stranica za snimanje nekretnina po ekranu iz dizajna i kroz isti ša
 ### Wednesday, 23.09.2026. | 16:06 — 11 Usluga: Događaji i proslave
 
 Napravljena stranica za snimanje događaja i proslava — rođendana, krštenja, punoletstava, sportskih i korporativnih događaja. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena isključivo iz postojećih delova šablona, bez ijedne nove komponente: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa sekcija o tome šta se pokriva, tri bloka o načinu snimanja, isporuka, dva primera i zeleni poziv na kontakt sa unapred izabranom uslugom. Vlasnik je pre implementacije odlučio o četiri stvari: cena se ne ispisuje kao iznos nego kao cena po dogovoru, isto kao na pregledu usluga, dok se ne odrede cena ili paketi; stranica ima pun raspored sa odvojenim sekcijama za ono što se pokriva i za način snimanja; uvod ima dva dugmeta kao na nekretninama, pri čemu drugo skače na primere; a tekst kartice ove usluge na pregledu usluga usklađen je sa stranicom, pa sada kaže da se duži snimak dobija po dogovoru, a ne uvek. Svi tekstovi su novi jer ih dizajn nema, napisani u tonu venčanja i nekretnina, sa ključnim frazama za pretragu utkanim u uvod, opis pokrivanja i blok o dronu. Kratak spot sa najboljim trenucima nosi domaći naziv umesto engleskog iz spec-a, bez navedenog trajanja jer ga vlasnik nije odredio, a podnaslov poziva na kontakt ponavlja već potvrđenu rečenicu umesto novog obećanja. Primeri su snimci ekipe sa odbojke na pesku i sa jahte kod Zadra, sa jasnom napomenom za vlasnika gde se upisuju pravi naslovi, trajanja i video ID-jevi. Tokom review-a jedan anglicizam zamenjen je domaćim izrazom, a dve rogobatne rečenice su prepisane. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, na stranici nema nijednog iznosa, nijedan video se ne učitava pre klika, skok na primere radi i ne završava ispod zaglavlja, a kartica na pregledu usluga ima novi tekst na oba jezika.
+
+### Thursday, 24.09.2026. | 10:46 — 12 Usluga: Promo video za firme
+
+Napravljena stranica za promo video namenjena firmama — restoranima, hotelima, teretanama i lokalnim biznisima. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena iz postojećih delova šablona: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa četiri bloka o tome šta se snima, koraci saradnje, isporuka sa cenom, dva primera i zeleni poziv na kontakt sa unapred izabranom uslugom. Za korake saradnje napravljena je nova zajednička sekcija po obrascu iz dizajna stranice o nama — naslov i pasus levo, četiri numerisana koraka desno — pa će je ta stranica kasnije samo preuzeti; vlasnik je izabrao ime, a pozadine su zamenjene da sekcija sa koracima stoji na toploj pozadini kao u dizajnu. Vlasnik je pre implementacije odlučio i da „cena po dogovoru" nestane sa celog sajta: svaka usluga sada ima polaznu cenu, a usluge bez paketa dobile su svaka svoj iznos na istom mestu gde stoje i cene paketa, namerno različit da bi se lako našlo šta se menja. Pregled usluga zato sada svuda ispisuje cenu, a stranica događaja umesto rečenice o dogovoru navodi polaznu cenu; iznos se nigde ne upisuje u tekst, nego se ubacuje sa tog jednog mesta i ispisuje po jeziku. Ako neka usluga ostane bez cene, build puca umesto da se na sajtu pojavi prazno mesto, a testovi proveravaju da svaka usluga ima cenu. Primeri su privremeni, bez izmišljenih klijenata i trajanja, sa napomenom gde se upisuju pravi snimci. Pravilo o cenama dopisano je u opis projekta i uputstvo za vlasnika, a napravljen je i kratak podsetnik sa odlukama iz ove sesije, uključujući savet da video na YouTube-u može biti sakriven sa kanala a ipak raditi na sajtu. Tokom review-a jedan anglicizam zamenjen je domaćim izrazom, a dvosmislena rečenica o tome ko su klijenti prepisana je jasnije. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, nijedan video se ne učitava pre klika, skok na primere radi i ne završava ispod zaglavlja, a cene na pregledu usluga i na stranicama događaja i promo videa ispisuju se tačno na oba jezika.

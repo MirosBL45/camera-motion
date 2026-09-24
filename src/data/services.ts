@@ -33,7 +33,7 @@ export const SERVICES_BY_ID = {
     routeKey: "servicesPromo",
     order: 4,
     contactParam: "promo",
-    videoIds: [PLACEHOLDER_VIDEO_ID],
+    videoIds: [PLACEHOLDER_VIDEO_ID, PLACEHOLDER_VIDEO_ID],
   },
   fpv: {
     id: "fpv",

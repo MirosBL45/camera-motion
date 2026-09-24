@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Camera, Drone, EyeOff, Mic, PartyPopper, Presentation, Trophy } from "lucide-react";
 
@@ -7,6 +7,7 @@ import { ServiceDelivery } from "@/components/sections/service-page/ServiceDeliv
 import { ServiceFeatures } from "@/components/sections/service-page/ServiceFeatures";
 import { ServiceIntro } from "@/components/sections/service-page/ServiceIntro";
 import { ServiceWorks } from "@/components/sections/service-page/ServiceWorks";
+import { formatPrice, getStartingPrice } from "@/lib/pricing";
 
 import { SERVICES_BY_ID } from "@/data/services";
 
@@ -28,12 +29,13 @@ const HOW_ITEMS = [
   { id: "discreet", Icon: EyeOff },
 ] as const;
 
-// Paketa nema (`events` nije u `packages.ts`), pa cena stoji kao „po dogovoru" u isporuci.
-const DELIVERY_ITEMS = ["highlight", "longer", "price"] as const;
+// Paketa nema, pa polazna cena (`PRICES.events` u `packages.ts`) stoji kao poslednja stavka isporuke.
+const DELIVERY_ITEMS = ["highlight", "longer"] as const;
 
 const WORK_ITEMS = ["first", "second"] as const;
 
 export default function ServicesEventsPage() {
+  const locale = useLocale();
   const t = useTranslations("services.events");
   const service = SERVICES_BY_ID.events;
 
@@ -74,7 +76,15 @@ export default function ServicesEventsPage() {
       <ServiceDelivery
         heading={t("delivery.heading")}
         intro={t("delivery.intro")}
-        items={DELIVERY_ITEMS.map((id) => ({ id, text: t(`delivery.items.${id}`) }))}
+        items={[
+          ...DELIVERY_ITEMS.map((id) => ({ id, text: t(`delivery.items.${id}`) })),
+          {
+            id: "price",
+            text: t("delivery.items.price", {
+              price: formatPrice(getStartingPrice(service.id), locale),
+            }),
+          },
+        ]}
       />
 
       {/* TODO(vlasnik): upisati konačne naslove i trajanja kad stignu snimci sa kanala

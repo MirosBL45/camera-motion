@@ -1,4 +1,5 @@
 import type { PackagesType } from "@/types/packages.type";
+import type { ServiceIdType } from "@/types/services.type";
 
 /* ------------------------------------------------------------------ *
  * CENE — JEDINO MESTO U PROJEKTU GDE STOJI IZNOS (poglavlje 9.1).
@@ -17,7 +18,18 @@ const PRICES = {
     apartman: 250,
     vila: 450,
   },
+  // Usluge bez paketa — jedna polazna cena po usluzi („od X €").
+  events: 100,
+  promo: 150,
+  fpv: 200,
 } as const;
+
+// Polazna cena usluga bez paketa; usluge sa paketima uzimaju najnižu cenu paketa.
+export const SERVICE_PRICES: Partial<Record<ServiceIdType, number>> = {
+  events: PRICES.events,
+  promo: PRICES.promo,
+  fpv: PRICES.fpv,
+};
 
 // Nazivi paketa i stavke iz `features` idu kroz i18n po `id` (poglavlje 9.1).
 // Usluge bez paketa (`events`, `promo`, `fpv`) se izostavljaju — dodavanje je dodavanje ključa.
