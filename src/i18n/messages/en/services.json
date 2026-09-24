@@ -1,18 +1,508 @@
 {
   "title": "Services",
+  "overview": {
+    "heading": "Drone and camera work — from weddings to business spaces.",
+    "lead": "Camera Motion is a video production crew from Belgrade. We film weddings, properties, celebrations and promo material for companies — with a drone from the air and a camera on the ground. We work in Belgrade and the surrounding area, and we arrange shoots elsewhere in Serbia and the region separately.",
+    "priceFrom": "from €{price}",
+    "detailsCta": "See details",
+    "editingNote": "Every service includes full editing in Adobe Premiere Pro — the cut, the color and the sound. We can also edit footage you filmed yourself, by arrangement.",
+    "photographyNote": "Photography is coming to every service soon — get in touch if you need it on your next shoot.",
+    "items": {
+      "weddings": {
+        "excerpt": "The whole day, from getting ready to the first dance, in a cinematic rhythm. The camera catches the emotion, the drone the church, the venue and the landscape. Vows and speeches are recorded with wireless microphones.",
+        "placeholder": "shot: the couple in golden hour"
+      },
+      "realEstate": {
+        "excerpt": "Apartments, houses, villas and business spaces for Booking, Airbnb and agencies. One drone flight shows the location and the surroundings, while calm interior shots show the space as it really is. The material is ready for your listing and social media right away.",
+        "placeholder": "shot: drone flight over a villa with a pool"
+      },
+      "events": {
+        "excerpt": "Christenings, birthdays, conferences, performances and sports events. We film the flow and the atmosphere, without stepping into the frame and without interrupting the programme. You get a short spot, and by arrangement a longer film of the whole event.",
+        "placeholder": "shot: celebration in a hall"
+      },
+      "promo": {
+        "excerpt": "For restaurants, salons, building sites, production floors and small businesses. A short spot that shows the space, the people and what you do. We also make a vertical version for Reels and Stories.",
+        "placeholder": "shot: promo filming inside a venue"
+      },
+      "fpv": {
+        "excerpt": "One unbroken flight through a space — through doorways, hallways and between trees. A shot a standard drone and camera simply cannot make. We do it on its own or as an add-on to any other service.",
+        "placeholder": "shot: FPV flight through a house"
+      }
+    }
+  },
+  "featuredBadge": "our specialty",
+  "packages": {
+    "featuredBadge": "most popular",
+    "priceFrom": "from €{price}",
+    "cta": "Request a quote"
+  },
+  "cta": {
+    "heading": "Tell us what you're filming — we'll come back with a plan and a price.",
+    "subheading": "We reply the same day, usually within a couple of hours.",
+    "button": "Request a quote"
+  },
   "weddings": {
-    "title": "Wedding videography"
+    "title": "Wedding videography",
+    "heading": "Your day deserves a film you'll still watch in ten years.",
+    "lead": "We arrive early, stay until the first dance and spend the whole day with you — quietly. The camera captures the emotion, the drone the setting and the atmosphere, and the edit turns it into a story with a beginning and an end.",
+    "placeholder": "photo: the couple in golden hour",
+    "ctaPrimary": "Check if your date is free",
+    "ctaSecondary": "See the packages",
+    "how": {
+      "heading": "How we film",
+      "items": {
+        "camera": {
+          "title": "Cinematic camera",
+          "description": "Fast lenses and a soft background — faces in focus, guests in the atmosphere. The camera holds up late in the evening too, when the lights in the venue go down."
+        },
+        "gimbal": {
+          "title": "Gimbal",
+          "description": "Smooth movement through the venue, with no shake and without stepping into the frame. That way the spontaneous moments stay exactly as they happened."
+        },
+        "drone": {
+          "title": "Drone",
+          "description": "The church, the venue and the landscape from the air — legally and in line with Civil Aviation Directorate rules. On request we add an FPV flight through the venue."
+        },
+        "sound": {
+          "title": "Clean sound",
+          "description": "Wireless microphones on the vows, the speeches and the toasts. We also take the feed from the band's mixer, together with ambient microphones, and mix everything in post — just let the band know in advance."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Packages",
+      "intro": "All prices are starting prices and depend on the location and the length of the day. We put the quote together after a short conversation.",
+      "note": "If you need something outside the packages, get in touch — we'll write a separate quote. We film weddings in Belgrade and the surrounding area; for weddings further afield we arrange the details separately.",
+      "osnovni": {
+        "name": "Basic",
+        "features": {
+          "camera": "Camera work on a gimbal",
+          "microphone": "Wireless microphone on the vows",
+          "fullEdit": "Edited film of the whole day",
+          "delivery": "Delivered in 4K, within 3 weeks"
+        }
+      },
+      "standard": {
+        "name": "Standard",
+        "features": {
+          "fromPrevious": "Everything in the Basic package",
+          "drone": "Drone footage (church, venue, landscape)",
+          "highlights": "\"Best moments\" film, 4–6 min, set to music",
+          "reel": "Vertical reel for social media"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "features": {
+          "fromPrevious": "Everything in the Standard package",
+          "fpv": "FPV flight through the venue and the first dance",
+          "staticCamera": "Static camera in the church (the full ceremony)",
+          "twoOperators": "Two camera operators all day"
+        }
+      }
+    },
+    "options": {
+      "heading": "Add-ons",
+      "intro": "Added to any package by arrangement — alongside the drone and camera work on the day.",
+      "items": {
+        "prewedding": {
+          "title": "Pre-wedding shoot",
+          "description": "A separate session before the wedding, for when the day itself leaves no time for calm shots of just the two of you. We pick the date around the weather forecast."
+        },
+        "staticCamera": {
+          "title": "Extra static camera",
+          "description": "One more angle recording without a break — the ceremony, the speeches or the first dance, with nothing missed."
+        },
+        "storage": {
+          "title": "Extended footage storage",
+          "description": "We keep the raw footage after delivery too, so you can ask for another cut or a single shot later on."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Delivery",
+      "intro": "You get the edited film digitally — no waiting for the post and no picking up a drive.",
+      "items": {
+        "digital": "A download link in full quality, plus versions ready for social media.",
+        "backup": "We recommend copying the film to an external drive right away — the download link doesn't stay up forever.",
+        "timeline": "We agree the delivery time and the deposit before the shoot and put them in writing."
+      }
+    },
+    "works": {
+      "heading": "Our work",
+      "items": {
+        "first": {
+          "title": "Jovana and Miloš — Zemun",
+          "meta": "Best moments film · 5:20",
+          "placeholder": "video: best moments film, wedding in Zemun"
+        },
+        "second": {
+          "title": "Ana and Nemanja — Avala",
+          "meta": "FPV flight and first dance · 1:40",
+          "placeholder": "video: FPV flight through the venue and the first dance"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Check if your date is free",
+      "subheading": "Saturdays in season fill up early — write to us even before everything else is settled.",
+      "button": "Get in touch"
+    }
   },
   "realEstate": {
-    "title": "Real estate videography"
+    "title": "Real estate videography",
+    "heading": "A film that shows the whole place — the space and the view.",
+    "lead": "We film apartments, houses, villas and business spaces for Booking, Airbnb, agencies and investors. One drone flight shows the location and the surroundings, while calm interior shots show the space exactly as it is.",
+    "placeholder": "shot: drone flight over a villa with a pool",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See examples",
+    "audience": {
+      "heading": "Who we film for",
+      "intro": "Video sells a property better than photos — buyers and guests see the space and everything around it before they ever arrive.",
+      "items": {
+        "sale": {
+          "title": "Selling apartments and houses",
+          "description": "A video that shows buyers the layout, the light and the neighbourhood of your apartment or house before the first viewing."
+        },
+        "rental": {
+          "title": "Renting on Booking and Airbnb",
+          "description": "Apartment videos for Booking and Airbnb — guests see the room, the terrace and the view, and book with more confidence."
+        },
+        "agencies": {
+          "title": "Agencies and investors",
+          "description": "Consistent material across several properties, ready for the agency website, listing portals and investor presentations."
+        },
+        "plots": {
+          "title": "Land plots",
+          "description": "From the air you can see the boundaries, the access road and the surroundings — everything that is hard to show from the ground."
+        }
+      }
+    },
+    "features": {
+      "heading": "What you get",
+      "intro": "The material is ready for your listing, website and social media straight away — no extra cropping or compression.",
+      "items": {
+        "droneFlight": {
+          "title": "Drone flight",
+          "description": "The property, the garden, the beach or the city centre — how close everything is, in a single shot. Aerial footage shows the location, the surroundings and the way in."
+        },
+        "interior": {
+          "title": "Interior walkthrough",
+          "description": "A smooth walk through the rooms on a gimbal, in the order a guest would see them. On request we add an FPV flight through the property, which gives the best sense of space."
+        },
+        "photos": {
+          "title": "Photos from the shoot",
+          "description": "10–20 edited photos for your listing, in the same tone as the video."
+        },
+        "social": {
+          "title": "Social media version",
+          "description": "A vertical 9:16 cut for Reels and Stories, alongside the horizontal one for your website. The spot runs 30–90 seconds, and the vertical cut is an option that works for TikTok too."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Packages",
+      "intro": "These are starting prices for properties in Belgrade and the surrounding area. We offer a discount for several properties at the same address.",
+      "oglas": {
+        "name": "Listing",
+        "features": {
+          "droneFlight": "Drone flight around the property",
+          "shortSpot": "30–45 s spot for your listing",
+          "aerialPhotos": "10 aerial photos",
+          "delivery": "Delivered in 4 days"
+        }
+      },
+      "apartman": {
+        "name": "Apartment",
+        "features": {
+          "droneAndInterior": "Drone and interior filming",
+          "spotAndVertical": "60–90 s spot + vertical cut",
+          "photos": "20 edited photos",
+          "subtitles": "Subtitles in Serbian and English"
+        }
+      },
+      "vila": {
+        "name": "Villa and business space",
+        "features": {
+          "fromPrevious": "Everything in the Apartment package",
+          "fpv": "FPV flight through the property",
+          "goldenHour": "Filming at golden hour and at night",
+          "twoDays": "Filming over two days if needed"
+        }
+      }
+    },
+    "works": {
+      "heading": "Examples",
+      "items": {
+        "first": {
+          "title": "A house rented out on Booking",
+          "meta": "FPV flight through the property",
+          "placeholder": "video: FPV flight through a rental house"
+        },
+        "second": {
+          "title": "Property in Sutomore",
+          "meta": "Listing spot",
+          "placeholder": "video: property in Sutomore, drone flight"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Send us the property address — we'll come back with a quote and a shot list.",
+      "subheading": "We usually schedule the shoot within a week.",
+      "button": "Request a quote"
+    }
   },
   "events": {
-    "title": "Events"
+    "title": "Events",
+    "heading": "Moments that don't happen twice — filmed the way they happened.",
+    "lead": "Filming celebrations and events: birthdays, christenings, coming-of-age parties, sports and corporate events. With a camera on the ground and a drone in the air, we capture the atmosphere, the emotions and the details nobody has time to notice on the day.",
+    "placeholder": "shot: celebration in a hall",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See examples",
+    "coverage": {
+      "heading": "What we cover",
+      "intro": "We make event videos in Belgrade and the surrounding area — from family celebrations to tournaments and conferences. For events further afield we arrange the details separately.",
+      "items": {
+        "private": {
+          "title": "Private celebrations",
+          "description": "Birthdays, christenings and coming-of-age parties — the toasts, the cake, the dancing and the guests, without staging or posing."
+        },
+        "sports": {
+          "title": "Sports events",
+          "description": "Tournaments and matches from several angles — we catch the action on the court with a camera, and the venue, the stands and the crowd from the air."
+        },
+        "corporate": {
+          "title": "Corporate gatherings",
+          "description": "Conferences, company celebrations and staff get-togethers — the speeches, the atmosphere and the people, ready for your website and social media."
+        },
+        "performances": {
+          "title": "Performances",
+          "description": "Concerts, plays and recitals — we film the programme without interrupting it or blocking the audience's view."
+        }
+      }
+    },
+    "how": {
+      "heading": "How we film",
+      "intro": "We follow the event quietly, from the side — guests relax and the footage stays natural.",
+      "items": {
+        "camera": {
+          "title": "Camera on a gimbal",
+          "description": "Smooth shots from the ground, close to the people: the emotions, the details and the moments that last a second."
+        },
+        "drone": {
+          "title": "Drone",
+          "description": "The location and the crowd from the air — the venue, the beach or the court in a single shot. Drone footage of birthdays and other celebrations is filmed in line with Civil Aviation Directorate rules."
+        },
+        "discreet": {
+          "title": "Discreet filming",
+          "description": "We don't interrupt the programme or ask guests to pose. The crew moves quietly, so the real atmosphere stays on film."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Delivery",
+      "intro": "After the event you get the edited film digitally, ready to share.",
+      "items": {
+        "highlight": "A short film of the best moments, set to music — ready to share with your guests and on social media.",
+        "longer": "A longer film by arrangement — the full programme, the speeches or the whole performance.",
+        "price": "Prices start from €{price}; the final price depends on the length, the location and what we're filming — get in touch for a quote."
+      }
+    },
+    "works": {
+      "heading": "Examples",
+      "items": {
+        "first": {
+          "title": "BeoSand — beach volleyball",
+          "meta": "Sports event · camera and drone",
+          "placeholder": "video: BeoSand beach volleyball"
+        },
+        "second": {
+          "title": "A yacht near Zadar",
+          "meta": "Filming at sea · travel",
+          "placeholder": "video: yacht near Zadar, drone flight"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Tell us the date and the place — we'll come back with a plan and a price.",
+      "subheading": "We reply the same day, usually within a couple of hours.",
+      "button": "Request a quote"
+    }
   },
   "promo": {
-    "title": "Promo video"
+    "title": "Promo video",
+    "heading": "A short video is the fastest way for people to get to know your business.",
+    "lead": "We make promo videos for businesses — restaurants, hotels, gyms and local companies in Belgrade and the surrounding area. One film that shows your space, your people and what you do, ready for your website, Instagram and ads.",
+    "placeholder": "shot: drone flight up to a restaurant entrance",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See examples",
+    "whatWeDo": {
+      "heading": "What we do",
+      "intro": "Video production for small businesses and larger companies in Belgrade: we film what customers need to see before they first walk through your door.",
+      "items": {
+        "space": {
+          "title": "Your space from the air and the ground",
+          "description": "The drone shows the location and the surroundings, the gimbal camera the interior and the details. Drone advertising shoots are flown in line with Civil Aviation Directorate rules."
+        },
+        "fpv": {
+          "title": "An FPV flight for impact",
+          "description": "One unbroken flight through the door and between the tables — a shot that stops the scroll in the very first seconds."
+        },
+        "work": {
+          "title": "Your work and your people",
+          "description": "A busy kitchen, a training session, a craftsman's hands at work. We show how you work and who's behind the business."
+        },
+        "formats": {
+          "title": "The right format for every channel",
+          "description": "A 16:9 landscape version for your website and YouTube and a 9:16 vertical one for Reels and Stories — from the same shoot."
+        }
+      }
+    },
+    "process": {
+      "heading": "How we work together",
+      "intro": "Four steps from the first conversation to the finished video. You know in advance what we'll film and what you'll get.",
+      "steps": {
+        "brief": {
+          "title": "Brief and preparation",
+          "description": "We hear what you want to show and who you're talking to, then write a short script and a shot plan."
+        },
+        "shoot": {
+          "title": "Filming on location",
+          "description": "We arrive at the agreed time and film with the drone and the camera, disrupting your work as little as possible."
+        },
+        "edit": {
+          "title": "Editing in your style",
+          "description": "We edit the video with your logo, colours and fonts, set to music that suits your brand."
+        },
+        "delivery": {
+          "title": "Delivery and revisions",
+          "description": "You get the video in every agreed format, and one round of revisions is included in the price."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Delivery and price",
+      "intro": "You get the finished video digitally, ready to publish.",
+      "items": {
+        "ready": "Ready to post on your website, on social media and in paid ads.",
+        "revisions": "One round of revisions is included in the price.",
+        "price": "Prices start from €{price}; the final price depends on how long we film, the location and the number of formats — get in touch for a quote."
+      }
+    },
+    "works": {
+      "heading": "Examples",
+      "items": {
+        "first": {
+          "title": "Showcasing a venue",
+          "meta": "Promo video · drone and camera",
+          "placeholder": "video: promo film of a venue"
+        },
+        "second": {
+          "title": "Behind the scenes at work",
+          "meta": "Promo video · gimbal camera",
+          "placeholder": "video: work in progress at a workshop"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Tell us what you do — we'll come back with an idea and a price.",
+      "subheading": "We reply the same day, usually within a couple of hours.",
+      "button": "Request a quote"
+    }
   },
   "fpv": {
-    "title": "FPV footage"
+    "title": "FPV footage",
+    "heading": "One shot that flies where others can't.",
+    "lead": "An FPV drone flies through doorways, down hallways and between trees — in one unbroken shot, with no cuts. We offer FPV filming in Belgrade and the surrounding area, on its own or as an add-on to any of our services.",
+    "placeholder": "shot: FPV flight through the front door of a house",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "See examples",
+    "about": {
+      "heading": "What is FPV",
+      "intro": "FPV stands for first-person view: the pilot sees exactly what the drone's camera sees, as if sitting inside it.",
+      "items": {
+        "firstPerson": {
+          "title": "Flying in first person",
+          "description": "The pilot wears goggles with a live feed from the drone and guides it precisely, inch by inch, through narrow gaps."
+        },
+        "avata": {
+          "title": "DJI Avata 2",
+          "description": "A small drone with guards around the propellers, built for flying indoors and through tight spaces. When needed, it also flies classic shots outdoors."
+        },
+        "oneTake": {
+          "title": "One flight, one take",
+          "description": "Instead of a string of shots, one dynamic cinematic flight that takes the viewer through the space as if they were flying themselves."
+        }
+      }
+    },
+    "uses": {
+      "heading": "Where we use it",
+      "intro": "FPV drone footage works best wherever a space needs to be experienced, not just seen.",
+      "items": {
+        "realEstate": {
+          "title": "Property",
+          "description": "A drone flight through the building, from the entrance to the terrace in a single shot. Guests or buyers see the layout as if they were walking through it."
+        },
+        "celebrations": {
+          "title": "Weddings and celebrations",
+          "description": "The opening shot of the film — a flight through the hall, the church or the garden in one go, before the programme begins."
+        },
+        "venues": {
+          "title": "Venues and businesses",
+          "description": "A restaurant, hotel or gym from the entrance to the last corner. A short flight that instantly shows what it's like to visit you."
+        },
+        "sports": {
+          "title": "Sport",
+          "description": "An angle nobody else has — the drone follows the action from the side of the court or track and captures the speed and the excitement."
+        }
+      }
+    },
+    "works": {
+      "heading": "Examples",
+      "items": {
+        "first": {
+          "title": "A house rented out on Booking",
+          "meta": "FPV flight through the property",
+          "placeholder": "video: FPV flight through a rental house"
+        },
+        "second": {
+          "title": "FPV flight through a venue",
+          "meta": "FPV footage · showcasing a space",
+          "placeholder": "video: FPV flight through a venue"
+        }
+      }
+    },
+    "safety": {
+      "heading": "Safe and by the rules",
+      "intro": "Before every flight we check where, when and how we're allowed to fly.",
+      "items": {
+        "dcv": {
+          "title": "In line with Civil Aviation Directorate rules",
+          "description": "We fly by the rules of the Civil Aviation Directorate and check the flight zones for every location."
+        },
+        "location": {
+          "title": "Location assessment",
+          "description": "Before filming we visit the space, or go through it with you using photos, and agree on the flight path, the obstacles and where people will be."
+        },
+        "weather": {
+          "title": "Weather conditions",
+          "description": "Outdoors, a flight depends on wind and rain, so we check the forecast before the shoot and don't fly when conditions aren't safe."
+        }
+      }
+    },
+    "price": {
+      "heading": "Price",
+      "intro": "Every FPV shoot comes edited, ready for your website, listings and social media.",
+      "items": {
+        "standalone": "FPV filming on its own: from €{price}.",
+        "addon": "As an add-on to a wedding, property, event or promo shoot: from €{price}.",
+        "factors": "The final price depends on the location, how complex the flight is and the number of flights — get in touch for a quote."
+      }
+    },
+    "cta": {
+      "heading": "Tell us what to fly through — we'll come back with a flight plan and a price.",
+      "subheading": "We reply the same day, usually within a couple of hours.",
+      "button": "Request a quote"
+    }
   }
 }

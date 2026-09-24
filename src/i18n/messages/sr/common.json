@@ -4,5 +4,8 @@
     "reveal": "Prikaži broj telefona",
     "loading": "Učitavanje…",
     "unavailable": "Broj trenutno nije dostupan — pišite nam na email."
+  },
+  "video": {
+    "play": "Pusti video: {title}"
   }
 }

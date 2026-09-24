@@ -181,6 +181,7 @@ Pravila:
 - **Cene se drže u jednom označenom bloku na vrhu `packages.ts`** (`const PRICES = { ... }`), sa komentarom da je to jedino mesto koje vlasnik menja. Nigde drugde u projektu ne sme da stoji iznos.
 - `priceFrom` je `number`; formatiranje ide kroz `Intl.NumberFormat` po locale-u (`sr-Latn-RS` → `1.150`, `en-GB` → `1,150`), valuta iz i18n poruke. Nikad konkatenacija stringova.
 - Ključ usluge koja nema pakete se izostavlja — komponenta paketa se tada ne renderuje. Dodavanje paketa za Eventi/Promo/FPV je dodavanje ključa, bez izmena komponenti.
+- **Svaka usluga ima polaznu cenu „od X €"** — nigde „cena po dogovoru" (odluka vlasnika). Usluga sa paketima prikazuje najnižu cenu paketa; usluga bez paketa ima svoj ključ u istom `PRICES` bloku (`events`, `promo`, `fpv`, a FPV kao dodatak `fpvAddon`). Početne vrednosti su namerno različite (100 / 150 / 200 / 250) da vlasnik lako nađe koji ključ menja. Build puca ako neka usluga nema cenu.
 
 Početne vrednosti (iz dizajn reference, vlasnik ih menja u `PRICES`):
 

@@ -1,4 +1,4 @@
-# Current Feature: 06 — Split hero (početna)
+# Current Feature: 13 — Usluga: FPV snimci
 
 ## Status
 
@@ -10,45 +10,73 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Split hero na početnoj (faza 1, fajl 3/4): levo poruka i CTA, desno uspravni video 9:16. Bez ijedne animacije pri učitavanju
-- Desktop: dve kolone `55fr 45fr`, gap 56px, padding `76px 48px 84px`, leva kolona vertikalno centrirana (h1 62px, podnaslov 20px `max-width:560px`, dva CTA dugmeta)
-- Tablet: iste dve kolone, video manji; mobilni: naslagano — h1, podnaslov, CTA dugmad (puna širina, jedno ispod drugog), pa video
-- Desni okvir: 9:16, radius 12px, bordura `1.5px accent-gold`, `max-width:400px` i `max-height:660px` na desktopu, poravnat desno; unutra play ikonica (krug 74px, `rgba(255,255,255,0.92)`, zlatna bordura) i monospace opis kadra
-- Tekstovi iz `home` namespace-a (sr + en); h1 „Vaši trenuci, snimljeni iz vazduha i iz srca.", CTA „Zatražite ponudu" → `ROUTES.contact`, „Pogledajte usluge" → `ROUTES.services`
-- **Traka sa brojkama** ispod CTA dugmadi (`margin-top:52px`, `padding-top:26px`, `border-top`, gap 34px): `40+` snimljenih venčanja · `120+` objekata iz vazduha · `4K` isporuka svakog kadra. Vrednosti kao konstante na jednom mestu uz `// TODO(vlasnik): ažurirati brojke`; labele kroz i18n. Na mobilnom se traka ne prikazuje (artboard `1d` je nema)
-- Video: za sada statičan placeholder sa play ikonicom bez funkcije; komponenta strukturirana tako da pravi `<video>` zamenjuje jedan blok, sa TODO komentarom iz feature fajla (izvoz 9:16, 8–12s, bez tona, H.264 MP4 + WebM, obavezan poster, NE YouTube embed)
+- Faza 2, fajl 6/6 (kraj faze). `/usluge/fpv-snimci` (`/en/services/fpv`) — stranica-diferencijator: malo ko nudi FPV prolete. Gradi se kroz deljeni šablon iz feature-a 08; **dizajn nema artboard za ovu uslugu**, pa izgled prati obrasce sa `1b` i `2a` (kao događaji i promo). Više teksta nego na ostalim stranicama — stranica služi i za SEO (odluka vlasnika)
+- **Raspored stranice** (predlog): uvodni blok → „Šta je FPV" → „Gde ga koristimo" (primene) → Primer → Bezbednost → Cena → zeleni CTA band → footer
+  - **Uvodni blok** (`ServiceIntro`): breadcrumb „Usluge / FPV snimci", h1 i lead oko toga da FPV dron leti gde klasičan dron i kamera ne mogu — kroz vrata, hodnike, između drveća, u jednom neprekinutom kadru; dva dugmeta: primarno „Zatražite ponudu" → `/kontakt?usluga=fpv`, sekundarno „Vidite primere" → skok na `#primeri`; placeholder kadar desno
+  - **„Šta je FPV"** (`ServiceFeatures`, `tone="warm"`, 3 kartice): kratko i laički — upravljanje iz „prvog lica" (naočare), DJI Avata 2, dinamičan filmski prolet u jednom dahu
+  - **„Gde ga koristimo"** (`ServiceFeatures`, 4 kartice): prolet kroz nekretninu (od ulaza do terase u jednom kadru), otvaranje proslave ili venčanja, predstavljanje lokala, sport iz ugla koji niko nema
+  - **Primer** (`ServiceWorks`, `id="primeri"`): FPV prolet kroz kuću — **isti snimak kao prvi primer na nekretninama**, isti YouTube ID (jedno mesto u `services.ts` za obe stranice) + `TODO(vlasnik)`
+  - **Bezbednost** (`ServiceFeatures`, 3 kartice): letenje u skladu sa regulativom DCV, procena lokacije pre leta, zavisnost od vremenskih uslova
+  - **Cena** (`ServiceDelivery`): samostalno „od 200 €" (`PRICES.fpv`) i kao dodatak uz drugu uslugu „od 250 €" (novi ključ `PRICES.fpvAddon`), oba kroz ICU `{price}` i formatirano po jeziku
+  - **CTA band** → `/kontakt?usluga=fpv`
+- Svi tekstovi kroz `services.fpv` namespace (sr + en); engleski je prirodan prevod, ne bukvalan. Bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije 200ms
+- **DoD Faze 2** (zbirna provera na kraju): /usluge + svih 5 stranica na oba jezika kroz deljeni šablon; svi podaci iz `services.ts`/`packages.ts`, cene izmenljive na jednom mestu; svi embed-ovi lite, svi TODO placeholderi obeleženi; build zelen
+- `context/bitne-stvari.md` se dopunjuje ako se donese nova odluka
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Referenca dizajna: `context/design-reference/Camera Motion Sajt.dc.html` — artboard `1a` (linija 570, hero od linije ~607) i `1d` (linija 814). Inline stilovi su izvor istine za izgled
-- Element u dizajnu koji spec ne opisuje → pitati pre implementacije
-- Odluke vlasnika pri učitavanju (dopune i odstupanja od speca/dizajna):
-  - Mobilni video okvir: `max-width` 320px i centriran (po specu), ne puna širina iz artboarda `1d`
-  - Podnaslov: jedan i18n ključ za sve širine — duža, desktop verzija (dve rečenice); kraća mobilna varijanta iz `1d` se ne pravi
-  - Sekundarno CTA dugme dobija novu varijantu u `button.tsx` (bela pozadina, zlatna bordura, hover `surface-warm`) umesto override klasa nad `outline` varijantom — biće ponovo upotrebljena tamo gde dizajn traži isti izgled
-  - Monospace opis kadra u placeholderu ide kroz `home` namespace (sr + en), ne hardkodovan; ključevi se brišu kad stigne pravi video
+- Dizajn nema artboard za FPV (NOTES 1). Stranica se sklapa iz postojećih sekcija šablona
+- Grana `12-13-promo-i-fpv` (feature 12 je već commit-ovan i push-ovan); feature 13 dobija svoj commit
+- Posle feature-a 13, na istoj grani i u posebnom commit-u: „Zatražite ponudu" u header-u i mobilnom meniju na stranici usluge vodi na kontakt sa `?usluga=` te usluge (odluka vlasnika) — nije deo ovog feature-a
+- Odluke vlasnika (ranije u sesiji):
+  - **Cene**: `fpv` 200 € već postoji; `fpvAddon` 250 € se dodaje sada, u istom `PRICES` bloku. Iznosi su namerno različiti da vlasnik lako nađe ključ (zato je dodatak za sada skuplji od samostalnog snimanja — vlasnik menja)
+  - **Raspored**: iz postojećeg šablona
+  - **Primer**: isti snimak kao na nekretninama; na FPV stranici više teksta o FPV-u (SEO)
+  - **Pri startu** (vlasnik pokrenuo start bez odgovora → idu preporuke): dva primera (kuća + placeholder „FPV prolet kroz lokal"), bez posebnog zlatnog isticanja, stavka sa cenom se ne izdvaja u zajednički deo
 - Pretpostavke za implementaciju (ako nešto ne odgovara, reci pre starta):
-  - Traka sa brojkama skrivena ispod `md` (768px), jer od tog breakpointa hero prelazi u dve kolone
-  - Play ikonica: `Play` iz `lucide-react` (već u projektu), umesto CSS trougla iz dizajna
-  - Senka okvira videa: postojeći token `shadow-raised` umesto uvođenja novog tokena za `0 20px 44px rgba(38,36,31,0.12)` iz dizajna
-  - Sekcija „Šta snimamo" i sve ispod hero-a na artboardu `1a` pripadaju featureu 07 — ne diraju se u ovoj sesiji
+  - Tekstove pišem nove (dizajn ih nema), u tonu prethodnih stranica usluga; vlasnik ih pregleda u browseru
+  - Pozadine: uvod `background` → Šta je FPV `surface-warm` → Gde ga koristimo `surface` → Primer `background` → Bezbednost `surface-warm` → Cena `background` → CTA
+  - FPV stranica nema posebno zlatno isticanje (badge „naša specijalnost" ostaje na karticama početne i /usluge); uvodni kadar već ima zlatnu borduru kao na ostalim stranicama usluga
+  - YouTube ID kuće se izdvaja u jednu konstantu u `services.ts` koju koriste i `realEstate` i `fpv`, da se upisuje na jednom mestu
+  - Stavka sa cenom se gradi u stranici kao na događajima i promo (bez novog zajedničkog dela — ponavlja se samo formatiranje cene)
+  - Rok isporuke i trajanje leta se ne navode jer ih vlasnik nije odredio
+  - Ikonice iz `lucide-react`, potvrđuju se u browseru
+  - Sidro `#primeri` se ne prevodi (princip 5)
+  - SEO fraze se utkivaju prirodno u tekst: FPV snimanje, FPV dron snimci, prolet dronom kroz objekat
+  - `generateMetadata` i JSON-LD `Service` ostaju za feature 19
+- Odstupanja uočena tokom implementacije:
+  - Nijedna komponenta šablona nije menjana — stranica koristi `ServiceIntro`, `ServiceFeatures` (3×), `ServiceWorks`, `ServiceDelivery` i `CtaBand`
+  - `PRICES.fpvAddon` izlazi kao `FPV_ADDON_PRICE`; nije usluga, pa ne ulazi u `SERVICE_PRICES`
+  - YouTube ID kuće je konstanta `FPV_HOUSE_VIDEO_ID` u `services.ts`; prvi video i na nekretninama i na FPV-u
+  - Sekcija „Cena" koristi `ServiceDelivery` sa tri stavke: samostalno, kao dodatak, i od čega zavisi konačna cena
+  - Tekstovi o bezbednosti ne obećavaju pomeranje termina zbog vremena i ne tvrde da je pilot registrovan kod DCV — samo „u skladu sa regulativom" (overview 2)
+  - Ikonice: `Glasses`, `Drone`, `Clapperboard` (Šta je FPV); `House`, `PartyPopper`, `Store`, `Trophy` (Gde ga koristimo); `ShieldCheck`, `MapPinned`, `CloudSun` (Bezbednost)
+- Review:
+  - „Prati akciju" (anglicizam u sportskom smislu) zamenjeno sa „prati igru ili trku" (overview 8.3)
+- DoD Faze 2: /usluge + 5 stranica na oba jezika prošle automatsku proveru na 5 širina (bez horizontalnog skrola, jedan h1, bez iframe-a pre klika, bez animacija, bez „cena po dogovoru"); sve cene iz `PRICES`; svi primeri i kadrovi imaju `TODO` oznake; build zelen
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Hero uravnotežen na 360px, 390px, 768px, 1024px, 1440px; odnos 9:16 očuvan na svim širinama
-2. Oba CTA vode na lokalizovane rute; tekstovi provereni na oba jezika
-3. Traka sa brojkama vidljiva od 768px naviše, skrivena ispod
-4. Placeholder jasno obeležen TODO komentarom sa uputstvom za izvoz videa
+1. Kompletno na oba jezika; responzivno na 360px, 390px, 768px, 1024px, 1440px — nema horizontalnog skrola
+2. CTA i primarno dugme vode na `/kontakt?usluga=fpv` (`/en/contact?usluga=fpv`)
+3. „Vidite primere" skače na sekciju Primeri, bez animacije skrola, a naslov ne završava ispod sticky header-a
+4. Cene „od 200 €" i „od 250 €" na stranici, „od 200 €" na kartici /usluge; iznos formatiran po jeziku
+5. `YouTubeLite` ne učitava `iframe` pre klika; FPV i nekretnine čitaju isti video ID
+6. Hover i fokus stanja rade i tastaturom; nema nijedne animacije pri učitavanju ili skrolu
+7. DoD Faze 2 prođen na /usluge i svih 5 stranica
+8. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 5, 10.2, 10.4)
-- @context/features/06-hero-done.md
-- @context/features/02-dizajn-sistem.md
+- @context/project-overview.md (poglavlja 2, 9, 14)
+- @context/features/13-usluga-fpv.md
+- @context/features/08-usluge-pregled-done.md
+- @context/features/10-usluga-nekretnine-done.md
+- @context/design-reference/NOTES.md (sekcije 1, 5, 6)
 
 ## History
 
@@ -89,3 +117,31 @@ Napravljen footer po dizajnu sa brendom, navigacijom, svim uslugama, kontaktom i
 ### Monday, 21.09.2026. | 14:23 — 06 Split hero (početna)
 
 Napravljen hero na početnoj stranici po dizajnu: levo naslov, podnaslov i dva dugmeta sa trakom od tri brojke ispod, desno uspravni okvir za video u odnosu 9:16 sa zlatnom bordurom i privremenim ispunom. Na mobilnom se sve slaže jedno ispod drugog, a traka sa brojkama se skriva, kako i dizajn predviđa. Vlasnik je pre implementacije odlučio o četiri stvari: mobilni okvir za video ostaje uži i centriran po specu umesto pune širine iz dizajna, podnaslov ima jedan tekst na svim širinama, sekundarno dugme dobija novu varijantu sa belom pozadinom i zlatnom bordurom umesto ponavljanja stilova na svakom mestu, a opis budućeg kadra u okviru ide kroz prevode. Brojke stoje na jednom mestu uz napomenu da ih vlasnik menja kako brend raste, a okvir za video nosi detaljno uputstvo za izvoz pravog snimka — ceo blok koji se tada briše je jasno označen. Uz hero je dodat i glavni landmark stranice, koji do sada nije postojao. Tokom rada ispravljeno je to što dizajn okviru zadaje i širinu i visinu koje se međusobno isključuju, pa je širina izvedena iz visine da bi odnos 9:16 ostao tačan, kao i to što Tailwind ne prima proizvoljne decimale u razmacima. Tokom review-a nađeno je i rešeno izlaženje dugmadi i trake sa brojkama izvan kolone na tablet širinama. Lint, provera tipova, testovi i build prolaze; klik na mobilni meni dodatno proveren automatski na tri scenarija jer je prijavljen kao sumnjiv, i radi i na dev i na produkcijskom buildu.
+
+### Monday, 21.09.2026. | 16:40 — 07 Početna stranica (ispod heroa)
+
+Završena početna stranica i time cela faza layout-a: ispod heroa su dodate četiri sekcije po dizajnu — pregled onoga što se snima sa pet kartica usluga, blok o tome kako ekipa radi sa tri istaknute prednosti, tanka traka sa napomenama o regulativi i opremi, i zeleni poziv na kontakt pre footera. Sekcija sa recenzijama je preskočena, kako je vlasnik ranije odlučio, i sekcije se spajaju kao da je nikad nije ni bilo. Kartica FPV snimaka je izdvojena zlatnom bordurom, mekšom zlatnom senkom i oznakom da je to specijalnost ekipe. Kartice ne ponavljaju spisak usluga nego ga čitaju sa jednog mesta i same vode na svoju stranicu, pa dodavanje usluge kasnije ne traži izmenu sekcije. Vlasnik je pre implementacije odlučio o šest stvari: kartice nose skraćene nazive iz dizajna, rečenice uz njih su novi tekstovi umesto onih iz menija, kraće mobilne varijante rečenica dobijaju svoj prevod, a tri prednosti, uvodni pasus i podnaslov poziva na kontakt vide se i na telefonu iako ih mobilni dizajn nema. Tokom rada uvedena je zajednička komponenta za privremene ispune slika sa tri varijante pruga, oznaka kao novi primitiv i nova varijanta dugmeta za svetlo dugme na zelenoj podlozi, jer se sve to ponavlja i na kasnijim stranicama. Poziv na kontakt je napravljen tako da mu tekstovi stižu spolja, pa se ista sekcija koristi i drugde. Raspored iz dizajna sa šest kolona pomeren je na široke ekrane jer su na tabletu kolone bile preuske da tekst stane, a isto važi i za blok o načinu rada. Opis željenog kadra u privremenoj ispuni je sakriven od čitača ekrana jer je to napomena za snimanje, a ne sadržaj stranice. Lint, provera tipova, testovi i build prolaze; početna je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, svi linkovi vode na tačne adrese, hover i fokus rade, a na stranici nema nijedne animacije pri učitavanju ni pri skrolu.
+
+### Tuesday, 22.09.2026. | 14:29 — 08 Stranica /usluge (pregled)
+
+Započeta faza usluga: napravljena pregledna stranica usluga i deljeni šablon po kom će se praviti svih pet pojedinačnih stranica. Dizajn nema ekran za pregled usluga, pa je izgled izveden iz zaglavlja ostalih stranica i obrasca kartica sa početne, uz odluku vlasnika: naslov i uvodni pasus na vrhu, pa pet velikih kartica u dve kolone, rečenica o montaži i zeleni poziv na kontakt. Svaka kartica nosi privremenu ispunu u odnosu 16:9, naziv, tri rečenice, polaznu cenu i oznaku „Detaljnije"; cela je link ka svojoj stranici, a FPV ide preko celog reda i ostaje zlatno istaknut. Cene su prvi put ušle u projekat: napravljen je spisak paketa sa jednim označenim blokom na vrhu u kom vlasnik menja iznose, i to je jedino mesto u projektu gde iznos sme da stoji. Kartica sama uzima najnižu cenu svoje usluge, a usluge koje još nemaju pakete pišu „cena po dogovoru" umesto izmišljene brojke. Iznos se ispisuje po jeziku, sa tačkom kao separatorom hiljada na srpskom i zarezom na engleskom, i to je pokriveno testovima. Rečenica o budućoj usluzi fotografije je napisana i prevedena, ali stoji zakomentarisana uz jasnu napomenu kada se pali. Uz stranicu je napravljen i ceo šablon stranice usluge — uvodni blok sa putanjom i kadrom, blok sa četiri prednosti, paketi i sekcija radova — koji čeka sadržaj iz narednih feature-a, kako je vlasnik tražio. Za video je napravljena komponenta koja do klika prikazuje samo sličicu, pa YouTube ne učitava ništa niti postavlja kolačiće dok posetilac sam ne pokrene snimak; provereno je da se plejer pojavljuje tek posle klika. Tekstovi paketa se šablonu prosleđuju spolja umesto da se traže po dogovorenom imenu ključa, jer projekat proverava postojanje svakog prevoda, a ti tekstovi stižu tek sa stranicama venčanja i nekretnina. Tokom review-a uklonjena su dva nepotrebna nasilna tipiziranja, natpis na dugmetu za video prebačen je u zajedničke prevode jer istu komponentu koristi i blog, a putanja na vrhu stranice usluge dobila je sopstveni naziv za čitače ekrana umesto da ponavlja naziv linka u sebi. U README je dodata tabela sa mestima koja vlasnik menja: cene, brojke u herou, video ID-jevi i tekstovi. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, svi linkovi vode na tačne lokalizovane adrese, cene se ispisuju po jeziku, a hover i fokus rade i tastaturom.
+
+### Tuesday, 22.09.2026. | 17:05 — 09 Usluga: Snimanje venčanja
+
+Napravljena stranica za snimanje venčanja, najvažnija prodajna stranica sajta, po ekranu iz dizajna i kroz šablon napravljen u prethodnoj sesiji. Redosled je isti kao u dizajnu: uvod sa naslovom, pasusom i kadrom, pa četiri bloka o tome kako se snima, paketi, dodatne opcije, isporuka, radovi i zeleni poziv na kontakt. Tekstovi su preuzeti iz dizajna doslovno, kako je vlasnik odlučio, a detalji koje dizajn nema ušli su u opise blokova — da kamera drži kvalitet i kad svetla u sali oslabe, da gimbal hvata i spontane momente, da se uz dron može dodati i prolet kroz salu, i da se ton uzima i sa miksete benda, uz napomenu da se bend obavesti unapred. Vlasnik je pre implementacije odlučio o šest stvari: tekstovi idu iz dizajna 1:1, dodatne opcije i isporuka su dve odvojene sekcije kojih dizajn nema, uvod ima dva dugmeta pri čemu drugo skače na pakete niže na stranici, imena parova u sekciji radova ostaju privremeno onakva kakva su u dizajnu, a napomena o cenama stoji i pored naslova paketa i ispod kartica. Tri paketa se ispisuju iz spiska cena napravljenog ranije, sa oznakom najpopularnijeg na srednjem, pa promena iznosa na jednom mestu menja i ovu stranicu; iznos se ispisuje po jeziku, sa tačkom kao separatorom hiljada na srpskom i zarezom na engleskom. Sekcija dodatnih opcija koristi isti obrazac kartica kao blokovi o načinu snimanja, jer bi zasebna komponenta bila kopija sa drugom pozadinom, a kartice prelaze u pun red tek na širokim ekranima pošto su na tabletu bile preuske da tekst stane. Uvodno dugme koje vodi na pakete napravljeno je kao obično sidro, bez animacije skrola, a sekcija paketa je dobila razmak odozgo da joj naslov ne završi ispod zalepljenog zaglavlja. Spisak usluga je prešao na oblik gde svaka usluga ima svoje mesto po imenu, pa stranica uzima svoj zapis bez pretrage kroz listu — isti obrazac koristiće i preostale četiri stranice usluga. Tekstovi stavki paketa stoje ispisani u stranici jer provera prevoda ne prihvata ključ sastavljen u hodu, pa je dodat i test koji puca ako se spisak stavki i prevodi raziđu; provereno je namernim kvarenjem jednog ključa. Rok isporuke i iznos avansa su ostavljeni kao opšta rečenica sa jasnom napomenom gde se upisuju kad ih vlasnik odredi, a isto važi i za imena parova i trajanja u sekciji radova. Tokom review-a ispravljeni su navodnici u srpskom tekstu da prate stil ostatka sajta i naziv Direktorata civilnog vazduhoplovstva na engleskom, koji je bio skraćen drugačije nego u footeru i na početnoj. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, nijedan video se ne učitava dok posetilac sam ne klikne, skok na pakete radi, a sve dugmad vode na kontakt sa unapred izabranom uslugom.
+
+### Wednesday, 23.09.2026. | 14:33 — 10 Usluga: Snimanje nekretnina
+
+Napravljena stranica za snimanje nekretnina po ekranu iz dizajna i kroz isti šablon kao venčanja: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa sekcija o tome za koga se snima, četiri bloka o tome šta klijent dobija, tri paketa, dva primera i zeleni poziv na kontakt sa unapred izabranom uslugom. Vlasnik je pre implementacije odlučio o sedam stvari: tekstovi idu iz dizajna doslovno uz dopune iz spec-a u opisima, sekcija „Za koga" je nova i stoji odmah posle uvoda jer je dizajn nema, broj fotografija u bloku je usklađen sa paketima umesto raspona iz dizajna koji im je protivrečio, primeri nose stvarne snimke ekipe umesto izmišljenih iz dizajna, napomena o cenama stoji samo pored naslova paketa, a pozadine sekcija prate dizajn. Uz to je ispravljeno odstupanje u šablonu koje je postojalo od ranije: u paketima je sada zeleno dugme samo na istaknutom paketu, a ostala dva imaju belo dugme sa zlatnom bordurom, kako dizajn predviđa za obe stranice usluga, pa se promena vidi i na venčanjima. Šablon je dobio mogućnost da paketima i primerima zada pozadinu po stranici, pa venčanja ostaju kakva su, a sekcija primera može da bude meta sidra, kao ranije sekcija paketa na venčanjima. Biblioteka ikonica je u međuvremenu dobila pravu ikonicu drona, pa je na zahtev vlasnika koriste obe stranice. Test koji čuva poklapanje stavki paketa i prevoda proširen je tako da nova usluga sa paketima traži samo novi red u tabeli. Tokom rada i review-a ispravljene su tri rečenice: uklonjeno je obećanje da se vertikalna verzija dodaje uz svaki paket, koje nije došlo od vlasnika, skraćen je blok koji je dvaput pominjao vertikalnu verziju, a engleski uvod pored paketa, koji je bio nepotpuna rečenica, prepisan je u dve cele. Naslovi i trajanja primera ostaju kao privremeni tekst sa jasnom napomenom za vlasnika. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika zajedno sa venčanjima — nema horizontalnog skrola, jedan je glavni naslov, nijedan video se ne učitava pre klika, skok na primere radi i ne završava ispod zaglavlja, cene se ispisuju po jeziku, a fokus tastaturom i hover na novim dugmadima rade.
+
+### Wednesday, 23.09.2026. | 16:06 — 11 Usluga: Događaji i proslave
+
+Napravljena stranica za snimanje događaja i proslava — rođendana, krštenja, punoletstava, sportskih i korporativnih događaja. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena isključivo iz postojećih delova šablona, bez ijedne nove komponente: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa sekcija o tome šta se pokriva, tri bloka o načinu snimanja, isporuka, dva primera i zeleni poziv na kontakt sa unapred izabranom uslugom. Vlasnik je pre implementacije odlučio o četiri stvari: cena se ne ispisuje kao iznos nego kao cena po dogovoru, isto kao na pregledu usluga, dok se ne odrede cena ili paketi; stranica ima pun raspored sa odvojenim sekcijama za ono što se pokriva i za način snimanja; uvod ima dva dugmeta kao na nekretninama, pri čemu drugo skače na primere; a tekst kartice ove usluge na pregledu usluga usklađen je sa stranicom, pa sada kaže da se duži snimak dobija po dogovoru, a ne uvek. Svi tekstovi su novi jer ih dizajn nema, napisani u tonu venčanja i nekretnina, sa ključnim frazama za pretragu utkanim u uvod, opis pokrivanja i blok o dronu. Kratak spot sa najboljim trenucima nosi domaći naziv umesto engleskog iz spec-a, bez navedenog trajanja jer ga vlasnik nije odredio, a podnaslov poziva na kontakt ponavlja već potvrđenu rečenicu umesto novog obećanja. Primeri su snimci ekipe sa odbojke na pesku i sa jahte kod Zadra, sa jasnom napomenom za vlasnika gde se upisuju pravi naslovi, trajanja i video ID-jevi. Tokom review-a jedan anglicizam zamenjen je domaćim izrazom, a dve rogobatne rečenice su prepisane. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, na stranici nema nijednog iznosa, nijedan video se ne učitava pre klika, skok na primere radi i ne završava ispod zaglavlja, a kartica na pregledu usluga ima novi tekst na oba jezika.
+
+### Thursday, 24.09.2026. | 10:46 — 12 Usluga: Promo video za firme
+
+Napravljena stranica za promo video namenjena firmama — restoranima, hotelima, teretanama i lokalnim biznisima. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena iz postojećih delova šablona: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa četiri bloka o tome šta se snima, koraci saradnje, isporuka sa cenom, dva primera i zeleni poziv na kontakt sa unapred izabranom uslugom. Za korake saradnje napravljena je nova zajednička sekcija po obrascu iz dizajna stranice o nama — naslov i pasus levo, četiri numerisana koraka desno — pa će je ta stranica kasnije samo preuzeti; vlasnik je izabrao ime, a pozadine su zamenjene da sekcija sa koracima stoji na toploj pozadini kao u dizajnu. Vlasnik je pre implementacije odlučio i da „cena po dogovoru" nestane sa celog sajta: svaka usluga sada ima polaznu cenu, a usluge bez paketa dobile su svaka svoj iznos na istom mestu gde stoje i cene paketa, namerno različit da bi se lako našlo šta se menja. Pregled usluga zato sada svuda ispisuje cenu, a stranica događaja umesto rečenice o dogovoru navodi polaznu cenu; iznos se nigde ne upisuje u tekst, nego se ubacuje sa tog jednog mesta i ispisuje po jeziku. Ako neka usluga ostane bez cene, build puca umesto da se na sajtu pojavi prazno mesto, a testovi proveravaju da svaka usluga ima cenu. Primeri su privremeni, bez izmišljenih klijenata i trajanja, sa napomenom gde se upisuju pravi snimci. Pravilo o cenama dopisano je u opis projekta i uputstvo za vlasnika, a napravljen je i kratak podsetnik sa odlukama iz ove sesije, uključujući savet da video na YouTube-u može biti sakriven sa kanala a ipak raditi na sajtu. Tokom review-a jedan anglicizam zamenjen je domaćim izrazom, a dvosmislena rečenica o tome ko su klijenti prepisana je jasnije. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, nijedan video se ne učitava pre klika, skok na primere radi i ne završava ispod zaglavlja, a cene na pregledu usluga i na stranicama događaja i promo videa ispisuju se tačno na oba jezika.
+
+### Thursday, 24.09.2026. | 11:47 — 13 Usluga: FPV snimci
+
+Napravljena stranica za FPV snimke, uslugu po kojoj se ekipa izdvaja, i time završena cela faza usluga. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena isključivo iz postojećih delova šablona, bez ijedne nove komponente: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa kratko i laičko objašnjenje šta je FPV, četiri primene, dva primera, blok o bezbednosti, cena i zeleni poziv na kontakt sa unapred izabranom uslugom. Stranica namerno ima više teksta od ostalih usluga jer služi i za pretragu, kako je vlasnik odlučio, pa su ključne fraze utkane u uvod, primene i opis proleta kroz nekretninu. Prvi primer je isti snimak kuće kao na stranici nekretnina, i njegov video ID se sada upisuje na jednom mestu koje čitaju obe stranice; drugi primer je privremen, bez izmišljenog klijenta. Cena navodi polazni iznos za samostalno snimanje i poseban iznos za FPV kao dodatak uz drugu uslugu, oba sa istog mesta gde stoje sve cene, ispisana po jeziku. Tekstovi o bezbednosti govore o poštovanju regulative, proceni lokacije i vremenskim uslovima, bez tvrdnje o registraciji i bez obećanja o pomeranju termina, jer to vlasnik nije potvrdio. Pošto vlasnik nije odgovorio na tri pitanja pre starta, primenjene su preporuke: dva primera umesto jednog, bez posebnog zlatnog isticanja stranice i bez izdvajanja stavke sa cenom u zajednički deo. Tokom review-a jedan anglicizam iz sportskog rečnika zamenjen je domaćim izrazom. Na kraju je prošla zbirna provera faze: pregled usluga i svih pet stranica na oba jezika i pet širina bez horizontalnog skrola, sa jednim glavnim naslovom, bez učitavanja videa pre klika, bez animacija i bez ijedne „cene po dogovoru", sa svim cenama sa jednog mesta i svim privremenim primerima i kadrovima jasno označenim. Lint, provera tipova, testovi i build prolaze.

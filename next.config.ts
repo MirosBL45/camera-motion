@@ -9,7 +9,16 @@ import { validateMessages } from "./src/i18n/validator";
 validateMessages(sr, en);
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // YouTube thumbnail za `YouTubeLite` facade — jedini remote izvor slika na sajtu
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
+    ],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

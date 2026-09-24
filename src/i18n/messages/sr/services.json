@@ -1,18 +1,508 @@
 {
   "title": "Usluge",
+  "overview": {
+    "heading": "Snimanje dronom i kamerom — od venčanja do poslovnog prostora.",
+    "lead": "Camera Motion je video produkcija iz Beograda. Snimamo venčanja, nekretnine, proslave i promo materijal za firme — dronom iz vazduha i kamerom sa zemlje. Radimo u Beogradu i okolini, a za snimanja u ostatku Srbije i regiona dogovaramo se posebno.",
+    "priceFrom": "od {price} €",
+    "detailsCta": "Detaljnije",
+    "editingNote": "Svaka usluga uključuje kompletnu montažu u Adobe Premiere Pro — rez, kolor i zvuk. Po dogovoru montiramo i materijal koji ste sami snimili.",
+    "photographyNote": "Uskoro uz svaku uslugu i fotografija — javite nam se ako vam treba već na sledećem snimanju.",
+    "items": {
+      "weddings": {
+        "excerpt": "Ceo dan, od priprema do prvog plesa, u filmskom ritmu. Kamerom hvatamo emociju, dronom crkvu, restoran i pejzaž. Zavete i govore snimamo bežičnim mikrofonima.",
+        "placeholder": "kadar: mladenci u zlatnom satu"
+      },
+      "realEstate": {
+        "excerpt": "Stanovi, kuće, vile i poslovni prostori za Booking, Airbnb i agencije. Jedan prolet dronom pokazuje lokaciju i okolinu, a mirni kadrovi iznutra prostor takav kakav jeste. Materijal je odmah spreman za oglas i mreže.",
+        "placeholder": "kadar: prolet dronom iznad vile sa bazenom"
+      },
+      "events": {
+        "excerpt": "Krštenja, rođendani, konferencije, nastupi i sportski događaji. Snimamo tok i atmosferu, bez upadanja u kadar i bez prekidanja programa. Dobijate kratak spot, a po dogovoru i duži snimak celog događaja.",
+        "placeholder": "kadar: proslava u sali"
+      },
+      "promo": {
+        "excerpt": "Za restorane, salone, gradilišta, proizvodnju i male biznise. Kratak spot koji pokazuje prostor, ljude i ono što radite. Pravimo i vertikalnu verziju za Reels i Stories.",
+        "placeholder": "kadar: promo snimanje u lokalu"
+      },
+      "fpv": {
+        "excerpt": "Jedan neprekinut prolet kroz prostor — kroz vrata, hodnike i između drveća. Kadar koji klasičan dron i kamera ne mogu da naprave. Radimo ga samostalno ili kao dodatak uz bilo koju drugu uslugu.",
+        "placeholder": "kadar: FPV prolet kroz kuću"
+      }
+    }
+  },
+  "featuredBadge": "naša specijalnost",
+  "packages": {
+    "featuredBadge": "najpopularniji",
+    "priceFrom": "od {price} €",
+    "cta": "Zatražite ponudu"
+  },
+  "cta": {
+    "heading": "Recite nam šta snimate — javljamo se sa predlogom i cenom.",
+    "subheading": "Odgovaramo istog dana, obično u par sati.",
+    "button": "Zatražite ponudu"
+  },
   "weddings": {
-    "title": "Snimanje venčanja"
+    "title": "Snimanje venčanja",
+    "heading": "Vaš dan zaslužuje snimak koji se gleda i za deset godina.",
+    "lead": "Dolazimo rano, ostajemo do prvog plesa i ceo dan smo tu — tiho. Kamerom snimamo emociju, dronom prostor i atmosferu, a montažom pravimo priču sa početkom i krajem.",
+    "placeholder": "fotografija: mladenci u zlatnom satu",
+    "ctaPrimary": "Proverite da li je vaš termin slobodan",
+    "ctaSecondary": "Pogledajte pakete",
+    "how": {
+      "heading": "Kako snimamo",
+      "items": {
+        "camera": {
+          "title": "Filmska kamera",
+          "description": "Svetli objektivi i mekana pozadina — lica u fokusu, gosti u atmosferi. Kamera drži kvalitet i kasno uveče, kad svetla u sali oslabe."
+        },
+        "gimbal": {
+          "title": "Gimbal",
+          "description": "Glatko kretanje kroz salu, bez trzaja i bez upadanja u kadar. Tako ostaju zabeleženi i spontani momenti, onakvi kakvi jesu."
+        },
+        "drone": {
+          "title": "Dron",
+          "description": "Crkva, restoran i pejzaž iz vazduha — legalno i u skladu sa DCV. Po želji dodajemo i FPV prolet kroz salu."
+        },
+        "sound": {
+          "title": "Čist zvuk",
+          "description": "Bežični mikrofoni na zavetima, govorima i zdravicama. Ton uzimamo i sa miksete benda, uz ambijentalne mikrofone, a sve miksujemo u postprodukciji — dovoljno je da bend obavestite unapred."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Paketi",
+      "intro": "Sve cene su početne i zavise od lokacije i trajanja dana. Ponudu pišemo posle kratkog razgovora.",
+      "note": "Ako vam treba nešto van paketa, javite se — pišemo posebnu ponudu. Kao snimatelji za svadbe radimo u Beogradu i okolini, a za venčanja dalje od grada dogovaramo se posebno.",
+      "osnovni": {
+        "name": "Osnovni",
+        "features": {
+          "camera": "Snimanje kamerom sa gimbalom",
+          "microphone": "Bežični mikrofon na zavetima",
+          "fullEdit": "Montiran ceo snimak dana",
+          "delivery": "Isporuka u 4K, do 3 nedelje"
+        }
+      },
+      "standard": {
+        "name": "Standard",
+        "features": {
+          "fromPrevious": "Sve iz Osnovnog paketa",
+          "drone": "Snimanje dronom (crkva, restoran, pejzaž)",
+          "highlights": "„Best moments“ spot 4–6 min uz muziku",
+          "reel": "Vertikalni reel za mreže"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "features": {
+          "fromPrevious": "Sve iz Standard paketa",
+          "fpv": "FPV prolet kroz salu i prvi ples",
+          "staticCamera": "Statična kamera u crkvi (ceo obred)",
+          "twoOperators": "Dva snimatelja ceo dan"
+        }
+      }
+    },
+    "options": {
+      "heading": "Dodatne opcije",
+      "intro": "Dodaju se uz bilo koji paket, po dogovoru — kao dopuna snimanju svadbe dronom i kamerom.",
+      "items": {
+        "prewedding": {
+          "title": "Prewedding snimanje",
+          "description": "Zaseban termin pre venčanja, kad na sam dan nema vremena za mirne kadrove udvoje. Datum biramo prema vremenskoj prognozi."
+        },
+        "staticCamera": {
+          "title": "Dodatna statična kamera",
+          "description": "Još jedan ugao koji snima bez prekida — obred, govore ili prvi ples, bez propuštenog trenutka."
+        },
+        "storage": {
+          "title": "Produženo čuvanje materijala",
+          "description": "Sirov materijal čuvamo i posle isporuke, pa naknadno možete da tražite dodatni rez ili pojedinačan kadar."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Isporuka",
+      "intro": "Montiran snimak dobijate digitalno — bez čekanja na poštu i bez dolaska po disk.",
+      "items": {
+        "digital": "Link za preuzimanje u punom kvalitetu, uz verzije spremne za društvene mreže.",
+        "backup": "Preporučujemo da snimak odmah prebacite na eksterni disk — link za preuzimanje ne stoji zauvek.",
+        "timeline": "Rok isporuke i avans dogovaramo pre snimanja i upisujemo u dogovor."
+      }
+    },
+    "works": {
+      "heading": "Naši radovi",
+      "items": {
+        "first": {
+          "title": "Jovana i Miloš — Zemun",
+          "meta": "Best moments spot · 5:20",
+          "placeholder": "snimak: best moments spot, venčanje u Zemunu"
+        },
+        "second": {
+          "title": "Ana i Nemanja — Avala",
+          "meta": "FPV prolet i prvi ples · 1:40",
+          "placeholder": "snimak: FPV prolet kroz salu i prvi ples"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Proverite da li je vaš termin slobodan",
+      "subheading": "Subote u sezoni se popune rano — pišite nam i pre nego što je sve dogovoreno.",
+      "button": "Pišite nam"
+    }
   },
   "realEstate": {
-    "title": "Snimanje nekretnina"
+    "title": "Snimanje nekretnina",
+    "heading": "Apartman koji se na snimku vidi ceo — i prostor i pogled.",
+    "lead": "Snimamo stanove, kuće, vile i poslovne prostore za Booking, Airbnb, agencije i investitore. Jedan prolet dronom pokazuje lokaciju i okolinu, a mirni kadrovi iznutra prostor takav kakav zaista jeste.",
+    "placeholder": "kadar: prolet dronom iznad vile sa bazenom",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Vidite primere",
+    "audience": {
+      "heading": "Za koga snimamo",
+      "intro": "Video prodaje nekretninu bolje od fotografija — kupac ili gost pre dolaska vidi i prostor i ono što ga okružuje.",
+      "items": {
+        "sale": {
+          "title": "Prodaja stanova i kuća",
+          "description": "Video za prodaju stana ili kuće koji kupcu pokaže raspored, svetlo i komšiluk još pre prvog razgledanja."
+        },
+        "rental": {
+          "title": "Izdavanje na Bookingu i Airbnb-u",
+          "description": "Snimanje apartmana za Booking i Airbnb — gost vidi sobu, terasu i pogled, pa se lakše odluči za rezervaciju."
+        },
+        "agencies": {
+          "title": "Agencije i investitori",
+          "description": "Ujednačen materijal za više objekata, spreman za sajt agencije, oglasne portale i prezentaciju investitorima."
+        },
+        "plots": {
+          "title": "Placevi",
+          "description": "Iz vazduha se vide granice, prilaz i okolina placa — sve ono što se sa zemlje teško pokazuje."
+        }
+      }
+    },
+    "features": {
+      "heading": "Šta dobijate",
+      "intro": "Materijal je odmah spreman za oglas, sajt i mreže — bez dodatnog kropovanja i kompresije.",
+      "items": {
+        "droneFlight": {
+          "title": "Prolet dronom",
+          "description": "Objekat, dvorište, plaža ili centar grada — udaljenost do svega u jednom kadru. Snimanje nekretnina dronom pokazuje lokaciju, okruženje i prilaz."
+        },
+        "interior": {
+          "title": "Obilazak iznutra",
+          "description": "Glatka šetnja kroz prostorije na gimbalu, u rasporedu u kom gost i ulazi. Po želji i FPV prolet kroz objekat, koji najbolje daje osećaj prostora."
+        },
+        "photos": {
+          "title": "Fotografije iz snimanja",
+          "description": "10–20 obrađenih fotografija za oglas, u istom tonu kao video."
+        },
+        "social": {
+          "title": "Verzija za mreže",
+          "description": "Vertikalni rez 9:16 za Reels i Stories, uz horizontalni za sajt. Spot traje 30–90 sekundi, a vertikalni rez je opcija koja radi i za TikTok."
+        }
+      }
+    },
+    "packages": {
+      "heading": "Paketi",
+      "intro": "Cene su početne, za objekte u Beogradu i okolini. Za više objekata na istoj adresi pravimo popust.",
+      "oglas": {
+        "name": "Oglas",
+        "features": {
+          "droneFlight": "Prolet dronom oko objekta",
+          "shortSpot": "Spot 30–45 s za oglas",
+          "aerialPhotos": "10 fotografija iz vazduha",
+          "delivery": "Isporuka u 4 dana"
+        }
+      },
+      "apartman": {
+        "name": "Apartman",
+        "features": {
+          "droneAndInterior": "Dron i snimanje unutrašnjosti",
+          "spotAndVertical": "Spot 60–90 s + vertikalni rez",
+          "photos": "20 obrađenih fotografija",
+          "subtitles": "Titlovi na srpskom i engleskom"
+        }
+      },
+      "vila": {
+        "name": "Vila i poslovni prostor",
+        "features": {
+          "fromPrevious": "Sve iz paketa Apartman",
+          "fpv": "FPV prolet kroz objekat",
+          "goldenHour": "Snimanje u zlatnom satu i noću",
+          "twoDays": "Snimanje u dva dana ako treba"
+        }
+      }
+    },
+    "works": {
+      "heading": "Primeri",
+      "items": {
+        "first": {
+          "title": "Kuća za izdavanje preko Bookinga",
+          "meta": "FPV prolet kroz objekat",
+          "placeholder": "snimak: FPV prolet kroz kuću za izdavanje"
+        },
+        "second": {
+          "title": "Nekretnina u Sutomoru",
+          "meta": "Spot za oglas",
+          "placeholder": "snimak: nekretnina u Sutomoru, prolet dronom"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Pošaljite adresu objekta — vraćamo ponudu i predlog kadrova.",
+      "subheading": "Snimanje obično zakazujemo u roku od nedelju dana.",
+      "button": "Zatražite ponudu"
+    }
   },
   "events": {
-    "title": "Događaji i proslave"
+    "title": "Događaji i proslave",
+    "heading": "Trenuci koji se ne ponavljaju — snimljeni onako kako su se desili.",
+    "lead": "Snimanje proslava i događaja: rođendani, krštenja, punoletstva, sportski i korporativni događaji. Kamerom sa zemlje i dronom iz vazduha hvatamo atmosferu, emocije i detalje koje u toku dana niko ne stigne da zapazi.",
+    "placeholder": "kadar: proslava u sali",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Vidite primere",
+    "coverage": {
+      "heading": "Šta pokrivamo",
+      "intro": "Pravimo video sa događaja u Beogradu i okolini — od porodičnih proslava do turnira i konferencija. Za događaje van grada dogovaramo se posebno.",
+      "items": {
+        "private": {
+          "title": "Privatne proslave",
+          "description": "Rođendani, krštenja i punoletstva — zdravice, torta, ples i gosti, bez nameštanja i poziranja."
+        },
+        "sports": {
+          "title": "Sportski događaji",
+          "description": "Turniri i utakmice iz više uglova — akciju na terenu hvatamo kamerom, a teren, tribine i masu iz vazduha."
+        },
+        "corporate": {
+          "title": "Korporativna okupljanja",
+          "description": "Konferencije, proslave firmi i druženja zaposlenih — govori, atmosfera i ljudi, spremno za sajt i mreže."
+        },
+        "performances": {
+          "title": "Nastupi",
+          "description": "Koncerti, predstave i priredbe — snimamo program bez prekidanja i bez zaklanjanja pogleda publici."
+        }
+      }
+    },
+    "how": {
+      "heading": "Kako snimamo",
+      "intro": "Događaj pratimo tiho, sa strane — gosti se opuste, a snimak ostaje prirodan.",
+      "items": {
+        "camera": {
+          "title": "Kamera na gimbalu",
+          "description": "Glatki kadrovi sa zemlje, blizu ljudi: emocije, detalji i trenuci koji traju sekund."
+        },
+        "drone": {
+          "title": "Dron",
+          "description": "Lokacija i masa iz vazduha — sala, plaža ili teren u jednom kadru. Snimanje rođendana dronom i ostalih proslava radimo u skladu sa regulativom DCV."
+        },
+        "discreet": {
+          "title": "Diskretno snimanje",
+          "description": "Ne prekidamo program i ne tražimo od gostiju da poziraju. Ekipa se kreće tiho, pa na snimku ostaje prava atmosfera."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Isporuka",
+      "intro": "Posle događaja montiran snimak dobijate digitalno, spreman za deljenje.",
+      "items": {
+        "highlight": "Kratak spot sa najboljim trenucima, uz muziku — spreman za deljenje sa gostima i na mrežama.",
+        "longer": "Po dogovoru i duži snimak — ceo program, govori ili nastup u celini.",
+        "price": "Cena počinje od {price} €, a konačnu određujemo prema trajanju, lokaciji i onome što se snima — javite nam se za ponudu."
+      }
+    },
+    "works": {
+      "heading": "Primeri",
+      "items": {
+        "first": {
+          "title": "BeoSand — odbojka na pesku",
+          "meta": "Sportski događaj · kamera i dron",
+          "placeholder": "snimak: BeoSand, odbojka na pesku"
+        },
+        "second": {
+          "title": "Jahta kod Zadra",
+          "meta": "Snimanje na moru · putovanje",
+          "placeholder": "snimak: jahta kod Zadra, prolet dronom"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Recite nam datum i mesto — javljamo se sa predlogom i cenom.",
+      "subheading": "Odgovaramo istog dana, obično u par sati.",
+      "button": "Zatražite ponudu"
+    }
   },
   "promo": {
-    "title": "Promo video"
+    "title": "Promo video",
+    "heading": "Kratak video je najbrži način da ljudi upoznaju vaš biznis.",
+    "lead": "Pravimo promo video za firme — restorane, hotele, teretane i lokalne biznise iz Beograda i okoline. Jedan snimak koji pokazuje prostor, ljude i ono što radite, spreman za sajt, Instagram i oglase.",
+    "placeholder": "kadar: prolet dronom do ulaza u restoran",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Vidite primere",
+    "whatWeDo": {
+      "heading": "Šta radimo",
+      "intro": "Video produkcija za mala preduzeća i veće firme u Beogradu: snimamo ono što vaši kupci i gosti treba da vide pre nego što prvi put dođu kod vas.",
+      "items": {
+        "space": {
+          "title": "Prostor iz vazduha i sa zemlje",
+          "description": "Dron pokazuje lokaciju i okolinu, a kamera na gimbalu enterijer i detalje. Snimanje reklame dronom radimo u skladu sa regulativom DCV."
+        },
+        "fpv": {
+          "title": "FPV prolet kao efekat",
+          "description": "Jedan neprekinut prolet kroz vrata i između stolova — kadar koji već u prvim sekundama spota zadržava pažnju."
+        },
+        "work": {
+          "title": "Proces rada i ljudi",
+          "description": "Kuhinja u punom zamahu, trening, ruke majstora na poslu. Pokazujemo kako radite i ko stoji iza firme."
+        },
+        "formats": {
+          "title": "Format za svaki kanal",
+          "description": "Horizontalna verzija 16:9 za sajt i YouTube i vertikalna 9:16 za Reels i Stories — iz istog snimanja."
+        }
+      }
+    },
+    "process": {
+      "heading": "Kako sarađujemo",
+      "intro": "Četiri koraka od prvog razgovora do gotovog videa. Unapred znate šta ćemo snimiti i šta dobijate.",
+      "steps": {
+        "brief": {
+          "title": "Dogovor i priprema",
+          "description": "Čujemo šta želite da pokažete i kome se obraćate, pa pravimo kratak scenario i plan kadrova."
+        },
+        "shoot": {
+          "title": "Snimanje na lokaciji",
+          "description": "Dolazimo u dogovoreni termin i snimamo dronom i kamerom, tako da što manje ometamo vaš rad."
+        },
+        "edit": {
+          "title": "Montaža u vašem stilu",
+          "description": "Montiramo spot sa vašim logom, bojama i fontom, uz muziku koja odgovara vašem brendu."
+        },
+        "delivery": {
+          "title": "Isporuka i izmene",
+          "description": "Dobijate video u svim dogovorenim formatima, a jedna runda izmena je uključena u cenu."
+        }
+      }
+    },
+    "delivery": {
+      "heading": "Isporuka i cena",
+      "intro": "Gotov video dobijate digitalno, spreman za objavu.",
+      "items": {
+        "ready": "Spreman za objavu na sajtu, na mrežama i u plaćenim oglasima.",
+        "revisions": "Jedna runda izmena uključena je u cenu.",
+        "price": "Cena počinje od {price} €, a konačnu određujemo prema trajanju snimanja, lokaciji i broju formata — javite nam se za ponudu."
+      }
+    },
+    "works": {
+      "heading": "Primeri",
+      "items": {
+        "first": {
+          "title": "Predstavljanje lokala",
+          "meta": "Promo video · dron i kamera",
+          "placeholder": "snimak: promo video lokala"
+        },
+        "second": {
+          "title": "Proces rada",
+          "meta": "Promo video · kamera na gimbalu",
+          "placeholder": "snimak: proces rada u radionici"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Recite nam čime se bavite — javljamo se sa idejom i cenom.",
+      "subheading": "Odgovaramo istog dana, obično u par sati.",
+      "button": "Zatražite ponudu"
+    }
   },
   "fpv": {
-    "title": "FPV snimci"
+    "title": "FPV snimci",
+    "heading": "Jedan kadar koji leti tamo gde drugi ne mogu.",
+    "lead": "FPV dron prolazi kroz vrata, hodnike i između drveća — u jednom neprekinutom kadru, bez reza. FPV snimanje radimo u Beogradu i okolini, samostalno ili kao dodatak uz bilo koju našu uslugu.",
+    "placeholder": "kadar: FPV prolet kroz ulazna vrata kuće",
+    "ctaPrimary": "Zatražite ponudu",
+    "ctaSecondary": "Vidite primere",
+    "about": {
+      "heading": "Šta je FPV",
+      "intro": "FPV znači let iz „prvog lica“: pilot vidi tačno ono što vidi kamera drona, kao da sedi u njemu.",
+      "items": {
+        "firstPerson": {
+          "title": "Let iz prvog lica",
+          "description": "Pilot nosi naočare sa slikom uživo iz drona i vodi ga precizno, centimetar po centimetar, kroz uske prolaze."
+        },
+        "avata": {
+          "title": "DJI Avata 2",
+          "description": "Mali dron sa zaštitom oko propelera, napravljen za letenje kroz zatvoren prostor i uske prolaze. Po potrebi leti i klasično, na otvorenom."
+        },
+        "oneTake": {
+          "title": "Prolet u jednom dahu",
+          "description": "Umesto niza kadrova, jedan dinamičan filmski prolet koji gledaoca vodi kroz prostor, kao da i sam leti."
+        }
+      }
+    },
+    "uses": {
+      "heading": "Gde ga koristimo",
+      "intro": "FPV dron snimci najbolje rade tamo gde prostor treba doživeti, a ne samo videti.",
+      "items": {
+        "realEstate": {
+          "title": "Nekretnine",
+          "description": "Prolet dronom kroz objekat, od ulaza do terase u jednom kadru. Gost ili kupac vidi raspored prostora kao da ga obilazi."
+        },
+        "celebrations": {
+          "title": "Venčanja i proslave",
+          "description": "Uvodni kadar filma — prolet kroz salu, crkvu ili vrt u jednom dahu, pre nego što počne program."
+        },
+        "venues": {
+          "title": "Lokali i firme",
+          "description": "Restoran, hotel ili teretana od ulaza do poslednjeg kutka. Kratak prolet koji odmah pokazuje kako izgleda kod vas."
+        },
+        "sports": {
+          "title": "Sport",
+          "description": "Ugao koji niko drugi nema — dron prati igru ili trku sa strane terena ili staze i prenosi brzinu i uzbuđenje."
+        }
+      }
+    },
+    "works": {
+      "heading": "Primeri",
+      "items": {
+        "first": {
+          "title": "Kuća za izdavanje preko Bookinga",
+          "meta": "FPV prolet kroz objekat",
+          "placeholder": "snimak: FPV prolet kroz kuću za izdavanje"
+        },
+        "second": {
+          "title": "FPV prolet kroz lokal",
+          "meta": "FPV snimak · predstavljanje prostora",
+          "placeholder": "snimak: FPV prolet kroz lokal"
+        }
+      }
+    },
+    "safety": {
+      "heading": "Bezbedno i po pravilima",
+      "intro": "Pre svakog leta proveravamo gde, kada i kako smemo da letimo.",
+      "items": {
+        "dcv": {
+          "title": "U skladu sa regulativom DCV",
+          "description": "Letimo po pravilima Direktorata civilnog vazduhoplovstva i za svaku lokaciju proveravamo zone leta."
+        },
+        "location": {
+          "title": "Procena lokacije",
+          "description": "Pre snimanja obilazimo prostor ili ga sa vama prolazimo preko fotografija i dogovaramo putanju leta, prepreke i gde će biti ljudi."
+        },
+        "weather": {
+          "title": "Vremenski uslovi",
+          "description": "Napolju let zavisi od vetra i kiše, pa prognozu proveravamo pre termina i ne letimo kada uslovi nisu bezbedni."
+        }
+      }
+    },
+    "price": {
+      "heading": "Cena",
+      "intro": "Svaki FPV snimak dobijate montiran, spreman za sajt, oglas i mreže.",
+      "items": {
+        "standalone": "Samostalno FPV snimanje: od {price} €.",
+        "addon": "Kao dodatak uz venčanje, nekretninu, događaj ili promo video: od {price} €.",
+        "factors": "Konačnu cenu određujemo prema lokaciji, složenosti leta i broju proleta — javite nam se za ponudu."
+      }
+    },
+    "cta": {
+      "heading": "Recite nam kroz šta da proletimo — javljamo se sa planom leta i cenom.",
+      "subheading": "Odgovaramo istog dana, obično u par sati.",
+      "button": "Zatražite ponudu"
+    }
   }
 }
