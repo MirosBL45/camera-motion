@@ -61,7 +61,7 @@
         },
         "drone": {
           "title": "Dron",
-          "description": "Crkva, restoran i pejzaž iz vazduha — legalno i u skladu sa DCV. Po želji dodajemo i FPV prolet kroz salu."
+          "description": "Crkva, restoran i pejzaž iz vazduha — sa pilotom registrovanim pri DCV i u skladu sa regulativom. Po želji dodajemo i FPV prolet kroz salu."
         },
         "sound": {
           "title": "Čist zvuk",
@@ -291,7 +291,7 @@
         },
         "drone": {
           "title": "Dron",
-          "description": "Lokacija i masa iz vazduha — sala, plaža ili teren u jednom kadru. Snimanje rođendana dronom i ostalih proslava radimo u skladu sa regulativom DCV."
+          "description": "Lokacija i masa iz vazduha — sala, plaža ili teren u jednom kadru. Snimanje rođendana dronom i ostalih proslava radi registrovan pilot pri DCV, u skladu sa regulativom."
         },
         "discreet": {
           "title": "Diskretno snimanje",
@@ -342,7 +342,7 @@
       "items": {
         "space": {
           "title": "Prostor iz vazduha i sa zemlje",
-          "description": "Dron pokazuje lokaciju i okolinu, a kamera na gimbalu enterijer i detalje. Snimanje reklame dronom radimo u skladu sa regulativom DCV."
+          "description": "Dron pokazuje lokaciju i okolinu, a kamera na gimbalu enterijer i detalje. Snimanje reklame dronom radi registrovan pilot pri DCV, u skladu sa regulativom."
         },
         "fpv": {
           "title": "FPV prolet kao efekat",
@@ -477,8 +477,8 @@
       "intro": "Pre svakog leta proveravamo gde, kada i kako smemo da letimo.",
       "items": {
         "dcv": {
-          "title": "U skladu sa regulativom DCV",
-          "description": "Letimo po pravilima Direktorata civilnog vazduhoplovstva i za svaku lokaciju proveravamo zone leta."
+          "title": "Registrovan pilot pri DCV",
+          "description": "Pilot je registrovan pri Direktoratu civilnog vazduhoplovstva, letimo u skladu sa regulativom i za svaku lokaciju proveravamo zone leta."
         },
         "location": {
           "title": "Procena lokacije",

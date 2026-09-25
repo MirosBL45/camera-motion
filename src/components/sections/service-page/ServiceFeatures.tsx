@@ -8,31 +8,42 @@ export type ServiceFeatureType = {
   description: string;
 };
 
+type ServiceFeaturesToneType = "surface" | "warm" | "background";
+
+// Pozadina sekcije i kartica — kartica je uvek u kontrastu sa sekcijom.
+const TONE_CLASSES: Record<ServiceFeaturesToneType, { section: string; card: string }> = {
+  surface: { section: "border-y border-border bg-surface", card: "bg-background" },
+  warm: { section: "bg-surface-warm", card: "bg-surface" },
+  background: { section: "bg-background", card: "bg-surface" },
+};
+
 interface IServiceFeaturesProps {
   heading: string;
   intro?: string;
   items: ServiceFeatureType[];
-  /** `warm` je za drugu pojavu obrasca na istoj stranici (npr. „Dodatne opcije"). */
-  tone?: "surface" | "warm";
+  /**
+   * `warm` je za drugu pojavu obrasca na istoj stranici (npr. „Dodatne opcije");
+   * `background` za sekciju posle bele (npr. „Oprema" na O nama).
+   */
+  tone?: ServiceFeaturesToneType;
+  /** Dodatni sadržaj ispod kartica (npr. napomena o regulativi na O nama). */
+  children?: React.ReactNode;
 }
 
 // Blokovi „kako snimamo" / „šta dobijate" (dizajn referenca, artboardi `1b` i `2a`):
-// grid stavki, svaka sa zlatnom ikonicom u krugu. Sadržaj stiže iz feature-a 09-13.
+// grid stavki, svaka sa zlatnom ikonicom u krugu. Sadržaj stiže iz feature-a 09-13;
+// isti obrazac nosi i „Opremu" na O nama.
 export function ServiceFeatures({
   heading,
   intro,
   items,
   tone = "surface",
+  children,
 }: IServiceFeaturesProps) {
-  const isWarm = tone === "warm";
+  const toneClasses = TONE_CLASSES[tone];
 
   return (
-    <section
-      className={cn(
-        "px-5 py-10 md:px-12 md:py-20",
-        isWarm ? "bg-surface-warm" : "border-y border-border bg-surface"
-      )}
-    >
+    <section className={cn("px-5 py-10 md:px-12 md:py-20", toneClasses.section)}>
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-10">
         <h2>{heading}</h2>
         {intro ? <p className="text-muted-foreground md:max-w-107.5 md:text-lg">{intro}</p> : null}
@@ -48,10 +59,7 @@ export function ServiceFeatures({
         {items.map(({ id, Icon, title, description }) => (
           <li
             key={id}
-            className={cn(
-              "rounded-xl border border-border p-5.5 shadow-card",
-              isWarm ? "bg-surface" : "bg-background"
-            )}
+            className={cn("rounded-xl border border-border p-5.5 shadow-card", toneClasses.card)}
           >
             <span
               aria-hidden="true"
@@ -65,6 +73,8 @@ export function ServiceFeatures({
           </li>
         ))}
       </ul>
+
+      {children}
     </section>
   );
 }

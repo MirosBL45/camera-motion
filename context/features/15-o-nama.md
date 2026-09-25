@@ -32,7 +32,7 @@ Faza 3, fajl 1/4. `/o-nama` — lična priča koja gradi poverenje.
 ## Reference
 
 - @context/project-overview.md (poglavlja 2, 5)
-- @context/features/08-usluge-pregled.md
+- @context/features/08-usluge-pregled-done.md
 
 ## Referenca dizajna
 

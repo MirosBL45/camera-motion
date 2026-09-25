@@ -1,3 +1,87 @@
 {
-  "title": "O nama"
+  "intro": {
+    "heading": "Mala ekipa iz Beograda koja voli da gleda odozgo.",
+    "story": "Camera Motion je nastao iz jednostavne želje: da snimci sa najvažnijih dana ne izgledaju kao obaveza, nego kao film. Volimo i snimanje i tehnologiju — letimo DJI dronovima, snimamo kamerom na gimbalu i sve montiramo u Premiere Pro-u. Ipak, za nas je svaki snimak pre svega priča, a kadrovi su samo način da je ispričamo.",
+    "crew": "Sve radimo sami, od prvog razgovora do isporuke — bez podizvođača i bez ljudi koje prvi put vidite na dan snimanja. Najčešće snimamo u Beogradu i okolini, a rado krećemo i dalje po Srbiji i regionu — samo se dogovorimo.",
+    "placeholder": "fotografija: ekipa sa opremom"
+  },
+  "teamHeading": "Ekipa",
+  "teamPortraitPlaceholder": "portret",
+  "teamPortraitAlt": "{name}, {role}",
+  "team": {
+    "miroslav": {
+      "role": "Pilot drona i FPV",
+      "bio": "Registrovan pilot pri DCV. Planira letove, dozvole i najlepše prolete — i onda ih izvede iz prve."
+    },
+    "bojan": {
+      "role": "Kamera i montaža",
+      "bio": "Snima na gimbalu i montira u Premiere Pro. Zaslužan je za to što snimak ima priču, a ne samo kadrove."
+    },
+    "nikola": {
+      "role": "Pilot drona i FPV",
+      "bio": "Registrovan pilot pri DCV. Planira letove, dozvole i najlepše prolete — i onda ih izvede iz prve."
+    },
+    "marko": {
+      "role": "Kamera i montaža",
+      "bio": "Snima na gimbalu i montira u Premiere Pro. Zaslužan je za to što snimak ima priču, a ne samo kadrove."
+    },
+    "petar": {
+      "role": "Pilot drona i FPV",
+      "bio": "Registrovan pilot pri DCV. Planira letove, dozvole i najlepše prolete — i onda ih izvede iz prve."
+    },
+    "nina": {
+      "role": "Kamera i montaža",
+      "bio": "Snima na gimbalu i montira u Premiere Pro. Zaslužna je za to što snimak ima priču, a ne samo kadrove."
+    }
+  },
+  "process": {
+    "heading": "Kako radimo",
+    "intro": "Bez iznenađenja u ceni i bez „videćemo na dan snimanja“. Sve što ćemo snimiti i kada ćete to dobiti stoji u ponudi.",
+    "steps": {
+      "talk": {
+        "title": "Razgovor",
+        "description": "Kratko čujemo šta vam je važno i predlažemo paket koji to pokriva."
+      },
+      "prep": {
+        "title": "Priprema",
+        "description": "Obilazimo lokaciju, proveravamo zone leta i pravimo plan kadrova."
+      },
+      "shoot": {
+        "title": "Snimanje",
+        "description": "Tiho i nenametljivo — vi ste sa gostima, mi radimo svoj deo."
+      },
+      "delivery": {
+        "title": "Montaža i isporuka",
+        "description": "Prvi rez pokazujemo vama, pa isporučujemo u 4K uz arhivu materijala."
+      }
+    }
+  },
+  "equipment": {
+    "heading": "Oprema",
+    "items": {
+      "drones": {
+        "title": "Dronovi",
+        "description": "DJI Mini 3 Pro za mirne kadrove iz vazduha i DJI Avata 2 za FPV prolete kroz prostor."
+      },
+      "cameras": {
+        "title": "Kamere",
+        "description": "Sony a7 IV i Sony a7 III — full-frame kamere koje drže čistu sliku i kad svetla oslabe."
+      },
+      "gimbals": {
+        "title": "Gimbali",
+        "description": "DJI RS 4 i DJI RS 3 za mirne, tečne kadrove iz ruke, i kad se krećemo zajedno sa vama."
+      },
+      "microphones": {
+        "title": "Mikrofoni",
+        "description": "Bežični i žičani mikrofoni, pa se jasno čuju i zaveti, i zdravice, i izjave za kameru."
+      }
+    },
+    "editing": "Montiramo u Adobe Premiere Pro i Vegas Pro, uz licenciranu muziku — snimak možete bez brige da objavite i na mrežama.",
+    "regulation": "Dronom upravlja pilot registrovan pri Direktoratu civilnog vazduhoplovstva, a letimo isključivo u skladu sa regulativom DCV."
+  },
+  "cta": {
+    "heading": "Upoznajmo se pre snimanja.",
+    "subheading": "Kafa ili video poziv — kako vam je lakše.",
+    "button": "Pišite nam"
+  }
 }
