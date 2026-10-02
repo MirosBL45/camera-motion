@@ -1,3 +1,64 @@
 {
-  "title": "Kontakt"
+  "intro": {
+    "heading": "Pišite nam",
+    "lead": "Recite nam datum, lokaciju i šta vam je najvažnije da se snimi. Odgovaramo u roku od 24 sata sa predlogom paketa i tačnom cenom."
+  },
+  "form": {
+    "label": "Upit za snimanje",
+    "fields": {
+      "name": { "label": "Ime i prezime", "placeholder": "Vaše ime" },
+      "email": { "label": "Email", "placeholder": "vas@email.com" },
+      "phone": { "label": "Telefon", "placeholder": "+381 6x ..." },
+      "service": { "label": "Tip usluge", "placeholder": "Izaberite uslugu" },
+      "date": {
+        "label": "Datum snimanja",
+        "placeholder": "Izaberite datum",
+        "clear": "Obriši datum"
+      },
+      "location": { "label": "Lokacija", "placeholder": "Grad, restoran, crkva…" },
+      "message": {
+        "label": "Poruka",
+        "placeholder": "Ukratko o danu i šta vam je najvažnije da snimimo…"
+      },
+      "honeypot": { "label": "Ne popunjavajte ovo polje" }
+    },
+    "services": {
+      "vencanje": "Venčanje",
+      "nekretnine": "Nekretnine",
+      "event": "Događaj ili proslava",
+      "promo": "Promo video",
+      "fpv": "FPV",
+      "drugo": "Drugo"
+    },
+    "consent": "Slažem se da Camera Motion obradi moje podatke radi odgovora na upit. <link>Politika privatnosti</link>",
+    "submit": "Pošaljite upit",
+    "submitting": "Šaljemo…",
+    "errors": {
+      "required": "Ovo polje je obavezno.",
+      "email": "Unesite ispravnu email adresu.",
+      "phone": "Unesite ispravan broj telefona.",
+      "date": "Unesite ispravan datum.",
+      "tooLong": "Tekst je predugačak.",
+      "consent": "Potrebna nam je vaša saglasnost da bismo odgovorili na upit."
+    },
+    "status": {
+      "success": "Hvala! Odgovaramo u roku od 24 sata.",
+      "error": "Upit nije poslat. Pokušajte ponovo ili nam pišite na email.",
+      "rateLimited": "Previše pokušaja — pokušajte za nekoliko minuta."
+    }
+  },
+  "info": {
+    "heading": "Radije telefonom?",
+    "hours": "Zovite radnim danima 09–20h, subotom do 15h. Ako ne odgovorimo — snimamo, pa vraćamo poziv.",
+    "email": "Email",
+    "area": {
+      "heading": "Područje rada",
+      "text": "Beograd i okolina · šire uz dogovor"
+    },
+    "social": {
+      "heading": "Pratite nas",
+      "instagram": "Instagram",
+      "youtube": "YouTube"
+    }
+  }
 }

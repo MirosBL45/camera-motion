@@ -1,3 +1,60 @@
 {
-  "title": "Contact"
+  "intro": {
+    "heading": "Get in touch",
+    "lead": "Tell us the date, the location and what matters most to you on camera. We reply within 24 hours with a suggested package and an exact price."
+  },
+  "form": {
+    "label": "Filming enquiry",
+    "fields": {
+      "name": { "label": "Full name", "placeholder": "Your name" },
+      "email": { "label": "Email", "placeholder": "you@email.com" },
+      "phone": { "label": "Phone", "placeholder": "+381 6x ..." },
+      "service": { "label": "Type of service", "placeholder": "Choose a service" },
+      "date": { "label": "Filming date", "placeholder": "Choose a date", "clear": "Clear date" },
+      "location": { "label": "Location", "placeholder": "City, venue, church…" },
+      "message": {
+        "label": "Message",
+        "placeholder": "A few words about the day and what matters most to you…"
+      },
+      "honeypot": { "label": "Leave this field empty" }
+    },
+    "services": {
+      "vencanje": "Wedding",
+      "nekretnine": "Real estate",
+      "event": "Event",
+      "promo": "Promo video",
+      "fpv": "FPV",
+      "drugo": "Other"
+    },
+    "consent": "I agree that Camera Motion may process my data to reply to this enquiry. <link>Privacy policy</link>",
+    "submit": "Send enquiry",
+    "submitting": "Sending…",
+    "errors": {
+      "required": "This field is required.",
+      "email": "Please enter a valid email address.",
+      "phone": "Please enter a valid phone number.",
+      "date": "Please enter a valid date.",
+      "tooLong": "This text is too long.",
+      "consent": "We need your consent to reply to your enquiry."
+    },
+    "status": {
+      "success": "Thank you! We'll reply within 24 hours.",
+      "error": "Your enquiry wasn't sent. Please try again or email us.",
+      "rateLimited": "Too many attempts — please try again in a few minutes."
+    }
+  },
+  "info": {
+    "heading": "Prefer to call?",
+    "hours": "Call us on weekdays 9am–8pm, Saturdays until 3pm. If we don't pick up, we're probably filming — we'll call you back.",
+    "email": "Email",
+    "area": {
+      "heading": "Where we work",
+      "text": "Belgrade and the surrounding area · further by arrangement"
+    },
+    "social": {
+      "heading": "Follow us",
+      "instagram": "Instagram",
+      "youtube": "YouTube"
+    }
+  }
 }
