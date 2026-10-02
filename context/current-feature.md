@@ -1,4 +1,4 @@
-# Current Feature: 13 — Usluga: FPV snimci
+# Current Feature: 15 — Stranica O nama
 
 ## Status
 
@@ -10,73 +10,80 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 2, fajl 6/6 (kraj faze). `/usluge/fpv-snimci` (`/en/services/fpv`) — stranica-diferencijator: malo ko nudi FPV prolete. Gradi se kroz deljeni šablon iz feature-a 08; **dizajn nema artboard za ovu uslugu**, pa izgled prati obrasce sa `1b` i `2a` (kao događaji i promo). Više teksta nego na ostalim stranicama — stranica služi i za SEO (odluka vlasnika)
-- **Raspored stranice** (predlog): uvodni blok → „Šta je FPV" → „Gde ga koristimo" (primene) → Primer → Bezbednost → Cena → zeleni CTA band → footer
-  - **Uvodni blok** (`ServiceIntro`): breadcrumb „Usluge / FPV snimci", h1 i lead oko toga da FPV dron leti gde klasičan dron i kamera ne mogu — kroz vrata, hodnike, između drveća, u jednom neprekinutom kadru; dva dugmeta: primarno „Zatražite ponudu" → `/kontakt?usluga=fpv`, sekundarno „Vidite primere" → skok na `#primeri`; placeholder kadar desno
-  - **„Šta je FPV"** (`ServiceFeatures`, `tone="warm"`, 3 kartice): kratko i laički — upravljanje iz „prvog lica" (naočare), DJI Avata 2, dinamičan filmski prolet u jednom dahu
-  - **„Gde ga koristimo"** (`ServiceFeatures`, 4 kartice): prolet kroz nekretninu (od ulaza do terase u jednom kadru), otvaranje proslave ili venčanja, predstavljanje lokala, sport iz ugla koji niko nema
-  - **Primer** (`ServiceWorks`, `id="primeri"`): FPV prolet kroz kuću — **isti snimak kao prvi primer na nekretninama**, isti YouTube ID (jedno mesto u `services.ts` za obe stranice) + `TODO(vlasnik)`
-  - **Bezbednost** (`ServiceFeatures`, 3 kartice): letenje u skladu sa regulativom DCV, procena lokacije pre leta, zavisnost od vremenskih uslova
-  - **Cena** (`ServiceDelivery`): samostalno „od 200 €" (`PRICES.fpv`) i kao dodatak uz drugu uslugu „od 250 €" (novi ključ `PRICES.fpvAddon`), oba kroz ICU `{price}` i formatirano po jeziku
-  - **CTA band** → `/kontakt?usluga=fpv`
-- Svi tekstovi kroz `services.fpv` namespace (sr + en); engleski je prirodan prevod, ne bukvalan. Bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije 200ms
-- **DoD Faze 2** (zbirna provera na kraju): /usluge + svih 5 stranica na oba jezika kroz deljeni šablon; svi podaci iz `services.ts`/`packages.ts`, cene izmenljive na jednom mestu; svi embed-ovi lite, svi TODO placeholderi obeleženi; build zelen
-- `context/bitne-stvari.md` se dopunjuje ako se donese nova odluka
+- Faza 3, fajl 1/4. `/o-nama` (`/en/about`) — lična priča koja gradi poverenje. Izgled po artboardu `2b` (1:1), sadržaj po spec-u
+- **Raspored po dizajnu**: Priča → Ekipa → Kako radimo → Oprema + DCV → CTA
+- **Priča** (uvodni blok, 2 kolone na desktopu): h1 + tekst levo, placeholder fotografije desno (zlatna bordura, dijagonalne pruge) sa `TODO`. Teme: ljubav prema snimanju i tehnologiji, letenje DJI dronovima, montaža u Premiere Pro, pristup „svaki snimak je priča". Ton profesionalan — NE pominjati hobi ili sporedni posao (overview 2). Polazni tekst, vlasnik dorađuje
+- Uvodni tekst usklađen sa brojem članova — „Nas je dvojica na snimanju" iz dizajna više ne važi
+- **Ekipa**: kartice se renderuju mapiranjem niza `team` iz novog `src/data/team.ts` (overview 9.2); početni sastav samo imena: Miroslav, Bojan, Nikola, Marko, Petar, Nina
+  - Ime člana ne sme da stoji nigde drugde u projektu; vlasnik dodaje/uklanja članove samo u tom nizu
+  - Uloga i opis kroz `about.team.{id}.role` / `about.team.{id}.bio`; polazni tekstovi generički iz dizajna, naizmenično „Pilot drona i FPV" i „Kamera i montaža", svaki sa `// TODO(vlasnik): tekst po osobi`
+  - Kartica spremna za sliku (`image?: StaticImageData`); dok slike nema — portret placeholder iz dizajna (pruge, 150×180px). U `team.ts` zakomentarisan primer statičkog importa za jednog člana (šablon iz spec-a)
+- **„Kako radimo"**: 4 numerisana koraka tačno po dizajnu — `01` Razgovor · `02` Priprema · `03` Snimanje · `04` Montaža i isporuka; uvodni tekst iz dizajna; koraci kao podaci na jednom mestu (niz sa i18n ključevima). Koristi postojeću deljenu komponentu `ProcessSteps`
+- **Oprema** (odluka vlasnika): 4 kartice sa ikonicom i kratkim opisom — **Dronovi** (DJI Mini 3 Pro, DJI Avata 2 za FPV), **Kamere** (Sony a7 IV, Sony a7 III), **Gimbali** (DJI RS 4, DJI RS 3), **Mikrofoni** (bežični i žičani); ispod kartica dodatni tekst o montaži: Adobe Premiere Pro, Vegas Pro, licencirana muzika
+- **Rečenica o DCV** (traka ispod opreme): „registrovan pilot pri DCV" + „u skladu sa regulativom", lepo sklopljeno; osiguranje se ne pominje
+- **CTA** → `/kontakt` (postojeći `CtaBand`)
+- Svi tekstovi kroz `about` namespace (sr + en); bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Dizajn nema artboard za FPV (NOTES 1). Stranica se sklapa iz postojećih sekcija šablona
-- Grana `12-13-promo-i-fpv` (feature 12 je već commit-ovan i push-ovan); feature 13 dobija svoj commit
-- Posle feature-a 13, na istoj grani i u posebnom commit-u: „Zatražite ponudu" u header-u i mobilnom meniju na stranici usluge vodi na kontakt sa `?usluga=` te usluge (odluka vlasnika) — nije deo ovog feature-a
-- Odluke vlasnika (ranije u sesiji):
-  - **Cene**: `fpv` 200 € već postoji; `fpvAddon` 250 € se dodaje sada, u istom `PRICES` bloku. Iznosi su namerno različiti da vlasnik lako nađe ključ (zato je dodatak za sada skuplji od samostalnog snimanja — vlasnik menja)
-  - **Raspored**: iz postojećeg šablona
-  - **Primer**: isti snimak kao na nekretninama; na FPV stranici više teksta o FPV-u (SEO)
-  - **Pri startu** (vlasnik pokrenuo start bez odgovora → idu preporuke): dva primera (kuća + placeholder „FPV prolet kroz lokal"), bez posebnog zlatnog isticanja, stavka sa cenom se ne izdvaja u zajednički deo
-- Pretpostavke za implementaciju (ako nešto ne odgovara, reci pre starta):
-  - Tekstove pišem nove (dizajn ih nema), u tonu prethodnih stranica usluga; vlasnik ih pregleda u browseru
-  - Pozadine: uvod `background` → Šta je FPV `surface-warm` → Gde ga koristimo `surface` → Primer `background` → Bezbednost `surface-warm` → Cena `background` → CTA
-  - FPV stranica nema posebno zlatno isticanje (badge „naša specijalnost" ostaje na karticama početne i /usluge); uvodni kadar već ima zlatnu borduru kao na ostalim stranicama usluga
-  - YouTube ID kuće se izdvaja u jednu konstantu u `services.ts` koju koriste i `realEstate` i `fpv`, da se upisuje na jednom mestu
-  - Stavka sa cenom se gradi u stranici kao na događajima i promo (bez novog zajedničkog dela — ponavlja se samo formatiranje cene)
-  - Rok isporuke i trajanje leta se ne navode jer ih vlasnik nije odredio
-  - Ikonice iz `lucide-react`, potvrđuju se u browseru
-  - Sidro `#primeri` se ne prevodi (princip 5)
-  - SEO fraze se utkivaju prirodno u tekst: FPV snimanje, FPV dron snimci, prolet dronom kroz objekat
-  - `generateMetadata` i JSON-LD `Service` ostaju za feature 19
+- Dizajn ima artboard `2b` (linija 218 u `.dc.html`). Raspored u dizajnu: uvod (h1 + 2 pasusa, kadar 520px) `background` → Ekipa `surface` (bordure gore/dole, kartice 2 kolone, kartica = portret levo + ime/uloga/bio desno) → Kako radimo `surface-warm` → Oprema `background` (3 kartice + traka sa DCV rečenicom) → zeleni CTA band „Upoznajmo se pre snimanja." / „Kafa ili video poziv — kako vam je lakše." / „Pišite nam" → footer
+- Postojeće što se koristi: `ProcessSteps` (napravljen u feature-u 12 baš za ovu stranicu; pozadina `surface-warm` odgovara dizajnu), `CtaBand`, placeholder komponenta za slike iz feature-a 07. Stranica trenutno ima samo stub sa h1, `about.json` ima samo `title`
+- `src/data/team.ts` i `src/assets/team/` još ne postoje
+- Odluke vlasnika (25.09.2026.):
+  1. **Redosled** po dizajnu: Priča → Ekipa → Kako radimo → Oprema + DCV → CTA
+  2. **Oprema**: 4 kartice (dronovi, kamere, gimbali, mikrofoni), svaka sa ikonicom i laganim opisom; Premiere Pro, Vegas i licencirana muzika u dodatnom tekstu ispod kartica. Oprema se predstavlja kao oprema ekipe, bez ikakvih ograda
+  3. **DCV**: na sajtu stoji „registrovan pilot pri DCV" uz „u skladu sa regulativom" (registracija je u toku i biće gotova pre objave sajta); osiguranje se ne pominje ni u pozitivnom ni u negativnom smislu. Isti fazon se primenjuje **svuda u projektu** gde se DCV pominje:
+     - footer `regulationNote` (sr + en)
+     - traka poverenja na početnoj `home` → `regulation` (sr + en)
+     - FPV stranica, kartica `dcv` u bezbednosti (sr + en)
+     - rečenice u opisima venčanja, događaja i promo videa (`services.json`, sr + en)
+     - overview poglavlje 2 (napomena „vlasnik planira prijavu" → nova odluka) i `context/bitne-stvari.md`
+  4. **Uvodni tekst**: baza je Beograd i okolina, šire uz dogovor — prijateljski i toplo; bez „širom Srbije" i bez „Nas je dvojica"
+  5. **Kartice ekipe**: 3 kolone na širokim ekranima → 2 kolone → 1 kolona na mobilnom. Na svim širinama slika je gore, tekst ispod (odstupanje od dizajna, gde je portret levo od teksta)
+  6. **Koraci i CTA**: tekstovi iz dizajna 1:1 (obilazak lokacije, prvi rez, 4K uz arhivu, „kafa ili video poziv"); vlasnik menja kasnije ako zatreba
+- `generateMetadata` i JSON-LD ostaju za feature 19
+- Odluke vlasnika tokom implementacije:
+  - Uloga člana nije zlatna kao u dizajnu (3.2:1, ispod AA) — tekst u boji glavnog teksta, Outfit 500, sa zlatnom crticom ispred
+  - Gimbali se pišu zvaničnim nazivima: DJI RS 4 i DJI RS 3
 - Odstupanja uočena tokom implementacije:
-  - Nijedna komponenta šablona nije menjana — stranica koristi `ServiceIntro`, `ServiceFeatures` (3×), `ServiceWorks`, `ServiceDelivery` i `CtaBand`
-  - `PRICES.fpvAddon` izlazi kao `FPV_ADDON_PRICE`; nije usluga, pa ne ulazi u `SERVICE_PRICES`
-  - YouTube ID kuće je konstanta `FPV_HOUSE_VIDEO_ID` u `services.ts`; prvi video i na nekretninama i na FPV-u
-  - Sekcija „Cena" koristi `ServiceDelivery` sa tri stavke: samostalno, kao dodatak, i od čega zavisi konačna cena
-  - Tekstovi o bezbednosti ne obećavaju pomeranje termina zbog vremena i ne tvrde da je pilot registrovan kod DCV — samo „u skladu sa regulativom" (overview 2)
-  - Ikonice: `Glasses`, `Drone`, `Clapperboard` (Šta je FPV); `House`, `PartyPopper`, `Store`, `Trophy` (Gde ga koristimo); `ShieldCheck`, `MapPinned`, `CloudSun` (Bezbednost)
+  - `ServiceFeatures` dobio `tone="background"` (sekcija `background`, kartice `surface`) i `children` za sadržaj ispod kartica — „Oprema" koristi isti obrazac sa ikonicom u krugu; stranice usluga se ne menjaju
+  - Nove komponente: `AboutIntro`, `TeamSection`, `TeamMemberCard` u `src/components/sections/about/`
+  - `TEAM` (SCREAMING_SNAKE po coding standardima) u `src/data/team.ts`; `id` je tipiziran iz `about.team`, pa član bez prevoda ne prolazi build
+  - `id` člana je ime malim slovima (kao u primeru iz spec-a `miroslavImg`), ime za prikaz stoji samo u `TEAM`
+  - Uvodni tekst ne navodi broj članova („Sve radimo sami"), pa ostaje tačan kad se niz promeni
+  - Bio za Ninu u ženskom rodu („Zaslužna je"); ostali generički tekstovi iz dizajna
+  - Ikonice opreme: `Drone`, `Camera`, `Rotate3d`, `Mic`
+  - Montaža: „Adobe Premiere Pro i Vegas Pro, uz licenciranu muziku" kao pasus ispod kartica, pa DCV traka iz dizajna
+  - DCV usklađen na još 5 mesta (sr + en): footer, traka poverenja na početnoj, FPV kartica bezbednosti, rečenice na venčanjima, događajima i promo; overview 2 i `bitne-stvari.md` dopunjeni
+  - Ključ `about.title` uklonjen (h1 je sada `about.intro.heading`)
 - Review:
-  - „Prati akciju" (anglicizam u sportskom smislu) zamenjeno sa „prati igru ili trku" (overview 8.3)
-- DoD Faze 2: /usluge + 5 stranica na oba jezika prošle automatsku proveru na 5 širina (bez horizontalnog skrola, jedan h1, bez iframe-a pre klika, bez animacija, bez „cena po dogovoru"); sve cene iz `PRICES`; svi primeri i kadrovi imaju `TODO` oznake; build zelen
+  - Uvod u dve kolone bio pretesan na 768px (naslov u pet redova, kadar 520px) — dve kolone pomerene na `lg`, kao u `ProcessSteps`
+  - Goals ispravljeni na RS 4 / RS 3 i Vegas Pro; overview 9.2 usklađen sa imenom niza `TEAM`
+  - Imena članova ne postoje nigde van `team.ts` (grep)
+  - Traka poverenja na početnoj: na telefonu (360–390px) tačka-separator visi na početku drugog reda kad se stavke prelome. Ovo nije posledica dužeg DCV teksta — javlja se i sa kraćim tekstom i na engleskom; pun DCV tekst ostaje po odluci vlasnika, a popravka rasporeda trake je otvorena (predlog: feature 21)
+- Provera: /o-nama i /en/about na 5 širina — bez horizontalnog skrola, jedan h1, 6 kartica u 1/2/3 kolone, 4 koraka, CTA na `/kontakt` / `/en/contact`, 0 animacija, fokus prsten na CTA; lint, tsc, test i build prolaze
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
 1. Kompletno na oba jezika; responzivno na 360px, 390px, 768px, 1024px, 1440px — nema horizontalnog skrola
-2. CTA i primarno dugme vode na `/kontakt?usluga=fpv` (`/en/contact?usluga=fpv`)
-3. „Vidite primere" skače na sekciju Primeri, bez animacije skrola, a naslov ne završava ispod sticky header-a
-4. Cene „od 200 €" i „od 250 €" na stranici, „od 200 €" na kartici /usluge; iznos formatiran po jeziku
-5. `YouTubeLite` ne učitava `iframe` pre klika; FPV i nekretnine čitaju isti video ID
-6. Hover i fokus stanja rade i tastaturom; nema nijedne animacije pri učitavanju ili skrolu
-7. DoD Faze 2 prođen na /usluge i svih 5 stranica
-8. `npm run lint`, `npm run test` i `npm run build` prolaze
+2. Kartice ekipe se renderuju iz niza `team` (dodavanje/brisanje člana u nizu menja stranicu); portret placeholder sa `TODO`
+3. Ime člana ekipe ne postoji nigde van `team.ts`
+4. „Kako radimo" ima 4 koraka iz jednog niza podataka
+5. CTA vodi na `/kontakt` (`/en/contact`)
+6. Jedan h1; hover i fokus rade tastaturom; nema animacija pri učitavanju ili skrolu
+7. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 2, 9, 14)
-- @context/features/13-usluga-fpv.md
+- @context/project-overview.md (poglavlja 2, 3, 5, 9.2)
+- @context/features/15-o-nama.md
 - @context/features/08-usluge-pregled-done.md
-- @context/features/10-usluga-nekretnine-done.md
-- @context/design-reference/NOTES.md (sekcije 1, 5, 6)
+- @context/features/12-usluga-promo-done.md (`ProcessSteps`)
+- @context/design-reference/NOTES.md (sekcije 1, 9, 9a) + artboard `2b`
 
 ## History
 
@@ -145,3 +152,7 @@ Napravljena stranica za promo video namenjena firmama — restoranima, hotelima,
 ### Thursday, 24.09.2026. | 11:47 — 13 Usluga: FPV snimci
 
 Napravljena stranica za FPV snimke, uslugu po kojoj se ekipa izdvaja, i time završena cela faza usluga. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena isključivo iz postojećih delova šablona, bez ijedne nove komponente: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa kratko i laičko objašnjenje šta je FPV, četiri primene, dva primera, blok o bezbednosti, cena i zeleni poziv na kontakt sa unapred izabranom uslugom. Stranica namerno ima više teksta od ostalih usluga jer služi i za pretragu, kako je vlasnik odlučio, pa su ključne fraze utkane u uvod, primene i opis proleta kroz nekretninu. Prvi primer je isti snimak kuće kao na stranici nekretnina, i njegov video ID se sada upisuje na jednom mestu koje čitaju obe stranice; drugi primer je privremen, bez izmišljenog klijenta. Cena navodi polazni iznos za samostalno snimanje i poseban iznos za FPV kao dodatak uz drugu uslugu, oba sa istog mesta gde stoje sve cene, ispisana po jeziku. Tekstovi o bezbednosti govore o poštovanju regulative, proceni lokacije i vremenskim uslovima, bez tvrdnje o registraciji i bez obećanja o pomeranju termina, jer to vlasnik nije potvrdio. Pošto vlasnik nije odgovorio na tri pitanja pre starta, primenjene su preporuke: dva primera umesto jednog, bez posebnog zlatnog isticanja stranice i bez izdvajanja stavke sa cenom u zajednički deo. Tokom review-a jedan anglicizam iz sportskog rečnika zamenjen je domaćim izrazom. Na kraju je prošla zbirna provera faze: pregled usluga i svih pet stranica na oba jezika i pet širina bez horizontalnog skrola, sa jednim glavnim naslovom, bez učitavanja videa pre klika, bez animacija i bez ijedne „cene po dogovoru", sa svim cenama sa jednog mesta i svim privremenim primerima i kadrovima jasno označenim. Lint, provera tipova, testovi i build prolaze.
+
+### Friday, 25.09.2026. | 15:06 — 15 Stranica O nama
+
+Napravljena stranica o nama po ekranu iz dizajna, redom kao u dizajnu: uvod sa pričom i kadrom ekipe, pa ekipa, koraci saradnje, oprema sa napomenom o regulativi i zeleni poziv na kontakt. Uvodni tekst je nov, topao i usklađen sa odlukom da je baza Beograd i okolina, a šire uz dogovor; ne navodi broj ljudi, pa ostaje tačan i kad se ekipa promeni. Ekipa od šest članova čita se sa jednog mesta u kom vlasnik dodaje ili uklanja ljude, a uloga i opis svakog člana idu kroz prevode sa jasnom napomenom da se dopišu po osobi; ako se doda član bez teksta, build puca umesto da se na sajtu pojavi prazna kartica. Kartica je spremna za pravu fotografiju, uz primer kako se ona ubacuje, a do tada nosi privremeni portret. Vlasnik je pre implementacije odlučio o više stvari: kartice ekipe idu u tri, dve ili jednu kolonu sa slikom uvek iznad teksta, oprema ima četiri kartice sa ikonicama za dronove, kamere, gimbale i mikrofone, a programi za montažu i licencirana muzika pominju se u tekstu ispod. Koraci saradnje i poziv na kontakt preuzeti su iz dizajna doslovno. Uloga člana nije zlatna kao u dizajnu jer zlatna na svetloj pozadini nema dovoljan kontrast, pa je u boji glavnog teksta sa zlatnom crticom ispred, a gimbali nose zvanične nazive proizvoda. Vlasnik je odlučio i da sajt navodi registrovanog pilota pri Direktoratu civilnog vazduhoplovstva uz poštovanje regulative, bez pominjanja osiguranja, pa je isti tekst usklađen svuda gde se regulativa pominje — u footeru, na početnoj i na stranicama usluga — a odluka je upisana u opis projekta. Oprema koristi isti obrazac kartica sa ikonicom kao stranice usluga, samo sa drugom pozadinom i mestom za tekst ispod, pa stranice usluga ostaju nepromenjene. Tokom review-a uvod je na tablet širini prebačen u jednu kolonu jer se naslov lomio u pet redova, a uočeno je da se na početnoj, na telefonu, separator u traci ispod heroa pojavljuje na početku drugog reda kad se stavke prelome — to nije posledica novog teksta i ostaje za kasniju doradu. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, šest kartica se slaže u tačan broj kolona, poziv na kontakt vodi na tačnu adresu i nema nijedne animacije.

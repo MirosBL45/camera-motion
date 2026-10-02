@@ -15,7 +15,7 @@ Bez logina, bez baze podataka — sav sadržaj živi u repou. Domen: cameramotio
 - Montaža: Adobe Premiere Pro
 - Postojeći sadržaj: 6-7 videa na YouTube kanalu, 16 objava na Instagramu
 - Reference snimanja: FPV prolet kroz kuću koja se izdaje preko Booking-a, jahta kod Zadra, BeoSand odbojka na pesku, nekretnina u Sutomoru
-- Vlasnik planira prijavu u Direktorat civilnog vazduhoplovstva (DCV) — na sajtu suptilna napomena "snimanje u skladu sa regulativom DCV"
+- Registracija pri Direktoratu civilnog vazduhoplovstva (DCV) je u toku i biće završena pre objave sajta — na sajtu zato stoji „registrovan pilot pri DCV" uz „u skladu sa regulativom" (odluka vlasnika, 25.09.2026.); osiguranje se ne pominje ni u pozitivnom ni u negativnom smislu
 - Logo: crn krug sa belim slovima "CM", natpis "Camera motion", zlatna linija okolo
 - Ton na sajtu: profesionalan; NE pominjati da je snimanje hobi ili sporedni posao
 
@@ -204,7 +204,7 @@ type TeamMemberType = {
 };
 ```
 
-- Niz `team` se mapira u kartice; vlasnik dodaje/uklanja članove isključivo u tom nizu.
+- Niz `TEAM` (u `src/data/team.ts`) se mapira u kartice; vlasnik dodaje/uklanja članove isključivo u tom nizu.
 - Početni sastav: Miroslav, Bojan, Nikola, Marko, Petar, Nina.
 - Uloga i opis idu kroz `about` namespace po `id` (`about.team.{id}.role` / `about.team.{id}.bio`) — polazni tekstovi su generički iz dizajn reference + `// TODO(vlasnik): tekst po osobi`.
 - Slike: `src/assets/team/*.jpg` sa statičkim importom (daje dimenzije i automatski `placeholder="blur"`). U `team.ts` stoji zakomentarisan primer importa za jednog člana kao šablon; dok slike ne postoje, kartica koristi placeholder iz dizajna.

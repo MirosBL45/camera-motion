@@ -30,3 +30,14 @@ Ovde idu samo ultrakratke teze — jedna odluka ili savet po redu, bez objašnja
 - FPV stranica koristi isti snimak kao nekretnine, ali ima više teksta (SEO)
 - Taj zajednički video ID se upisuje jednom: `FPV_HOUSE_VIDEO_ID` u `src/data/services.ts`
 - Koraci saradnje: deljena komponenta `ProcessSteps` (promo, kasnije O nama)
+
+## DCV
+
+- Svuda na sajtu: „registrovan pilot pri DCV" + „u skladu sa regulativom"
+- Osiguranje se ne pominje nigde
+
+## O nama
+
+- Ekipa se menja samo u `TEAM` u `src/data/team.ts`; uloga i opis po članu u `about.team.{id}` (sr + en)
+- Novi član bez teksta u `about.team` = build puca (tipska greška)
+- Oprema: dronovi, kamere, gimbali, mikrofoni; montaža (Premiere Pro, Vegas Pro, licencirana muzika) u tekstu ispod kartica
