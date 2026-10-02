@@ -1,4 +1,4 @@
-# Current Feature: 15 — Stranica O nama
+# Current Feature: 16 — Kontakt stranica (UI, bez slanja)
 
 ## Status
 
@@ -10,80 +10,74 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 3, fajl 1/4. `/o-nama` (`/en/about`) — lična priča koja gradi poverenje. Izgled po artboardu `2b` (1:1), sadržaj po spec-u
-- **Raspored po dizajnu**: Priča → Ekipa → Kako radimo → Oprema + DCV → CTA
-- **Priča** (uvodni blok, 2 kolone na desktopu): h1 + tekst levo, placeholder fotografije desno (zlatna bordura, dijagonalne pruge) sa `TODO`. Teme: ljubav prema snimanju i tehnologiji, letenje DJI dronovima, montaža u Premiere Pro, pristup „svaki snimak je priča". Ton profesionalan — NE pominjati hobi ili sporedni posao (overview 2). Polazni tekst, vlasnik dorađuje
-- Uvodni tekst usklađen sa brojem članova — „Nas je dvojica na snimanju" iz dizajna više ne važi
-- **Ekipa**: kartice se renderuju mapiranjem niza `team` iz novog `src/data/team.ts` (overview 9.2); početni sastav samo imena: Miroslav, Bojan, Nikola, Marko, Petar, Nina
-  - Ime člana ne sme da stoji nigde drugde u projektu; vlasnik dodaje/uklanja članove samo u tom nizu
-  - Uloga i opis kroz `about.team.{id}.role` / `about.team.{id}.bio`; polazni tekstovi generički iz dizajna, naizmenično „Pilot drona i FPV" i „Kamera i montaža", svaki sa `// TODO(vlasnik): tekst po osobi`
-  - Kartica spremna za sliku (`image?: StaticImageData`); dok slike nema — portret placeholder iz dizajna (pruge, 150×180px). U `team.ts` zakomentarisan primer statičkog importa za jednog člana (šablon iz spec-a)
-- **„Kako radimo"**: 4 numerisana koraka tačno po dizajnu — `01` Razgovor · `02` Priprema · `03` Snimanje · `04` Montaža i isporuka; uvodni tekst iz dizajna; koraci kao podaci na jednom mestu (niz sa i18n ključevima). Koristi postojeću deljenu komponentu `ProcessSteps`
-- **Oprema** (odluka vlasnika): 4 kartice sa ikonicom i kratkim opisom — **Dronovi** (DJI Mini 3 Pro, DJI Avata 2 za FPV), **Kamere** (Sony a7 IV, Sony a7 III), **Gimbali** (DJI RS 4, DJI RS 3), **Mikrofoni** (bežični i žičani); ispod kartica dodatni tekst o montaži: Adobe Premiere Pro, Vegas Pro, licencirana muzika
-- **Rečenica o DCV** (traka ispod opreme): „registrovan pilot pri DCV" + „u skladu sa regulativom", lepo sklopljeno; osiguranje se ne pominje
-- **CTA** → `/kontakt` (postojeći `CtaBand`)
-- Svi tekstovi kroz `about` namespace (sr + en); bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije
+- Faza 3, fajl 2/4. `/kontakt` (`/en/contact`) — kompletna stranica i forma sa validacijom, ALI bez slanja; submit za sada radi lokalnu validaciju i loguje (backend je feature 17). Izgled po artboardu `1c` (1:1)
+- **Layout**: desktop 2 kolone — forma levo + kontakt info kartica desno; mobilni: forma prva
+- **Forma** (bez react-hook-form: Server Action kroz `useActionState` + jedna zod šema koju dele klijent i server u feature-u 17):
+  1. Ime i prezime\* · 2. Email\* (validacija) · 3. Telefon (opciono, placeholder „+381 6x ...") · 4. Tip usluge — Select: Venčanje / Nekretnine / Događaj ili proslava (en: Event) / Promo video / FPV / Drugo · 5. Datum snimanja (opciono) · 6. Lokacija (opciono) · 7. Poruka\*
+  - Pre-selekcija tipa iz `?usluga=` (`vencanje | nekretnine | event | promo | fpv | drugo`, iste vrednosti na en — overview 7.3)
+  - Honeypot skriveno polje (koristi ga feature 17)
+  - Checkbox saglasnosti\* sa linkom na politiku privatnosti
+  - Dugme „Pošaljite upit" sa loading stanjem
+- **Stanja UI**: uspeh („Hvala! Odgovaramo u roku od 24h." + reset forme), greška (podaci ostaju), rate-limit („Previše pokušaja — pokušajte za nekoliko minuta.") — stanja postoje, feature 17 ih povezuje
+- **Kontakt info kartica** „Radije telefonom?" po dizajnu (sa radnim vremenom): telefon klik-za-prikaz (postojeći `PhoneReveal` — broj NIJE u inicijalnom HTML-u, overview 12), email (`CONTACT_DISPLAY_EMAIL`, isto kao footer), Instagram/YouTube linkovi, radno područje („Beograd i okolina · šire uz dogovor")
+- Validacione poruke i svi tekstovi u `contact` namespace-u (sr + en)
+- **Bez mape** — blok „Područje rada" sa placeholderom mape iz dizajna se svesno preskače (odluka vlasnika); područje rada je samo rečenica u kontakt kartici
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Dizajn ima artboard `2b` (linija 218 u `.dc.html`). Raspored u dizajnu: uvod (h1 + 2 pasusa, kadar 520px) `background` → Ekipa `surface` (bordure gore/dole, kartice 2 kolone, kartica = portret levo + ime/uloga/bio desno) → Kako radimo `surface-warm` → Oprema `background` (3 kartice + traka sa DCV rečenicom) → zeleni CTA band „Upoznajmo se pre snimanja." / „Kafa ili video poziv — kako vam je lakše." / „Pišite nam" → footer
-- Postojeće što se koristi: `ProcessSteps` (napravljen u feature-u 12 baš za ovu stranicu; pozadina `surface-warm` odgovara dizajnu), `CtaBand`, placeholder komponenta za slike iz feature-a 07. Stranica trenutno ima samo stub sa h1, `about.json` ima samo `title`
-- `src/data/team.ts` i `src/assets/team/` još ne postoje
-- Odluke vlasnika (25.09.2026.):
-  1. **Redosled** po dizajnu: Priča → Ekipa → Kako radimo → Oprema + DCV → CTA
-  2. **Oprema**: 4 kartice (dronovi, kamere, gimbali, mikrofoni), svaka sa ikonicom i laganim opisom; Premiere Pro, Vegas i licencirana muzika u dodatnom tekstu ispod kartica. Oprema se predstavlja kao oprema ekipe, bez ikakvih ograda
-  3. **DCV**: na sajtu stoji „registrovan pilot pri DCV" uz „u skladu sa regulativom" (registracija je u toku i biće gotova pre objave sajta); osiguranje se ne pominje ni u pozitivnom ni u negativnom smislu. Isti fazon se primenjuje **svuda u projektu** gde se DCV pominje:
-     - footer `regulationNote` (sr + en)
-     - traka poverenja na početnoj `home` → `regulation` (sr + en)
-     - FPV stranica, kartica `dcv` u bezbednosti (sr + en)
-     - rečenice u opisima venčanja, događaja i promo videa (`services.json`, sr + en)
-     - overview poglavlje 2 (napomena „vlasnik planira prijavu" → nova odluka) i `context/bitne-stvari.md`
-  4. **Uvodni tekst**: baza je Beograd i okolina, šire uz dogovor — prijateljski i toplo; bez „širom Srbije" i bez „Nas je dvojica"
-  5. **Kartice ekipe**: 3 kolone na širokim ekranima → 2 kolone → 1 kolona na mobilnom. Na svim širinama slika je gore, tekst ispod (odstupanje od dizajna, gde je portret levo od teksta)
-  6. **Koraci i CTA**: tekstovi iz dizajna 1:1 (obilazak lokacije, prvi rez, 4K uz arhivu, „kafa ili video poziv"); vlasnik menja kasnije ako zatreba
+- Dizajn `1c` (linija 1112 u `.dc.html`): naslov „Pišite nam" (52px) + uvodni pasus (20px, max 620px) → grid `1.25fr 1fr`, gap 32px. Forma: polja u 2 kolone (Ime | Email, Telefon | Tip usluge, Datum snimanja | Lokacija), ispod Poruka pune širine, checkbox sa zlatnom bordurom, zeleno dugme. Desno: kartica `surface-warm` „Radije telefonom?" (radno vreme, dugme za broj, Email, „Pratite nas" sa Instagram/YouTube pilulama) i ispod bela kartica „Područje rada" sa mapom (preskače se)
+- Postojeće što se koristi: `PhoneReveal` + `getPhoneNumber` (feature 05), `CONTACT_DISPLAY_EMAIL` i `SOCIAL_LINKS` iz `src/constants/contact.ts`, ikonice `InstagramIcon` / `YouTubeIcon`, shadcn `input`, `textarea`, `select`, `checkbox`, `label`, `button`
+- `contact.json` trenutno ima samo `title`; stranica je stub
+- `ServiceContactParamType` nema `drugo` — Select ima i opciju „Drugo"
+- U feature-u 02 shadcn Form je svesno preskočen (nova shadcn arhitektura nema gotov fajl na react-hook-form, a projekat tu biblioteku nema) — odluka je ostavljena za ovaj feature
 - `generateMetadata` i JSON-LD ostaju za feature 19
-- Odluke vlasnika tokom implementacije:
-  - Uloga člana nije zlatna kao u dizajnu (3.2:1, ispod AA) — tekst u boji glavnog teksta, Outfit 500, sa zlatnom crticom ispred
-  - Gimbali se pišu zvaničnim nazivima: DJI RS 4 i DJI RS 3
-- Odstupanja uočena tokom implementacije:
-  - `ServiceFeatures` dobio `tone="background"` (sekcija `background`, kartice `surface`) i `children` za sadržaj ispod kartica — „Oprema" koristi isti obrazac sa ikonicom u krugu; stranice usluga se ne menjaju
-  - Nove komponente: `AboutIntro`, `TeamSection`, `TeamMemberCard` u `src/components/sections/about/`
-  - `TEAM` (SCREAMING_SNAKE po coding standardima) u `src/data/team.ts`; `id` je tipiziran iz `about.team`, pa član bez prevoda ne prolazi build
-  - `id` člana je ime malim slovima (kao u primeru iz spec-a `miroslavImg`), ime za prikaz stoji samo u `TEAM`
-  - Uvodni tekst ne navodi broj članova („Sve radimo sami"), pa ostaje tačan kad se niz promeni
-  - Bio za Ninu u ženskom rodu („Zaslužna je"); ostali generički tekstovi iz dizajna
-  - Ikonice opreme: `Drone`, `Camera`, `Rotate3d`, `Mic`
-  - Montaža: „Adobe Premiere Pro i Vegas Pro, uz licenciranu muziku" kao pasus ispod kartica, pa DCV traka iz dizajna
-  - DCV usklađen na još 5 mesta (sr + en): footer, traka poverenja na početnoj, FPV kartica bezbednosti, rečenice na venčanjima, događajima i promo; overview 2 i `bitne-stvari.md` dopunjeni
-  - Ključ `about.title` uklonjen (h1 je sada `about.intro.heading`)
+- Odluke vlasnika (02.10.2026.):
+  1. **Forma bez react-hook-form** — `useActionState` + Server Action, jedna zod šema za klijent i server; shadcn Form/RHF se ne instaliraju
+  2. **Rok odgovora**: svuda „24 sata", uz „tačnu cenu" — uvodni pasus iz dizajna („istog dana") se usklađuje sa porukom o uspehu
+  3. **„Radije telefonom?"** ostaje kao u dizajnu, uključujući radno vreme
+  4. **Tekstovi forme**: tip usluge „Događaj ili proslava" (en: „Event"); saglasnost neutralno „Slažem se da Camera Motion obradi moje podatke…"; polje „Datum snimanja" (snimanje može biti i pre samog događaja, npr. pre svadbe)
+  5. **Email** = `CONTACT_DISPLAY_EMAIL` (isti kao footer, menja se na jednom mestu) + `// TODO: kasnije info@cameramotion.net`
+- Implementacija:
+  - Šema i parsiranje FormData u `src/lib/contact-form.ts` (deli ih feature 17); greške su kodovi (`required`, `email`, `phone`, `date`, `tooLong`, `consent`) koje UI prevodi kroz `contact.form.errors`
+  - Logika forme u hook-u `src/hooks/use-contact-form.ts`: validacija na klijentu pre slanja, `useActionState` sa lokalnom akcijom `submitContactLocally` (loguje upit; `TODO(feature 17)` za zamenu sa `submitContact`), reset posle uspeha, fokus na prvo neispravno polje
+  - Forma se šalje kroz `onSubmit` + `startTransition`, ne kroz `action` prop — React tada ne resetuje formu sam, pa posle greške podaci ostaju
+  - Komponente u `src/components/sections/contact/`: `ContactForm`, `ContactField`, `ContactServiceSelect`, `ContactConsent`, `ContactFormStatus`, `ContactInfoCard`
+  - `noValidate` — poruke idu kroz i18n umesto browserovih; polja imaju `aria-invalid`, `aria-describedby` i `aria-required`
+  - Obavezna polja nose diskretnu zvezdicu (`*`, sakrivena od čitača ekrana) — dizajn je nema, spec ih označava
+  - Link na politiku privatnosti se otvara u novom tabu da posetilac ne izgubi unos
+  - Linkovi (email, politika) su zeleni, ne zlatni kao u dizajnu — zlatni tekst na svetloj pozadini nema dovoljan kontrast (isti razlog kao uloga člana u feature-u 15)
+  - Kartica „Radije telefonom?" ima i deo „Područje rada" (rečenica, bez mape) između emaila i društvenih mreža
+  - Honeypot polje `website` (sr-only, `aria-hidden`, `tabIndex=-1`)
+  - Stranica čita `searchParams` zbog pre-selekcije, pa je `/kontakt` dinamička ruta (ƒ), za razliku od ostalih SSG stranica
 - Review:
-  - Uvod u dve kolone bio pretesan na 768px (naslov u pet redova, kadar 520px) — dve kolone pomerene na `lg`, kao u `ProcessSteps`
-  - Goals ispravljeni na RS 4 / RS 3 i Vegas Pro; overview 9.2 usklađen sa imenom niza `TEAM`
-  - Imena članova ne postoje nigde van `team.ts` (grep)
-  - Traka poverenja na početnoj: na telefonu (360–390px) tačka-separator visi na početku drugog reda kad se stavke prelome. Ovo nije posledica dužeg DCV teksta — javlja se i sa kraćim tekstom i na engleskom; pun DCV tekst ostaje po odluci vlasnika, a popravka rasporeda trake je otvorena (predlog: feature 21)
-- Provera: /o-nama i /en/about na 5 širina — bez horizontalnog skrola, jedan h1, 6 kartica u 1/2/3 kolone, 4 koraka, CTA na `/kontakt` / `/en/contact`, 0 animacija, fokus prsten na CTA; lint, tsc, test i build prolaze
+  - Poruka prethodnog slanja („Hvala!") se sakriva dok forma ima greške na poljima
+  - Telefon traži bar 6 cifara — unos samo od zagrada ili crtica više ne prolazi (test dodat)
+  - README: tabela „šta vlasnik menja" dobila red za email i društvene mreže (`src/constants/contact.ts`)
+  - Kalendar (odluka vlasnika): native `type="date"` zamenjen sopstvenim — prozor browsera ne može da se stilizuje (dugme „Clear" i izbor godine su bili osnovni HTML). shadcn `calendar` + `popover` (novi paket `react-day-picker`): srpska latinica / en-GB, pun naziv meseca, mesec i godina kroz Radix Select u stilu sajta, prošli datumi onemogućeni, izbor do 3 godine unapred, dugme „Obriši datum". Prikaz kroz `Intl` (`14.06.2026.` / `14/06/2026`), a u formu ide skriveno polje `date` kao `YYYY-MM-DD`, pa šema ostaje ista; nove pomoćne funkcije `toIsoDate` i `formatShortDate` u `src/lib/date.ts` sa testovima
+  - shadcn je uz kalendar dodao i `date-fns` kao direktnu zavisnost — uklonjen jer ga projekat ne koristi (ostaje samo kao zavisnost `react-day-picker`-a); `button.tsx` nije pregažen
+  - Generisani `calendar.tsx`: traka sa strelicama je ležala preko padajućih menija za mesec i godinu i hvatala klik — propušta klik, strelice ga hvataju; `popover.tsx` senka mapirana na token `shadow-card-hover` (kao `select`)
+  - Dugme za datum nema `aria-invalid` (ne važi za ulogu dugmeta) — greška se prikazuje kroz `data-invalid` stil i čita kroz `aria-describedby`, zajedno sa izabranim datumom
+  - Unos se gubi ako posetilac na kontakt stranici klikne link ka kontaktu u header-u (forma se učitava ispočetka zbog promene `?usluga=`) — vlasnik prihvatio, ostaje ovako
+- Provera: /kontakt i /en/contact na 5 širina — bez horizontalnog skrola, jedan h1, 0 animacija, forma pre kartice na mobilnom; pre-selekcija za svih 6 vrednosti + nepoznata na oba jezika; prazna forma i forma bez saglasnosti blokiraju slanje sa porukama; uspeh resetuje formu i loguje upit; broj nije u sirovom HTML-u, a posle klika `tel:` link dobija fokus; Tab preskače honeypot; kalendar: izbor godine i dana mišem i tastaturom, brisanje, reset posle slanja, bez horizontalnog skrola na 390px; lint, tsc, test (40) i build prolaze
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Kompletno na oba jezika; responzivno na 360px, 390px, 768px, 1024px, 1440px — nema horizontalnog skrola
-2. Kartice ekipe se renderuju iz niza `team` (dodavanje/brisanje člana u nizu menja stranicu); portret placeholder sa `TODO`
-3. Ime člana ekipe ne postoji nigde van `team.ts`
-4. „Kako radimo" ima 4 koraka iz jednog niza podataka
-5. CTA vodi na `/kontakt` (`/en/contact`)
-6. Jedan h1; hover i fokus rade tastaturom; nema animacija pri učitavanju ili skrolu
-7. `npm run lint`, `npm run test` i `npm run build` prolaze
+1. Validacija radi sa porukama na oba jezika; obavezna polja i saglasnost blokiraju submit
+2. `?usluga=vencanje` (i ostale vrednosti) pre-selektuju tip na obe lokalizacije
+3. Telefon nevidljiv u view-source pre klika; posle klika `tel:` link radi
+4. Responzivno na 360px, 390px, 768px, 1024px, 1440px — bez horizontalnog skrola; jedan h1; fokus i tastatura rade; nema animacija
+5. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 2, 3, 5, 9.2)
-- @context/features/15-o-nama.md
-- @context/features/08-usluge-pregled-done.md
-- @context/features/12-usluga-promo-done.md (`ProcessSteps`)
-- @context/design-reference/NOTES.md (sekcije 1, 9, 9a) + artboard `2b`
+- @context/project-overview.md (poglavlja 7.3, 8.2, 12)
+- @context/features/16-kontakt-stranica-done.md
+- @context/features/17-kontakt-backend.md
+- @context/design-reference/NOTES.md (sekcije 8, 9, 9a) + artboard `1c`
 
 ## History
 
@@ -156,3 +150,7 @@ Napravljena stranica za FPV snimke, uslugu po kojoj se ekipa izdvaja, i time zav
 ### Friday, 25.09.2026. | 15:06 — 15 Stranica O nama
 
 Napravljena stranica o nama po ekranu iz dizajna, redom kao u dizajnu: uvod sa pričom i kadrom ekipe, pa ekipa, koraci saradnje, oprema sa napomenom o regulativi i zeleni poziv na kontakt. Uvodni tekst je nov, topao i usklađen sa odlukom da je baza Beograd i okolina, a šire uz dogovor; ne navodi broj ljudi, pa ostaje tačan i kad se ekipa promeni. Ekipa od šest članova čita se sa jednog mesta u kom vlasnik dodaje ili uklanja ljude, a uloga i opis svakog člana idu kroz prevode sa jasnom napomenom da se dopišu po osobi; ako se doda član bez teksta, build puca umesto da se na sajtu pojavi prazna kartica. Kartica je spremna za pravu fotografiju, uz primer kako se ona ubacuje, a do tada nosi privremeni portret. Vlasnik je pre implementacije odlučio o više stvari: kartice ekipe idu u tri, dve ili jednu kolonu sa slikom uvek iznad teksta, oprema ima četiri kartice sa ikonicama za dronove, kamere, gimbale i mikrofone, a programi za montažu i licencirana muzika pominju se u tekstu ispod. Koraci saradnje i poziv na kontakt preuzeti su iz dizajna doslovno. Uloga člana nije zlatna kao u dizajnu jer zlatna na svetloj pozadini nema dovoljan kontrast, pa je u boji glavnog teksta sa zlatnom crticom ispred, a gimbali nose zvanične nazive proizvoda. Vlasnik je odlučio i da sajt navodi registrovanog pilota pri Direktoratu civilnog vazduhoplovstva uz poštovanje regulative, bez pominjanja osiguranja, pa je isti tekst usklađen svuda gde se regulativa pominje — u footeru, na početnoj i na stranicama usluga — a odluka je upisana u opis projekta. Oprema koristi isti obrazac kartica sa ikonicom kao stranice usluga, samo sa drugom pozadinom i mestom za tekst ispod, pa stranice usluga ostaju nepromenjene. Tokom review-a uvod je na tablet širini prebačen u jednu kolonu jer se naslov lomio u pet redova, a uočeno je da se na početnoj, na telefonu, separator u traci ispod heroa pojavljuje na početku drugog reda kad se stavke prelome — to nije posledica novog teksta i ostaje za kasniju doradu. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, šest kartica se slaže u tačan broj kolona, poziv na kontakt vodi na tačnu adresu i nema nijedne animacije.
+
+### Friday, 02.10.2026. | 12:47 — 16 Kontakt stranica (UI, bez slanja)
+
+Napravljena kontakt stranica po ekranu iz dizajna: naslov i uvod, pa forma za upit levo i kartica „Radije telefonom?" desno, a na telefonu forma ide prva. Forma ima ime, email, telefon, tip usluge, datum snimanja, lokaciju i poruku, skriveno polje za hvatanje botova i obaveznu saglasnost sa linkom na politiku privatnosti koji se otvara u novom tabu da posetilac ne izgubi unos. Tip usluge se sam bira kada posetilac dođe sa stranice usluge, na oba jezika, a nepoznata vrednost u adresi se ignoriše. Slanje još ne postoji: forma proverava podatke, ispisuje upit u konzolu i prazni se posle uspeha, dok poruke za grešku i za previše pokušaja čekaju povezivanje sa serverom u sledećem feature-u. Provera podataka je napisana jednom, za browser i za server, pa će je slanje samo preuzeti; pokrivena je testovima. Vlasnik je pre implementacije odlučio o pet stvari: forma se pravi bez dodatne biblioteke za forme, rok odgovora je svuda 24 sata uz tačnu cenu, kartica zadržava radno vreme iz dizajna, tekstovi su „Događaj ili proslava", neutralna saglasnost „Slažem se…" i „Datum snimanja" jer se snima i pre samog događaja, a email je isti kao u footeru i menja se na jednom mestu. Mape nema, a područje rada je rečenica u kartici, uz broj telefona koji se prikazuje tek na klik i linkove ka Instagramu i YouTube-u. Obavezna polja nose diskretnu zvezdicu, a linkovi su zeleni umesto zlatnih iz dizajna zbog kontrasta. Tokom review-a sakrivena je poruka prethodnog uspešnog slanja dok forma ima nove greške, provera telefona sada traži bar šest cifara, a uputstvo za vlasnika dobilo je mesto gde se menjaju email i društvene mreže. Na zahtev vlasnika sistemski kalendar browsera, čiji se prozor ne može stilizovati, zamenjen je sopstvenim kalendarom u stilu sajta: srpski i engleski nazivi, izbor meseca i godine iz padajuće liste sajta, prošli dani onemogućeni, dugme za brisanje datuma i potpuna podrška za tastaturu. Usput je ispravljena greška u gotovom kalendaru, zbog koje traka sa strelicama nije dozvoljavala klik na izbor meseca i godine. Uočeno je i prihvaćeno da se unos gubi ako posetilac na kontakt stranici ponovo klikne link ka kontaktu. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, nema animacija, pre-selekcija radi za sve usluge, prazna forma i forma bez saglasnosti ne mogu da se pošalju, broj telefona nije u kodu stranice pre klika, a kalendar radi mišem i tastaturom.

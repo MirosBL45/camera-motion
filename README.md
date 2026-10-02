@@ -29,6 +29,7 @@ Sajt nema bazu ni CMS — ovo su mesta gde se menjaju vrednosti:
 | Cene paketa i usluga      | `PRICES` blok na vrhu `src/data/packages.ts` — jedino mesto u projektu gde stoji iznos |
 | Brojke u hero traci       | `src/constants/hero-stats.ts`                                                          |
 | YouTube ID-jevi po usluzi | `videoIds` u `src/data/services.ts`                                                    |
+| Email i društvene mreže   | `src/constants/contact.ts` — isti podaci za footer i kontakt stranicu                  |
 | Tekstovi                  | `src/i18n/messages/sr/` i `src/i18n/messages/en/` (isti ključevi na oba jezika)        |
 
 ## Environment varijable
