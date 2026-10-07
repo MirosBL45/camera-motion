@@ -40,7 +40,7 @@
     "status": {
       "success": "Thank you! We'll reply within 24 hours.",
       "error": "Your enquiry wasn't sent. Please try again or email us.",
-      "rateLimited": "Too many attempts — please try again in a few minutes."
+      "rateLimited": "Too many attempts — please try again in about 15 minutes."
     }
   },
   "info": {
@@ -56,5 +56,12 @@
       "instagram": "Instagram",
       "youtube": "YouTube"
     }
+  },
+  "email": {
+    "subject": "[cameramotion.net] Enquiry — {service} — {name}",
+    "heading": "New enquiry from cameramotion.net",
+    "notProvided": "Not provided",
+    "siteLanguage": "Site language",
+    "replyHint": "Reply directly to this email — your reply goes to the client at {email}."
   }
 }

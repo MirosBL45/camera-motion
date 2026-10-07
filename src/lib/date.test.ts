@@ -1,6 +1,18 @@
 import { describe, expect, it } from "vitest";
 
-import { formatShortDate, toIsoDate } from "./date";
+import { formatShortDate, fromIsoDate, toIsoDate } from "./date";
+
+describe("fromIsoDate", () => {
+  it("vraća lokalni datum, bez UTC pomeranja", () => {
+    const date = fromIsoDate("2026-06-04");
+
+    expect([date.getFullYear(), date.getMonth(), date.getDate()]).toEqual([2026, 5, 4]);
+  });
+
+  it("je obrnuto od toIsoDate", () => {
+    expect(toIsoDate(fromIsoDate("2027-01-01"))).toBe("2027-01-01");
+  });
+});
 
 describe("toIsoDate", () => {
   it("vraća lokalni datum sa nulama ispred", () => {

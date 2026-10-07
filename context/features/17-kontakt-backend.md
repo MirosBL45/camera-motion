@@ -28,5 +28,5 @@ Faza 3, fajl 3/4. Server Action + Resend + Upstash rate limit; povezivanje na fo
 ## Reference
 
 - @context/project-overview.md (poglavlja 12, 15)
-- @context/features/16-kontakt-stranica.md
+- @context/features/16-kontakt-stranica-done.md
 - https://resend.com/docs · https://upstash.com/docs (proveriti najnovije verzije)

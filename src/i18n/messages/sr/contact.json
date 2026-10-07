@@ -44,7 +44,7 @@
     "status": {
       "success": "Hvala! Odgovaramo u roku od 24 sata.",
       "error": "Upit nije poslat. Pokušajte ponovo ili nam pišite na email.",
-      "rateLimited": "Previše pokušaja — pokušajte za nekoliko minuta."
+      "rateLimited": "Previše pokušaja — pokušajte ponovo za nekih 15 minuta."
     }
   },
   "info": {
@@ -60,5 +60,12 @@
       "instagram": "Instagram",
       "youtube": "YouTube"
     }
+  },
+  "email": {
+    "subject": "[cameramotion.net] Upit — {service} — {name}",
+    "heading": "Novi upit sa sajta cameramotion.net",
+    "notProvided": "Nije navedeno",
+    "siteLanguage": "Jezik sajta",
+    "replyHint": "Odgovorite direktno na ovaj email — odgovor stiže klijentu na {email}."
   }
 }
