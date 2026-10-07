@@ -1,4 +1,5 @@
 import { type FormEvent, startTransition, useActionState, useRef, useState } from "react";
+import { useLocale } from "next-intl";
 
 import { CONTACT_FIELD_ORDER, isContactField, parseContactForm } from "@/lib/contact-form";
 import type {
@@ -8,25 +9,13 @@ import type {
   ContactSubmitStateType,
 } from "@/types/contact.type";
 
+import { submitContact } from "@/app/actions/contact";
+
 export const contactFieldId = (field: ContactFieldType) => `contact-${field}`;
-
-// TODO(feature 17): zameniti Server Action-om `submitContact` iz `src/app/actions/contact.ts`
-// (isti potpis; server ponovo validira istom šemom, proverava honeypot i rate limit).
-async function submitContactLocally(
-  _prevState: ContactSubmitStateType,
-  formData: FormData
-): Promise<ContactSubmitStateType> {
-  const result = parseContactForm(formData);
-
-  if (!result.success) return { success: false, error: "INVALID" };
-
-  console.info("[contact] Upit (feature 16 — bez slanja):", result.data);
-
-  return { success: true, data: null };
-}
 
 // Validacija na klijentu pre slanja, stanje slanja kroz `useActionState` i reset posle uspeha.
 export function useContactForm(defaultService?: ContactServiceType) {
+  const locale = useLocale();
   const formRef = useRef<HTMLFormElement>(null);
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrorsType>({});
   const [service, setService] = useState<ContactServiceType | "">(defaultService ?? "");
@@ -37,7 +26,10 @@ export function useContactForm(defaultService?: ContactServiceType) {
   // ostaju, a posle uspeha se forma prazni ovde.
   const [state, formAction, isPending] = useActionState(
     async (prevState: ContactSubmitStateType, formData: FormData) => {
-      const nextState = await submitContactLocally(prevState, formData);
+      const nextState = await submitContact(locale, prevState, formData).catch(
+        // Mrežna greška ili pad servera — bez ovoga bi action bacio grešku i srušio stranicu
+        (): ContactSubmitStateType => ({ success: false, error: "SEND_FAILED" })
+      );
 
       if (nextState?.success) {
         formRef.current?.reset();
