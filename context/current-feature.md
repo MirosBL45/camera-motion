@@ -1,4 +1,4 @@
-# Current Feature: 13 — Usluga: FPV snimci
+# Current Feature: 16 — Kontakt stranica (UI, bez slanja)
 
 ## Status
 
@@ -10,73 +10,74 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 2, fajl 6/6 (kraj faze). `/usluge/fpv-snimci` (`/en/services/fpv`) — stranica-diferencijator: malo ko nudi FPV prolete. Gradi se kroz deljeni šablon iz feature-a 08; **dizajn nema artboard za ovu uslugu**, pa izgled prati obrasce sa `1b` i `2a` (kao događaji i promo). Više teksta nego na ostalim stranicama — stranica služi i za SEO (odluka vlasnika)
-- **Raspored stranice** (predlog): uvodni blok → „Šta je FPV" → „Gde ga koristimo" (primene) → Primer → Bezbednost → Cena → zeleni CTA band → footer
-  - **Uvodni blok** (`ServiceIntro`): breadcrumb „Usluge / FPV snimci", h1 i lead oko toga da FPV dron leti gde klasičan dron i kamera ne mogu — kroz vrata, hodnike, između drveća, u jednom neprekinutom kadru; dva dugmeta: primarno „Zatražite ponudu" → `/kontakt?usluga=fpv`, sekundarno „Vidite primere" → skok na `#primeri`; placeholder kadar desno
-  - **„Šta je FPV"** (`ServiceFeatures`, `tone="warm"`, 3 kartice): kratko i laički — upravljanje iz „prvog lica" (naočare), DJI Avata 2, dinamičan filmski prolet u jednom dahu
-  - **„Gde ga koristimo"** (`ServiceFeatures`, 4 kartice): prolet kroz nekretninu (od ulaza do terase u jednom kadru), otvaranje proslave ili venčanja, predstavljanje lokala, sport iz ugla koji niko nema
-  - **Primer** (`ServiceWorks`, `id="primeri"`): FPV prolet kroz kuću — **isti snimak kao prvi primer na nekretninama**, isti YouTube ID (jedno mesto u `services.ts` za obe stranice) + `TODO(vlasnik)`
-  - **Bezbednost** (`ServiceFeatures`, 3 kartice): letenje u skladu sa regulativom DCV, procena lokacije pre leta, zavisnost od vremenskih uslova
-  - **Cena** (`ServiceDelivery`): samostalno „od 200 €" (`PRICES.fpv`) i kao dodatak uz drugu uslugu „od 250 €" (novi ključ `PRICES.fpvAddon`), oba kroz ICU `{price}` i formatirano po jeziku
-  - **CTA band** → `/kontakt?usluga=fpv`
-- Svi tekstovi kroz `services.fpv` namespace (sr + en); engleski je prirodan prevod, ne bukvalan. Bez scroll animacija, fade-in efekata i parallaxa — samo hover/focus tranzicije 200ms
-- **DoD Faze 2** (zbirna provera na kraju): /usluge + svih 5 stranica na oba jezika kroz deljeni šablon; svi podaci iz `services.ts`/`packages.ts`, cene izmenljive na jednom mestu; svi embed-ovi lite, svi TODO placeholderi obeleženi; build zelen
-- `context/bitne-stvari.md` se dopunjuje ako se donese nova odluka
+- Faza 3, fajl 2/4. `/kontakt` (`/en/contact`) — kompletna stranica i forma sa validacijom, ALI bez slanja; submit za sada radi lokalnu validaciju i loguje (backend je feature 17). Izgled po artboardu `1c` (1:1)
+- **Layout**: desktop 2 kolone — forma levo + kontakt info kartica desno; mobilni: forma prva
+- **Forma** (bez react-hook-form: Server Action kroz `useActionState` + jedna zod šema koju dele klijent i server u feature-u 17):
+  1. Ime i prezime\* · 2. Email\* (validacija) · 3. Telefon (opciono, placeholder „+381 6x ...") · 4. Tip usluge — Select: Venčanje / Nekretnine / Događaj ili proslava (en: Event) / Promo video / FPV / Drugo · 5. Datum snimanja (opciono) · 6. Lokacija (opciono) · 7. Poruka\*
+  - Pre-selekcija tipa iz `?usluga=` (`vencanje | nekretnine | event | promo | fpv | drugo`, iste vrednosti na en — overview 7.3)
+  - Honeypot skriveno polje (koristi ga feature 17)
+  - Checkbox saglasnosti\* sa linkom na politiku privatnosti
+  - Dugme „Pošaljite upit" sa loading stanjem
+- **Stanja UI**: uspeh („Hvala! Odgovaramo u roku od 24h." + reset forme), greška (podaci ostaju), rate-limit („Previše pokušaja — pokušajte za nekoliko minuta.") — stanja postoje, feature 17 ih povezuje
+- **Kontakt info kartica** „Radije telefonom?" po dizajnu (sa radnim vremenom): telefon klik-za-prikaz (postojeći `PhoneReveal` — broj NIJE u inicijalnom HTML-u, overview 12), email (`CONTACT_DISPLAY_EMAIL`, isto kao footer), Instagram/YouTube linkovi, radno područje („Beograd i okolina · šire uz dogovor")
+- Validacione poruke i svi tekstovi u `contact` namespace-u (sr + en)
+- **Bez mape** — blok „Područje rada" sa placeholderom mape iz dizajna se svesno preskače (odluka vlasnika); područje rada je samo rečenica u kontakt kartici
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Dizajn nema artboard za FPV (NOTES 1). Stranica se sklapa iz postojećih sekcija šablona
-- Grana `12-13-promo-i-fpv` (feature 12 je već commit-ovan i push-ovan); feature 13 dobija svoj commit
-- Posle feature-a 13, na istoj grani i u posebnom commit-u: „Zatražite ponudu" u header-u i mobilnom meniju na stranici usluge vodi na kontakt sa `?usluga=` te usluge (odluka vlasnika) — nije deo ovog feature-a
-- Odluke vlasnika (ranije u sesiji):
-  - **Cene**: `fpv` 200 € već postoji; `fpvAddon` 250 € se dodaje sada, u istom `PRICES` bloku. Iznosi su namerno različiti da vlasnik lako nađe ključ (zato je dodatak za sada skuplji od samostalnog snimanja — vlasnik menja)
-  - **Raspored**: iz postojećeg šablona
-  - **Primer**: isti snimak kao na nekretninama; na FPV stranici više teksta o FPV-u (SEO)
-  - **Pri startu** (vlasnik pokrenuo start bez odgovora → idu preporuke): dva primera (kuća + placeholder „FPV prolet kroz lokal"), bez posebnog zlatnog isticanja, stavka sa cenom se ne izdvaja u zajednički deo
-- Pretpostavke za implementaciju (ako nešto ne odgovara, reci pre starta):
-  - Tekstove pišem nove (dizajn ih nema), u tonu prethodnih stranica usluga; vlasnik ih pregleda u browseru
-  - Pozadine: uvod `background` → Šta je FPV `surface-warm` → Gde ga koristimo `surface` → Primer `background` → Bezbednost `surface-warm` → Cena `background` → CTA
-  - FPV stranica nema posebno zlatno isticanje (badge „naša specijalnost" ostaje na karticama početne i /usluge); uvodni kadar već ima zlatnu borduru kao na ostalim stranicama usluga
-  - YouTube ID kuće se izdvaja u jednu konstantu u `services.ts` koju koriste i `realEstate` i `fpv`, da se upisuje na jednom mestu
-  - Stavka sa cenom se gradi u stranici kao na događajima i promo (bez novog zajedničkog dela — ponavlja se samo formatiranje cene)
-  - Rok isporuke i trajanje leta se ne navode jer ih vlasnik nije odredio
-  - Ikonice iz `lucide-react`, potvrđuju se u browseru
-  - Sidro `#primeri` se ne prevodi (princip 5)
-  - SEO fraze se utkivaju prirodno u tekst: FPV snimanje, FPV dron snimci, prolet dronom kroz objekat
-  - `generateMetadata` i JSON-LD `Service` ostaju za feature 19
-- Odstupanja uočena tokom implementacije:
-  - Nijedna komponenta šablona nije menjana — stranica koristi `ServiceIntro`, `ServiceFeatures` (3×), `ServiceWorks`, `ServiceDelivery` i `CtaBand`
-  - `PRICES.fpvAddon` izlazi kao `FPV_ADDON_PRICE`; nije usluga, pa ne ulazi u `SERVICE_PRICES`
-  - YouTube ID kuće je konstanta `FPV_HOUSE_VIDEO_ID` u `services.ts`; prvi video i na nekretninama i na FPV-u
-  - Sekcija „Cena" koristi `ServiceDelivery` sa tri stavke: samostalno, kao dodatak, i od čega zavisi konačna cena
-  - Tekstovi o bezbednosti ne obećavaju pomeranje termina zbog vremena i ne tvrde da je pilot registrovan kod DCV — samo „u skladu sa regulativom" (overview 2)
-  - Ikonice: `Glasses`, `Drone`, `Clapperboard` (Šta je FPV); `House`, `PartyPopper`, `Store`, `Trophy` (Gde ga koristimo); `ShieldCheck`, `MapPinned`, `CloudSun` (Bezbednost)
+- Dizajn `1c` (linija 1112 u `.dc.html`): naslov „Pišite nam" (52px) + uvodni pasus (20px, max 620px) → grid `1.25fr 1fr`, gap 32px. Forma: polja u 2 kolone (Ime | Email, Telefon | Tip usluge, Datum snimanja | Lokacija), ispod Poruka pune širine, checkbox sa zlatnom bordurom, zeleno dugme. Desno: kartica `surface-warm` „Radije telefonom?" (radno vreme, dugme za broj, Email, „Pratite nas" sa Instagram/YouTube pilulama) i ispod bela kartica „Područje rada" sa mapom (preskače se)
+- Postojeće što se koristi: `PhoneReveal` + `getPhoneNumber` (feature 05), `CONTACT_DISPLAY_EMAIL` i `SOCIAL_LINKS` iz `src/constants/contact.ts`, ikonice `InstagramIcon` / `YouTubeIcon`, shadcn `input`, `textarea`, `select`, `checkbox`, `label`, `button`
+- `contact.json` trenutno ima samo `title`; stranica je stub
+- `ServiceContactParamType` nema `drugo` — Select ima i opciju „Drugo"
+- U feature-u 02 shadcn Form je svesno preskočen (nova shadcn arhitektura nema gotov fajl na react-hook-form, a projekat tu biblioteku nema) — odluka je ostavljena za ovaj feature
+- `generateMetadata` i JSON-LD ostaju za feature 19
+- Odluke vlasnika (02.10.2026.):
+  1. **Forma bez react-hook-form** — `useActionState` + Server Action, jedna zod šema za klijent i server; shadcn Form/RHF se ne instaliraju
+  2. **Rok odgovora**: svuda „24 sata", uz „tačnu cenu" — uvodni pasus iz dizajna („istog dana") se usklađuje sa porukom o uspehu
+  3. **„Radije telefonom?"** ostaje kao u dizajnu, uključujući radno vreme
+  4. **Tekstovi forme**: tip usluge „Događaj ili proslava" (en: „Event"); saglasnost neutralno „Slažem se da Camera Motion obradi moje podatke…"; polje „Datum snimanja" (snimanje može biti i pre samog događaja, npr. pre svadbe)
+  5. **Email** = `CONTACT_DISPLAY_EMAIL` (isti kao footer, menja se na jednom mestu) + `// TODO: kasnije info@cameramotion.net`
+- Implementacija:
+  - Šema i parsiranje FormData u `src/lib/contact-form.ts` (deli ih feature 17); greške su kodovi (`required`, `email`, `phone`, `date`, `tooLong`, `consent`) koje UI prevodi kroz `contact.form.errors`
+  - Logika forme u hook-u `src/hooks/use-contact-form.ts`: validacija na klijentu pre slanja, `useActionState` sa lokalnom akcijom `submitContactLocally` (loguje upit; `TODO(feature 17)` za zamenu sa `submitContact`), reset posle uspeha, fokus na prvo neispravno polje
+  - Forma se šalje kroz `onSubmit` + `startTransition`, ne kroz `action` prop — React tada ne resetuje formu sam, pa posle greške podaci ostaju
+  - Komponente u `src/components/sections/contact/`: `ContactForm`, `ContactField`, `ContactServiceSelect`, `ContactConsent`, `ContactFormStatus`, `ContactInfoCard`
+  - `noValidate` — poruke idu kroz i18n umesto browserovih; polja imaju `aria-invalid`, `aria-describedby` i `aria-required`
+  - Obavezna polja nose diskretnu zvezdicu (`*`, sakrivena od čitača ekrana) — dizajn je nema, spec ih označava
+  - Link na politiku privatnosti se otvara u novom tabu da posetilac ne izgubi unos
+  - Linkovi (email, politika) su zeleni, ne zlatni kao u dizajnu — zlatni tekst na svetloj pozadini nema dovoljan kontrast (isti razlog kao uloga člana u feature-u 15)
+  - Kartica „Radije telefonom?" ima i deo „Područje rada" (rečenica, bez mape) između emaila i društvenih mreža
+  - Honeypot polje `website` (sr-only, `aria-hidden`, `tabIndex=-1`)
+  - Stranica čita `searchParams` zbog pre-selekcije, pa je `/kontakt` dinamička ruta (ƒ), za razliku od ostalih SSG stranica
 - Review:
-  - „Prati akciju" (anglicizam u sportskom smislu) zamenjeno sa „prati igru ili trku" (overview 8.3)
-- DoD Faze 2: /usluge + 5 stranica na oba jezika prošle automatsku proveru na 5 širina (bez horizontalnog skrola, jedan h1, bez iframe-a pre klika, bez animacija, bez „cena po dogovoru"); sve cene iz `PRICES`; svi primeri i kadrovi imaju `TODO` oznake; build zelen
+  - Poruka prethodnog slanja („Hvala!") se sakriva dok forma ima greške na poljima
+  - Telefon traži bar 6 cifara — unos samo od zagrada ili crtica više ne prolazi (test dodat)
+  - README: tabela „šta vlasnik menja" dobila red za email i društvene mreže (`src/constants/contact.ts`)
+  - Kalendar (odluka vlasnika): native `type="date"` zamenjen sopstvenim — prozor browsera ne može da se stilizuje (dugme „Clear" i izbor godine su bili osnovni HTML). shadcn `calendar` + `popover` (novi paket `react-day-picker`): srpska latinica / en-GB, pun naziv meseca, mesec i godina kroz Radix Select u stilu sajta, prošli datumi onemogućeni, izbor do 3 godine unapred, dugme „Obriši datum". Prikaz kroz `Intl` (`14.06.2026.` / `14/06/2026`), a u formu ide skriveno polje `date` kao `YYYY-MM-DD`, pa šema ostaje ista; nove pomoćne funkcije `toIsoDate` i `formatShortDate` u `src/lib/date.ts` sa testovima
+  - shadcn je uz kalendar dodao i `date-fns` kao direktnu zavisnost — uklonjen jer ga projekat ne koristi (ostaje samo kao zavisnost `react-day-picker`-a); `button.tsx` nije pregažen
+  - Generisani `calendar.tsx`: traka sa strelicama je ležala preko padajućih menija za mesec i godinu i hvatala klik — propušta klik, strelice ga hvataju; `popover.tsx` senka mapirana na token `shadow-card-hover` (kao `select`)
+  - Dugme za datum nema `aria-invalid` (ne važi za ulogu dugmeta) — greška se prikazuje kroz `data-invalid` stil i čita kroz `aria-describedby`, zajedno sa izabranim datumom
+  - Unos se gubi ako posetilac na kontakt stranici klikne link ka kontaktu u header-u (forma se učitava ispočetka zbog promene `?usluga=`) — vlasnik prihvatio, ostaje ovako
+- Provera: /kontakt i /en/contact na 5 širina — bez horizontalnog skrola, jedan h1, 0 animacija, forma pre kartice na mobilnom; pre-selekcija za svih 6 vrednosti + nepoznata na oba jezika; prazna forma i forma bez saglasnosti blokiraju slanje sa porukama; uspeh resetuje formu i loguje upit; broj nije u sirovom HTML-u, a posle klika `tel:` link dobija fokus; Tab preskače honeypot; kalendar: izbor godine i dana mišem i tastaturom, brisanje, reset posle slanja, bez horizontalnog skrola na 390px; lint, tsc, test (40) i build prolaze
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Kompletno na oba jezika; responzivno na 360px, 390px, 768px, 1024px, 1440px — nema horizontalnog skrola
-2. CTA i primarno dugme vode na `/kontakt?usluga=fpv` (`/en/contact?usluga=fpv`)
-3. „Vidite primere" skače na sekciju Primeri, bez animacije skrola, a naslov ne završava ispod sticky header-a
-4. Cene „od 200 €" i „od 250 €" na stranici, „od 200 €" na kartici /usluge; iznos formatiran po jeziku
-5. `YouTubeLite` ne učitava `iframe` pre klika; FPV i nekretnine čitaju isti video ID
-6. Hover i fokus stanja rade i tastaturom; nema nijedne animacije pri učitavanju ili skrolu
-7. DoD Faze 2 prođen na /usluge i svih 5 stranica
-8. `npm run lint`, `npm run test` i `npm run build` prolaze
+1. Validacija radi sa porukama na oba jezika; obavezna polja i saglasnost blokiraju submit
+2. `?usluga=vencanje` (i ostale vrednosti) pre-selektuju tip na obe lokalizacije
+3. Telefon nevidljiv u view-source pre klika; posle klika `tel:` link radi
+4. Responzivno na 360px, 390px, 768px, 1024px, 1440px — bez horizontalnog skrola; jedan h1; fokus i tastatura rade; nema animacija
+5. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 2, 9, 14)
-- @context/features/13-usluga-fpv.md
-- @context/features/08-usluge-pregled-done.md
-- @context/features/10-usluga-nekretnine-done.md
-- @context/design-reference/NOTES.md (sekcije 1, 5, 6)
+- @context/project-overview.md (poglavlja 7.3, 8.2, 12)
+- @context/features/16-kontakt-stranica-done.md
+- @context/features/17-kontakt-backend.md
+- @context/design-reference/NOTES.md (sekcije 8, 9, 9a) + artboard `1c`
 
 ## History
 
@@ -145,3 +146,11 @@ Napravljena stranica za promo video namenjena firmama — restoranima, hotelima,
 ### Thursday, 24.09.2026. | 11:47 — 13 Usluga: FPV snimci
 
 Napravljena stranica za FPV snimke, uslugu po kojoj se ekipa izdvaja, i time završena cela faza usluga. Dizajn nema ekran za ovu uslugu, pa je stranica sklopljena isključivo iz postojećih delova šablona, bez ijedne nove komponente: uvod sa naslovom, pasusom, dva dugmeta i kadrom, pa kratko i laičko objašnjenje šta je FPV, četiri primene, dva primera, blok o bezbednosti, cena i zeleni poziv na kontakt sa unapred izabranom uslugom. Stranica namerno ima više teksta od ostalih usluga jer služi i za pretragu, kako je vlasnik odlučio, pa su ključne fraze utkane u uvod, primene i opis proleta kroz nekretninu. Prvi primer je isti snimak kuće kao na stranici nekretnina, i njegov video ID se sada upisuje na jednom mestu koje čitaju obe stranice; drugi primer je privremen, bez izmišljenog klijenta. Cena navodi polazni iznos za samostalno snimanje i poseban iznos za FPV kao dodatak uz drugu uslugu, oba sa istog mesta gde stoje sve cene, ispisana po jeziku. Tekstovi o bezbednosti govore o poštovanju regulative, proceni lokacije i vremenskim uslovima, bez tvrdnje o registraciji i bez obećanja o pomeranju termina, jer to vlasnik nije potvrdio. Pošto vlasnik nije odgovorio na tri pitanja pre starta, primenjene su preporuke: dva primera umesto jednog, bez posebnog zlatnog isticanja stranice i bez izdvajanja stavke sa cenom u zajednički deo. Tokom review-a jedan anglicizam iz sportskog rečnika zamenjen je domaćim izrazom. Na kraju je prošla zbirna provera faze: pregled usluga i svih pet stranica na oba jezika i pet širina bez horizontalnog skrola, sa jednim glavnim naslovom, bez učitavanja videa pre klika, bez animacija i bez ijedne „cene po dogovoru", sa svim cenama sa jednog mesta i svim privremenim primerima i kadrovima jasno označenim. Lint, provera tipova, testovi i build prolaze.
+
+### Friday, 25.09.2026. | 15:06 — 15 Stranica O nama
+
+Napravljena stranica o nama po ekranu iz dizajna, redom kao u dizajnu: uvod sa pričom i kadrom ekipe, pa ekipa, koraci saradnje, oprema sa napomenom o regulativi i zeleni poziv na kontakt. Uvodni tekst je nov, topao i usklađen sa odlukom da je baza Beograd i okolina, a šire uz dogovor; ne navodi broj ljudi, pa ostaje tačan i kad se ekipa promeni. Ekipa od šest članova čita se sa jednog mesta u kom vlasnik dodaje ili uklanja ljude, a uloga i opis svakog člana idu kroz prevode sa jasnom napomenom da se dopišu po osobi; ako se doda član bez teksta, build puca umesto da se na sajtu pojavi prazna kartica. Kartica je spremna za pravu fotografiju, uz primer kako se ona ubacuje, a do tada nosi privremeni portret. Vlasnik je pre implementacije odlučio o više stvari: kartice ekipe idu u tri, dve ili jednu kolonu sa slikom uvek iznad teksta, oprema ima četiri kartice sa ikonicama za dronove, kamere, gimbale i mikrofone, a programi za montažu i licencirana muzika pominju se u tekstu ispod. Koraci saradnje i poziv na kontakt preuzeti su iz dizajna doslovno. Uloga člana nije zlatna kao u dizajnu jer zlatna na svetloj pozadini nema dovoljan kontrast, pa je u boji glavnog teksta sa zlatnom crticom ispred, a gimbali nose zvanične nazive proizvoda. Vlasnik je odlučio i da sajt navodi registrovanog pilota pri Direktoratu civilnog vazduhoplovstva uz poštovanje regulative, bez pominjanja osiguranja, pa je isti tekst usklađen svuda gde se regulativa pominje — u footeru, na početnoj i na stranicama usluga — a odluka je upisana u opis projekta. Oprema koristi isti obrazac kartica sa ikonicom kao stranice usluga, samo sa drugom pozadinom i mestom za tekst ispod, pa stranice usluga ostaju nepromenjene. Tokom review-a uvod je na tablet širini prebačen u jednu kolonu jer se naslov lomio u pet redova, a uočeno je da se na početnoj, na telefonu, separator u traci ispod heroa pojavljuje na početku drugog reda kad se stavke prelome — to nije posledica novog teksta i ostaje za kasniju doradu. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, šest kartica se slaže u tačan broj kolona, poziv na kontakt vodi na tačnu adresu i nema nijedne animacije.
+
+### Friday, 02.10.2026. | 12:47 — 16 Kontakt stranica (UI, bez slanja)
+
+Napravljena kontakt stranica po ekranu iz dizajna: naslov i uvod, pa forma za upit levo i kartica „Radije telefonom?" desno, a na telefonu forma ide prva. Forma ima ime, email, telefon, tip usluge, datum snimanja, lokaciju i poruku, skriveno polje za hvatanje botova i obaveznu saglasnost sa linkom na politiku privatnosti koji se otvara u novom tabu da posetilac ne izgubi unos. Tip usluge se sam bira kada posetilac dođe sa stranice usluge, na oba jezika, a nepoznata vrednost u adresi se ignoriše. Slanje još ne postoji: forma proverava podatke, ispisuje upit u konzolu i prazni se posle uspeha, dok poruke za grešku i za previše pokušaja čekaju povezivanje sa serverom u sledećem feature-u. Provera podataka je napisana jednom, za browser i za server, pa će je slanje samo preuzeti; pokrivena je testovima. Vlasnik je pre implementacije odlučio o pet stvari: forma se pravi bez dodatne biblioteke za forme, rok odgovora je svuda 24 sata uz tačnu cenu, kartica zadržava radno vreme iz dizajna, tekstovi su „Događaj ili proslava", neutralna saglasnost „Slažem se…" i „Datum snimanja" jer se snima i pre samog događaja, a email je isti kao u footeru i menja se na jednom mestu. Mape nema, a područje rada je rečenica u kartici, uz broj telefona koji se prikazuje tek na klik i linkove ka Instagramu i YouTube-u. Obavezna polja nose diskretnu zvezdicu, a linkovi su zeleni umesto zlatnih iz dizajna zbog kontrasta. Tokom review-a sakrivena je poruka prethodnog uspešnog slanja dok forma ima nove greške, provera telefona sada traži bar šest cifara, a uputstvo za vlasnika dobilo je mesto gde se menjaju email i društvene mreže. Na zahtev vlasnika sistemski kalendar browsera, čiji se prozor ne može stilizovati, zamenjen je sopstvenim kalendarom u stilu sajta: srpski i engleski nazivi, izbor meseca i godine iz padajuće liste sajta, prošli dani onemogućeni, dugme za brisanje datuma i potpuna podrška za tastaturu. Usput je ispravljena greška u gotovom kalendaru, zbog koje traka sa strelicama nije dozvoljavala klik na izbor meseca i godine. Uočeno je i prihvaćeno da se unos gubi ako posetilac na kontakt stranici ponovo klikne link ka kontaktu. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, nema animacija, pre-selekcija radi za sve usluge, prazna forma i forma bez saglasnosti ne mogu da se pošalju, broj telefona nije u kodu stranice pre klika, a kalendar radi mišem i tastaturom.

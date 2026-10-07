@@ -61,7 +61,7 @@
         },
         "drone": {
           "title": "Drone",
-          "description": "The church, the venue and the landscape from the air — legally and in line with Civil Aviation Directorate rules. On request we add an FPV flight through the venue."
+          "description": "The church, the venue and the landscape from the air — flown by a pilot registered with the Civil Aviation Directorate, in line with its rules. On request we add an FPV flight through the venue."
         },
         "sound": {
           "title": "Clean sound",
@@ -291,7 +291,7 @@
         },
         "drone": {
           "title": "Drone",
-          "description": "The location and the crowd from the air — the venue, the beach or the court in a single shot. Drone footage of birthdays and other celebrations is filmed in line with Civil Aviation Directorate rules."
+          "description": "The location and the crowd from the air — the venue, the beach or the court in a single shot. Drone footage of birthdays and other celebrations is flown by a pilot registered with the Civil Aviation Directorate, in line with its rules."
         },
         "discreet": {
           "title": "Discreet filming",
@@ -342,7 +342,7 @@
       "items": {
         "space": {
           "title": "Your space from the air and the ground",
-          "description": "The drone shows the location and the surroundings, the gimbal camera the interior and the details. Drone advertising shoots are flown in line with Civil Aviation Directorate rules."
+          "description": "The drone shows the location and the surroundings, the gimbal camera the interior and the details. Drone advertising shoots are flown by a pilot registered with the Civil Aviation Directorate, in line with its rules."
         },
         "fpv": {
           "title": "An FPV flight for impact",
@@ -477,8 +477,8 @@
       "intro": "Before every flight we check where, when and how we're allowed to fly.",
       "items": {
         "dcv": {
-          "title": "In line with Civil Aviation Directorate rules",
-          "description": "We fly by the rules of the Civil Aviation Directorate and check the flight zones for every location."
+          "title": "A registered pilot",
+          "description": "Our pilot is registered with the Civil Aviation Directorate; we fly in line with its rules and check the flight zones for every location."
         },
         "location": {
           "title": "Location assessment",

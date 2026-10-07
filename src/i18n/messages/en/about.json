@@ -1,3 +1,87 @@
 {
-  "title": "About us"
+  "intro": {
+    "heading": "A small Belgrade crew that loves the view from above.",
+    "story": "Camera Motion grew out of a simple wish: that footage from the most important days shouldn't feel like a formality, but like a film. We love filming and the technology behind it — we fly DJI drones, shoot with a gimbal-mounted camera and edit everything in Premiere Pro. Still, to us every shot is a story first, and the frames are simply how we tell it.",
+    "crew": "We do everything ourselves, from the first conversation to delivery — no subcontractors and no strangers showing up on the day of the shoot. You'll usually find us in and around Belgrade, and we're happy to travel further across Serbia and the region — just let us know.",
+    "placeholder": "photo: the crew with their gear"
+  },
+  "teamHeading": "The crew",
+  "teamPortraitPlaceholder": "portrait",
+  "teamPortraitAlt": "{name}, {role}",
+  "team": {
+    "miroslav": {
+      "role": "Drone and FPV pilot",
+      "bio": "Registered pilot with the Civil Aviation Directorate. Plans the flights, the permits and the best fly-throughs — then nails them on the first take."
+    },
+    "bojan": {
+      "role": "Camera and editing",
+      "bio": "Shoots on a gimbal and edits in Premiere Pro. He's the reason the film tells a story instead of just stringing shots together."
+    },
+    "nikola": {
+      "role": "Drone and FPV pilot",
+      "bio": "Registered pilot with the Civil Aviation Directorate. Plans the flights, the permits and the best fly-throughs — then nails them on the first take."
+    },
+    "marko": {
+      "role": "Camera and editing",
+      "bio": "Shoots on a gimbal and edits in Premiere Pro. He's the reason the film tells a story instead of just stringing shots together."
+    },
+    "petar": {
+      "role": "Drone and FPV pilot",
+      "bio": "Registered pilot with the Civil Aviation Directorate. Plans the flights, the permits and the best fly-throughs — then nails them on the first take."
+    },
+    "nina": {
+      "role": "Camera and editing",
+      "bio": "Shoots on a gimbal and edits in Premiere Pro. She's the reason the film tells a story instead of just stringing shots together."
+    }
+  },
+  "process": {
+    "heading": "How we work",
+    "intro": "No surprises in the price and no “we'll see on the day”. Everything we'll film, and when you'll get it, is written in the quote.",
+    "steps": {
+      "talk": {
+        "title": "A short chat",
+        "description": "We hear what matters to you and suggest the package that covers it."
+      },
+      "prep": {
+        "title": "Preparation",
+        "description": "We visit the location, check the flight zones and plan the shots."
+      },
+      "shoot": {
+        "title": "The shoot",
+        "description": "Quiet and unobtrusive — you're with your guests, we do our part."
+      },
+      "delivery": {
+        "title": "Editing and delivery",
+        "description": "We show you the first cut, then deliver in 4K along with the footage archive."
+      }
+    }
+  },
+  "equipment": {
+    "heading": "Our gear",
+    "items": {
+      "drones": {
+        "title": "Drones",
+        "description": "DJI Mini 3 Pro for calm aerial shots and DJI Avata 2 for FPV fly-throughs."
+      },
+      "cameras": {
+        "title": "Cameras",
+        "description": "Sony a7 IV and Sony a7 III — full-frame cameras that keep the image clean even when the lights go down."
+      },
+      "gimbals": {
+        "title": "Gimbals",
+        "description": "DJI RS 4 and DJI RS 3 for smooth handheld shots, even when we move along with you."
+      },
+      "microphones": {
+        "title": "Microphones",
+        "description": "Wireless and wired microphones, so the vows, the toasts and every interview come through clearly."
+      }
+    },
+    "editing": "We edit in Adobe Premiere Pro and Vegas Pro with licensed music — so you can share the film on social media without a second thought.",
+    "regulation": "Our drones are flown by a pilot registered with the Civil Aviation Directorate of Serbia, strictly in line with its regulations."
+  },
+  "cta": {
+    "heading": "Let's meet before the shoot.",
+    "subheading": "Coffee or a video call — whatever suits you.",
+    "button": "Get in touch"
+  }
 }
