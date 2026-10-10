@@ -1,4 +1,4 @@
-# Current Feature: 16 — Kontakt stranica (UI, bez slanja)
+# Current Feature: 17 — Kontakt forma (backend)
 
 ## Status
 
@@ -10,74 +10,74 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 3, fajl 2/4. `/kontakt` (`/en/contact`) — kompletna stranica i forma sa validacijom, ALI bez slanja; submit za sada radi lokalnu validaciju i loguje (backend je feature 17). Izgled po artboardu `1c` (1:1)
-- **Layout**: desktop 2 kolone — forma levo + kontakt info kartica desno; mobilni: forma prva
-- **Forma** (bez react-hook-form: Server Action kroz `useActionState` + jedna zod šema koju dele klijent i server u feature-u 17):
-  1. Ime i prezime\* · 2. Email\* (validacija) · 3. Telefon (opciono, placeholder „+381 6x ...") · 4. Tip usluge — Select: Venčanje / Nekretnine / Događaj ili proslava (en: Event) / Promo video / FPV / Drugo · 5. Datum snimanja (opciono) · 6. Lokacija (opciono) · 7. Poruka\*
-  - Pre-selekcija tipa iz `?usluga=` (`vencanje | nekretnine | event | promo | fpv | drugo`, iste vrednosti na en — overview 7.3)
-  - Honeypot skriveno polje (koristi ga feature 17)
-  - Checkbox saglasnosti\* sa linkom na politiku privatnosti
-  - Dugme „Pošaljite upit" sa loading stanjem
-- **Stanja UI**: uspeh („Hvala! Odgovaramo u roku od 24h." + reset forme), greška (podaci ostaju), rate-limit („Previše pokušaja — pokušajte za nekoliko minuta.") — stanja postoje, feature 17 ih povezuje
-- **Kontakt info kartica** „Radije telefonom?" po dizajnu (sa radnim vremenom): telefon klik-za-prikaz (postojeći `PhoneReveal` — broj NIJE u inicijalnom HTML-u, overview 12), email (`CONTACT_DISPLAY_EMAIL`, isto kao footer), Instagram/YouTube linkovi, radno područje („Beograd i okolina · šire uz dogovor")
-- Validacione poruke i svi tekstovi u `contact` namespace-u (sr + en)
-- **Bez mape** — blok „Područje rada" sa placeholderom mape iz dizajna se svesno preskače (odluka vlasnika); područje rada je samo rečenica u kontakt kartici
+- Faza 3, fajl 3/4. Server Action `submitContact` u `src/app/actions/contact.ts` (poglavlje 12) koji zamenjuje lokalnu `submitContactLocally` u formi iz feature-a 16
+- **Validacija na serveru** istom zod šemom kao na klijentu (`contactSchema` / `parseContactForm` iz `src/lib/contact-form.ts`); nevalidan payload poslat direktno na action se odbija (`INVALID`)
+- **Honeypot** (`website`) popunjen → tihi „uspeh" bez slanja
+- **Rate limit** — Upstash `@upstash/ratelimit`: sliding window 3 zahteva / 10 min po IP (iz `x-forwarded-for`) + 10 / dan po IP; prekoračenje vraća `RATE_LIMITED`, koji UI već mapira u poruku „Previše pokušaja…"
+- **Resend**: slanje na `CONTACT_EMAIL`; From `onboarding@resend.dev` + `// TODO: verifikovati cameramotion.net → upiti@cameramotion.net`; Reply-To = email klijenta; Subject `[cameramotion.net] Upit — {tip} — {ime}`; telo uredan HTML (jednostavan šablon, escape unosa) + plain-text fallback
+- **Greške**: pad Resend-a → `SEND_FAILED` (error stanje u UI, podaci ostaju) + server log; greška se nikad ne guta kao uspeh
+- Instalirati `resend`, `@upstash/redis`, `@upstash/ratelimit`; env iz poglavlja 15 (već postoje u `.env.example`)
+- Vlasniku napisati tačno uputstvo: šta da napravi na Upstash-u i Resend-u i koje vrednosti da upiše u `.env.local` i na Vercel
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Dizajn `1c` (linija 1112 u `.dc.html`): naslov „Pišite nam" (52px) + uvodni pasus (20px, max 620px) → grid `1.25fr 1fr`, gap 32px. Forma: polja u 2 kolone (Ime | Email, Telefon | Tip usluge, Datum snimanja | Lokacija), ispod Poruka pune širine, checkbox sa zlatnom bordurom, zeleno dugme. Desno: kartica `surface-warm` „Radije telefonom?" (radno vreme, dugme za broj, Email, „Pratite nas" sa Instagram/YouTube pilulama) i ispod bela kartica „Područje rada" sa mapom (preskače se)
-- Postojeće što se koristi: `PhoneReveal` + `getPhoneNumber` (feature 05), `CONTACT_DISPLAY_EMAIL` i `SOCIAL_LINKS` iz `src/constants/contact.ts`, ikonice `InstagramIcon` / `YouTubeIcon`, shadcn `input`, `textarea`, `select`, `checkbox`, `label`, `button`
-- `contact.json` trenutno ima samo `title`; stranica je stub
-- `ServiceContactParamType` nema `drugo` — Select ima i opciju „Drugo"
-- U feature-u 02 shadcn Form je svesno preskočen (nova shadcn arhitektura nema gotov fajl na react-hook-form, a projekat tu biblioteku nema) — odluka je ostavljena za ovaj feature
+- Postojeće iz feature-a 16 na koje se action naslanja:
+  - `src/lib/contact-form.ts` — `contactSchema`, `contactFormDataToInput`, `parseContactForm`, `CONTACT_LIMITS`
+  - `src/hooks/use-contact-form.ts` — `submitContactLocally` sa `TODO(feature 17)`; isti potpis `(prevState, formData) => Promise<ContactSubmitStateType>`, reset forme posle uspeha već postoji
+  - `src/types/contact.type.ts` — `ContactSubmitErrorType = "INVALID" | "RATE_LIMITED" | "SEND_FAILED"`, honeypot `website`
+  - `ContactFormStatus` već prikazuje uspeh / grešku / rate-limit poruku
+  - `src/app/actions/phone.ts` — postojeći obrazac Server Action-a i `ActionResultType`
+- Env (poglavlje 15): `RESEND_API_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `CONTACT_EMAIL` — samo server-side, ništa pod `NEXT_PUBLIC_`
+- Pre implementacije proveriti aktuelnu Resend i Upstash dokumentaciju (verzije paketa i API)
+- Vitest testovi za Server Action uz `vi.mock()` za Resend i Upstash (coding standards)
+- README: setup Upstash/Resend naloga i env varijabli
 - `generateMetadata` i JSON-LD ostaju za feature 19
-- Odluke vlasnika (02.10.2026.):
-  1. **Forma bez react-hook-form** — `useActionState` + Server Action, jedna zod šema za klijent i server; shadcn Form/RHF se ne instaliraju
-  2. **Rok odgovora**: svuda „24 sata", uz „tačnu cenu" — uvodni pasus iz dizajna („istog dana") se usklađuje sa porukom o uspehu
-  3. **„Radije telefonom?"** ostaje kao u dizajnu, uključujući radno vreme
-  4. **Tekstovi forme**: tip usluge „Događaj ili proslava" (en: „Event"); saglasnost neutralno „Slažem se da Camera Motion obradi moje podatke…"; polje „Datum snimanja" (snimanje može biti i pre samog događaja, npr. pre svadbe)
-  5. **Email** = `CONTACT_DISPLAY_EMAIL` (isti kao footer, menja se na jednom mestu) + `// TODO: kasnije info@cameramotion.net`
+- Odluke vlasnika (07.10.2026.):
+  1. **Subject bez izabrane usluge**: `{tip}` = „Nije navedeno"
+  2. **Jezik emaila**: kostur obaveštenja (labele polja, naslovi) i nazivi usluga uvek na srpskom; tekst koji je posetilac uneo ide u originalu, bez ikakvog prevođenja
+  3. **Nalozi i ključevi**: vlasniku dati uputstvo korak po korak (sajtovi, gde se prave baza i API key, gde se kopiraju vrednosti, `.env.local` i Vercel)
+  4. **Upstash ne radi, a Resend radi**: upit se šalje bez rate limita, greška ide u server log (lokalno terminal `npm run dev`, u produkciji Vercel → Logs)
+  5. **Ključevi nisu upisani u env**: u developmentu se upit ispisuje u terminal (kao u feature-u 16); u produkciji action vraća `SEND_FAILED` i greška ide u server log
+  6. **`CONTACT_EMAIL`** mora biti isti Gmail kojim je otvoren Resend nalog — dok domen nije verifikovan, `onboarding@resend.dev` šalje samo na email vlasnika naloga
 - Implementacija:
-  - Šema i parsiranje FormData u `src/lib/contact-form.ts` (deli ih feature 17); greške su kodovi (`required`, `email`, `phone`, `date`, `tooLong`, `consent`) koje UI prevodi kroz `contact.form.errors`
-  - Logika forme u hook-u `src/hooks/use-contact-form.ts`: validacija na klijentu pre slanja, `useActionState` sa lokalnom akcijom `submitContactLocally` (loguje upit; `TODO(feature 17)` za zamenu sa `submitContact`), reset posle uspeha, fokus na prvo neispravno polje
-  - Forma se šalje kroz `onSubmit` + `startTransition`, ne kroz `action` prop — React tada ne resetuje formu sam, pa posle greške podaci ostaju
-  - Komponente u `src/components/sections/contact/`: `ContactForm`, `ContactField`, `ContactServiceSelect`, `ContactConsent`, `ContactFormStatus`, `ContactInfoCard`
-  - `noValidate` — poruke idu kroz i18n umesto browserovih; polja imaju `aria-invalid`, `aria-describedby` i `aria-required`
-  - Obavezna polja nose diskretnu zvezdicu (`*`, sakrivena od čitača ekrana) — dizajn je nema, spec ih označava
-  - Link na politiku privatnosti se otvara u novom tabu da posetilac ne izgubi unos
-  - Linkovi (email, politika) su zeleni, ne zlatni kao u dizajnu — zlatni tekst na svetloj pozadini nema dovoljan kontrast (isti razlog kao uloga člana u feature-u 15)
-  - Kartica „Radije telefonom?" ima i deo „Područje rada" (rečenica, bez mape) između emaila i društvenih mreža
-  - Honeypot polje `website` (sr-only, `aria-hidden`, `tabIndex=-1`)
-  - Stranica čita `searchParams` zbog pre-selekcije, pa je `/kontakt` dinamička ruta (ƒ), za razliku od ostalih SSG stranica
+  - Paketi: `resend` 6.32, `@upstash/redis` 1.39, `@upstash/ratelimit` 2.2 (dokumentacija proverena 07.10.2026.)
+  - `src/app/actions/contact.ts` — `submitContact(locale, prevState, formData)`: redom honeypot → zod validacija → rate limit → Resend; `locale` šalje forma (`useLocale`) i služi samo za red „Jezik sajta" u emailu, nepoznata vrednost pada na `sr`
+  - Honeypot se proverava pre validacije i rate limita — bot dobija tihi uspeh bez obzira na ostala polja i ne troši limit posetiocu sa iste IP adrese
+  - `src/lib/contact-rate-limit.ts` — dva sliding window limita (`contact:10m` 3/10 min, `contact:1d` 10/dan), oba po IP; IP iz prve adrese `x-forwarded-for`, pa `x-real-ip`; Upstash timeout (sam pušta zahtev) i izuzeci se loguju, upit prolazi
+  - `src/lib/contact-email.ts` — subject, HTML i plain-text; kostur kroz `createTranslator` nad srpskim `contact` porukama (labele polja i nazivi usluga se ne dupliraju), novi ključevi `contact.email.*` (sr + en zbog validatora, en se ne koristi); unos escape-ovan, subject u jednom redu; datum `14.06.2027.` preko nove `fromIsoDate`
+  - Email šablon ima inline stilove sa hex vrednostima iz palete — email klijenti ne čitaju CSS klase ni tokene
+  - Hook: `submitContactLocally` zamenjen sa `submitContact`; mrežna greška pri pozivu action-a vraća `SEND_FAILED` umesto da sruši stranicu
+  - README: sekcija „Kontakt forma (Resend + Upstash)" i ponašanje bez ključeva
+- Provera: testovi za action (7), email (7) i rate limit (7) uz `vi.mock` za Resend/Upstash/`next/headers`; uživo bez ključeva — dev: uspeh + reset forme + upit u terminalu na sr i en; production (`next start`): poruka o grešci, podaci ostaju, razlog u logu; serverski stringovi (pošiljalac, prefiksi limita, env imena, kostur emaila) nisu u `.next/static`; lint, tsc, test (63) i build prolaze. Sa ključevima vlasnika (dev): tri upita (sr venčanje sa svim poljima, en FPV, sr bez usluge) Resend prihvatio bez greške, četvrti u 10 min dobio rate-limit poruku; lokalno je IP `::1`, brojači posle testa resetovani u Upstash-u
 - Review:
-  - Poruka prethodnog slanja („Hvala!") se sakriva dok forma ima greške na poljima
-  - Telefon traži bar 6 cifara — unos samo od zagrada ili crtica više ne prolazi (test dodat)
-  - README: tabela „šta vlasnik menja" dobila red za email i društvene mreže (`src/constants/contact.ts`)
-  - Kalendar (odluka vlasnika): native `type="date"` zamenjen sopstvenim — prozor browsera ne može da se stilizuje (dugme „Clear" i izbor godine su bili osnovni HTML). shadcn `calendar` + `popover` (novi paket `react-day-picker`): srpska latinica / en-GB, pun naziv meseca, mesec i godina kroz Radix Select u stilu sajta, prošli datumi onemogućeni, izbor do 3 godine unapred, dugme „Obriši datum". Prikaz kroz `Intl` (`14.06.2026.` / `14/06/2026`), a u formu ide skriveno polje `date` kao `YYYY-MM-DD`, pa šema ostaje ista; nove pomoćne funkcije `toIsoDate` i `formatShortDate` u `src/lib/date.ts` sa testovima
-  - shadcn je uz kalendar dodao i `date-fns` kao direktnu zavisnost — uklonjen jer ga projekat ne koristi (ostaje samo kao zavisnost `react-day-picker`-a); `button.tsx` nije pregažen
-  - Generisani `calendar.tsx`: traka sa strelicama je ležala preko padajućih menija za mesec i godinu i hvatala klik — propušta klik, strelice ga hvataju; `popover.tsx` senka mapirana na token `shadow-card-hover` (kao `select`)
-  - Dugme za datum nema `aria-invalid` (ne važi za ulogu dugmeta) — greška se prikazuje kroz `data-invalid` stil i čita kroz `aria-describedby`, zajedno sa izabranim datumom
-  - Unos se gubi ako posetilac na kontakt stranici klikne link ka kontaktu u header-u (forma se učitava ispočetka zbog promene `?usluga=`) — vlasnik prihvatio, ostaje ovako
-- Provera: /kontakt i /en/contact na 5 širina — bez horizontalnog skrola, jedan h1, 0 animacija, forma pre kartice na mobilnom; pre-selekcija za svih 6 vrednosti + nepoznata na oba jezika; prazna forma i forma bez saglasnosti blokiraju slanje sa porukama; uspeh resetuje formu i loguje upit; broj nije u sirovom HTML-u, a posle klika `tel:` link dobija fokus; Tab preskače honeypot; kalendar: izbor godine i dana mišem i tastaturom, brisanje, reset posle slanja, bez horizontalnog skrola na 390px; lint, tsc, test (40) i build prolaze
+  - Limiti su se proveravali paralelno, pa su pokušaji odbijeni 10-minutnim limitom punili dnevni (Upstash ne broji odbijen zahtev, ali dnevni nije bio odbijen) — posle 3 poslata i 7 odbijenih klikova posetilac bi bio blokiran ceo dan; sada redom, dnevni se proverava samo ako 10-minutni prođe (test dodat)
+  - Action je javni endpoint: poziv sa nečim što nije FormData bacao je grešku (500) — sada vraća `INVALID` (test dodat)
+  - lint, tsc, test (64) i build prolaze
+- Vlasnik potvrdio (07.10.2026.): emailovi stižu sa svim poljima, Reply-To radi; red „Jezik sajta" i rečenica o odgovoru na dnu emaila ostaju
+- Dorade posle review-a (odluke vlasnika):
+  - Neuspelo slanje (Resend greška ili nije podešen u produkciji) vraća pokušaj u oba limita (`refundContactRateLimit`, `limit(ip, { rate: -1 })`) — kvar Resend-a ne dovodi posetioca do „Previše pokušaja"; provereno i na pravom Upstash-u sa test ključevima (obrisani posle provere)
+  - Popunjen honeypot se beleži kao `console.warn` (`[contact] Honeypot popunjen…`) — vidi se u Vercel → Logs ako polje ikad popuni pravi posetilac (npr. automatsko popunjavanje)
+  - Rate-limit poruka: „Previše pokušaja — pokušajte ponovo za nekih 15 minuta." / „…in about 15 minutes." — konkretno vreme umesto „nekoliko minuta"; 10-minutni sliding window se odblokira najkasnije posle ~10 min, pa 15 uvek važi
+  - Dupli klik na dugme šalje jedan upit (provereno u browseru)
+  - lint, tsc, test (68) i build prolaze
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Validacija radi sa porukama na oba jezika; obavezna polja i saglasnost blokiraju submit
-2. `?usluga=vencanje` (i ostale vrednosti) pre-selektuju tip na obe lokalizacije
-3. Telefon nevidljiv u view-source pre klika; posle klika `tel:` link radi
-4. Responzivno na 360px, 390px, 768px, 1024px, 1440px — bez horizontalnog skrola; jedan h1; fokus i tastatura rade; nema animacija
-5. `npm run lint`, `npm run test` i `npm run build` prolaze
+1. Upit stiže na Gmail sa svim poljima; Reply-To ispravan
+2. 4. zahtev u 10 min → rate-limit poruka; honeypot filtrira
+3. Nevalidan payload direktno na action → server validacija odbija
+4. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 7.3, 8.2, 12)
+- @context/project-overview.md (poglavlja 12, 15)
 - @context/features/16-kontakt-stranica-done.md
 - @context/features/17-kontakt-backend.md
-- @context/design-reference/NOTES.md (sekcije 8, 9, 9a) + artboard `1c`
+- https://resend.com/docs · https://upstash.com/docs
 
 ## History
 
@@ -154,3 +154,7 @@ Napravljena stranica o nama po ekranu iz dizajna, redom kao u dizajnu: uvod sa p
 ### Friday, 02.10.2026. | 12:47 — 16 Kontakt stranica (UI, bez slanja)
 
 Napravljena kontakt stranica po ekranu iz dizajna: naslov i uvod, pa forma za upit levo i kartica „Radije telefonom?" desno, a na telefonu forma ide prva. Forma ima ime, email, telefon, tip usluge, datum snimanja, lokaciju i poruku, skriveno polje za hvatanje botova i obaveznu saglasnost sa linkom na politiku privatnosti koji se otvara u novom tabu da posetilac ne izgubi unos. Tip usluge se sam bira kada posetilac dođe sa stranice usluge, na oba jezika, a nepoznata vrednost u adresi se ignoriše. Slanje još ne postoji: forma proverava podatke, ispisuje upit u konzolu i prazni se posle uspeha, dok poruke za grešku i za previše pokušaja čekaju povezivanje sa serverom u sledećem feature-u. Provera podataka je napisana jednom, za browser i za server, pa će je slanje samo preuzeti; pokrivena je testovima. Vlasnik je pre implementacije odlučio o pet stvari: forma se pravi bez dodatne biblioteke za forme, rok odgovora je svuda 24 sata uz tačnu cenu, kartica zadržava radno vreme iz dizajna, tekstovi su „Događaj ili proslava", neutralna saglasnost „Slažem se…" i „Datum snimanja" jer se snima i pre samog događaja, a email je isti kao u footeru i menja se na jednom mestu. Mape nema, a područje rada je rečenica u kartici, uz broj telefona koji se prikazuje tek na klik i linkove ka Instagramu i YouTube-u. Obavezna polja nose diskretnu zvezdicu, a linkovi su zeleni umesto zlatnih iz dizajna zbog kontrasta. Tokom review-a sakrivena je poruka prethodnog uspešnog slanja dok forma ima nove greške, provera telefona sada traži bar šest cifara, a uputstvo za vlasnika dobilo je mesto gde se menjaju email i društvene mreže. Na zahtev vlasnika sistemski kalendar browsera, čiji se prozor ne može stilizovati, zamenjen je sopstvenim kalendarom u stilu sajta: srpski i engleski nazivi, izbor meseca i godine iz padajuće liste sajta, prošli dani onemogućeni, dugme za brisanje datuma i potpuna podrška za tastaturu. Usput je ispravljena greška u gotovom kalendaru, zbog koje traka sa strelicama nije dozvoljavala klik na izbor meseca i godine. Uočeno je i prihvaćeno da se unos gubi ako posetilac na kontakt stranici ponovo klikne link ka kontaktu. Lint, provera tipova, testovi i build prolaze; stranica je automatski proverena na pet širina i oba jezika — nema horizontalnog skrola, jedan je glavni naslov, nema animacija, pre-selekcija radi za sve usluge, prazna forma i forma bez saglasnosti ne mogu da se pošalju, broj telefona nije u kodu stranice pre klika, a kalendar radi mišem i tastaturom.
+
+### Wednesday, 07.10.2026. | 12:06 — 17 Kontakt forma (backend)
+
+Kontakt forma sada zaista šalje upite: posle provere podataka upit stiže vlasniku na Gmail preko servisa za slanje emaila, a odgovor iz Gmail-a ide direktno klijentu. Server ponovo proverava sve podatke istim pravilima kao forma u browseru, pa upit poslat mimo forme biva odbijen, a popunjeno skriveno polje za botove daje tihi uspeh bez slanja i ostavlja upozorenje u logu, da se vidi ako ga ikad popuni pravi posetilac. Broj upita je ograničen po IP adresi na tri u deset minuta i deset dnevno; posle toga posetilac dobija poruku da pokuša ponovo za nekih 15 minuta, koju je vlasnik izabrao umesto neodređenog „nekoliko minuta" da bi posetilac znao koliko da čeka. Vlasnik je pre implementacije odlučio o šest stvari: kad usluga nije izabrana u naslovu emaila piše „Nije navedeno", kostur obaveštenja i nazivi usluga su uvek na srpskom dok tekst posetioca stiže u originalu, kvar servisa za ograničenje ne sme da blokira klijenta pa upit tada prolazi uz zapis u logu, bez upisanih ključeva forma u razvoju samo ispisuje upit u terminal a na produkciji prikazuje grešku, primalac mora biti isti Gmail kojim je otvoren nalog za slanje dok se domen ne verifikuje, a vlasnik je dobio uputstvo korak po korak za otvaranje oba naloga i upis ključeva lokalno i na Vercel-u. Email ima uredan izgled u bojama sajta i tekstualnu verziju, sav unos posetioca je zaštićen od ubacivanja koda, a vlasnik je zadržao red sa jezikom sajta i rečenicu o odgovaranju na dnu emaila. Tokom review-a ispravljeno je to što su pokušaji odbijeni desetominutnim ograničenjem trošili i dnevni, pa bi posetilac koji uporno klikće bio blokiran ceo dan, kao i pad servera kada neko pozove slanje bez podataka forme. Na zahtev vlasnika neuspelo slanje se više ne računa u ograničenje, pa kvar servisa za email ne kažnjava posetioca, a provereno je i da dupli klik na dugme šalje samo jedan upit. README je dobio uputstvo za naloge i opis ponašanja bez ključeva. Lint, provera tipova, testovi i build prolaze; uživo je potvrđeno da upiti sa oba jezika stižu na Gmail sa svim poljima, da odgovor ide klijentu, da četvrti upit u deset minuta dobija poruku o ograničenju i da vraćanje pokušaja radi na pravoj bazi.

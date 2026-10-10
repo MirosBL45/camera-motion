@@ -7,6 +7,12 @@ export function toIsoDate(date: Date): string {
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
 
+/** `YYYY-MM-DD` nazad u lokalni datum (obrnuto od `toIsoDate`; `new Date("YYYY-MM-DD")` bi bio UTC). */
+export function fromIsoDate(value: string): Date {
+  const [year, month, day] = value.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
 /** Kratak prikaz datuma po jeziku: sr `14.06.2026.`, en `14/06/2026` (poglavlje 8.3). */
 export function formatShortDate(date: Date, locale: Locale): string {
   return new Intl.DateTimeFormat(INTL_LOCALE_MAP[locale], {
