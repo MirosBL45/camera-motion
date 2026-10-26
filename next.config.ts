@@ -19,6 +19,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // MDX članci se čitaju sa diska (`src/lib/blog.ts`). Lista `/blog` se renderuje po zahtevu
+  // (query parametri), a stranica članka za slug drugog jezika radi redirect — oba moraju
+  // imati fajlove u server bundle-u na Vercel-u.
+  outputFileTracingIncludes: {
+    "/\\[locale\\]/blog": ["./src/content/blog/**/*.mdx"],
+    "/\\[locale\\]/blog/\\[slug\\]": ["./src/content/blog/**/*.mdx"],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();

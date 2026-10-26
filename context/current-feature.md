@@ -1,4 +1,4 @@
-# Current Feature: 17 — Kontakt forma (backend)
+# Current Feature: 18 — Blog (MDX)
 
 ## Status
 
@@ -10,74 +10,84 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 3, fajl 3/4. Server Action `submitContact` u `src/app/actions/contact.ts` (poglavlje 12) koji zamenjuje lokalnu `submitContactLocally` u formi iz feature-a 16
-- **Validacija na serveru** istom zod šemom kao na klijentu (`contactSchema` / `parseContactForm` iz `src/lib/contact-form.ts`); nevalidan payload poslat direktno na action se odbija (`INVALID`)
-- **Honeypot** (`website`) popunjen → tihi „uspeh" bez slanja
-- **Rate limit** — Upstash `@upstash/ratelimit`: sliding window 3 zahteva / 10 min po IP (iz `x-forwarded-for`) + 10 / dan po IP; prekoračenje vraća `RATE_LIMITED`, koji UI već mapira u poruku „Previše pokušaja…"
-- **Resend**: slanje na `CONTACT_EMAIL`; From `onboarding@resend.dev` + `// TODO: verifikovati cameramotion.net → upiti@cameramotion.net`; Reply-To = email klijenta; Subject `[cameramotion.net] Upit — {tip} — {ime}`; telo uredan HTML (jednostavan šablon, escape unosa) + plain-text fallback
-- **Greške**: pad Resend-a → `SEND_FAILED` (error stanje u UI, podaci ostaju) + server log; greška se nikad ne guta kao uspeh
-- Instalirati `resend`, `@upstash/redis`, `@upstash/ratelimit`; env iz poglavlja 15 (već postoje u `.env.example`)
-- Vlasniku napisati tačno uputstvo: šta da napravi na Upstash-u i Resend-u i koje vrednosti da upiše u `.env.local` i na Vercel
+- Faza 3, fajl 4/4 (kraj faze). Blog iz MDX fajlova + 9 početnih članaka na srpskom
+- **Infrastruktura** (poglavlje 13): `src/content/blog/sr|en/*.mdx`, frontmatter `title, description, date, slug, cover?, tags?, draft`, SSG, `draft: true` ne izlazi u produkciju; tehnika (`next-mdx-remote` ili `@next/mdx`) po aktuelnoj preporuci za App Router
+- **en verzija opciona** — bez en fajla članak ne postoji na `/en/blog` (nikad sr tekst na en listi)
+- **Lista `/blog`** po artboardu `2c`: prvi (najnoviji) članak istaknut u širokoj kartici sa naslovnom fotografijom, ostali u gridu 3×2 (naslov, kategorija, datum po locale formatu, opis, cover ako postoji), od najnovijeg
+- **Filteri po kategorijama** — pilule Sve / Venčanja / Nekretnine / Dron i FPV / Iza kadra / Događaji i firme; ključevi `vencanja`, `nekretnine`, `dron-fpv`, `iza-kadra`, `dogadjaji-firme` iz `tags` (ne prevode se), nazivi kroz `blog` namespace; članak sa više ključeva je u svakoj svojoj kategoriji; filter kroz `?kategorija=` (deljiv URL), ne kroz stanje komponente
+- **„Prikaži još tekstova"** — lista prvo prikazuje 7 (1 istaknut + 3×2); na „Sve" sa 9 članaka dugme učitava preostala 2 i nestaje; sakriva se i kad u kategoriji nema više stavki
+- **Vreme čitanja** — utility u `src/lib/` (~200 reči/min, naviše, min 1), ne u frontmatteru; prikaz kroz ICU plural u `blog` namespace-u
+- **`/blog/[slug]`** — tekst max 75ch (odluka 16), typography plugin usklađen sa paletom; custom MDX komponente: YouTubeLite i slika sa potpisom
+- **Metadata iz frontmattera**
+- **9 članaka** (~500–800 reči, prirodan ton) po tezama iz feature fajla: bez izmišljenih činjenica, bez placeholder markera u tekstu, različit placeholder `date` po članku, interni linkovi ka usluzi/kontaktu gde se prirodno uklapaju, nigde let dronom iznad okupljenih ljudi
 
 ## Notes
 
 <!-- Any extra notes -->
 
-- Postojeće iz feature-a 16 na koje se action naslanja:
-  - `src/lib/contact-form.ts` — `contactSchema`, `contactFormDataToInput`, `parseContactForm`, `CONTACT_LIMITS`
-  - `src/hooks/use-contact-form.ts` — `submitContactLocally` sa `TODO(feature 17)`; isti potpis `(prevState, formData) => Promise<ContactSubmitStateType>`, reset forme posle uspeha već postoji
-  - `src/types/contact.type.ts` — `ContactSubmitErrorType = "INVALID" | "RATE_LIMITED" | "SEND_FAILED"`, honeypot `website`
-  - `ContactFormStatus` već prikazuje uspeh / grešku / rate-limit poruku
-  - `src/app/actions/phone.ts` — postojeći obrazac Server Action-a i `ActionResultType`
-- Env (poglavlje 15): `RESEND_API_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `CONTACT_EMAIL` — samo server-side, ništa pod `NEXT_PUBLIC_`
-- Pre implementacije proveriti aktuelnu Resend i Upstash dokumentaciju (verzije paketa i API)
-- Vitest testovi za Server Action uz `vi.mock()` za Resend i Upstash (coding standards)
-- README: setup Upstash/Resend naloga i env varijabli
-- `generateMetadata` i JSON-LD ostaju za feature 19
-- Odluke vlasnika (07.10.2026.):
-  1. **Subject bez izabrane usluge**: `{tip}` = „Nije navedeno"
-  2. **Jezik emaila**: kostur obaveštenja (labele polja, naslovi) i nazivi usluga uvek na srpskom; tekst koji je posetilac uneo ide u originalu, bez ikakvog prevođenja
-  3. **Nalozi i ključevi**: vlasniku dati uputstvo korak po korak (sajtovi, gde se prave baza i API key, gde se kopiraju vrednosti, `.env.local` i Vercel)
-  4. **Upstash ne radi, a Resend radi**: upit se šalje bez rate limita, greška ide u server log (lokalno terminal `npm run dev`, u produkciji Vercel → Logs)
-  5. **Ključevi nisu upisani u env**: u developmentu se upit ispisuje u terminal (kao u feature-u 16); u produkciji action vraća `SEND_FAILED` i greška ide u server log
-  6. **`CONTACT_EMAIL`** mora biti isti Gmail kojim je otvoren Resend nalog — dok domen nije verifikovan, `onboarding@resend.dev` šalje samo na email vlasnika naloga
-- Implementacija:
-  - Paketi: `resend` 6.32, `@upstash/redis` 1.39, `@upstash/ratelimit` 2.2 (dokumentacija proverena 07.10.2026.)
-  - `src/app/actions/contact.ts` — `submitContact(locale, prevState, formData)`: redom honeypot → zod validacija → rate limit → Resend; `locale` šalje forma (`useLocale`) i služi samo za red „Jezik sajta" u emailu, nepoznata vrednost pada na `sr`
-  - Honeypot se proverava pre validacije i rate limita — bot dobija tihi uspeh bez obzira na ostala polja i ne troši limit posetiocu sa iste IP adrese
-  - `src/lib/contact-rate-limit.ts` — dva sliding window limita (`contact:10m` 3/10 min, `contact:1d` 10/dan), oba po IP; IP iz prve adrese `x-forwarded-for`, pa `x-real-ip`; Upstash timeout (sam pušta zahtev) i izuzeci se loguju, upit prolazi
-  - `src/lib/contact-email.ts` — subject, HTML i plain-text; kostur kroz `createTranslator` nad srpskim `contact` porukama (labele polja i nazivi usluga se ne dupliraju), novi ključevi `contact.email.*` (sr + en zbog validatora, en se ne koristi); unos escape-ovan, subject u jednom redu; datum `14.06.2027.` preko nove `fromIsoDate`
-  - Email šablon ima inline stilove sa hex vrednostima iz palete — email klijenti ne čitaju CSS klase ni tokene
-  - Hook: `submitContactLocally` zamenjen sa `submitContact`; mrežna greška pri pozivu action-a vraća `SEND_FAILED` umesto da sruši stranicu
-  - README: sekcija „Kontakt forma (Resend + Upstash)" i ponašanje bez ključeva
-- Provera: testovi za action (7), email (7) i rate limit (7) uz `vi.mock` za Resend/Upstash/`next/headers`; uživo bez ključeva — dev: uspeh + reset forme + upit u terminalu na sr i en; production (`next start`): poruka o grešci, podaci ostaju, razlog u logu; serverski stringovi (pošiljalac, prefiksi limita, env imena, kostur emaila) nisu u `.next/static`; lint, tsc, test (63) i build prolaze. Sa ključevima vlasnika (dev): tri upita (sr venčanje sa svim poljima, en FPV, sr bez usluge) Resend prihvatio bez greške, četvrti u 10 min dobio rate-limit poruku; lokalno je IP `::1`, brojači posle testa resetovani u Upstash-u
-- Review:
-  - Limiti su se proveravali paralelno, pa su pokušaji odbijeni 10-minutnim limitom punili dnevni (Upstash ne broji odbijen zahtev, ali dnevni nije bio odbijen) — posle 3 poslata i 7 odbijenih klikova posetilac bi bio blokiran ceo dan; sada redom, dnevni se proverava samo ako 10-minutni prođe (test dodat)
-  - Action je javni endpoint: poziv sa nečim što nije FormData bacao je grešku (500) — sada vraća `INVALID` (test dodat)
-  - lint, tsc, test (64) i build prolaze
-- Vlasnik potvrdio (07.10.2026.): emailovi stižu sa svim poljima, Reply-To radi; red „Jezik sajta" i rečenica o odgovoru na dnu emaila ostaju
-- Dorade posle review-a (odluke vlasnika):
-  - Neuspelo slanje (Resend greška ili nije podešen u produkciji) vraća pokušaj u oba limita (`refundContactRateLimit`, `limit(ip, { rate: -1 })`) — kvar Resend-a ne dovodi posetioca do „Previše pokušaja"; provereno i na pravom Upstash-u sa test ključevima (obrisani posle provere)
-  - Popunjen honeypot se beleži kao `console.warn` (`[contact] Honeypot popunjen…`) — vidi se u Vercel → Logs ako polje ikad popuni pravi posetilac (npr. automatsko popunjavanje)
-  - Rate-limit poruka: „Previše pokušaja — pokušajte ponovo za nekih 15 minuta." / „…in about 15 minutes." — konkretno vreme umesto „nekoliko minuta"; 10-minutni sliding window se odblokira najkasnije posle ~10 min, pa 15 uvek važi
-  - Dupli klik na dugme šalje jedan upit (provereno u browseru)
-  - lint, tsc, test (68) i build prolaze
+- Postojeće na šta se feature naslanja:
+  - Rute `blog` i `blogPost` već postoje u `src/constants/routes.ts`; `src/app/[locale]/(site)/blog/page.tsx` i `blog/[slug]/page.tsx` su skeleti iz feature-a 03
+  - `src/i18n/messages/{sr,en}/blog.json` ima samo `title` i `post.title`
+  - `src/components/shared/YouTubeLite.tsx` (facade, klijentska) — koristi se i u MDX-u; `src/components/mdx/` i `src/content/blog/{sr,en}/` su prazni
+  - `MediaPlaceholder` (pruge, uklj. zlatnu varijantu za naslovnu blog fotografiju), `CtaBand`, `src/lib/date.ts` (formatiranje datuma po locale-u)
+  - Validator prevoda puca ako sr i en nemaju iste ključeve
+- Dizajn `2c`: h1 „Blog" 52px + uvodni pasus (max 640px), pilule (aktivna zelena), istaknuta kartica `1.15fr 1fr` sa zlatnom bordurom i `shadow-gold` (meta: kategorija · datum · „6 min čitanja", h2 36px, opis, „Pročitajte tekst →"), grid kartica `repeat(3,1fr)` gap 24px sa slikom 200px, dugme „Prikaži još tekstova" (belo sa zlatnom bordurom), na dnu zeleni CTA band
+- Dizajn ima samo 5 pilula — „Događaji i firme" je dodata odlukom vlasnika (overview 13)
+- Ekran članka (detalj) ne postoji u dizajnu (NOTES.md) — izgled se izvodi iz postojećih obrazaca
+- Članci 4 i 5 su u prvom licu jednine (priča vlasnika), po spec-u; članak 5 pominje DJI Mavic Air (dron koji je stradao) — po spec-u, bez regulative u tom članku
+- Pre implementacije proveriti aktuelnu dokumentaciju: MDX u Next.js 16 App Router (`node_modules/next/dist/docs/`), `@tailwindcss/typography` za Tailwind v4
+- Vitest testovi za utilities (vreme čitanja, učitavanje/filtriranje/sortiranje članaka, draft)
+- `generateMetadata` (canonical, hreflang), `BlogPosting`/`BreadcrumbList` JSON-LD i sitemap ostaju za feature 19 — ovde samo title/description iz frontmattera (proveriti granicu na startu)
+
+### Odluke vlasnika (23.10.2026.)
+
+1. **CTA band na dnu liste** iz dizajna se dodaje („Imate pitanje na koje nema teksta?" + dugme „Pišite nam" → kontakt), preko postojećeg `CtaBand`
+2. **Stranica članka**: putanja (Blog › naslov), meta red (kategorija · datum · vreme čitanja), h1, opis, naslovna fotografija/placeholder, tekst 75ch (izmenjeno odlukom 16), link „Nazad na blog", CTA band na kraju — isključivo iz postojećih obrazaca, bez novih elemenata
+3. **Kategorija u meta redu** je zelena (čitljiva), ne zlatna
+4. **„Prikaži još tekstova" kroz query param** (`?strana=2` = 7 + 6, svaka sledeća strana +6; broj tekstova će rasti), server render bez klijentske komponente; dugme ne skroluje na vrh; nepoznata vrednost `?kategorija=` / `?strana=` pada na podrazumevano. Posledica: `/blog` lista se renderuje po zahtevu, članci ostaju SSG
+5. **Svih 9 članaka i na engleskom** — prirodan, smislen prevod, ne bukvalan
+6. SR/EN prekidač na članku vodi na prevod istog članka (rešeno odlukom 5)
+7. **Naslovne fotografije**: placeholder po dizajnu (zlatne pruge za istaknutu, neutralne za grid) + `// TODO: prava slika`
+8. **Članak 6**: sr „kratak spot sa najboljim trenucima", en „highlight spot"
+9. **Pilule na telefonu** se prelamaju u više redova
+10. **Engleski slugovi** po članku; isti naziv fajla u `sr/` i `en/` povezuje prevode (SR/EN prekidač vodi na prevod istog članka)
+11. **Istaknut je članak 3**, ostali po datumu; placeholder datumi unazad sa nasumičnim razmakom 10–17 dana: 3 → 19.10.2026., 1 → 05.10.2026., 2 → 22.09.2026., 4 → 05.09.2026., 5 → 26.08.2026., 6 → 11.08.2026., 7 → 30.07.2026., 8 → 14.07.2026., 9 → 03.07.2026.
+12. **YouTubeLite u članku 2** — isti snimak kuće kao na stranicama nekretnina i FPV-a (jedan ID na jednom mestu); vlasnik dao snimak: `ZvHHT27JMvc` („Seosko turističko domaćinstvo Milanović Žuč | FPV dron kroz kuću i dvorište | Kuršumlija") → upisati u `FPV_HOUSE_VIDEO_ID` u `src/data/services.ts`
+13. **Slika sa potpisom**: komponenta se pravi, ali se ne koristi ni u jednom članku dok ne postoje prave fotografije; u README primer kako se ubacuje
+14. **Prazno stanje kategorije**: jedna rečenica ispod pilula („U ovoj kategoriji još nema tekstova.") — zaštita ako kategorija ostane bez objavljenih članaka
+15. **Snimak kuće**: seosko turističko domaćinstvo Milanović u Žuču kod Kuršumlije, izdaje se preko Booking-a; klijent i mesto se navode — u članku 2 i u naslovu primera na stranicama nekretnina i FPV-a (sr + en)
+
+### Odluke vlasnika (26.10.2026.) — posle review-a
+
+16. **Stranica članka u dve centrirane kolone**: putanja, meta red, naslov, opis i naslovna fotografija u koloni ~880px; tekst članka i link „Nazad na blog" (u `<footer>` članka) u užoj koloni od **75ch**
+17. **Nigde let dronom iznad okupljenih ljudi** — pravilo važi za ceo sajt (upisano u overview, poglavlje 2): FPV prolet je kroz praznu salu, pre dolaska gostiju (Premium paket i primer na venčanjima, blok o dronu, članak 6); na događajima dron snima lokaciju sa strane i sa bezbedne udaljenosti, bez „mase iz vazduha"
+18. **Članak 6**: montiran snimak celog dana najčešće traje između jednog i tri sata — tačna dužina ne može unapred, a cilj je što više emocija; stavka „snimak celog događaja u punoj dužini" izbačena iz dodataka jer se sudarala sa montiranim snimkom celog dana
+19. **README** dobija uputstvo za blog: nov članak, frontmatter, linkovi, `<YouTube>` i `<Figure>`
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Upit stiže na Gmail sa svim poljima; Reply-To ispravan
-2. 4. zahtev u 10 min → rate-limit poruka; honeypot filtrira
-3. Nevalidan payload direktno na action → server validacija odbija
-4. `npm run lint`, `npm run test` i `npm run build` prolaze
+1. Lista i članci rade na obe lokalizacije; članak bez en verzije ne postoji na `/en/blog`
+2. `draft: true` ne izlazi u build; datumi formatirani po locale-u
+3. YouTubeLite radi unutar MDX-a
+4. Filter radi za svih 5 kategorija preko `?kategorija=`, URL je deljiv; članak sa više `tags` vrednosti pojavljuje se u svakoj svojoj kategoriji
+5. „Prikaži još tekstova" na listi „Sve" učitava preostala 2 članka i zatim nestaje
+6. `npm run lint`, `npm run test` i `npm run build` prolaze
+
+### DoD Faze 3 (zbirna provera)
+
+- [x] O nama kompletna, uključujući ekipu iz `team.ts` i sekciju „Kako radimo"
+- [x] Kontakt: forma šalje na Gmail, rate limit i honeypot rade, telefon skriven do klika
+- [x] Blog sa 9 članaka; build zelen
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 12, 15)
-- @context/features/16-kontakt-stranica-done.md
-- @context/features/17-kontakt-backend.md
-- https://resend.com/docs · https://upstash.com/docs
+- @context/project-overview.md (poglavlja 8, 13)
+- @context/features/18-blog.md
+- @context/features/03-i18n-i-tipizirane-rute-done.md
+- @context/design-reference/NOTES.md (artboard `2c`)
+- https://nextjs.org/docs (MDX u App Routeru — proveriti najnoviju verziju)
 
 ## History
 
@@ -158,3 +168,7 @@ Napravljena kontakt stranica po ekranu iz dizajna: naslov i uvod, pa forma za up
 ### Wednesday, 07.10.2026. | 12:06 — 17 Kontakt forma (backend)
 
 Kontakt forma sada zaista šalje upite: posle provere podataka upit stiže vlasniku na Gmail preko servisa za slanje emaila, a odgovor iz Gmail-a ide direktno klijentu. Server ponovo proverava sve podatke istim pravilima kao forma u browseru, pa upit poslat mimo forme biva odbijen, a popunjeno skriveno polje za botove daje tihi uspeh bez slanja i ostavlja upozorenje u logu, da se vidi ako ga ikad popuni pravi posetilac. Broj upita je ograničen po IP adresi na tri u deset minuta i deset dnevno; posle toga posetilac dobija poruku da pokuša ponovo za nekih 15 minuta, koju je vlasnik izabrao umesto neodređenog „nekoliko minuta" da bi posetilac znao koliko da čeka. Vlasnik je pre implementacije odlučio o šest stvari: kad usluga nije izabrana u naslovu emaila piše „Nije navedeno", kostur obaveštenja i nazivi usluga su uvek na srpskom dok tekst posetioca stiže u originalu, kvar servisa za ograničenje ne sme da blokira klijenta pa upit tada prolazi uz zapis u logu, bez upisanih ključeva forma u razvoju samo ispisuje upit u terminal a na produkciji prikazuje grešku, primalac mora biti isti Gmail kojim je otvoren nalog za slanje dok se domen ne verifikuje, a vlasnik je dobio uputstvo korak po korak za otvaranje oba naloga i upis ključeva lokalno i na Vercel-u. Email ima uredan izgled u bojama sajta i tekstualnu verziju, sav unos posetioca je zaštićen od ubacivanja koda, a vlasnik je zadržao red sa jezikom sajta i rečenicu o odgovaranju na dnu emaila. Tokom review-a ispravljeno je to što su pokušaji odbijeni desetominutnim ograničenjem trošili i dnevni, pa bi posetilac koji uporno klikće bio blokiran ceo dan, kao i pad servera kada neko pozove slanje bez podataka forme. Na zahtev vlasnika neuspelo slanje se više ne računa u ograničenje, pa kvar servisa za email ne kažnjava posetioca, a provereno je i da dupli klik na dugme šalje samo jedan upit. README je dobio uputstvo za naloge i opis ponašanja bez ključeva. Lint, provera tipova, testovi i build prolaze; uživo je potvrđeno da upiti sa oba jezika stižu na Gmail sa svim poljima, da odgovor ide klijentu, da četvrti upit u deset minuta dobija poruku o ograničenju i da vraćanje pokušaja radi na pravoj bazi.
+
+### Monday, 26.10.2026. | 12:43 — 18 Blog (MDX)
+
+Napravljen blog i time završena faza sadržaja i kontakta. Članci žive u repou kao MDX fajlovi, po jedan za svaki jezik, a isti naziv fajla povezuje srpsku i englesku verziju, pa prekidač jezika na članku vodi na prevod istog teksta. Engleska verzija nije obavezna: članak bez nje ne postoji na engleskoj listi. Podaci na vrhu svakog članka se proveravaju, pa pogrešan datum, nepoznata kategorija ili ponovljena adresa ruše build sa nazivom fajla, a članci označeni kao nacrt vide se samo u razvoju. Stranice članaka se prave unapred, pri build-u. Lista je po ekranu iz dizajna: naslov i uvod, pilule kategorija, istaknut najnoviji članak, grid od šest kartica, dugme za još tekstova i zeleni poziv na kontakt. Kategorija i strana idu kroz adresu, pa se filtrirana lista može podeliti linkom, a članak sa više kategorija pojavljuje se u svakoj. Vreme čitanja se računa iz dužine teksta, a datumi se ispisuju po jeziku. Linkovi u člancima se pišu preko ključeva umesto adresa, pa isti zapis radi na oba jezika, a pokvaren link ruši build. Napisano je devet članaka na srpskom i engleskom, po tezama vlasnika, sa linkovima ka uslugama i kontaktu; tekst o FPV proletu nosi snimak seoskog domaćinstva Milanović u Žuču, isti koji je sada i na stranicama nekretnina i FPV-a. Napravljena je i komponenta za sliku sa potpisom, koja čeka prave fotografije. Vlasnik je pre implementacije odlučio o petnaest stvari, među kojima su kraj liste sa pozivom na kontakt, zelena kategorija umesto zlatne zbog kontrasta, dugme za još tekstova bez skrola na vrh, prevod svih članaka i istaknut članak sa pitanjima za snimatelja. Tokom review-a stranica članka je centrirana i podeljena u dve kolone — šira za putanju, naslov, opis i naslovnu fotografiju, a uža od 75 znakova za tekst, zbog udobnijeg čitanja — a link za povratak na blog je dobio semantički okvir u dnu članka. Tekst je ostao levo poravnat, uz pravilo koje sprečava da poslednji red pasusa ostane sa jednom reči. Vlasnik je odlučio i da se nigde na sajtu ne opisuje let dronom iznad okupljenih ljudi, pa je FPV prolet na venčanjima sada kroz praznu salu, pre dolaska gostiju, a na događajima dron snima lokaciju sa strane; pravilo je upisano u opis projekta. U tekstu o ceni venčanja dodato je da montiran snimak dana najčešće traje između jednog i tri sata, a uklonjena je stavka koja se sa tim sudarala. README je dobio uputstvo za pisanje novog članka, linkove, video i sliku sa potpisom; primeri su provereni na privremenom članku. Lint, provera tipova, testovi i build prolaze; lista i članci provereni su na oba jezika i više širina — filteri za svih pet kategorija, dugme za još tekstova, prevodi i preusmeravanja rade, nema horizontalnog skrola, a video se ne učitava pre klika.

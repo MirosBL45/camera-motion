@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Tekst blog članaka (MDX) — `prose` klase; boje se vezuju za tokene u `prose-brand` ispod */
+@plugin "@tailwindcss/typography";
+
 @theme inline {
   --font-heading: var(--font-heading);
   --font-body: var(--font-body);
@@ -139,6 +142,22 @@
     font-size: 1.125rem;
     font-weight: 500;
   }
+}
+
+/* Boje `prose` teksta iz palete (poglavlje 10.1) umesto sivih iz typography plugina.
+   Zlatna samo za oznake liste i liniju citata — nikad za tekst (kontrast). */
+@utility prose-brand {
+  --tw-prose-body: var(--foreground);
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-lead: var(--muted-foreground);
+  --tw-prose-links: var(--primary);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-counters: var(--muted-foreground);
+  --tw-prose-bullets: var(--accent-gold);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--foreground);
+  --tw-prose-quote-borders: var(--accent-gold);
+  --tw-prose-captions: var(--muted-foreground);
 }
 
 /* Motion — poglavlje 10.4: samo hover/focus/otvaranje; bez scroll/fade-in/parallax po pravilima projekta */

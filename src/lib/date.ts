@@ -21,3 +21,12 @@ export function formatShortDate(date: Date, locale: Locale): string {
     year: "numeric",
   }).format(date);
 }
+
+/** Datum sa nazivom meseca (blog): sr `5. oktobar 2026.`, en `5 October 2026`. */
+export function formatLongDate(date: Date, locale: Locale): string {
+  return new Intl.DateTimeFormat(INTL_LOCALE_MAP[locale], {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}

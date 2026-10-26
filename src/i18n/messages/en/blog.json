@@ -1,6 +1,34 @@
 {
   "title": "Blog",
+  "list": {
+    "lead": "First-hand advice — what to ask your videographer, how to prepare for a shoot and why some shots can't be done just anywhere.",
+    "filtersLabel": "Article categories",
+    "all": "All",
+    "readMore": "Read the article",
+    "loadMore": "Show more articles",
+    "empty": "There are no articles in this category yet."
+  },
+  "categories": {
+    "vencanja": "Weddings",
+    "nekretnine": "Real estate",
+    "dron-fpv": "Drone & FPV",
+    "iza-kadra": "Behind the scenes",
+    "dogadjaji-firme": "Events & business"
+  },
+  "meta": {
+    "readingTime": "{minutes, plural, one {# min read} other {# min read}}"
+  },
+  "placeholders": {
+    "featured": "cover photo",
+    "card": "photo",
+    "cover": "article cover photo"
+  },
   "post": {
-    "title": "Blog post"
+    "backToBlog": "Back to the blog"
+  },
+  "cta": {
+    "heading": "Got a question we haven't written about?",
+    "subheading": "Write to us — we'll answer, and sometimes it turns into a new article.",
+    "button": "Write to us"
   }
 }
