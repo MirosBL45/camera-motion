@@ -1,6 +1,15 @@
 import { describe, expect, it } from "vitest";
 
-import { formatShortDate, fromIsoDate, toIsoDate } from "./date";
+import { formatLongDate, formatShortDate, fromIsoDate, toIsoDate } from "./date";
+
+describe("formatLongDate", () => {
+  it("ispisuje naziv meseca po jeziku", () => {
+    const date = new Date(2026, 9, 5);
+
+    expect(formatLongDate(date, "sr")).toBe("5. oktobar 2026.");
+    expect(formatLongDate(date, "en")).toBe("5 October 2026");
+  });
+});
 
 describe("fromIsoDate", () => {
   it("vraća lokalni datum, bez UTC pomeranja", () => {

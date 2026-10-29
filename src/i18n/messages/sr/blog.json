@@ -1,6 +1,34 @@
 {
   "title": "Blog",
+  "list": {
+    "lead": "Saveti iz prve ruke — šta pitati snimatelja, kako se pripremiti za snimanje i zašto neki kadrovi ne mogu svuda.",
+    "filtersLabel": "Kategorije tekstova",
+    "all": "Sve",
+    "readMore": "Pročitajte tekst",
+    "loadMore": "Prikaži još tekstova",
+    "empty": "U ovoj kategoriji još nema tekstova."
+  },
+  "categories": {
+    "vencanja": "Venčanja",
+    "nekretnine": "Nekretnine",
+    "dron-fpv": "Dron i FPV",
+    "iza-kadra": "Iza kadra",
+    "dogadjaji-firme": "Događaji i firme"
+  },
+  "meta": {
+    "readingTime": "{minutes, plural, one {# min čitanja} few {# min čitanja} other {# min čitanja}}"
+  },
+  "placeholders": {
+    "featured": "naslovna fotografija",
+    "card": "fotografija",
+    "cover": "naslovna fotografija članka"
+  },
   "post": {
-    "title": "Blog objava"
+    "backToBlog": "Nazad na blog"
+  },
+  "cta": {
+    "heading": "Imate pitanje na koje nema teksta?",
+    "subheading": "Pišite nam — odgovorimo, a ponekad iz toga ispadne i nov tekst.",
+    "button": "Pišite nam"
   }
 }
