@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { ContactForm } from "@/components/sections/contact/ContactForm";
 import { ContactInfoCard } from "@/components/sections/contact/ContactInfoCard";
 import { isContactService } from "@/lib/contact-form";
+import { getStaticPageMetadata } from "@/lib/page-metadata";
+
+export function generateMetadata(): Promise<Metadata> {
+  return getStaticPageMetadata("contact");
+}
 
 // Raspored po dizajnu (artboard `1c`): naslov i uvod, pa forma levo i kartica desno;
 // na telefonu forma ide prva. Bez slanja — backend je feature 17.

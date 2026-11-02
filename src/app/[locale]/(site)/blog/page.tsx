@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import { BlogCategoryFilter } from "@/components/sections/blog/BlogCategoryFilter";
@@ -7,10 +8,15 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { Button } from "@/components/ui/button";
 import { getBlogPosts } from "@/lib/blog";
 import { getBlogListPage, parseBlogCategory, parseBlogPage } from "@/lib/blog-list";
+import { getStaticPageMetadata } from "@/lib/page-metadata";
 
 import { BLOG_QUERY } from "@/constants/blog";
 import { ROUTES } from "@/constants/routes";
 import { Link } from "@/i18n/navigation";
+
+export function generateMetadata(): Promise<Metadata> {
+  return getStaticPageMetadata("blog");
+}
 
 // Lista po dizajnu (artboard `2c`): naslov, uvod i pilule, istaknut najnoviji članak, grid,
 // „Prikaži još tekstova" i zeleni CTA. Filter i strana idu kroz query parametre (deljiv URL),

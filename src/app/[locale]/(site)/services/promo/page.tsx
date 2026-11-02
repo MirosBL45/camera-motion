@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { useLocale, useTranslations } from "next-intl";
 
 import { Drone, Hammer, RectangleVertical, Rocket } from "lucide-react";
@@ -8,6 +9,8 @@ import { ServiceDelivery } from "@/components/sections/service-page/ServiceDeliv
 import { ServiceFeatures } from "@/components/sections/service-page/ServiceFeatures";
 import { ServiceIntro } from "@/components/sections/service-page/ServiceIntro";
 import { ServiceWorks } from "@/components/sections/service-page/ServiceWorks";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { getStaticPageMetadata } from "@/lib/page-metadata";
 import { formatPrice, getStartingPrice } from "@/lib/pricing";
 
 import { SERVICES_BY_ID } from "@/data/services";
@@ -31,6 +34,10 @@ const DELIVERY_ITEMS = ["ready", "revisions"] as const;
 
 const WORK_ITEMS = ["first", "second"] as const;
 
+export function generateMetadata(): Promise<Metadata> {
+  return getStaticPageMetadata("servicesPromo");
+}
+
 export default function ServicesPromoPage() {
   const locale = useLocale();
   const t = useTranslations("services.promo");
@@ -38,6 +45,7 @@ export default function ServicesPromoPage() {
 
   return (
     <>
+      <ServiceJsonLd service={service} />
       <ServiceIntro
         service={service}
         heading={t("heading")}

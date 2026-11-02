@@ -1,12 +1,12 @@
 import { defineRouting } from "next-intl/routing";
 
-import { SUPPORTED_LOCALES } from "@/lib/types/i18n";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@/lib/types/i18n";
 
 import { ROUTES } from "@/constants/routes";
 
 export const routing = defineRouting({
   locales: SUPPORTED_LOCALES,
-  defaultLocale: "sr",
+  defaultLocale: DEFAULT_LOCALE,
   localePrefix: "as-needed",
   // Sajt se uvek otvara na srpskom, bez obzira na jezik browsera; na engleski se prelazi ručno
   localeDetection: false,

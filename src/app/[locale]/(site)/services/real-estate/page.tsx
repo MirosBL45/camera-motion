@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 
 import {
@@ -16,6 +17,8 @@ import { ServiceFeatures } from "@/components/sections/service-page/ServiceFeatu
 import { ServiceIntro } from "@/components/sections/service-page/ServiceIntro";
 import { ServicePackages } from "@/components/sections/service-page/ServicePackages";
 import { ServiceWorks } from "@/components/sections/service-page/ServiceWorks";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { getStaticPageMetadata } from "@/lib/page-metadata";
 
 import { SERVICES_BY_ID } from "@/data/services";
 
@@ -40,12 +43,17 @@ const FEATURE_ITEMS = [
 
 const WORK_ITEMS = ["first", "second"] as const;
 
+export function generateMetadata(): Promise<Metadata> {
+  return getStaticPageMetadata("servicesRealEstate");
+}
+
 export default function ServicesRealEstatePage() {
   const t = useTranslations("services.realEstate");
   const service = SERVICES_BY_ID.realEstate;
 
   return (
     <>
+      <ServiceJsonLd service={service} />
       <ServiceIntro
         service={service}
         heading={t("heading")}
