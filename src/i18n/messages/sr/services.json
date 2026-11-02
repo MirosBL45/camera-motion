@@ -61,7 +61,7 @@
         },
         "drone": {
           "title": "Dron",
-          "description": "Crkva, restoran i pejzaž iz vazduha — sa pilotom registrovanim pri DCV i u skladu sa regulativom. Po želji dodajemo i FPV prolet kroz salu."
+          "description": "Crkva, restoran i pejzaž iz vazduha — sa pilotom registrovanim pri DCV i u skladu sa regulativom. Po želji dodajemo i FPV prolet kroz praznu salu, pre nego što stignu gosti."
         },
         "sound": {
           "title": "Čist zvuk",
@@ -95,7 +95,7 @@
         "name": "Premium",
         "features": {
           "fromPrevious": "Sve iz Standard paketa",
-          "fpv": "FPV prolet kroz salu i prvi ples",
+          "fpv": "FPV prolet kroz praznu salu",
           "staticCamera": "Statična kamera u crkvi (ceo obred)",
           "twoOperators": "Dva snimatelja ceo dan"
         }
@@ -138,8 +138,8 @@
         },
         "second": {
           "title": "Ana i Nemanja — Avala",
-          "meta": "FPV prolet i prvi ples · 1:40",
-          "placeholder": "snimak: FPV prolet kroz salu i prvi ples"
+          "meta": "FPV prolet kroz praznu salu · 1:40",
+          "placeholder": "snimak: FPV prolet kroz praznu salu"
         }
       }
     },
@@ -235,9 +235,9 @@
       "heading": "Primeri",
       "items": {
         "first": {
-          "title": "Kuća za izdavanje preko Bookinga",
-          "meta": "FPV prolet kroz objekat",
-          "placeholder": "snimak: FPV prolet kroz kuću za izdavanje"
+          "title": "Seosko domaćinstvo Milanović, Žuč kod Kuršumlije",
+          "meta": "FPV prolet kroz kuću i dvorište · izdaje se preko Bookinga",
+          "placeholder": "snimak: FPV prolet kroz kuću i dvorište"
         },
         "second": {
           "title": "Nekretnina u Sutomoru",
@@ -269,7 +269,7 @@
         },
         "sports": {
           "title": "Sportski događaji",
-          "description": "Turniri i utakmice iz više uglova — akciju na terenu hvatamo kamerom, a teren, tribine i masu iz vazduha."
+          "description": "Turniri i utakmice iz više uglova — akciju na terenu hvatamo kamerom, a teren i okolinu iz vazduha, sa bezbedne udaljenosti."
         },
         "corporate": {
           "title": "Korporativna okupljanja",
@@ -291,7 +291,7 @@
         },
         "drone": {
           "title": "Dron",
-          "description": "Lokacija i masa iz vazduha — sala, plaža ili teren u jednom kadru. Snimanje rođendana dronom i ostalih proslava radi registrovan pilot pri DCV, u skladu sa regulativom."
+          "description": "Lokacija iz vazduha — sala, plaža ili teren u jednom kadru, uvek sa strane i nikad iznad gostiju. Snimanje rođendana dronom i ostalih proslava radi registrovan pilot pri DCV, u skladu sa regulativom."
         },
         "discreet": {
           "title": "Diskretno snimanje",
@@ -461,9 +461,9 @@
       "heading": "Primeri",
       "items": {
         "first": {
-          "title": "Kuća za izdavanje preko Bookinga",
-          "meta": "FPV prolet kroz objekat",
-          "placeholder": "snimak: FPV prolet kroz kuću za izdavanje"
+          "title": "Seosko domaćinstvo Milanović, Žuč kod Kuršumlije",
+          "meta": "FPV prolet kroz kuću i dvorište · izdaje se preko Bookinga",
+          "placeholder": "snimak: FPV prolet kroz kuću i dvorište"
         },
         "second": {
           "title": "FPV prolet kroz lokal",

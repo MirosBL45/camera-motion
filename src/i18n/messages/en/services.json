@@ -61,7 +61,7 @@
         },
         "drone": {
           "title": "Drone",
-          "description": "The church, the venue and the landscape from the air — flown by a pilot registered with the Civil Aviation Directorate, in line with its rules. On request we add an FPV flight through the venue."
+          "description": "The church, the venue and the landscape from the air — flown by a pilot registered with the Civil Aviation Directorate, in line with its rules. On request we add an FPV flight through the empty venue, before the guests arrive."
         },
         "sound": {
           "title": "Clean sound",
@@ -95,7 +95,7 @@
         "name": "Premium",
         "features": {
           "fromPrevious": "Everything in the Standard package",
-          "fpv": "FPV flight through the venue and the first dance",
+          "fpv": "FPV flight through the empty venue",
           "staticCamera": "Static camera in the church (the full ceremony)",
           "twoOperators": "Two camera operators all day"
         }
@@ -138,8 +138,8 @@
         },
         "second": {
           "title": "Ana and Nemanja — Avala",
-          "meta": "FPV flight and first dance · 1:40",
-          "placeholder": "video: FPV flight through the venue and the first dance"
+          "meta": "FPV flight through the empty venue · 1:40",
+          "placeholder": "video: FPV flight through the empty venue"
         }
       }
     },
@@ -235,9 +235,9 @@
       "heading": "Examples",
       "items": {
         "first": {
-          "title": "A house rented out on Booking",
-          "meta": "FPV flight through the property",
-          "placeholder": "video: FPV flight through a rental house"
+          "title": "Milanović rural guesthouse, Žuč near Kuršumlija",
+          "meta": "FPV flight through the house and yard · rented out on Booking",
+          "placeholder": "video: FPV flight through the house and yard"
         },
         "second": {
           "title": "Property in Sutomore",
@@ -269,7 +269,7 @@
         },
         "sports": {
           "title": "Sports events",
-          "description": "Tournaments and matches from several angles — we catch the action on the court with a camera, and the venue, the stands and the crowd from the air."
+          "description": "Tournaments and matches from several angles — we catch the action on the court with a camera, and the venue and its surroundings from the air, from a safe distance."
         },
         "corporate": {
           "title": "Corporate gatherings",
@@ -291,7 +291,7 @@
         },
         "drone": {
           "title": "Drone",
-          "description": "The location and the crowd from the air — the venue, the beach or the court in a single shot. Drone footage of birthdays and other celebrations is flown by a pilot registered with the Civil Aviation Directorate, in line with its rules."
+          "description": "The location from the air — the venue, the beach or the court in a single shot, always from the side and never over the guests. Drone footage of birthdays and other celebrations is flown by a pilot registered with the Civil Aviation Directorate, in line with its rules."
         },
         "discreet": {
           "title": "Discreet filming",
@@ -461,9 +461,9 @@
       "heading": "Examples",
       "items": {
         "first": {
-          "title": "A house rented out on Booking",
-          "meta": "FPV flight through the property",
-          "placeholder": "video: FPV flight through a rental house"
+          "title": "Milanović rural guesthouse, Žuč near Kuršumlija",
+          "meta": "FPV flight through the house and yard · rented out on Booking",
+          "placeholder": "video: FPV flight through the house and yard"
         },
         "second": {
           "title": "FPV flight through a venue",

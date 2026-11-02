@@ -18,6 +18,7 @@ Bez logina, bez baze podataka — sav sadržaj živi u repou. Domen: cameramotio
 - Registracija pri Direktoratu civilnog vazduhoplovstva (DCV) je u toku i biće završena pre objave sajta — na sajtu zato stoji „registrovan pilot pri DCV" uz „u skladu sa regulativom" (odluka vlasnika, 25.09.2026.); osiguranje se ne pominje ni u pozitivnom ni u negativnom smislu
 - Logo: crn krug sa belim slovima "CM", natpis "Camera motion", zlatna linija okolo
 - Ton na sajtu: profesionalan; NE pominjati da je snimanje hobi ili sporedni posao
+- Nigde na sajtu ne opisivati let dronom iznad okupljenih ljudi (gosti, publika, tribine): kadrovi sa ljudima se snimaju sa strane i sa bezbedne udaljenosti, a FPV prolet kroz salu je kroz praznu salu, pre dolaska gostiju (odluka vlasnika, 26.10.2026.)
 
 ## 3. Publika i geografsko ciljanje
 
@@ -294,9 +295,10 @@ Dizajn je urađen u Claude Design i vlasnik ga **zadržava takav kakav je (1:1)*
 - **Vreme čitanja se ne upisuje u frontmatter** — računa se iz dužine teksta pri build-u (utility u `src/lib/`, ~200 reči u minuti, zaokruženo naviše, min 1); prikazuje se kroz i18n sa ICU pluralom, ne konkatenacijom
 - SSG; `draft: true` ne izlazi u produkciju
 - Custom MDX komponente: YouTube lite embed, slika sa potpisom
-- 3 početna članka na srpskom (teme u featureu 18)
-- Lista `/blog` po dizajn referenci ima **filtere po kategorijama** (pilule: Sve / Venčanja / Nekretnine / Dron i FPV / Iza kadra) i dugme **„Prikaži još tekstova"**. Kategorije izviru iz `tags` u frontmatteru; nazivi kategorija idu kroz `blog` namespace, a vrednosti u `tags` su stabilni ključevi koji se NE prevode (princip 5)
+- 9 početnih članaka na srpskom (teme u featureu 18)
+- Lista `/blog` po dizajn referenci ima **filtere po kategorijama** (pilule: Sve / Venčanja / Nekretnine / Dron i FPV / Iza kadra / Događaji i firme) i dugme **„Prikaži još tekstova"**. Kategorije izviru iz `tags` u frontmatteru; nazivi kategorija idu kroz `blog` namespace, a vrednosti u `tags` su stabilni ključevi koji se NE prevode (princip 5)
 - Prvi članak na listi je istaknut (široka kartica sa naslovnom fotografijom), ostali u gridu 3×2
+- Stranica članka: putanja, meta red, naslov, opis i naslovna fotografija u centriranoj koloni ~880px; tekst članka u užoj centriranoj koloni **75ch** (odluka vlasnika, 26.10.2026.)
 
 ## 14. SEO
 

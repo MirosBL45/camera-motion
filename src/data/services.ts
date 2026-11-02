@@ -6,7 +6,9 @@ export const PLACEHOLDER_VIDEO_ID = "";
 
 // FPV prolet kroz kuću za izdavanje — isti snimak na nekretninama i na FPV stranici,
 // pa se ID upisuje samo ovde.
-const FPV_HOUSE_VIDEO_ID = PLACEHOLDER_VIDEO_ID;
+// Seosko domaćinstvo Milanović, Žuč kod Kuršumlije; koristi ga i blog članak o FPV proletu
+// (MDX `<YouTube video="fpvHouse" />`).
+export const FPV_HOUSE_VIDEO_ID = "ZvHHT27JMvc";
 
 // Nazivi i opisi usluga idu kroz i18n po `id` (poglavlje 9); ovde samo struktura.
 // Mapa po `id` da stranica usluge uzme svoj zapis bez pretrage po listi.
