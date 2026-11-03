@@ -39,7 +39,15 @@ export function Logo({ variant = "header" }: ILogoProps) {
       )}
     >
       {/* TODO: pravi logo fajl (public/logo.svg je placeholder) */}
-      <Image src="/logo.svg" alt="" width={42} height={42} className={classes.image} />
+      {/* U header-u je uvek iznad fold-a (na kratkim stranicama i LCP) — učitava se odmah. */}
+      <Image
+        src="/logo.svg"
+        alt=""
+        width={42}
+        height={42}
+        loading={variant === "header" ? "eager" : "lazy"}
+        className={classes.image}
+      />
       <span className={cn("font-heading font-medium text-foreground", classes.text)}>
         {tCommon("brandName")}
       </span>

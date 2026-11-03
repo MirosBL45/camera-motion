@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 
 import { Camera, Drone, Mic, Rotate3d } from "lucide-react";
@@ -7,6 +8,7 @@ import { TeamSection } from "@/components/sections/about/TeamSection";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { ServiceFeatures } from "@/components/sections/service-page/ServiceFeatures";
+import { getStaticPageMetadata } from "@/lib/page-metadata";
 
 // Raspored po dizajnu (artboard `2b`): priča → ekipa → kako radimo → oprema + DCV → CTA.
 // Tekstovi idu kroz `about` namespace.
@@ -18,6 +20,10 @@ const EQUIPMENT_ITEMS = [
   { id: "gimbals", Icon: Rotate3d },
   { id: "microphones", Icon: Mic },
 ] as const;
+
+export function generateMetadata(): Promise<Metadata> {
+  return getStaticPageMetadata("about");
+}
 
 export default function AboutPage() {
   const t = useTranslations("about");

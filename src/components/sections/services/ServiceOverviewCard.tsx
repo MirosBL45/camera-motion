@@ -57,7 +57,10 @@ export function ServiceOverviewCard({
           </Badge>
         ) : null}
 
-        <h3>{t(`${service.id}.title`)}</h3>
+        {/* h2 jer na /usluge nema sekcijskog naslova između h1 i kartica; izgled ostaje h3. */}
+        <h2 className="text-[clamp(1.3125rem,1.6vw,1.625rem)] leading-[1.65] font-medium tracking-normal">
+          {t(`${service.id}.title`)}
+        </h2>
         <p className="mt-2.5 text-base leading-[1.6] text-muted-foreground">{tCard("excerpt")}</p>
 
         {/* „Detaljnije" je vizuelni element, ne ugnežđen link — cela kartica je link. */}

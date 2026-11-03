@@ -2,6 +2,9 @@ export const SUPPORTED_LOCALES = ["sr", "en"] as const;
 
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
+// Srpski je bez URL prefiksa i `x-default` u hreflang-u (poglavlja 8.1 i 14).
+export const DEFAULT_LOCALE: Locale = "sr";
+
 export const LOCALE_LABELS: Record<Locale, string> = {
   sr: "SR",
   en: "EN",

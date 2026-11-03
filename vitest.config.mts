@@ -10,5 +10,7 @@ export default defineConfig({
   },
   test: {
     environment: "node",
+    // next-intl uvozi `next/navigation` bez ekstenzije — bez inline-a Node ESM ga ne razrešava
+    server: { deps: { inline: ["next-intl"] } },
   },
 });

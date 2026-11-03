@@ -1,38 +1,56 @@
 {
+  "siteName": "Camera Motion",
+  "default": {
+    "title": "Camera Motion — drone and camera videography",
+    "description": "Video production from Belgrade: wedding and real estate videography, events and celebrations, promo videos for businesses and FPV footage — by drone and on the ground."
+  },
+  "ogImageAlt": "Camera Motion — drone and camera videography, Belgrade",
   "home": {
-    "title": "Home"
+    "title": "Drone and camera videography in Belgrade",
+    "description": "We film weddings, properties, celebrations and promo videos by drone and camera — in Belgrade and the surrounding area. Cinematic shots, editing and a registered drone pilot."
   },
   "services": {
-    "title": "Services"
+    "title": "Drone and camera videography services",
+    "description": "Wedding and real estate videography, events and celebrations, promo videos for businesses and FPV footage. See what we film and our starting prices — Belgrade and the area."
   },
   "servicesWeddings": {
-    "title": "Wedding videography"
+    "title": "Wedding videography by drone and camera",
+    "description": "Wedding videographer in Belgrade: we film your day by camera and drone, from getting ready to the first dance, and edit it to keep the emotion. Packages and starting prices."
   },
   "servicesRealEstate": {
-    "title": "Real estate videography"
+    "title": "Real estate drone videography",
+    "description": "Real estate videography by drone and camera: videos that help sell a flat or house, and apartment videos for Booking and Airbnb. Packages and starting prices, Belgrade area."
   },
   "servicesEvents": {
-    "title": "Events"
+    "title": "Event and celebration videography",
+    "description": "Filming birthdays, christenings and 18th birthdays, sports and corporate events — by camera on the ground and drone from the air. Event videos in Belgrade."
   },
   "servicesPromo": {
-    "title": "Promo video"
+    "title": "Promo videos for businesses",
+    "description": "Promo videos for restaurants, hotels, gyms and small businesses in Belgrade: drone and camera filming, editing and a video ready for your website, social media and ads."
   },
   "servicesFpv": {
-    "title": "FPV footage"
+    "title": "FPV drone videography",
+    "description": "FPV drone footage: a fly-through of a building in one continuous shot — for properties, weddings, venues and sport. On its own or as an add-on to any of our services."
   },
   "blog": {
-    "title": "Blog"
+    "title": "Blog on drone and camera videography",
+    "description": "First-hand advice — what to ask a videographer, how to prepare for filming a wedding or a property, and why some drone shots can't be done everywhere."
   },
   "about": {
-    "title": "About us"
+    "title": "About us",
+    "description": "Meet the Camera Motion crew from Belgrade: how we work from the first conversation to delivery, the gear we film with and why we fly by the rules."
   },
   "contact": {
-    "title": "Contact"
+    "title": "Contact and quotes",
+    "description": "Request a quote for drone and camera filming. Tell us the date, the location and what matters most to you — we reply within 24 hours with an exact price."
   },
   "privacy": {
-    "title": "Privacy policy"
+    "title": "Privacy policy",
+    "description": "How Camera Motion handles the data you send through the contact form."
   },
   "terms": {
-    "title": "Terms of use"
+    "title": "Terms of use",
+    "description": "Terms of use for the Camera Motion website."
   }
 }

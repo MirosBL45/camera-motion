@@ -13,6 +13,7 @@ Faza 4, fajl 1/3. Kompletna SEO infrastruktura po poglavlju 14.
 - JSON-LD po poglavlju 14: LocalBusiness (layout — naziv, url, logo, areaServed, email; BEZ telefona), Service (stranice usluga), BlogPosting (članci), BreadcrumbList (usluge + blog)
 - Favicon set iz loga: `favicon.ico`, `apple-touch-icon`, manifest sa temom `#FAF8F4` (placeholder ikone + TODO)
 - Provera semantike: jedan h1 po stranici, logičan redosled naslova, alt tekstovi
+- Pošto još nema pravih slika i sličica za ikonice, neka budu generisani placeholderi sličica, ali obavezno dodati na prigodnim mestima podsetnik u fajlovima context/bitne-stvari.md i README.md da se to uradi kada se naprave prave sličice od strane dizajnera
 
 ## Testiranje
 
@@ -23,4 +24,4 @@ Faza 4, fajl 1/3. Kompletna SEO infrastruktura po poglavlju 14.
 ## Reference
 
 - @context/project-overview.md (poglavlja 7, 14)
-- @context/features/18-blog.md
+- @context/features/18-blog-done.md

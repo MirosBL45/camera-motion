@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ServicesGrid } from "@/components/sections/services/ServicesGrid";
+import { getStaticPageMetadata } from "@/lib/page-metadata";
+
+export function generateMetadata(): Promise<Metadata> {
+  return getStaticPageMetadata("services");
+}
 
 export default function ServicesPage() {
   const t = useTranslations("services");

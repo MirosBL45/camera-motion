@@ -1,4 +1,4 @@
-# Current Feature: 18 — Blog (MDX)
+# Current Feature: 19 — SEO i metapodaci
 
 ## Status
 
@@ -10,84 +10,61 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 3, fajl 4/4 (kraj faze). Blog iz MDX fajlova + 9 početnih članaka na srpskom
-- **Infrastruktura** (poglavlje 13): `src/content/blog/sr|en/*.mdx`, frontmatter `title, description, date, slug, cover?, tags?, draft`, SSG, `draft: true` ne izlazi u produkciju; tehnika (`next-mdx-remote` ili `@next/mdx`) po aktuelnoj preporuci za App Router
-- **en verzija opciona** — bez en fajla članak ne postoji na `/en/blog` (nikad sr tekst na en listi)
-- **Lista `/blog`** po artboardu `2c`: prvi (najnoviji) članak istaknut u širokoj kartici sa naslovnom fotografijom, ostali u gridu 3×2 (naslov, kategorija, datum po locale formatu, opis, cover ako postoji), od najnovijeg
-- **Filteri po kategorijama** — pilule Sve / Venčanja / Nekretnine / Dron i FPV / Iza kadra / Događaji i firme; ključevi `vencanja`, `nekretnine`, `dron-fpv`, `iza-kadra`, `dogadjaji-firme` iz `tags` (ne prevode se), nazivi kroz `blog` namespace; članak sa više ključeva je u svakoj svojoj kategoriji; filter kroz `?kategorija=` (deljiv URL), ne kroz stanje komponente
-- **„Prikaži još tekstova"** — lista prvo prikazuje 7 (1 istaknut + 3×2); na „Sve" sa 9 članaka dugme učitava preostala 2 i nestaje; sakriva se i kad u kategoriji nema više stavki
-- **Vreme čitanja** — utility u `src/lib/` (~200 reči/min, naviše, min 1), ne u frontmatteru; prikaz kroz ICU plural u `blog` namespace-u
-- **`/blog/[slug]`** — tekst max 75ch (odluka 16), typography plugin usklađen sa paletom; custom MDX komponente: YouTubeLite i slika sa potpisom
-- **Metadata iz frontmattera**
-- **9 članaka** (~500–800 reči, prirodan ton) po tezama iz feature fajla: bez izmišljenih činjenica, bez placeholder markera u tekstu, različit placeholder `date` po članku, interni linkovi ka usluzi/kontaktu gde se prirodno uklapaju, nigde let dronom iznad okupljenih ljudi
+- Faza 4, fajl 1/3. Kompletna SEO infrastruktura po poglavlju 14
+- **`generateMetadata` za svaku stranicu**: title šablon `%s | Camera Motion`, description sr + en iz `metadata` namespace-a, canonical, hreflang alternates (sr ↔ en, `x-default` → sr), uz lokalizovane pathname-ove iz tabele 7.1
+- **OG default** `public/og.png` 1200×630 — placeholder generisan iz palete (logo + slogan) + `// TODO(vlasnik): zameniti pravim kadrom`
+- **`sitemap.ts`**: sve rute u obe lokalizacije + objavljeni blog članci (bez `draft`)
+- **`robots.ts`**: allow sve, disallow `/dev-ui`, link na sitemap
+- **JSON-LD**: `LocalBusiness` u layout-u (naziv, url, logo, areaServed, email — BEZ telefona), `Service` na stranicama usluga, `BlogPosting` na člancima, `BreadcrumbList` na uslugama i blogu
+- **Favicon set iz loga**: `favicon.ico`, `apple-touch-icon`, manifest sa temom `#FAF8F4` — placeholder ikone + TODO
+- **Provera semantike**: jedan h1 po stranici, logičan redosled naslova, alt tekstovi
+- **Podsetnik za prave slike**: pošto prave slike i ikonice još ne postoje, generišu se placeholderi, a u `context/bitne-stvari.md` i `README.md` se na prigodnim mestima dodaje podsetnik da se zamene kad dizajner napravi prave
 
 ## Notes
 
 <!-- Any extra notes -->
 
 - Postojeće na šta se feature naslanja:
-  - Rute `blog` i `blogPost` već postoje u `src/constants/routes.ts`; `src/app/[locale]/(site)/blog/page.tsx` i `blog/[slug]/page.tsx` su skeleti iz feature-a 03
-  - `src/i18n/messages/{sr,en}/blog.json` ima samo `title` i `post.title`
-  - `src/components/shared/YouTubeLite.tsx` (facade, klijentska) — koristi se i u MDX-u; `src/components/mdx/` i `src/content/blog/{sr,en}/` su prazni
-  - `MediaPlaceholder` (pruge, uklj. zlatnu varijantu za naslovnu blog fotografiju), `CtaBand`, `src/lib/date.ts` (formatiranje datuma po locale-u)
-  - Validator prevoda puca ako sr i en nemaju iste ključeve
-- Dizajn `2c`: h1 „Blog" 52px + uvodni pasus (max 640px), pilule (aktivna zelena), istaknuta kartica `1.15fr 1fr` sa zlatnom bordurom i `shadow-gold` (meta: kategorija · datum · „6 min čitanja", h2 36px, opis, „Pročitajte tekst →"), grid kartica `repeat(3,1fr)` gap 24px sa slikom 200px, dugme „Prikaži još tekstova" (belo sa zlatnom bordurom), na dnu zeleni CTA band
-- Dizajn ima samo 5 pilula — „Događaji i firme" je dodata odlukom vlasnika (overview 13)
-- Ekran članka (detalj) ne postoji u dizajnu (NOTES.md) — izgled se izvodi iz postojećih obrazaca
-- Članci 4 i 5 su u prvom licu jednine (priča vlasnika), po spec-u; članak 5 pominje DJI Mavic Air (dron koji je stradao) — po spec-u, bez regulative u tom članku
-- Pre implementacije proveriti aktuelnu dokumentaciju: MDX u Next.js 16 App Router (`node_modules/next/dist/docs/`), `@tailwindcss/typography` za Tailwind v4
-- Vitest testovi za utilities (vreme čitanja, učitavanje/filtriranje/sortiranje članaka, draft)
-- `generateMetadata` (canonical, hreflang), `BlogPosting`/`BreadcrumbList` JSON-LD i sitemap ostaju za feature 19 — ovde samo title/description iz frontmattera (proveriti granicu na startu)
+  - `src/app/[locale]/layout.tsx` ima statički `metadata` (hardkodovan sr title i description) — prelazi na `generateMetadata` kroz i18n
+  - `blog/[slug]/page.tsx` već ima `generateMetadata` sa title/description iz frontmattera (feature 18) — ovde se dopunjuju canonical, hreflang i OG
+  - `metadata` namespace (sr + en) ima samo `title` po stranici — `description` za svih 13 stranica tek treba napisati
+  - `src/app/favicon.ico` je podrazumevani Next.js favicon (16 + 32px); `public/logo.svg` je placeholder loga sa TODO
+  - Rute iz `src/constants/routes.ts` + `getPathname` iz `@/i18n/navigation` za lokalizovane URL-ove; `NEXT_PUBLIC_SITE_URL` iz env-a
+  - Privacy i terms stranice su skeleti do feature-a 20
+  - Blog lista se renderuje po zahtevu (`?kategorija=`, `?strana=`), članci su SSG; isti naziv fajla u `sr/` i `en/` povezuje prevode (hreflang na članku mora da vodi na prevod, a ne na isti slug)
+- Telefon nigde u JSON-LD (poglavlje 12)
+- Ključne fraze po usluzi su u feature fajlovima 09–13
+- Pre implementacije proveriti aktuelnu dokumentaciju u `node_modules/next/dist/docs/` (Metadata API, `sitemap`, `robots`, `manifest`, `icon`/`apple-icon`, JSON-LD) i next-intl preporuke za metadata i hreflang
 
-### Odluke vlasnika (23.10.2026.)
+### Odluke vlasnika (02.11.2026.)
 
-1. **CTA band na dnu liste** iz dizajna se dodaje („Imate pitanje na koje nema teksta?" + dugme „Pišite nam" → kontakt), preko postojećeg `CtaBand`
-2. **Stranica članka**: putanja (Blog › naslov), meta red (kategorija · datum · vreme čitanja), h1, opis, naslovna fotografija/placeholder, tekst 75ch (izmenjeno odlukom 16), link „Nazad na blog", CTA band na kraju — isključivo iz postojećih obrazaca, bez novih elemenata
-3. **Kategorija u meta redu** je zelena (čitljiva), ne zlatna
-4. **„Prikaži još tekstova" kroz query param** (`?strana=2` = 7 + 6, svaka sledeća strana +6; broj tekstova će rasti), server render bez klijentske komponente; dugme ne skroluje na vrh; nepoznata vrednost `?kategorija=` / `?strana=` pada na podrazumevano. Posledica: `/blog` lista se renderuje po zahtevu, članci ostaju SSG
-5. **Svih 9 članaka i na engleskom** — prirodan, smislen prevod, ne bukvalan
-6. SR/EN prekidač na članku vodi na prevod istog članka (rešeno odlukom 5)
-7. **Naslovne fotografije**: placeholder po dizajnu (zlatne pruge za istaknutu, neutralne za grid) + `// TODO: prava slika`
-8. **Članak 6**: sr „kratak spot sa najboljim trenucima", en „highlight spot"
-9. **Pilule na telefonu** se prelamaju u više redova
-10. **Engleski slugovi** po članku; isti naziv fajla u `sr/` i `en/` povezuje prevode (SR/EN prekidač vodi na prevod istog članka)
-11. **Istaknut je članak 3**, ostali po datumu; placeholder datumi unazad sa nasumičnim razmakom 10–17 dana: 3 → 19.10.2026., 1 → 05.10.2026., 2 → 22.09.2026., 4 → 05.09.2026., 5 → 26.08.2026., 6 → 11.08.2026., 7 → 30.07.2026., 8 → 14.07.2026., 9 → 03.07.2026.
-12. **YouTubeLite u članku 2** — isti snimak kuće kao na stranicama nekretnina i FPV-a (jedan ID na jednom mestu); vlasnik dao snimak: `ZvHHT27JMvc` („Seosko turističko domaćinstvo Milanović Žuč | FPV dron kroz kuću i dvorište | Kuršumlija") → upisati u `FPV_HOUSE_VIDEO_ID` u `src/data/services.ts`
-13. **Slika sa potpisom**: komponenta se pravi, ali se ne koristi ni u jednom članku dok ne postoje prave fotografije; u README primer kako se ubacuje
-14. **Prazno stanje kategorije**: jedna rečenica ispod pilula („U ovoj kategoriji još nema tekstova.") — zaštita ako kategorija ostane bez objavljenih članaka
-15. **Snimak kuće**: seosko turističko domaćinstvo Milanović u Žuču kod Kuršumlije, izdaje se preko Booking-a; klijent i mesto se navode — u članku 2 i u naslovu primera na stranicama nekretnina i FPV-a (sr + en)
+1. **Naslov i opis u layout-u** prelaze sa hardkodovanog srpskog na i18n, na oba jezika (sr + en)
+2. **Opisi za svih 13 stranica** se pišu u `metadata` namespace-u, sr + en
+3. **Podrazumevani favicon i placeholder logo** se zamenjuju generisanim placeholderima iz loga + TODO i podsetnik (README, `bitne-stvari.md`)
+4. **`LocalBusiness` dobija adresu**: Beograd, Novi Beograd (bez ulice) — na oba jezika zvanični nazivi „Novi Beograd" (`addressLocality`) i „Beograd" (`addressRegion`), država `RS`; bez engleskog „Belgrade"
+5. **`Service` se proverava u Schema Markup Validator-u**, jer ga Google Rich Results test ne prepoznaje; LocalBusiness i BlogPosting idu kroz Rich Results test
+6. **Canonical za filtriranu blog listu**: sve verzije (`?kategorija=`, `?strana=`) upućuju na `/blog` bez parametara; hreflang na listi isto bez parametara (`/blog` ↔ `/en/blog`), a u sitemap-u je samo `/blog`. Razlog: `?strana=` je „učitaj još" (nadskup prve strane), kategorije imaju po nekoliko tekstova, a svaki članak je posebno u sitemap-u
+7. **Pravne stranice su `noindex`** dok ih feature 20 ne napravi; zato nisu ni u sitemap-u (`noindex` stranica u sitemap-u je kontradiktoran signal)
 
-### Odluke vlasnika (26.10.2026.) — posle review-a
+### Napomene iz implementacije
 
-16. **Stranica članka u dve centrirane kolone**: putanja, meta red, naslov, opis i naslovna fotografija u koloni ~880px; tekst članka i link „Nazad na blog" (u `<footer>` članka) u užoj koloni od **75ch**
-17. **Nigde let dronom iznad okupljenih ljudi** — pravilo važi za ceo sajt (upisano u overview, poglavlje 2): FPV prolet je kroz praznu salu, pre dolaska gostiju (Premium paket i primer na venčanjima, blok o dronu, članak 6); na događajima dron snima lokaciju sa strane i sa bezbedne udaljenosti, bez „mase iz vazduha"
-18. **Članak 6**: montiran snimak celog dana najčešće traje između jednog i tri sata — tačna dužina ne može unapred, a cilj je što više emocija; stavka „snimak celog događaja u punoj dužini" izbačena iz dodataka jer se sudarala sa montiranim snimkom celog dana
-19. **README** dobija uputstvo za blog: nov članak, frontmatter, linkovi, `<YouTube>` i `<Figure>`
+1. `apple-icon.png` u `src/app/` ruši Turbopack dev server (panic „Failed to write app endpoint /page") jer projekat nema jedan root layout — ikonica je zato `public/apple-touch-icon.png`, prijavljena kroz `icons.apple` u layout-u. U `src/app/` korenu ostaju samo `favicon.ico`, `manifest.ts`, `robots.ts` i `sitemap.ts`
+2. Logo u header-u ima `loading="eager"` (uvek iznad fold-a, na kratkim stranicama LCP); u footer-u ostaje `lazy`
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Lista i članci rade na obe lokalizacije; članak bez en verzije ne postoji na `/en/blog`
-2. `draft: true` ne izlazi u build; datumi formatirani po locale-u
-3. YouTubeLite radi unutar MDX-a
-4. Filter radi za svih 5 kategorija preko `?kategorija=`, URL je deljiv; članak sa više `tags` vrednosti pojavljuje se u svakoj svojoj kategoriji
-5. „Prikaži još tekstova" na listi „Sve" učitava preostala 2 članka i zatim nestaje
-6. `npm run lint`, `npm run test` i `npm run build` prolaze
-
-### DoD Faze 3 (zbirna provera)
-
-- [x] O nama kompletna, uključujući ekipu iz `team.ts` i sekciju „Kako radimo"
-- [x] Kontakt: forma šalje na Gmail, rate limit i honeypot rade, telefon skriven do klika
-- [x] Blog sa 9 članaka; build zelen
+1. Rich Results test prolazi za LocalBusiness / Service / BlogPosting
+2. hreflang ispravan na svim stranicama (proveriti izvor obe verzije)
+3. OG pregled ispravan u share debuggeru; sitemap sadrži sve rute i članke
+4. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 8, 13)
-- @context/features/18-blog.md
-- @context/features/03-i18n-i-tipizirane-rute-done.md
-- @context/design-reference/NOTES.md (artboard `2c`)
-- https://nextjs.org/docs (MDX u App Routeru — proveriti najnoviju verziju)
+- @context/project-overview.md (poglavlja 7, 14)
+- @context/features/19-seo.md
+- @context/features/18-blog-done.md
 
 ## History
 
@@ -172,3 +149,7 @@ Kontakt forma sada zaista šalje upite: posle provere podataka upit stiže vlasn
 ### Monday, 26.10.2026. | 12:43 — 18 Blog (MDX)
 
 Napravljen blog i time završena faza sadržaja i kontakta. Članci žive u repou kao MDX fajlovi, po jedan za svaki jezik, a isti naziv fajla povezuje srpsku i englesku verziju, pa prekidač jezika na članku vodi na prevod istog teksta. Engleska verzija nije obavezna: članak bez nje ne postoji na engleskoj listi. Podaci na vrhu svakog članka se proveravaju, pa pogrešan datum, nepoznata kategorija ili ponovljena adresa ruše build sa nazivom fajla, a članci označeni kao nacrt vide se samo u razvoju. Stranice članaka se prave unapred, pri build-u. Lista je po ekranu iz dizajna: naslov i uvod, pilule kategorija, istaknut najnoviji članak, grid od šest kartica, dugme za još tekstova i zeleni poziv na kontakt. Kategorija i strana idu kroz adresu, pa se filtrirana lista može podeliti linkom, a članak sa više kategorija pojavljuje se u svakoj. Vreme čitanja se računa iz dužine teksta, a datumi se ispisuju po jeziku. Linkovi u člancima se pišu preko ključeva umesto adresa, pa isti zapis radi na oba jezika, a pokvaren link ruši build. Napisano je devet članaka na srpskom i engleskom, po tezama vlasnika, sa linkovima ka uslugama i kontaktu; tekst o FPV proletu nosi snimak seoskog domaćinstva Milanović u Žuču, isti koji je sada i na stranicama nekretnina i FPV-a. Napravljena je i komponenta za sliku sa potpisom, koja čeka prave fotografije. Vlasnik je pre implementacije odlučio o petnaest stvari, među kojima su kraj liste sa pozivom na kontakt, zelena kategorija umesto zlatne zbog kontrasta, dugme za još tekstova bez skrola na vrh, prevod svih članaka i istaknut članak sa pitanjima za snimatelja. Tokom review-a stranica članka je centrirana i podeljena u dve kolone — šira za putanju, naslov, opis i naslovnu fotografiju, a uža od 75 znakova za tekst, zbog udobnijeg čitanja — a link za povratak na blog je dobio semantički okvir u dnu članka. Tekst je ostao levo poravnat, uz pravilo koje sprečava da poslednji red pasusa ostane sa jednom reči. Vlasnik je odlučio i da se nigde na sajtu ne opisuje let dronom iznad okupljenih ljudi, pa je FPV prolet na venčanjima sada kroz praznu salu, pre dolaska gostiju, a na događajima dron snima lokaciju sa strane; pravilo je upisano u opis projekta. U tekstu o ceni venčanja dodato je da montiran snimak dana najčešće traje između jednog i tri sata, a uklonjena je stavka koja se sa tim sudarala. README je dobio uputstvo za pisanje novog članka, linkove, video i sliku sa potpisom; primeri su provereni na privremenom članku. Lint, provera tipova, testovi i build prolaze; lista i članci provereni su na oba jezika i više širina — filteri za svih pet kategorija, dugme za još tekstova, prevodi i preusmeravanja rade, nema horizontalnog skrola, a video se ne učitava pre klika.
+
+### Monday, 02.11.2026. | 13:03 — 19 SEO i metapodaci
+
+Započeta završna faza: sajt je dobio kompletnu osnovu za pretraživače i deljenje linkova. Svaka stranica sada ima svoj naslov sa nastavkom „Camera Motion" i opis na oba jezika, sa ključnim frazama po usluzi, a podrazumevani naslov i opis više nisu upisani na srpskom u kodu nego idu kroz prevode. Svaka stranica pokazuje pretraživaču svoju glavnu adresu i adresu prevoda, sa srpskom verzijom kao podrazumevanom; članak bloga vodi na prevod istog teksta, koji ima svoju adresu, a članak bez prevoda pokazuje samo svoj jezik. Mapa sajta se pravi sama iz ruta i objavljenih članaka, sa vezama ka prevodima, a uputstvo za pretraživače sklanja internu razvojnu stranicu. Vlasnik je pre implementacije odlučio o sedam stvari: naslov i opis sajta idu kroz prevode na oba jezika, opisi se pišu za svih trinaest stranica, podrazumevane ikonice se zamenjuju generisanim, opis firme za pretraživače nosi adresu Novi Beograd, Beograd, bez ulice i sa zvaničnim nazivima na oba jezika, opis usluga se proverava u opštem validatoru jer ga Google ne prikazuje posebno, filtrirana lista bloga uvek upućuje na glavnu listu jer je „prikaži još" samo duža verzija iste liste, a pravne stranice se ne indeksiraju i nisu u mapi sajta dok ih sledeći feature ne napravi. Strukturirani podaci opisuju firmu na svakoj stranici, bez telefona, zatim usluge sa polaznom cenom sa jednog mesta, članke i putanju iznad naslova, isto kao vidljiva putanja. Za deljenje linka napravljena je privremena slika u bojama sajta sa logom i sloganom, a uz nju ikonica u tabu browsera, ikonica za početni ekran telefona i manifest sa bojom teme; svi su jasno označeni kao privremeni, a uputstvo za vlasnika i kratki podsetnik dobili su spisak fajlova sa dimenzijama za zamenu kad dizajner napravi prave. Provera semantike prošla je kroz sve stranice na oba jezika: svuda je jedan glavni naslov i sve slike imaju opis, a na pregledu usluga naslovi kartica su podignuti za nivo jer su preskakali jedan stepen, uz izgled koji je izmeren u browseru i ostao isti. Tokom rada otkriveno je da ikonica za telefon postavljena na uobičajeno mesto ruši razvojni server, jer projekat nema jedan zajednički osnovni raspored, pa je premeštena među javne fajlove i prijavljena kroz metapodatke; logo u zaglavlju se sada učitava odmah, jer je na kratkim stranicama najveći element ekrana. Tokom review-a jezik u osnovnom rasporedu čita se sa jednog mesta, podrazumevani jezik je postao jedna zajednička vrednost za rute i pretraživače, a dva članka su usklađena sa pravilima formatiranja. Lint, provera tipova, testovi i build prolaze; uživo su provereni naslovi, opisi, glavne adrese, veze ka prevodima, mapa sajta, strukturirani podaci i ikonice na oba jezika, a provera u Google alatima za bogate rezultate i pregled deljenja ostaju za posle objave sajta.

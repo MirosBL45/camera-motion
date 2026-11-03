@@ -32,6 +32,7 @@ Sajt nema bazu ni CMS — ovo su mesta gde se menjaju vrednosti:
 | Email i društvene mreže   | `src/constants/contact.ts` — isti podaci za footer i kontakt stranicu                  |
 | Tekstovi                  | `src/i18n/messages/sr/` i `src/i18n/messages/en/` (isti ključevi na oba jezika)        |
 | Blog članci               | `src/content/blog/sr/` i `src/content/blog/en/` — vidi [Blog](#blog)                   |
+| SEO naslovi i opisi       | `src/i18n/messages/{sr,en}/metadata.json` — vidi [SEO](#seo)                           |
 
 ## Blog
 
@@ -124,6 +125,30 @@ Slika sa potpisom — fajl ide u `public/blog/`, a `width` i `height` su stvarne
 
 `import` i `export` u MDX fajlovima nisu dozvoljeni — koriste se samo `<YouTube>` i `<Figure>`.
 
+## SEO
+
+- **Naslov i opis stranice** (`<title>`, Google, deljenje linka): `metadata.json` u `src/i18n/messages/sr/` i `en/`, po ključu stranice. Naslov dobija nastavak `| Camera Motion` automatski. Članci bloga uzimaju `title` i `description` iz frontmattera.
+- **Canonical, hreflang, sitemap i robots** se prave sami iz ruta i članaka — ništa se ne upisuje ručno. Nov članak sam ulazi u `/sitemap.xml` (osim `draft: true`).
+- **Blog lista** sa filterom (`?kategorija=`, `?strana=`) uvek upućuje na `/blog`, pa se filtrirane verzije ne indeksiraju posebno.
+- **Pravne stranice** su `noindex` i van sitemap-a dok ih feature 20 ne napravi.
+- **JSON-LD:** LocalBusiness na svakoj stranici (bez telefona), Service na stranicama usluga, BlogPosting na člancima, BreadcrumbList na uslugama i člancima. Adresa i područje rada su u `src/constants/seo.ts`.
+- **Provera posle deploy-a:** [Rich Results Test](https://search.google.com/test/rich-results) za LocalBusiness i BlogPosting, [Schema Markup Validator](https://validator.schema.org/) za Service (Google ga ne prikazuje kao rich rezultat). Pre deploy-a može i preko kartice „Kod": nalepi se izvor stranice (`view-source:`).
+
+### Slike i ikonice za zamenu
+
+Sve slike ispod su **generisani placeholderi iz palete** (krug „CM" i natpis). Kad dizajner napravi prave, fajl se zameni istim imenom i dimenzijama — kod se ne menja.
+
+| Fajl                          | Dimenzije          | Za šta                                                          |
+| ----------------------------- | ------------------ | --------------------------------------------------------------- |
+| `public/og.png`               | 1200×630 PNG       | Slika pri deljenju linka (Facebook, Viber, WhatsApp, LinkedIn…) |
+| `src/app/favicon.ico`         | 16, 32 i 48 px ICO | Ikonica u tabu browsera                                         |
+| `public/apple-touch-icon.png` | 180×180 PNG        | Ikonica na iPhone početnom ekranu                               |
+| `public/icons/icon-192.png`   | 192×192 PNG        | Android / manifest                                              |
+| `public/icons/icon-512.png`   | 512×512 PNG        | Android / manifest i logo u JSON-LD-u                           |
+| `public/logo.svg`             | SVG                | Logo u header-u i footer-u                                      |
+
+Za OG sliku je najbolji pravi kadar sa logom, bez sitnog teksta — ista slika se deli na oba jezika. Posle zamene: novi deploy, pa u [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) kliknuti „Scrape Again" da Facebook povuče novu sliku.
+
 ## Environment varijable
 
 Kopirati `.env.example` u `.env.local` i popuniti vrednosti:
@@ -132,14 +157,14 @@ Kopirati `.env.example` u `.env.local` i popuniti vrednosti:
 cp .env.example .env.local
 ```
 
-| Varijabla                  | Opis                                                                 |
-| -------------------------- | -------------------------------------------------------------------- |
-| `RESEND_API_KEY`           | Resend API ključ za slanje kontakt forme                             |
-| `UPSTASH_REDIS_REST_URL`   | Upstash Redis URL za rate limit kontakt forme                        |
-| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis token                                                  |
-| `CONTACT_EMAIL`            | Gmail adresa vlasnika, primalac poruka sa kontakt forme              |
-| `CONTACT_PHONE`            | Telefon vlasnika, prikazuje se tek na klik (npr. `+381 60 123 4567`) |
-| `NEXT_PUBLIC_SITE_URL`     | Javni URL sajta, koristi se za canonical/OG                          |
+| Varijabla                  | Opis                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------ |
+| `RESEND_API_KEY`           | Resend API ključ za slanje kontakt forme                                                   |
+| `UPSTASH_REDIS_REST_URL`   | Upstash Redis URL za rate limit kontakt forme                                              |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis token                                                                        |
+| `CONTACT_EMAIL`            | Gmail adresa vlasnika, primalac poruka sa kontakt forme                                    |
+| `CONTACT_PHONE`            | Telefon vlasnika, prikazuje se tek na klik (npr. `+381 60 123 4567`)                       |
+| `NEXT_PUBLIC_SITE_URL`     | Javni URL sajta za canonical, hreflang, OG i sitemap (bez nje: `https://cameramotion.net`) |
 
 Iste vrednosti se upisuju i na Vercel-u: Project → Settings → Environment Variables (posle izmene je potreban novi deploy).
 

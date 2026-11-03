@@ -36,6 +36,16 @@ Ovde idu samo ultrakratke teze — jedna odluka ili savet po redu, bez objašnja
 - Svuda na sajtu: „registrovan pilot pri DCV" + „u skladu sa regulativom"
 - Osiguranje se ne pominje nigde
 
+## SEO
+
+- Naslovi i opisi stranica: `metadata.json` (sr + en); članci iz frontmattera
+- Sitemap, robots, canonical i hreflang se prave sami — ništa ručno
+- Filtrirana blog lista uvek upućuje na `/blog`
+- Pravne stranice: `noindex` i van sitemap-a do feature-a 20
+- JSON-LD adresa: Novi Beograd, Beograd, RS — bez ulice i bez telefona
+- **Placeholder slike — zameniti kad dizajner napravi prave** (isto ime i dimenzije): `public/og.png`, `src/app/favicon.ico`, `public/apple-touch-icon.png`, `public/icons/icon-192.png`, `public/icons/icon-512.png`, `public/logo.svg` — spisak sa dimenzijama u README-u
+- Posle zamene OG slike: Facebook Sharing Debugger → „Scrape Again"
+
 ## O nama
 
 - Ekipa se menja samo u `TEAM` u `src/data/team.ts`; uloga i opis po članu u `about.team.{id}` (sr + en)
