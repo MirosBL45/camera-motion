@@ -19,4 +19,4 @@ Faza 4, fajl 2/3. Politika privatnosti i uslovi korišćenja — obavezni jer fo
 ## Reference
 
 - @context/project-overview.md (poglavlja 7, 12)
-- @context/features/05-footer.md, @context/features/16-kontakt-stranica.md
+- @context/features/05-footer-done.md, @context/features/16-kontakt-stranica-done.md

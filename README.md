@@ -24,15 +24,16 @@ npm run test    # Vitest (jedan prolaz)
 
 Sajt nema bazu ni CMS — ovo su mesta gde se menjaju vrednosti:
 
-| Šta                       | Gde                                                                                    |
-| ------------------------- | -------------------------------------------------------------------------------------- |
-| Cene paketa i usluga      | `PRICES` blok na vrhu `src/data/packages.ts` — jedino mesto u projektu gde stoji iznos |
-| Brojke u hero traci       | `src/constants/hero-stats.ts`                                                          |
-| YouTube ID-jevi po usluzi | `videoIds` u `src/data/services.ts`                                                    |
-| Email i društvene mreže   | `src/constants/contact.ts` — isti podaci za footer i kontakt stranicu                  |
-| Tekstovi                  | `src/i18n/messages/sr/` i `src/i18n/messages/en/` (isti ključevi na oba jezika)        |
-| Blog članci               | `src/content/blog/sr/` i `src/content/blog/en/` — vidi [Blog](#blog)                   |
-| SEO naslovi i opisi       | `src/i18n/messages/{sr,en}/metadata.json` — vidi [SEO](#seo)                           |
+| Šta                       | Gde                                                                                     |
+| ------------------------- | --------------------------------------------------------------------------------------- |
+| Cene paketa i usluga      | `PRICES` blok na vrhu `src/data/packages.ts` — jedino mesto u projektu gde stoji iznos  |
+| Brojke u hero traci       | `src/constants/hero-stats.ts`                                                           |
+| YouTube ID-jevi po usluzi | `videoIds` u `src/data/services.ts`                                                     |
+| Email i društvene mreže   | `src/constants/contact.ts` — isti podaci za footer i kontakt stranicu                   |
+| Tekstovi                  | `src/i18n/messages/sr/` i `src/i18n/messages/en/` (isti ključevi na oba jezika)         |
+| Blog članci               | `src/content/blog/sr/` i `src/content/blog/en/` — vidi [Blog](#blog)                    |
+| SEO naslovi i opisi       | `src/i18n/messages/{sr,en}/metadata.json` — vidi [SEO](#seo)                            |
+| Pravne stranice           | tekst u `src/i18n/messages/{sr,en}/legal.json`, datum izmene u `src/constants/legal.ts` |
 
 ## Blog
 
