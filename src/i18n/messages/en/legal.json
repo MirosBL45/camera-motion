@@ -1,8 +1,109 @@
 {
+  "lastUpdated": "Last updated: <time>{date}</time>",
   "privacy": {
-    "title": "Privacy policy"
+    "title": "Privacy policy",
+    "lead": "This policy explains what personal data we collect through cameramotion.net, why we collect it, how long we keep it and what your rights are. We process data in accordance with the Serbian Law on Personal Data Protection (Official Gazette of the Republic of Serbia, No. 87/2018).",
+    "controller": {
+      "heading": "Who processes your data",
+      "body": "The data controller is Camera Motion, a video production team based in Belgrade. For any questions about your data, write to us at <mail>{email}</mail>."
+    },
+    "data": {
+      "heading": "What data we collect",
+      "intro": "We only collect the data you enter into the contact form yourself:",
+      "items": {
+        "name": "your name",
+        "email": "your email address",
+        "phone": "your phone number, if you provide it",
+        "details": "filming details — type of service, date and location, if you provide them",
+        "message": "the message you write to us"
+      },
+      "technical": "In addition, to protect the form from abuse we briefly record the IP address an enquiry was sent from, and our hosting provider technically logs the IP address and basic details of each request."
+    },
+    "purpose": {
+      "heading": "Why we use it",
+      "body": "We use the data from the form only to reply to your enquiry and, if we agree to work together, to prepare a quote and organise the shoot. The legal basis is your consent, which you give by ticking the consent box before sending the form, together with the steps we take at your request before agreeing on a job.",
+      "technical": "We use the IP address to limit the number of enquiries from the same address and so protect the form from automated messages, which is our legitimate interest.",
+      "noMarketing": "We do not use your data for marketing, we do not send you promotional messages and we do not sell it."
+    },
+    "processors": {
+      "heading": "Who else has access to the data",
+      "intro": "We do not share your data with third parties for their own purposes. To run the website we use a few service providers, who process data only on our instructions and only as far as their service requires:",
+      "items": {
+        "resend": "<b>Resend</b> (USA) — delivers enquiries from the form to our inbox",
+        "gmail": "<b>Google — Gmail</b> (USA) — the inbox where we keep enquiries and our correspondence with you",
+        "upstash": "<b>Upstash</b> (server in the European Union, Frankfurt) — a short-lived record of IP addresses used to limit the number of enquiries",
+        "vercel": "<b>Vercel</b> (USA) — website hosting and technical request logs"
+      },
+      "transfer": "Some of these providers store data on servers outside Serbia, including in the USA. Such transfers rely on the safeguards these providers apply, such as standard contractual clauses, in accordance with the Law.",
+      "authorities": "We may disclose data to public authorities only where the law expressly requires it."
+    },
+    "retention": {
+      "heading": "How long we keep it",
+      "items": {
+        "ip": "The IP address used to limit enquiries is deleted automatically after 48 hours at the latest.",
+        "inquiries": "We keep enquiries and correspondence for no longer than 12 months after our last contact, and then delete them.",
+        "cooperation": "If we agree to work together, we keep the data needed for the shoot for as long as it takes to complete the job and as long as the law requires.",
+        "logs": "Hosting logs and the record of sent emails kept by the email delivery service are stored briefly, according to those providers' rules."
+      }
+    },
+    "cookies": {
+      "heading": "Cookies and videos",
+      "body": "This website does not set cookies and does not use analytics or marketing tools — we do not track how you move around the site.",
+      "youtube": "Videos do not start until you click on them. Until then only the video thumbnail is shown, loaded from YouTube's servers, so Google sees your IP address at that point. When you start a video, the player loads in YouTube's privacy-enhanced mode, and YouTube may then store data in your browser, according to <google>Google's privacy policy</google>."
+    },
+    "rights": {
+      "heading": "Your rights",
+      "intro": "At any time you have the right to:",
+      "items": {
+        "access": "find out whether we process your data and get access to it",
+        "rectification": "ask us to correct inaccurate data or complete incomplete data",
+        "erasure": "ask us to delete your data",
+        "restriction": "ask us to restrict processing",
+        "portability": "receive your data in a common electronic format",
+        "objection": "object to processing based on legitimate interest",
+        "withdraw": "withdraw your consent, without affecting processing carried out before the withdrawal"
+      },
+      "request": "Send your request to <mail>{email}</mail>. We will reply within 30 days at the latest.",
+      "complaint": "If you believe we process your data in breach of the Law, you can file a complaint with the <poverenik>Commissioner for Information of Public Importance and Personal Data Protection</poverenik>."
+    },
+    "changes": {
+      "heading": "Changes to this policy",
+      "body": "If we change this policy, we publish the new version on this page, with the date of the last update at the top."
+    }
   },
   "terms": {
-    "title": "Terms of use"
+    "title": "Terms of use",
+    "lead": "These terms apply to the use of cameramotion.net. By using the website you accept them, so please read them.",
+    "about": {
+      "heading": "About the website",
+      "body": "The website presents the video production services of Camera Motion: drone and camera filming for weddings, properties, events and businesses. The information on the website is meant to introduce these services."
+    },
+    "content": {
+      "heading": "Copyright",
+      "body": "All content on the website — videos, photos, texts, the logo and the design — is the property of Camera Motion. Copying, downloading, republishing or using the content for commercial purposes without our written consent is not allowed.",
+      "sharing": "Sharing links to pages of the website is, of course, welcome."
+    },
+    "prices": {
+      "heading": "Prices and quotes",
+      "body": "Prices on the website are starting prices (\"from\") and are for information only. The final price depends on the duration, location and scope of the job and is set in the quote you receive after your enquiry.",
+      "inquiry": "Sending an enquiry through the form does not commit you or us to anything. We start working together only once we agree on a quote."
+    },
+    "drone": {
+      "heading": "Drone filming",
+      "body": "Drone filming depends on the weather, such as wind, rain and fog, and on the regulations of the Civil Aviation Directorate of Serbia. The drone is flown by a pilot registered with the Directorate, in compliance with its regulations.",
+      "limits": "At some locations flying is not allowed or requires a special permit. If conditions or regulations do not allow a safe flight, drone filming does not take place; we let you know and agree on the next steps together."
+    },
+    "liability": {
+      "heading": "Accuracy of information",
+      "body": "We do our best to keep the information on the website accurate and up to date, but we cannot guarantee that it is complete at all times. The website may occasionally be unavailable due to maintenance. We are not responsible for the content of external websites we link to, such as YouTube and Instagram."
+    },
+    "privacy": {
+      "heading": "Privacy",
+      "body": "How we process the data you send through the contact form is described in our <privacy>Privacy policy</privacy>."
+    },
+    "law": {
+      "heading": "Governing law and changes",
+      "body": "These terms are governed by the law of the Republic of Serbia. If we change them, we publish the new version on this page, with the date of the last update at the top. For any questions, write to us at <mail>{email}</mail>."
+    }
   }
 }

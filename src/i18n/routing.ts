@@ -10,6 +10,9 @@ export const routing = defineRouting({
   localePrefix: "as-needed",
   // Sajt se uvek otvara na srpskom, bez obzira na jezik browsera; na engleski se prelazi ručno
   localeDetection: false,
+  // Bez `NEXT_LOCALE` kolačića — jezik je samo u URL-u, pa sajt ne postavlja nijedan kolačić
+  // (politika privatnosti; odluka vlasnika, 04.11.2026.)
+  localeCookie: false,
   pathnames: {
     [ROUTES.home]: "/",
     [ROUTES.services]: {

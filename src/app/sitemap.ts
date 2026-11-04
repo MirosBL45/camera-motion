@@ -10,8 +10,6 @@ import {
 import { buildLanguageAlternates } from "@/lib/seo";
 import { SUPPORTED_LOCALES } from "@/lib/types/i18n";
 
-// Pravne stranice su `noindex` dok su skeleti (odluka vlasnika, 02.11.2026.), pa nisu ni ovde.
-// TODO(feature 20): dodati "privacy" i "terms" kad stranice budu gotove.
 const INDEXED_PAGES = [
   "home",
   "services",
@@ -23,6 +21,8 @@ const INDEXED_PAGES = [
   "blog",
   "about",
   "contact",
+  "privacy",
+  "terms",
 ] as const satisfies readonly StaticPageKeyType[];
 
 // Sve stranice na oba jezika + objavljeni članci (`draft` ne ulazi u produkciju); svaki

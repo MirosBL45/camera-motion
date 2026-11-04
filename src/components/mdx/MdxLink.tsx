@@ -3,6 +3,7 @@ import { getLocale } from "next-intl/server";
 
 import { getBlogPostByKey } from "@/lib/blog";
 
+import { INLINE_LINK_FOCUS_CLASSES } from "@/constants/link-styles";
 import { ROUTES } from "@/constants/routes";
 import { Link } from "@/i18n/navigation";
 
@@ -15,9 +16,6 @@ interface IMdxLinkProps {
 
 const ROUTE_PREFIX = "route:";
 const BLOG_PREFIX = "blog:";
-
-const FOCUS_CLASSES =
-  "rounded-sm underline-offset-4 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none";
 
 function isLinkableRouteKey(key: string): key is LinkableRouteKeyType {
   return key !== "blogPost" && Object.hasOwn(ROUTES, key);
@@ -44,7 +42,7 @@ export async function MdxLink({ href = "", children }: IMdxLinkProps) {
           pathname: ROUTES[key],
           query: Object.fromEntries(new URLSearchParams(queryString)),
         }}
-        className={FOCUS_CLASSES}
+        className={INLINE_LINK_FOCUS_CLASSES}
       >
         {children}
       </Link>
@@ -62,7 +60,7 @@ export async function MdxLink({ href = "", children }: IMdxLinkProps) {
     return (
       <Link
         href={{ pathname: ROUTES.blogPost, params: { slug: post.slug } }}
-        className={FOCUS_CLASSES}
+        className={INLINE_LINK_FOCUS_CLASSES}
       >
         {children}
       </Link>
@@ -71,7 +69,12 @@ export async function MdxLink({ href = "", children }: IMdxLinkProps) {
 
   if (/^https:\/\//.test(href)) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={FOCUS_CLASSES}>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={INLINE_LINK_FOCUS_CLASSES}
+      >
         {children}
       </a>
     );

@@ -1,8 +1,109 @@
 {
+  "lastUpdated": "Poslednja izmena: <time>{date}</time>",
   "privacy": {
-    "title": "Politika privatnosti"
+    "title": "Politika privatnosti",
+    "lead": "Ova politika objašnjava koje podatke o ličnosti prikupljamo preko sajta cameramotion.net, zašto ih prikupljamo, koliko dugo ih čuvamo i koja prava imate. Podatke obrađujemo u skladu sa Zakonom o zaštiti podataka o ličnosti („Službeni glasnik RS“, br. 87/2018).",
+    "controller": {
+      "heading": "Ko obrađuje vaše podatke",
+      "body": "Rukovalac podacima je Camera Motion, video produkcija iz Beograda. Za sva pitanja o vašim podacima pišite nam na <mail>{email}</mail>."
+    },
+    "data": {
+      "heading": "Koje podatke prikupljamo",
+      "intro": "Prikupljamo isključivo podatke koje sami unesete u kontakt formu:",
+      "items": {
+        "name": "ime i prezime",
+        "email": "email adresu",
+        "phone": "broj telefona, ako ga unesete",
+        "details": "detalje snimanja: vrstu usluge, datum i lokaciju, ako ih unesete",
+        "message": "poruku koju nam pišete"
+      },
+      "technical": "Pored toga, radi zaštite forme od zloupotrebe kratko beležimo IP adresu sa koje je upit poslat, a hosting sajta tehnički beleži IP adresu i osnovne podatke o svakom zahtevu."
+    },
+    "purpose": {
+      "heading": "Zašto ih koristimo",
+      "body": "Podatke iz forme koristimo samo da bismo odgovorili na vaš upit i, ako se dogovorimo, pripremili ponudu i organizovali snimanje. Osnov za to je vaš pristanak, koji dajete označavanjem polja za saglasnost pre slanja forme, kao i koraci koje na vaš zahtev preduzimamo pre dogovora o saradnji.",
+      "technical": "IP adresu koristimo da ograničimo broj upita sa iste adrese i tako zaštitimo formu od automatskih poruka, što je naš legitimni interes.",
+      "noMarketing": "Vaše podatke ne koristimo za marketing, ne šaljemo vam reklamne poruke i ne prodajemo ih."
+    },
+    "processors": {
+      "heading": "Ko još ima pristup podacima",
+      "intro": "Podatke ne ustupamo trećim licima za njihove svrhe. Za rad sajta koristimo nekoliko pružalaca usluga, koji podatke obrađuju isključivo po našem nalogu i samo u meri potrebnoj za svoju uslugu:",
+      "items": {
+        "resend": "<b>Resend</b> (SAD) — dostavlja upit iz forme u naše email sanduče",
+        "gmail": "<b>Google — Gmail</b> (SAD) — email sanduče u kome čuvamo upite i prepisku sa vama",
+        "upstash": "<b>Upstash</b> (server u Evropskoj uniji, Frankfurt) — kratkotrajna evidencija IP adrese radi ograničenja broja upita",
+        "vercel": "<b>Vercel</b> (SAD) — hosting sajta i tehnički logovi zahteva"
+      },
+      "transfer": "Neki od ovih pružalaca čuvaju podatke na serverima van Srbije, uključujući i SAD. Takav prenos se vrši uz mere zaštite koje ti pružaoci primenjuju, kao što su standardne ugovorne klauzule, u skladu sa Zakonom.",
+      "authorities": "Podatke možemo dostaviti državnim organima samo kada to zakon izričito nalaže."
+    },
+    "retention": {
+      "heading": "Koliko dugo ih čuvamo",
+      "items": {
+        "ip": "IP adresa za ograničenje broja upita briše se automatski, najkasnije posle 48 sati.",
+        "inquiries": "Upite i prepisku čuvamo najduže 12 meseci od poslednje komunikacije, a zatim ih brišemo.",
+        "cooperation": "Ako se dogovorimo o saradnji, podatke potrebne za snimanje čuvamo koliko je potrebno za izvršenje dogovora i koliko to nalažu propisi.",
+        "logs": "Tehnički logovi hostinga i evidencija poslatih emailova kod servisa za slanje čuvaju se kratko, prema pravilima tih pružalaca."
+      }
+    },
+    "cookies": {
+      "heading": "Kolačići i video snimci",
+      "body": "Sajt ne postavlja kolačiće i ne koristi alate za analitiku ni marketing — ne pratimo vaše kretanje po sajtu.",
+      "youtube": "Video snimci se ne pokreću dok sami ne kliknete na njih. Do tada se prikazuje samo sličica videa, koja se učitava sa YouTube servera, pa Google tom prilikom vidi vašu IP adresu. Kada pokrenete video, plejer se učitava u YouTube režimu proširene privatnosti, a YouTube tada može da sačuva podatke u vašem browseru, prema <google>politici privatnosti Google-a</google>."
+    },
+    "rights": {
+      "heading": "Vaša prava",
+      "intro": "U svakom trenutku imate pravo da:",
+      "items": {
+        "access": "saznate da li obrađujemo vaše podatke i dobijete uvid u njih",
+        "rectification": "zatražite ispravku netačnih ili dopunu nepotpunih podataka",
+        "erasure": "zatražite brisanje podataka",
+        "restriction": "zatražite ograničenje obrade",
+        "portability": "dobijete svoje podatke u uobičajenom elektronskom obliku",
+        "objection": "podnesete prigovor na obradu zasnovanu na legitimnom interesu",
+        "withdraw": "povučete pristanak, bez uticaja na obradu pre povlačenja"
+      },
+      "request": "Zahtev pošaljite na <mail>{email}</mail>. Odgovorićemo najkasnije u roku od 30 dana.",
+      "complaint": "Ako smatrate da vaše podatke obrađujemo suprotno Zakonu, možete podneti pritužbu <poverenik>Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti</poverenik>."
+    },
+    "changes": {
+      "heading": "Izmene politike",
+      "body": "Ako promenimo ovu politiku, novu verziju objavljujemo na ovoj stranici, uz datum poslednje izmene na vrhu."
+    }
   },
   "terms": {
-    "title": "Uslovi korišćenja"
+    "title": "Uslovi korišćenja",
+    "lead": "Ovi uslovi važe za korišćenje sajta cameramotion.net. Korišćenjem sajta prihvatate ih, pa vas molimo da ih pročitate.",
+    "about": {
+      "heading": "O sajtu",
+      "body": "Sajt predstavlja usluge video produkcije Camera Motion: snimanje dronom i kamerom za venčanja, nekretnine, događaje i firme. Informacije na sajtu služe za upoznavanje sa uslugama."
+    },
+    "content": {
+      "heading": "Autorska prava",
+      "body": "Sav sadržaj sajta — video snimci, fotografije, tekstovi, logo i dizajn — vlasništvo je Camera Motion. Nije dozvoljeno kopiranje, preuzimanje, ponovno objavljivanje ni korišćenje sadržaja u komercijalne svrhe bez naše pisane saglasnosti.",
+      "sharing": "Deljenje linkova ka stranicama sajta je, naravno, dozvoljeno."
+    },
+    "prices": {
+      "heading": "Cene i ponude",
+      "body": "Cene na sajtu su polazne („od“) i informativne. Konačna cena zavisi od trajanja, lokacije i obima posla i određuje se u ponudi koju dobijate posle upita.",
+      "inquiry": "Slanje upita preko forme ne obavezuje ni vas ni nas. Saradnja počinje tek kada se dogovorimo o ponudi."
+    },
+    "drone": {
+      "heading": "Snimanje dronom",
+      "body": "Snimanje dronom zavisi od vremenskih uslova, kao što su vetar, kiša i magla, i od propisa Direktorata civilnog vazduhoplovstva (DCV). Dronom upravlja pilot registrovan pri DCV, u skladu sa regulativom.",
+      "limits": "Na nekim lokacijama let nije dozvoljen ili zahteva posebnu dozvolu. Ako uslovi ili propisi ne dozvoljavaju bezbedan let, snimanje dronom se ne izvodi, a o tome vas obaveštavamo i dogovaramo dalje korake."
+    },
+    "liability": {
+      "heading": "Tačnost informacija",
+      "body": "Trudimo se da informacije na sajtu budu tačne i ažurne, ali ne možemo da garantujemo da su u svakom trenutku potpune. Sajt može povremeno biti nedostupan zbog održavanja. Za sadržaj spoljnih sajtova na koje vode linkovi, kao što su YouTube i Instagram, ne odgovaramo."
+    },
+    "privacy": {
+      "heading": "Privatnost",
+      "body": "Kako obrađujemo podatke koje pošaljete preko kontakt forme, opisano je u <privacy>Politici privatnosti</privacy>."
+    },
+    "law": {
+      "heading": "Merodavno pravo i izmene",
+      "body": "Na ove uslove primenjuje se pravo Republike Srbije. Ako ih promenimo, novu verziju objavljujemo na ovoj stranici, uz datum poslednje izmene na vrhu. Za pitanja nam pišite na <mail>{email}</mail>."
+    }
   }
 }

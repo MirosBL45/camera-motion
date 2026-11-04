@@ -1,4 +1,4 @@
-# Current Feature: 19 — SEO i metapodaci
+# Current Feature: 20 — Pravne stranice
 
 ## Status
 
@@ -10,61 +10,68 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 4, fajl 1/3. Kompletna SEO infrastruktura po poglavlju 14
-- **`generateMetadata` za svaku stranicu**: title šablon `%s | Camera Motion`, description sr + en iz `metadata` namespace-a, canonical, hreflang alternates (sr ↔ en, `x-default` → sr), uz lokalizovane pathname-ove iz tabele 7.1
-- **OG default** `public/og.png` 1200×630 — placeholder generisan iz palete (logo + slogan) + `// TODO(vlasnik): zameniti pravim kadrom`
-- **`sitemap.ts`**: sve rute u obe lokalizacije + objavljeni blog članci (bez `draft`)
-- **`robots.ts`**: allow sve, disallow `/dev-ui`, link na sitemap
-- **JSON-LD**: `LocalBusiness` u layout-u (naziv, url, logo, areaServed, email — BEZ telefona), `Service` na stranicama usluga, `BlogPosting` na člancima, `BreadcrumbList` na uslugama i blogu
-- **Favicon set iz loga**: `favicon.ico`, `apple-touch-icon`, manifest sa temom `#FAF8F4` — placeholder ikone + TODO
-- **Provera semantike**: jedan h1 po stranici, logičan redosled naslova, alt tekstovi
-- **Podsetnik za prave slike**: pošto prave slike i ikonice još ne postoje, generišu se placeholderi, a u `context/bitne-stvari.md` i `README.md` se na prigodnim mestima dodaje podsetnik da se zamene kad dizajner napravi prave
+- Faza 4, fajl 2/3. Politika privatnosti i uslovi korišćenja — obavezni jer forma skuplja lične podatke
+- **`/politika-privatnosti`** (`/en/privacy-policy`):
+  - rukovalac: Camera Motion, kontakt email
+  - podaci: isključivo ono što je uneto u formu (ime, email, telefon, detalji događaja)
+  - svrha: odgovor na upit; bez prosleđivanja trećim licima i bez marketinga
+  - procesori: Resend (slanje), Gmail (sanduče), Upstash (kratkotrajna anti-spam evidencija IP)
+  - kolačići: sajt NE koristi analitičke ni marketinške (samo tehnički neophodno)
+  - prava: uvid, ispravka, brisanje — zahtev na email
+- **`/uslovi-koriscenja`** (`/en/terms`): sadržaj sajta je vlasništvo Camera Motion; cene „od" su informativne — konačna ponuda dogovorom; snimanje dronom zavisi od vremenskih uslova i propisa DCV
+- **Obe stranice**: mirna tipografska stranica, max ~70ch, datum poslednje izmene na vrhu; `// NAPOMENA: šablon teksta, nije pravni savet — vlasnik pregleda`
+- **Linkovi** iz footera i iz checkbox-a saglasnosti na kontakt formi vode na ove stranice (proveriti da rade, na oba jezika)
+- **SEO**: skinuti `noindex` sa obe stranice i vratiti ih u sitemap (feature 19 ih je privremeno isključio — odluka vlasnika, 02.11.2026.)
 
 ## Notes
 
 <!-- Any extra notes -->
 
 - Postojeće na šta se feature naslanja:
-  - `src/app/[locale]/layout.tsx` ima statički `metadata` (hardkodovan sr title i description) — prelazi na `generateMetadata` kroz i18n
-  - `blog/[slug]/page.tsx` već ima `generateMetadata` sa title/description iz frontmattera (feature 18) — ovde se dopunjuju canonical, hreflang i OG
-  - `metadata` namespace (sr + en) ima samo `title` po stranici — `description` za svih 13 stranica tek treba napisati
-  - `src/app/favicon.ico` je podrazumevani Next.js favicon (16 + 32px); `public/logo.svg` je placeholder loga sa TODO
-  - Rute iz `src/constants/routes.ts` + `getPathname` iz `@/i18n/navigation` za lokalizovane URL-ove; `NEXT_PUBLIC_SITE_URL` iz env-a
-  - Privacy i terms stranice su skeleti do feature-a 20
-  - Blog lista se renderuje po zahtevu (`?kategorija=`, `?strana=`), članci su SSG; isti naziv fajla u `sr/` i `en/` povezuje prevode (hreflang na članku mora da vodi na prevod, a ne na isti slug)
-- Telefon nigde u JSON-LD (poglavlje 12)
-- Ključne fraze po usluzi su u feature fajlovima 09–13
-- Pre implementacije proveriti aktuelnu dokumentaciju u `node_modules/next/dist/docs/` (Metadata API, `sitemap`, `robots`, `manifest`, `icon`/`apple-icon`, JSON-LD) i next-intl preporuke za metadata i hreflang
+  - `privacy/page.tsx` i `terms/page.tsx` su skeleti sa samo `<h1>` i `getStaticPageMetadata(..., { noIndex: true })` + `TODO(feature 20)`
+  - `sitemap.ts` ima `INDEXED_PAGES` bez `privacy`/`terms` + `TODO(feature 20)`
+  - `legal` namespace (sr + en) ima samo `title` po stranici; `metadata` namespace već ima title + description za obe stranice (feature 19)
+  - Rute i lokalizovani slugovi već postoje (`ROUTES.privacy`, `ROUTES.terms`, tabela 7.1)
+  - Footer linkuje obe stranice; checkbox saglasnosti (`ContactConsent`) linkuje politiku i otvara je u novom tabu
+  - Javni email je u `CONTACT_DISPLAY_EMAIL` (`src/constants/contact.ts`) — rukovalac ga čita odatle, ne upisuje se ponovo
+- Dizajn referenca nema artboard za pravne stranice (NOTES.md) — izgled se izvodi iz postojećih obrazaca (zaglavlje stranica, tipografija blog članka); nedoumice oko izgleda → pitati
+- Pravila koja važe: sav tekst kroz next-intl (sr + en), datum kroz `Intl.DateTimeFormat` po locale-u, ton profesionalan, bez pominjanja osiguranja, DCV formulacija „registrovan pilot pri DCV" / „u skladu sa regulativom" (poglavlje 2)
+- Telefon se ne prikazuje u tekstu stranica (poglavlje 12)
 
-### Odluke vlasnika (02.11.2026.)
+### Odluke vlasnika (04.11.2026.)
 
-1. **Naslov i opis u layout-u** prelaze sa hardkodovanog srpskog na i18n, na oba jezika (sr + en)
-2. **Opisi za svih 13 stranica** se pišu u `metadata` namespace-u, sr + en
-3. **Podrazumevani favicon i placeholder logo** se zamenjuju generisanim placeholderima iz loga + TODO i podsetnik (README, `bitne-stvari.md`)
-4. **`LocalBusiness` dobija adresu**: Beograd, Novi Beograd (bez ulice) — na oba jezika zvanični nazivi „Novi Beograd" (`addressLocality`) i „Beograd" (`addressRegion`), država `RS`; bez engleskog „Belgrade"
-5. **`Service` se proverava u Schema Markup Validator-u**, jer ga Google Rich Results test ne prepoznaje; LocalBusiness i BlogPosting idu kroz Rich Results test
-6. **Canonical za filtriranu blog listu**: sve verzije (`?kategorija=`, `?strana=`) upućuju na `/blog` bez parametara; hreflang na listi isto bez parametara (`/blog` ↔ `/en/blog`), a u sitemap-u je samo `/blog`. Razlog: `?strana=` je „učitaj još" (nadskup prve strane), kategorije imaju po nekoliko tekstova, a svaki članak je posebno u sitemap-u
-7. **Pravne stranice su `noindex`** dok ih feature 20 ne napravi; zato nisu ni u sitemap-u (`noindex` stranica u sitemap-u je kontradiktoran signal)
+1. **Širina teksta je ~70ch**, po feature-u — pravne stranice ne prate blog (75ch)
+2. **Datum poslednje izmene** stoji na jednom mestu u kodu, koje vlasnik menja kad menja tekst; ispisuje se kroz `Intl.DateTimeFormat` po locale-u
+3. **Uključuju se rok čuvanja podataka i pozivanje na Zakon o zaštiti podataka o ličnosti** („Sl. glasnik RS", br. 87/2018)
+4. **Treća lica i prenos van Srbije** — formulacija po preporuci (vlasnik prepustio):
+   1. Podaci se ne prodaju, ne ustupaju trećim licima za njihove svrhe i ne koriste se za marketing
+   2. Pružaoci usluga su navedeni kao obrađivači koji podatke obrađuju isključivo po nalogu Camera Motion i samo za rad sajta: Resend (slanje upita, SAD), Google / Gmail (sanduče, SAD), Upstash (anti-spam evidencija IP, server u EU — Frankfurt)
+   3. Prenos van Srbije se navodi otvoreno, uz pozivanje na mere zaštite koje ti pružaoci primenjuju (standardne ugovorne klauzule), u skladu sa ZZPL
+   4. Pored tri servisa iz spec-a, navode se i: Vercel (hosting — tehnički logovi sa IP adresom) i YouTube — sličica videa se učitava sa Google servera, a sam plejer (`youtube-nocookie.com`) tek posle klika posetioca. Dodato jer bi tekst bez njih bio netačan — vlasnik potvrdio
+   5. Rok čuvanja: anti-spam evidencija IP — do 48 sati (sliding window od jednog dana čuva ključ dva prozora, `PEXPIRE window * 2`); upit u sandučetu — do 12 meseci od poslednje komunikacije, osim ako nastane saradnja — vlasnik potvrdio
+5. **`NEXT_LOCALE` kolačić je isključen** (`localeCookie: false` u routing-u): next-intl ga je postavljao, a sajt ga nije koristio jer je `localeDetection: false`. Sajt sada ne postavlja nijedan kolačić, pa politika to može jasno da kaže
 
 ### Napomene iz implementacije
 
-1. `apple-icon.png` u `src/app/` ruši Turbopack dev server (panic „Failed to write app endpoint /page") jer projekat nema jedan root layout — ikonica je zato `public/apple-touch-icon.png`, prijavljena kroz `icons.apple` u layout-u. U `src/app/` korenu ostaju samo `favicon.ico`, `manifest.ts`, `robots.ts` i `sitemap.ts`
-2. Logo u header-u ima `loading="eager"` (uvek iznad fold-a, na kratkim stranicama LCP); u footer-u ostaje `lazy`
+1. Izgled po obrascu blog članka (dizajn nema ekran): centrirana kolona 70ch, `prose prose-brand`, h1 → datum izmene → uvod, pa h2 sekcije
+2. Datum izmene po stranici u `LEGAL_LAST_UPDATED` (`src/constants/legal.ts`); email u tekstu se čita iz `CONTACT_DISPLAY_EMAIL` kroz `t.rich`
+3. `noIndex` opcija iz `getStaticPageMetadata` / `buildPageMetadata` je uklonjena jer je više niko ne koristi; pravne stranice su u sitemap-u
+4. Prekidač jezika sa en na sr vodi na `/sr/...` pa proxy preusmerava na adresu bez prefiksa — postojeće ponašanje next-intl `Link`-a sa `locale` prop-om, nije posledica isključenog kolačića
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Rich Results test prolazi za LocalBusiness / Service / BlogPosting
-2. hreflang ispravan na svim stranicama (proveriti izvor obe verzije)
-3. OG pregled ispravan u share debuggeru; sitemap sadrži sve rute i članke
-4. `npm run lint`, `npm run test` i `npm run build` prolaze
+1. Obe stranice na oba jezika; linkovi iz footera i forme rade
+2. Stranice nemaju `noindex` i nalaze se u sitemap-u
+3. `npm run lint`, `npm run test` i `npm run build` prolaze
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 7, 14)
-- @context/features/19-seo.md
-- @context/features/18-blog-done.md
+- @context/project-overview.md (poglavlja 2, 7, 12, 14)
+- @context/features/20-pravne-stranice.md
+- @context/features/05-footer-done.md, @context/features/16-kontakt-stranica-done.md
+- @context/features/19-seo-done.md
 
 ## History
 
@@ -153,3 +160,7 @@ Napravljen blog i time završena faza sadržaja i kontakta. Članci žive u repo
 ### Monday, 02.11.2026. | 13:03 — 19 SEO i metapodaci
 
 Započeta završna faza: sajt je dobio kompletnu osnovu za pretraživače i deljenje linkova. Svaka stranica sada ima svoj naslov sa nastavkom „Camera Motion" i opis na oba jezika, sa ključnim frazama po usluzi, a podrazumevani naslov i opis više nisu upisani na srpskom u kodu nego idu kroz prevode. Svaka stranica pokazuje pretraživaču svoju glavnu adresu i adresu prevoda, sa srpskom verzijom kao podrazumevanom; članak bloga vodi na prevod istog teksta, koji ima svoju adresu, a članak bez prevoda pokazuje samo svoj jezik. Mapa sajta se pravi sama iz ruta i objavljenih članaka, sa vezama ka prevodima, a uputstvo za pretraživače sklanja internu razvojnu stranicu. Vlasnik je pre implementacije odlučio o sedam stvari: naslov i opis sajta idu kroz prevode na oba jezika, opisi se pišu za svih trinaest stranica, podrazumevane ikonice se zamenjuju generisanim, opis firme za pretraživače nosi adresu Novi Beograd, Beograd, bez ulice i sa zvaničnim nazivima na oba jezika, opis usluga se proverava u opštem validatoru jer ga Google ne prikazuje posebno, filtrirana lista bloga uvek upućuje na glavnu listu jer je „prikaži još" samo duža verzija iste liste, a pravne stranice se ne indeksiraju i nisu u mapi sajta dok ih sledeći feature ne napravi. Strukturirani podaci opisuju firmu na svakoj stranici, bez telefona, zatim usluge sa polaznom cenom sa jednog mesta, članke i putanju iznad naslova, isto kao vidljiva putanja. Za deljenje linka napravljena je privremena slika u bojama sajta sa logom i sloganom, a uz nju ikonica u tabu browsera, ikonica za početni ekran telefona i manifest sa bojom teme; svi su jasno označeni kao privremeni, a uputstvo za vlasnika i kratki podsetnik dobili su spisak fajlova sa dimenzijama za zamenu kad dizajner napravi prave. Provera semantike prošla je kroz sve stranice na oba jezika: svuda je jedan glavni naslov i sve slike imaju opis, a na pregledu usluga naslovi kartica su podignuti za nivo jer su preskakali jedan stepen, uz izgled koji je izmeren u browseru i ostao isti. Tokom rada otkriveno je da ikonica za telefon postavljena na uobičajeno mesto ruši razvojni server, jer projekat nema jedan zajednički osnovni raspored, pa je premeštena među javne fajlove i prijavljena kroz metapodatke; logo u zaglavlju se sada učitava odmah, jer je na kratkim stranicama najveći element ekrana. Tokom review-a jezik u osnovnom rasporedu čita se sa jednog mesta, podrazumevani jezik je postao jedna zajednička vrednost za rute i pretraživače, a dva članka su usklađena sa pravilima formatiranja. Lint, provera tipova, testovi i build prolaze; uživo su provereni naslovi, opisi, glavne adrese, veze ka prevodima, mapa sajta, strukturirani podaci i ikonice na oba jezika, a provera u Google alatima za bogate rezultate i pregled deljenja ostaju za posle objave sajta.
+
+### Wednesday, 04.11.2026. | 12:52 — 20 Pravne stranice
+
+Napravljene su politika privatnosti i uslovi korišćenja na oba jezika, jer kontakt forma prikuplja lične podatke. Dizajn nema ekran za ove stranice, pa su napravljene po obrascu blog članka: mirna centrirana kolona od oko 70 znakova, naslov, datum poslednje izmene i uvod, pa sekcije sa podnaslovima. Datum se menja na jednom mestu i ispisuje po jeziku, a email u tekstu se čita sa istog mesta kao u footeru. Politika navodi ko obrađuje podatke, da se prikuplja samo ono što posetilac unese u formu, zašto i na kom osnovu, koji pružaoci usluga učestvuju i gde čuvaju podatke, koliko dugo se podaci čuvaju, kako rade video snimci i koja prava posetilac ima, uz pozivanje na Zakon o zaštiti podataka o ličnosti i pravo na pritužbu Povereniku. Uslovi navode da je sadržaj sajta vlasništvo Camera Motion, da su cene „od" informativne a konačna cena stvar ponude, i da snimanje dronom zavisi od vremena i propisa, uz pilota registrovanog pri Direktoratu civilnog vazduhoplovstva; dodate su i kratke sekcije o sajtu, tačnosti informacija, privatnosti i merodavnom pravu. Vlasnik je pre implementacije odlučio o više stvari: širina teksta ostaje 70 znakova umesto širine bloga, uključuju se rok čuvanja i pozivanje na zakon, pružaoci usluga se navode kao obrađivači uz otvoreno naveden prenos podataka van Srbije, u spisak ulaze i hosting i YouTube jer bi tekst bez njih bio netačan, a rokovi čuvanja su do 48 sati za zaštitu od spama i do 12 meseci za upite. Tokom rada otkriveno je da biblioteka za jezike postavlja kolačić koji sajt ne koristi, pa je na odluku vlasnika isključen i sajt sada ne postavlja nijedan kolačić, što politika i kaže. Obe stranice se sada indeksiraju i nalaze se u mapi sajta, a privremena opcija za isključivanje indeksiranja je uklonjena jer je više ništa ne koristi. U kodu stoji napomena da je tekst šablon, a ne pravni savet, i podsetnik da se dopišu podaci o registraciji ako postoje; uputstvo za vlasnika dobilo je mesto gde se menjaju tekst i datum. Tokom review-a rok čuvanja je dopunjen zapisima kod servisa za slanje emaila, a stil fokusa za linkove u tekstu je spojen sa onim iz bloga umesto da postoji dvaput. Lint, provera tipova, testovi i build prolaze; obe stranice su proverene na oba jezika i pet širina — nema horizontalnog skrola, jedan je glavni naslov, nema animacija ni kolačića, a linkovi iz footera, iz saglasnosti na formi i iz uslova ka politici, kao i prekidač jezika, rade.

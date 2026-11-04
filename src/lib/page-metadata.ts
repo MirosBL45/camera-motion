@@ -52,15 +52,13 @@ interface IPageMetadataInput {
   title: string;
   description: string;
   urls: LocalizedUrlsType;
-  /** Stranica se ne indeksira (npr. pravne stranice dok su skeleti). */
-  noIndex?: boolean;
   /** Članak bloga: `og:type=article` sa datumom objave. */
   publishedTime?: string;
 }
 
 /** Title, description, canonical, hreflang i Open Graph za jednu stranicu (poglavlje 14). */
 export async function buildPageMetadata(input: IPageMetadataInput): Promise<Metadata> {
-  const { locale, title, description, urls, noIndex, publishedTime } = input;
+  const { locale, title, description, urls, publishedTime } = input;
   const t = await getTranslations({ locale, namespace: "metadata" });
   const canonical = urls[locale];
 
@@ -87,15 +85,11 @@ export async function buildPageMetadata(input: IPageMetadataInput): Promise<Meta
       ],
     },
     twitter: { card: "summary_large_image" },
-    ...(noIndex ? { robots: { index: false, follow: true } } : {}),
   };
 }
 
 /** Metadata stranice sa fiksnom putanjom; tekstovi iz `metadata.{pageKey}`. */
-export async function getStaticPageMetadata(
-  pageKey: StaticPageKeyType,
-  options: { noIndex?: boolean } = {}
-): Promise<Metadata> {
+export async function getStaticPageMetadata(pageKey: StaticPageKeyType): Promise<Metadata> {
   const locale = await getLocale();
   const t = await getTranslations({ locale, namespace: "metadata" });
 
@@ -104,6 +98,5 @@ export async function getStaticPageMetadata(
     title: t(`${pageKey}.title`),
     description: t(`${pageKey}.description`),
     urls: getStaticPageUrls(pageKey),
-    noIndex: options.noIndex,
   });
 }
