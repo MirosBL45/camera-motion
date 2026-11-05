@@ -31,7 +31,7 @@ export function ContactConsent({ id, checked, onCheckedChange, error }: IContact
           aria-required="true"
           aria-invalid={Boolean(error) || undefined}
           aria-describedby={fieldErrorId(id)}
-          className="mt-0.5 size-5 rounded-sm border-accent-gold bg-surface"
+          className="mt-0.5 size-5 rounded-sm border-accent-gold bg-surface after:-inset-y-3"
         />
         <label htmlFor={id} className="text-[0.9375rem] leading-[1.55] text-muted-foreground">
           {t.rich("consent", {

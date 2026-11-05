@@ -3,7 +3,7 @@ import type { AppRoute } from "@/types/routes.type";
 import { Link } from "@/i18n/navigation";
 
 export const FOOTER_LINK_CLASSES =
-  "inline-flex items-center rounded-sm text-muted-foreground transition-colors duration-150 hover:text-accent-gold focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-warm focus-visible:outline-none pointer-coarse:min-h-11";
+  "inline-flex items-center rounded-sm text-muted-foreground transition-colors duration-150 hover:text-accent-gold focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-warm focus-visible:outline-none pointer-coarse:min-h-11 pointer-coarse:min-w-11";
 
 interface IFooterColumnProps {
   title: string;

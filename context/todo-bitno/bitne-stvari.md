@@ -41,7 +41,7 @@ Ovde idu samo ultrakratke teze — jedna odluka ili savet po redu, bez objašnja
 - Naslovi i opisi stranica: `metadata.json` (sr + en); članci iz frontmattera
 - Sitemap, robots, canonical i hreflang se prave sami — ništa ručno
 - Filtrirana blog lista uvek upućuje na `/blog`
-- Pravne stranice: `noindex` i van sitemap-a do feature-a 20
+- Pravne stranice se indeksiraju i nalaze se u sitemap-u (od feature-a 20)
 - JSON-LD adresa: Novi Beograd, Beograd, RS — bez ulice i bez telefona
 - **Placeholder slike — zameniti kad dizajner napravi prave** (isto ime i dimenzije): `public/og.png`, `src/app/favicon.ico`, `public/apple-touch-icon.png`, `public/icons/icon-192.png`, `public/icons/icon-512.png`, `public/logo.svg` — spisak sa dimenzijama u README-u
 - Posle zamene OG slike: Facebook Sharing Debugger → „Scrape Again"

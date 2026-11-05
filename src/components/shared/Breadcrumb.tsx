@@ -20,9 +20,10 @@ export function Breadcrumb({ parent, current }: IBreadcrumbProps) {
     <nav aria-label={t("breadcrumbLabel")}>
       <ol className="flex flex-wrap items-center gap-1 text-base text-muted-foreground">
         <li>
+          {/* `after:` proširuje površinu za dodir na 44px bez menjanja izgleda putanje */}
           <Link
             href={parent.href}
-            className="rounded-sm hover:text-accent-gold focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
+            className="relative rounded-sm after:absolute after:inset-x-0 after:-inset-y-2.75 hover:text-accent-gold focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none"
           >
             {parent.label}
           </Link>

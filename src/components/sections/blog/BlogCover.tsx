@@ -36,7 +36,8 @@ export function BlogCover({
   }
 
   return (
-    <div className={cn("relative overflow-hidden", className)}>
+    // Topla pozadina dok se slika učitava — `cover` je putanja, pa nema automatskog blur-a
+    <div className={cn("relative overflow-hidden bg-surface-warm", className)}>
       {/* Dekorativna: naslov članka stoji odmah uz sliku. */}
       <Image src={cover} alt="" fill sizes={sizes} className="object-cover" />
     </div>
