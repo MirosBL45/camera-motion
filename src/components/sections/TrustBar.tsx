@@ -12,13 +12,15 @@ export function TrustBar() {
     >
       <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-center text-sm leading-[1.7] text-muted-foreground md:text-[0.9375rem]">
         {TRUST_ITEMS.map((item, index) => (
-          <li key={item} className="flex items-center gap-x-4">
-            {index > 0 ? (
-              <span aria-hidden="true" className="text-accent-gold">
+          // Separator je zalepljen za poslednju reč stavke (bez razmaka između), pa pri prelomu na
+          // telefonu nikad ne počinje novi red i ne ostaje sam na kraju reda.
+          <li key={item}>
+            {t(`items.${item}`)}
+            {index < TRUST_ITEMS.length - 1 ? (
+              <span aria-hidden="true" className="ml-4 text-accent-gold">
                 ·
               </span>
             ) : null}
-            {t(`items.${item}`)}
           </li>
         ))}
       </ul>

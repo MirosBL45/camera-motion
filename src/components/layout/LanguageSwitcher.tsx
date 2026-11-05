@@ -14,7 +14,7 @@ interface ILanguageSwitcherProps {
 }
 
 const PILL_CLASSES =
-  "relative rounded-md border px-2 py-0.75 text-sm leading-none after:absolute after:inset-x-0 after:-inset-y-2.5 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none";
+  "relative rounded-md border px-2 py-0.75 text-sm leading-none after:absolute after:inset-x-0 after:-inset-y-3 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none";
 
 export function LanguageSwitcher({ className }: ILanguageSwitcherProps) {
   const t = useTranslations("nav");

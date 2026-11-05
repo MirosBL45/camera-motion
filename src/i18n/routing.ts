@@ -13,6 +13,10 @@ export const routing = defineRouting({
   // Bez `NEXT_LOCALE` kolačića — jezik je samo u URL-u, pa sajt ne postavlja nijedan kolačić
   // (politika privatnosti; odluka vlasnika, 04.11.2026.)
   localeCookie: false,
+  // Bez hreflang `Link` header-a iz proxy-ja — hreflang već stoji u HTML-u kroz metapodatke
+  // (feature 19), a header je za članke bloga davao pogrešnu adresu prevoda (slug se razlikuje
+  // po jeziku) i adresu sa hosta zahteva umesto `NEXT_PUBLIC_SITE_URL`
+  alternateLinks: false,
   pathnames: {
     [ROUTES.home]: "/",
     [ROUTES.services]: {

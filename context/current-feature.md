@@ -1,4 +1,4 @@
-# Current Feature: 20 — Pravne stranice
+# Current Feature: 21 — Responzivnost, performanse i završna provera
 
 ## Status
 
@@ -10,68 +10,84 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 4, fajl 2/3. Politika privatnosti i uslovi korišćenja — obavezni jer forma skuplja lične podatke
-- **`/politika-privatnosti`** (`/en/privacy-policy`):
-  - rukovalac: Camera Motion, kontakt email
-  - podaci: isključivo ono što je uneto u formu (ime, email, telefon, detalji događaja)
-  - svrha: odgovor na upit; bez prosleđivanja trećim licima i bez marketinga
-  - procesori: Resend (slanje), Gmail (sanduče), Upstash (kratkotrajna anti-spam evidencija IP)
-  - kolačići: sajt NE koristi analitičke ni marketinške (samo tehnički neophodno)
-  - prava: uvid, ispravka, brisanje — zahtev na email
-- **`/uslovi-koriscenja`** (`/en/terms`): sadržaj sajta je vlasništvo Camera Motion; cene „od" su informativne — konačna ponuda dogovorom; snimanje dronom zavisi od vremenskih uslova i propisa DCV
-- **Obe stranice**: mirna tipografska stranica, max ~70ch, datum poslednje izmene na vrhu; `// NAPOMENA: šablon teksta, nije pravni savet — vlasnik pregleda`
-- **Linkovi** iz footera i iz checkbox-a saglasnosti na kontakt formi vode na ove stranice (proveriti da rade, na oba jezika)
-- **SEO**: skinuti `noindex` sa obe stranice i vratiti ih u sitemap (feature 19 ih je privremeno isključio — odluka vlasnika, 02.11.2026.)
+- Faza 4, fajl 3/3 — kraj projekta. Završni prolaz kroz ceo sajt, čišćenje i dokumentacija
+- **Responzivnost**:
+  - sve stranice na 360, 390, 768, 1024, 1280 i 1536 px, bez horizontalnog skrola; embed-ovi u overflow-bezbednim kontejnerima
+  - hero 9:16 očuvan; paketi u kolonu na mobilnom bez gubitka čitljivosti; touch mete ≥ 44px
+- **Performanse**:
+  - YouTube svuda lite (iframe tek na klik); slike kroz `next/image` sa `sizes` i blur placeholderom za veće
+  - fontovi self-hosted kroz next/font, samo potrebni weights
+  - Lighthouse mobilni ciljevi: Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95; CLS ~0, LCP < 2.5s
+  - bundle provera (`@next/bundle-analyzer` po potrebi) — bez teških klijentskih biblioteka
+- **Pristupačnost**:
+  - tastatura kroz ceo sajt (meni, dropdown, forma, sheet); vidljiv fokus svuda
+  - `prefers-reduced-motion` gasi i dozvoljene tranzicije; provera kontrasta cele palete
+- **Čišćenje i dokumentacija**:
+  - obrisati `/dev-ui`
+  - 404 stranica: lokalizovana, sa linkom na početnu
+  - README dopuniti: pregled projekta, instalacija, env varijable, komande, ručni deploy na Vercel, gde se menjaju cene (`PRICES` u `packages.ts`), ekipa (`team.ts`), video ID-jevi (`services.ts`), hero brojke, hero video (uputstvo iz feature-a 06), troubleshooting — dovoljno da se vlasnik posle pauze od par meseci brzo snađe
+- **Predaja**: popis svih preostalih TODO komentara u kodu kao spisak za vlasnika (video, slike, telefon, cene, YouTube ID-jevi, OG slika, domen za Resend)
 
 ## Notes
 
 <!-- Any extra notes -->
 
 - Postojeće na šta se feature naslanja:
-  - `privacy/page.tsx` i `terms/page.tsx` su skeleti sa samo `<h1>` i `getStaticPageMetadata(..., { noIndex: true })` + `TODO(feature 20)`
-  - `sitemap.ts` ima `INDEXED_PAGES` bez `privacy`/`terms` + `TODO(feature 20)`
-  - `legal` namespace (sr + en) ima samo `title` po stranici; `metadata` namespace već ima title + description za obe stranice (feature 19)
-  - Rute i lokalizovani slugovi već postoje (`ROUTES.privacy`, `ROUTES.terms`, tabela 7.1)
-  - Footer linkuje obe stranice; checkbox saglasnosti (`ContactConsent`) linkuje politiku i otvara je u novom tabu
-  - Javni email je u `CONTACT_DISPLAY_EMAIL` (`src/constants/contact.ts`) — rukovalac ga čita odatle, ne upisuje se ponovo
-- Dizajn referenca nema artboard za pravne stranice (NOTES.md) — izgled se izvodi iz postojećih obrazaca (zaglavlje stranica, tipografija blog članka); nedoumice oko izgleda → pitati
-- Pravila koja važe: sav tekst kroz next-intl (sr + en), datum kroz `Intl.DateTimeFormat` po locale-u, ton profesionalan, bez pominjanja osiguranja, DCV formulacija „registrovan pilot pri DCV" / „u skladu sa regulativom" (poglavlje 2)
-- Telefon se ne prikazuje u tekstu stranica (poglavlje 12)
+  - `src/app/dev-ui/` (layout + page) je van `[locale]` stabla; pominju ga i `src/proxy.ts` (izuzetak u `matcher`-u) i `src/app/robots.ts` (`disallow: "/dev-ui"`) — oba moraju da se usklade pri brisanju
+  - 404 još ne postoji: nema `not-found.tsx` ni catch-all rute; `notFound` namespace (sr + en) ima samo `title`. Dizajn nema artboard za 404 (NOTES.md) — izgled se izvodi iz postojećih obrazaca, nedoumice → pitati
+  - Fontovi (`src/lib/fonts.ts`): Outfit 400/500/600/700, Source Sans 3 400/600, `latin` + `latin-ext`, `display: swap` — proveriti da li se svaki weight zaista koristi
+  - `prefers-reduced-motion` blok već postoji u `globals.css` (gasi animacije i tranzicije)
+  - `next/image` koriste: `Logo`, `BlogCover`, `TeamMemberCard`, `MdxFigure`, `YouTubeLite`; prave slike još ne postoje (placeholderi), pa blur placeholder trenutno nema na čemu da se primeni osim provere obrasca
+  - README već ima: pokretanje, sadržaj koji se menja u kodu, blog, SEO, env varijable, kontakt formu i deploy — dopunjuje se, ne piše iznova
+  - Next.js je 16.3.4 — pre bundle provere pročitati aktuelnu dokumentaciju u `node_modules/next/dist/docs/` (moguće da postoji ugrađen analizator za Turbopack umesto `@next/bundle-analyzer`)
+  - U kodu je trenutno ~30 TODO komentara (cene, video, slike, ikonice, OG slika, Resend domen, tekstovi ekipe, društvene mreže, registracija firme u politici…) — osnova za spisak za vlasnika
+- Poznati otvoreni nalaz iz feature-a 15: na početnoj, na telefonu, separator u traci ispod heroa pojavljuje se na početku drugog reda kad se stavke prelome — „ostaje za kasniju doradu"; ovaj feature je prirodno mesto za to
+- Zaostali `TODO(feature 03+)` u `ui/sheet.tsx` i `ui/dialog.tsx` (sr-only tekst kroz next-intl) — proveriti da li je već rešeno ili ulazi u čišćenje
+- Lighthouse se meri na lokalnom produkcijskom build-u (`npm run build` + `npm run start`) jer sajt još nije objavljen
+- Pravila koja važe: sav tekst kroz next-intl (sr + en), boje/fontovi/radijusi samo kroz tokene, bez scroll animacija i fade-in efekata (10.4), ne dirati postojeće komentare, telefon nikad u HTML-u pre klika
 
-### Odluke vlasnika (04.11.2026.)
+### Odluke vlasnika (05.11.2026.)
 
-1. **Širina teksta je ~70ch**, po feature-u — pravne stranice ne prate blog (75ch)
-2. **Datum poslednje izmene** stoji na jednom mestu u kodu, koje vlasnik menja kad menja tekst; ispisuje se kroz `Intl.DateTimeFormat` po locale-u
-3. **Uključuju se rok čuvanja podataka i pozivanje na Zakon o zaštiti podataka o ličnosti** („Sl. glasnik RS", br. 87/2018)
-4. **Treća lica i prenos van Srbije** — formulacija po preporuci (vlasnik prepustio):
-   1. Podaci se ne prodaju, ne ustupaju trećim licima za njihove svrhe i ne koriste se za marketing
-   2. Pružaoci usluga su navedeni kao obrađivači koji podatke obrađuju isključivo po nalogu Camera Motion i samo za rad sajta: Resend (slanje upita, SAD), Google / Gmail (sanduče, SAD), Upstash (anti-spam evidencija IP, server u EU — Frankfurt)
-   3. Prenos van Srbije se navodi otvoreno, uz pozivanje na mere zaštite koje ti pružaoci primenjuju (standardne ugovorne klauzule), u skladu sa ZZPL
-   4. Pored tri servisa iz spec-a, navode se i: Vercel (hosting — tehnički logovi sa IP adresom) i YouTube — sličica videa se učitava sa Google servera, a sam plejer (`youtube-nocookie.com`) tek posle klika posetioca. Dodato jer bi tekst bez njih bio netačan — vlasnik potvrdio
-   5. Rok čuvanja: anti-spam evidencija IP — do 48 sati (sliding window od jednog dana čuva ključ dva prozora, `PEXPIRE window * 2`); upit u sandučetu — do 12 meseci od poslednje komunikacije, osim ako nastane saradnja — vlasnik potvrdio
-5. **`NEXT_LOCALE` kolačić je isključen** (`localeCookie: false` u routing-u): next-intl ga je postavljao, a sajt ga nije koristio jer je `localeDetection: false`. Sajt sada ne postavlja nijedan kolačić, pa politika to može jasno da kaže
+1. **404 stranica**: header i footer sajta, centriran naslov, jedna rečenica, zeleno dugme „Nazad na početnu" i ispod dva tekstualna linka — Usluge i Kontakt
+2. **`/dev-ui` ostaje** (odstupanje od spec-a): na produkciji već vraća 404 (`notFound()` kad je `NODE_ENV === "production"`), pa je javno nedostupna; sa njom ostaju i `card`, `dialog` i `dropdown-menu` koje koristi samo ona
+3. **h2 u `prose` tekstu (blog, pravne stranice) ima weight 600** kao ostatak sajta (poglavlje 10.2), umesto 700 iz typography plugina; Outfit 700 se više ne učitava
+4. **Separator u traci ispod heroa ide uz prethodnu stavku**, kao u meta redu bloga — novi red na telefonu nikad ne počinje tačkom
+5. **Brojevi koraka (01–04) u `ProcessSteps` su zeleni**, ne zlatni kao u dizajnu — zlatna na `surface-warm` ima kontrast 2,84:1 (O nama, Promo video)
+6. **Deploy na Vercel vlasnik radi i opisuje sam** — README se o tome ne dopunjuje
+7. **Kontakt stranica se ne optimizuje dodatno**: ~116 kB JS-a više od ostalih stranica (gzip: `zod`, kalendar, Radix select/popover), Performance i dalje ≥ 90
+8. **Spisak za vlasnika** je u `context/todo-bitno/to-do-vlasnik.md`; `bitne-stvari.md` je premešten u isti folder
 
 ### Napomene iz implementacije
 
-1. Izgled po obrascu blog članka (dizajn nema ekran): centrirana kolona 70ch, `prose prose-brand`, h1 → datum izmene → uvod, pa h2 sekcije
-2. Datum izmene po stranici u `LEGAL_LAST_UPDATED` (`src/constants/legal.ts`); email u tekstu se čita iz `CONTACT_DISPLAY_EMAIL` kroz `t.rich`
-3. `noIndex` opcija iz `getStaticPageMetadata` / `buildPageMetadata` je uklonjena jer je više niko ne koristi; pravne stranice su u sitemap-u
-4. Prekidač jezika sa en na sr vodi na `/sr/...` pa proxy preusmerava na adresu bez prefiksa — postojeće ponašanje next-intl `Link`-a sa `locale` prop-om, nije posledica isključenog kolačića
+1. 404: `[locale]/(site)/[...rest]/page.tsx` poziva `notFound()`, a `[locale]/(site)/not-found.tsx` crta stranicu unutar headera i footera; status je 404 i Next sam dodaje `noindex`
+2. Next za `notFound()` u ovom projektu (root layout pod `[locale]`) šalje HTML ljusku `__next_error__` i stranicu iscrtava u browseru iz RSC podataka — isto je bilo i ranije za nepostojeći članak bloga; naslov taba je podrazumevani naslov sajta, jer se metapodaci rute u tom režimu ne primenjuju
+3. SEO je bio 92 zbog hreflang `Link` header-a koji next-intl šalje iz proxy-ja: dupliran sa HTML-om, sa hostom zahteva i pogrešnom adresom prevoda za članke bloga → `alternateLinks: false` u routing-u; SEO je sada 100
+4. Touch mete: putanja iznad naslova dobila `after:` proširenje na 44px, prekidač jezika 46px, checkbox saglasnosti 44×44, kratki linkovi u footeru `pointer-coarse:min-w-11`; pilule bloga, header i footer su to već imali (proveren pogodak 10px izvan elementa)
+5. Fontovi su varijabilni fajlovi (4 × woff2, ~134 kB ukupno), pa izbacivanje Outfit 700 nije smanjilo preuzimanje — samo je usklađeno sa tipografijom
+6. Bez teških klijentskih biblioteka: osnova je React/Next (~150 kB gzip), plus `cn` (~10 kB, zamena za `tailwind-merge`); YouTube nijedna od 44 adrese ne učitava pre klika
+7. Rezultati (mobilni Lighthouse, lokalni produkcijski build, 10 stranica): Performance 93–100 (kontakt najniži), Accessibility 100, Best Practices 100, SEO 100, CLS 0, LCP 0,9–1,2 s
+8. Automatska provera 44 adrese × 6 širina: bez horizontalnog skrola, jedan h1, bez JS grešaka; hero 9:16 tačan na svim širinama, paketi u jednoj koloni do 1024px; 582 Tab koraka sa vidljivim fokusom; mobilni meni zadržava fokus i vraća ga na Esc; `prefers-reduced-motion` gasi sve tranzicije i animacije
+9. README: pregled projekta, instalacija, komande (uklj. `next experimental-analyze`), ekipa, hero video, rešavanje problema; ispravljena zastarela rečenica o pravnim stranicama i u README-u i u `bitne-stvari.md`
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Obe stranice na oba jezika; linkovi iz footera i forme rade
-2. Stranice nemaju `noindex` i nalaze se u sitemap-u
+1. Cela kontrolna lista iz Goals prošla; `npm run build` bez upozorenja
+2. Spisak svih preostalih TODO stavki predat vlasniku
 3. `npm run lint`, `npm run test` i `npm run build` prolaze
+
+### DoD Faze 4 / projekta
+
+1. SEO kompletno; pravne stranice povezane
+2. Lighthouse ciljevi ispunjeni; dev-ui obrisan
+3. README kompletan; spisak TODO stavki za vlasnika predat
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 2, 7, 12, 14)
-- @context/features/20-pravne-stranice.md
-- @context/features/05-footer-done.md, @context/features/16-kontakt-stranica-done.md
-- @context/features/19-seo-done.md
+- @context/project-overview.md (poglavlja 5, 10.4, 14)
+- @context/features/21-responzivnost-i-performanse.md
+- @context/features/06-hero-done.md, @context/features/19-seo-done.md
 
 ## History
 
@@ -164,3 +180,7 @@ Započeta završna faza: sajt je dobio kompletnu osnovu za pretraživače i delj
 ### Wednesday, 04.11.2026. | 12:52 — 20 Pravne stranice
 
 Napravljene su politika privatnosti i uslovi korišćenja na oba jezika, jer kontakt forma prikuplja lične podatke. Dizajn nema ekran za ove stranice, pa su napravljene po obrascu blog članka: mirna centrirana kolona od oko 70 znakova, naslov, datum poslednje izmene i uvod, pa sekcije sa podnaslovima. Datum se menja na jednom mestu i ispisuje po jeziku, a email u tekstu se čita sa istog mesta kao u footeru. Politika navodi ko obrađuje podatke, da se prikuplja samo ono što posetilac unese u formu, zašto i na kom osnovu, koji pružaoci usluga učestvuju i gde čuvaju podatke, koliko dugo se podaci čuvaju, kako rade video snimci i koja prava posetilac ima, uz pozivanje na Zakon o zaštiti podataka o ličnosti i pravo na pritužbu Povereniku. Uslovi navode da je sadržaj sajta vlasništvo Camera Motion, da su cene „od" informativne a konačna cena stvar ponude, i da snimanje dronom zavisi od vremena i propisa, uz pilota registrovanog pri Direktoratu civilnog vazduhoplovstva; dodate su i kratke sekcije o sajtu, tačnosti informacija, privatnosti i merodavnom pravu. Vlasnik je pre implementacije odlučio o više stvari: širina teksta ostaje 70 znakova umesto širine bloga, uključuju se rok čuvanja i pozivanje na zakon, pružaoci usluga se navode kao obrađivači uz otvoreno naveden prenos podataka van Srbije, u spisak ulaze i hosting i YouTube jer bi tekst bez njih bio netačan, a rokovi čuvanja su do 48 sati za zaštitu od spama i do 12 meseci za upite. Tokom rada otkriveno je da biblioteka za jezike postavlja kolačić koji sajt ne koristi, pa je na odluku vlasnika isključen i sajt sada ne postavlja nijedan kolačić, što politika i kaže. Obe stranice se sada indeksiraju i nalaze se u mapi sajta, a privremena opcija za isključivanje indeksiranja je uklonjena jer je više ništa ne koristi. U kodu stoji napomena da je tekst šablon, a ne pravni savet, i podsetnik da se dopišu podaci o registraciji ako postoje; uputstvo za vlasnika dobilo je mesto gde se menjaju tekst i datum. Tokom review-a rok čuvanja je dopunjen zapisima kod servisa za slanje emaila, a stil fokusa za linkove u tekstu je spojen sa onim iz bloga umesto da postoji dvaput. Lint, provera tipova, testovi i build prolaze; obe stranice su proverene na oba jezika i pet širina — nema horizontalnog skrola, jedan je glavni naslov, nema animacija ni kolačića, a linkovi iz footera, iz saglasnosti na formi i iz uslova ka politici, kao i prekidač jezika, rade.
+
+### Thursday, 05.11.2026. | 15:19 — 21 Responzivnost, performanse i završna provera
+
+Završni prolaz kroz ceo sajt i time kraj projekta. Svaka stranica sajta, na oba jezika, automatski je proverena na šest širina, od telefona do širokog ekrana: nigde nema horizontalnog skrola, svuda je jedan glavni naslov, nema grešaka u browseru, hero zadržava uspravni odnos na svim širinama, a paketi na telefonu idu u jednu kolonu. Napravljena je stranica za nepostojeće adrese na oba jezika, sa headerom i footerom, naslovom, rečenicom, dugmetom za povratak na početnu i linkovima ka uslugama i kontaktu; vraća pravi status i ne indeksira se. Mobilni Lighthouse na produkcijskom build-u daje performanse od 93 do 100, a pristupačnost, dobre prakse i pretragu na 100, bez pomeranja sadržaja i sa najvećim elementom učitanim za oko jednu sekundu. Pretraga je bila na 92 zbog greške iz faze SEO-a: biblioteka za jezike je uz svaku stranicu slala i sopstvene veze ka prevodima, koje su duplirale one u stranici, a za članke bloga vodile na pogrešnu adresu prevoda; to slanje je isključeno. Mete za dodir su svuda bar 44 piksela — putanja iznad naslova, prekidač jezika, polje saglasnosti na formi i kratki linkovi u footeru dobili su nevidljivo proširenje, bez promene izgleda. Tastatura je proverena kroz deset stranica na desktopu i telefonu: svaki korak ima vidljiv fokus, mobilni meni zadržava fokus i vraća ga posle zatvaranja, a podešavanje za smanjeno kretanje gasi sve prelaze. Provera kontrasta cele palete pokazala je da sav tekst prolazi, osim zlatnih brojeva koraka saradnje, koji su na odluku vlasnika postali zeleni. Vlasnik je odlučio i da podnaslovi u člancima i pravnim stranicama budu iste debljine kao na ostatku sajta, pa se najdeblji rez naslovnog fonta više ne učitava, da se separator u traci ispod heroa lepi za poslednju reč pa nikad ne počinje novi red, da razvojna stranica sa pregledom komponenti ostaje jer je na produkciji ionako nedostupna, da se kontakt stranica, koja zbog forme i kalendara nosi najviše koda, ne optimizuje dodatno jer je iznad cilja, i da deploy opisuje sam. YouTube se ni na jednoj stranici ne učitava pre klika, a na sajtu nema teških biblioteka. README je dopunjen pregledom projekta, instalacijom, komandama, uputstvom za ekipu i hero video i tabelom za rešavanje čestih problema, a zastarela rečenica o pravnim stranicama ispravljena je i tu i u podsetniku. Svi preostali poslovi za vlasnika — video, fotografije, YouTube ID-jevi, logo i ikonice, domen za slanje emaila, pravni podaci i koraci posle objave — skupljeni su u numerisan spisak sa tačnim mestima u kodu, u novom folderu zajedno sa podsetnikom, a uz njega je napisano i uputstvo za asistenta koji pomaže vlasniku dok radi te stavke. Tokom review-a ispravljena je debljina fonta u opisu projekta, a naslovna slika članka dobila je toplu pozadinu dok se učitava. Lint, testovi i build prolaze bez upozorenja.

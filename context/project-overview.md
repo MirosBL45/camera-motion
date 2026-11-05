@@ -234,7 +234,7 @@ Pomoćne vrednosti iz dizajna koje nisu tokeni palete, nego deo placeholder obra
 
 ### 10.2 Tipografija
 
-- Naslovi: Outfit (400-700); h1/h2 weight 600, h3 weight 500. Tekst: Source Sans 3 (400/600)
+- Naslovi: Outfit (400-600); h1/h2 weight 600, h3 weight 500. Tekst: Source Sans 3 (400/600)
 - Subsets `["latin", "latin-ext"]` (š đ č ć ž), `display: "swap"`, CSS varijable `--font-heading` / `--font-body`
 - letter-spacing: h1 `-0.025em`, h2 `-0.02em`, h3 bez
 - h1 `clamp(2.25rem, 5vw, 3.875rem)` (36px mobilni → 62px hero), h2 40-42px desktop / 30px mobilni, h3 21-26px

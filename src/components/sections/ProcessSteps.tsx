@@ -34,9 +34,11 @@ export function ProcessSteps({ heading, intro, steps }: IProcessStepsProps) {
               className="flex gap-4 border-b border-border py-4.5 last:border-b-0 md:gap-5 md:py-5.5"
             >
               {/* Redni broj već čita `<ol>`; vizuelni „01" je samo ukras. */}
+              {/* Zelen, ne zlatan kao u dizajnu — zlatna na toploj pozadini ima kontrast 2,84:1
+                  (odluka vlasnika, 05.11.2026.) */}
               <span
                 aria-hidden="true"
-                className="w-8.5 flex-none font-heading text-lg font-semibold text-accent-gold md:text-xl"
+                className="w-8.5 flex-none font-heading text-lg font-semibold text-primary md:text-xl"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
