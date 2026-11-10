@@ -1,3 +1,6 @@
 {
-  "title": "Stranica nije pronađena"
+  "title": "Stranica nije pronađena",
+  "lead": "Adresa koju ste otvorili ne postoji ili je premeštena.",
+  "backHome": "Nazad na početnu",
+  "linksLabel": "Korisni linkovi"
 }

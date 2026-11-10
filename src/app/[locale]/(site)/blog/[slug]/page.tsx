@@ -9,8 +9,10 @@ import { MdxContent } from "@/components/mdx/MdxContent";
 import { BlogCover } from "@/components/sections/blog/BlogCover";
 import { BlogPostMeta } from "@/components/sections/blog/BlogPostMeta";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { BlogPostJsonLd } from "@/components/seo/BlogPostJsonLd";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { findTranslatedSlug, getBlogPostBySlug, getBlogPosts } from "@/lib/blog";
+import { buildPageMetadata, getBlogPostUrls } from "@/lib/page-metadata";
 
 import { ROUTES } from "@/constants/routes";
 import { Link, redirect } from "@/i18n/navigation";
@@ -29,7 +31,16 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const post = hasLocale(routing.locales, locale) ? await getBlogPostBySlug(locale, slug) : null;
 
-  return post ? { title: post.title, description: post.description } : {};
+  if (!post) return {};
+
+  // hreflang vodi na prevod istog članka, koji ima svoj slug.
+  return buildPageMetadata({
+    locale: post.locale,
+    title: post.title,
+    description: post.description,
+    urls: await getBlogPostUrls(post),
+    publishedTime: post.date,
+  });
 }
 
 // Dizajn nema ekran članka — sklopljen iz postojećih obrazaca (odluka vlasnika): putanja
@@ -57,6 +68,7 @@ export default async function BlogPostPage({ params }: PageProps<"/[locale]/blog
 
   return (
     <>
+      <BlogPostJsonLd post={post} />
       {/* Centrirana kolona (~880px) za putanju, naslov i kadar; tekst u užoj koloni od 75ch.
           `box-content` da padding ne sužava kolonu. */}
       <article className="mx-auto box-content max-w-220 px-5 pt-6 pb-12 md:px-12 md:pt-12 md:pb-21">

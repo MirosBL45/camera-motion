@@ -1,4 +1,4 @@
-# Current Feature: 18 — Blog (MDX)
+# Current Feature: 21 — Responzivnost, performanse i završna provera
 
 ## Status
 
@@ -10,84 +10,84 @@ Completed
 
 <!-- Goals & requirements -->
 
-- Faza 3, fajl 4/4 (kraj faze). Blog iz MDX fajlova + 9 početnih članaka na srpskom
-- **Infrastruktura** (poglavlje 13): `src/content/blog/sr|en/*.mdx`, frontmatter `title, description, date, slug, cover?, tags?, draft`, SSG, `draft: true` ne izlazi u produkciju; tehnika (`next-mdx-remote` ili `@next/mdx`) po aktuelnoj preporuci za App Router
-- **en verzija opciona** — bez en fajla članak ne postoji na `/en/blog` (nikad sr tekst na en listi)
-- **Lista `/blog`** po artboardu `2c`: prvi (najnoviji) članak istaknut u širokoj kartici sa naslovnom fotografijom, ostali u gridu 3×2 (naslov, kategorija, datum po locale formatu, opis, cover ako postoji), od najnovijeg
-- **Filteri po kategorijama** — pilule Sve / Venčanja / Nekretnine / Dron i FPV / Iza kadra / Događaji i firme; ključevi `vencanja`, `nekretnine`, `dron-fpv`, `iza-kadra`, `dogadjaji-firme` iz `tags` (ne prevode se), nazivi kroz `blog` namespace; članak sa više ključeva je u svakoj svojoj kategoriji; filter kroz `?kategorija=` (deljiv URL), ne kroz stanje komponente
-- **„Prikaži još tekstova"** — lista prvo prikazuje 7 (1 istaknut + 3×2); na „Sve" sa 9 članaka dugme učitava preostala 2 i nestaje; sakriva se i kad u kategoriji nema više stavki
-- **Vreme čitanja** — utility u `src/lib/` (~200 reči/min, naviše, min 1), ne u frontmatteru; prikaz kroz ICU plural u `blog` namespace-u
-- **`/blog/[slug]`** — tekst max 75ch (odluka 16), typography plugin usklađen sa paletom; custom MDX komponente: YouTubeLite i slika sa potpisom
-- **Metadata iz frontmattera**
-- **9 članaka** (~500–800 reči, prirodan ton) po tezama iz feature fajla: bez izmišljenih činjenica, bez placeholder markera u tekstu, različit placeholder `date` po članku, interni linkovi ka usluzi/kontaktu gde se prirodno uklapaju, nigde let dronom iznad okupljenih ljudi
+- Faza 4, fajl 3/3 — kraj projekta. Završni prolaz kroz ceo sajt, čišćenje i dokumentacija
+- **Responzivnost**:
+  - sve stranice na 360, 390, 768, 1024, 1280 i 1536 px, bez horizontalnog skrola; embed-ovi u overflow-bezbednim kontejnerima
+  - hero 9:16 očuvan; paketi u kolonu na mobilnom bez gubitka čitljivosti; touch mete ≥ 44px
+- **Performanse**:
+  - YouTube svuda lite (iframe tek na klik); slike kroz `next/image` sa `sizes` i blur placeholderom za veće
+  - fontovi self-hosted kroz next/font, samo potrebni weights
+  - Lighthouse mobilni ciljevi: Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95; CLS ~0, LCP < 2.5s
+  - bundle provera (`@next/bundle-analyzer` po potrebi) — bez teških klijentskih biblioteka
+- **Pristupačnost**:
+  - tastatura kroz ceo sajt (meni, dropdown, forma, sheet); vidljiv fokus svuda
+  - `prefers-reduced-motion` gasi i dozvoljene tranzicije; provera kontrasta cele palete
+- **Čišćenje i dokumentacija**:
+  - obrisati `/dev-ui`
+  - 404 stranica: lokalizovana, sa linkom na početnu
+  - README dopuniti: pregled projekta, instalacija, env varijable, komande, ručni deploy na Vercel, gde se menjaju cene (`PRICES` u `packages.ts`), ekipa (`team.ts`), video ID-jevi (`services.ts`), hero brojke, hero video (uputstvo iz feature-a 06), troubleshooting — dovoljno da se vlasnik posle pauze od par meseci brzo snađe
+- **Predaja**: popis svih preostalih TODO komentara u kodu kao spisak za vlasnika (video, slike, telefon, cene, YouTube ID-jevi, OG slika, domen za Resend)
 
 ## Notes
 
 <!-- Any extra notes -->
 
 - Postojeće na šta se feature naslanja:
-  - Rute `blog` i `blogPost` već postoje u `src/constants/routes.ts`; `src/app/[locale]/(site)/blog/page.tsx` i `blog/[slug]/page.tsx` su skeleti iz feature-a 03
-  - `src/i18n/messages/{sr,en}/blog.json` ima samo `title` i `post.title`
-  - `src/components/shared/YouTubeLite.tsx` (facade, klijentska) — koristi se i u MDX-u; `src/components/mdx/` i `src/content/blog/{sr,en}/` su prazni
-  - `MediaPlaceholder` (pruge, uklj. zlatnu varijantu za naslovnu blog fotografiju), `CtaBand`, `src/lib/date.ts` (formatiranje datuma po locale-u)
-  - Validator prevoda puca ako sr i en nemaju iste ključeve
-- Dizajn `2c`: h1 „Blog" 52px + uvodni pasus (max 640px), pilule (aktivna zelena), istaknuta kartica `1.15fr 1fr` sa zlatnom bordurom i `shadow-gold` (meta: kategorija · datum · „6 min čitanja", h2 36px, opis, „Pročitajte tekst →"), grid kartica `repeat(3,1fr)` gap 24px sa slikom 200px, dugme „Prikaži još tekstova" (belo sa zlatnom bordurom), na dnu zeleni CTA band
-- Dizajn ima samo 5 pilula — „Događaji i firme" je dodata odlukom vlasnika (overview 13)
-- Ekran članka (detalj) ne postoji u dizajnu (NOTES.md) — izgled se izvodi iz postojećih obrazaca
-- Članci 4 i 5 su u prvom licu jednine (priča vlasnika), po spec-u; članak 5 pominje DJI Mavic Air (dron koji je stradao) — po spec-u, bez regulative u tom članku
-- Pre implementacije proveriti aktuelnu dokumentaciju: MDX u Next.js 16 App Router (`node_modules/next/dist/docs/`), `@tailwindcss/typography` za Tailwind v4
-- Vitest testovi za utilities (vreme čitanja, učitavanje/filtriranje/sortiranje članaka, draft)
-- `generateMetadata` (canonical, hreflang), `BlogPosting`/`BreadcrumbList` JSON-LD i sitemap ostaju za feature 19 — ovde samo title/description iz frontmattera (proveriti granicu na startu)
+  - `src/app/dev-ui/` (layout + page) je van `[locale]` stabla; pominju ga i `src/proxy.ts` (izuzetak u `matcher`-u) i `src/app/robots.ts` (`disallow: "/dev-ui"`) — oba moraju da se usklade pri brisanju
+  - 404 još ne postoji: nema `not-found.tsx` ni catch-all rute; `notFound` namespace (sr + en) ima samo `title`. Dizajn nema artboard za 404 (NOTES.md) — izgled se izvodi iz postojećih obrazaca, nedoumice → pitati
+  - Fontovi (`src/lib/fonts.ts`): Outfit 400/500/600/700, Source Sans 3 400/600, `latin` + `latin-ext`, `display: swap` — proveriti da li se svaki weight zaista koristi
+  - `prefers-reduced-motion` blok već postoji u `globals.css` (gasi animacije i tranzicije)
+  - `next/image` koriste: `Logo`, `BlogCover`, `TeamMemberCard`, `MdxFigure`, `YouTubeLite`; prave slike još ne postoje (placeholderi), pa blur placeholder trenutno nema na čemu da se primeni osim provere obrasca
+  - README već ima: pokretanje, sadržaj koji se menja u kodu, blog, SEO, env varijable, kontakt formu i deploy — dopunjuje se, ne piše iznova
+  - Next.js je 16.3.4 — pre bundle provere pročitati aktuelnu dokumentaciju u `node_modules/next/dist/docs/` (moguće da postoji ugrađen analizator za Turbopack umesto `@next/bundle-analyzer`)
+  - U kodu je trenutno ~30 TODO komentara (cene, video, slike, ikonice, OG slika, Resend domen, tekstovi ekipe, društvene mreže, registracija firme u politici…) — osnova za spisak za vlasnika
+- Poznati otvoreni nalaz iz feature-a 15: na početnoj, na telefonu, separator u traci ispod heroa pojavljuje se na početku drugog reda kad se stavke prelome — „ostaje za kasniju doradu"; ovaj feature je prirodno mesto za to
+- Zaostali `TODO(feature 03+)` u `ui/sheet.tsx` i `ui/dialog.tsx` (sr-only tekst kroz next-intl) — proveriti da li je već rešeno ili ulazi u čišćenje
+- Lighthouse se meri na lokalnom produkcijskom build-u (`npm run build` + `npm run start`) jer sajt još nije objavljen
+- Pravila koja važe: sav tekst kroz next-intl (sr + en), boje/fontovi/radijusi samo kroz tokene, bez scroll animacija i fade-in efekata (10.4), ne dirati postojeće komentare, telefon nikad u HTML-u pre klika
 
-### Odluke vlasnika (23.10.2026.)
+### Odluke vlasnika (05.11.2026.)
 
-1. **CTA band na dnu liste** iz dizajna se dodaje („Imate pitanje na koje nema teksta?" + dugme „Pišite nam" → kontakt), preko postojećeg `CtaBand`
-2. **Stranica članka**: putanja (Blog › naslov), meta red (kategorija · datum · vreme čitanja), h1, opis, naslovna fotografija/placeholder, tekst 75ch (izmenjeno odlukom 16), link „Nazad na blog", CTA band na kraju — isključivo iz postojećih obrazaca, bez novih elemenata
-3. **Kategorija u meta redu** je zelena (čitljiva), ne zlatna
-4. **„Prikaži još tekstova" kroz query param** (`?strana=2` = 7 + 6, svaka sledeća strana +6; broj tekstova će rasti), server render bez klijentske komponente; dugme ne skroluje na vrh; nepoznata vrednost `?kategorija=` / `?strana=` pada na podrazumevano. Posledica: `/blog` lista se renderuje po zahtevu, članci ostaju SSG
-5. **Svih 9 članaka i na engleskom** — prirodan, smislen prevod, ne bukvalan
-6. SR/EN prekidač na članku vodi na prevod istog članka (rešeno odlukom 5)
-7. **Naslovne fotografije**: placeholder po dizajnu (zlatne pruge za istaknutu, neutralne za grid) + `// TODO: prava slika`
-8. **Članak 6**: sr „kratak spot sa najboljim trenucima", en „highlight spot"
-9. **Pilule na telefonu** se prelamaju u više redova
-10. **Engleski slugovi** po članku; isti naziv fajla u `sr/` i `en/` povezuje prevode (SR/EN prekidač vodi na prevod istog članka)
-11. **Istaknut je članak 3**, ostali po datumu; placeholder datumi unazad sa nasumičnim razmakom 10–17 dana: 3 → 19.10.2026., 1 → 05.10.2026., 2 → 22.09.2026., 4 → 05.09.2026., 5 → 26.08.2026., 6 → 11.08.2026., 7 → 30.07.2026., 8 → 14.07.2026., 9 → 03.07.2026.
-12. **YouTubeLite u članku 2** — isti snimak kuće kao na stranicama nekretnina i FPV-a (jedan ID na jednom mestu); vlasnik dao snimak: `ZvHHT27JMvc` („Seosko turističko domaćinstvo Milanović Žuč | FPV dron kroz kuću i dvorište | Kuršumlija") → upisati u `FPV_HOUSE_VIDEO_ID` u `src/data/services.ts`
-13. **Slika sa potpisom**: komponenta se pravi, ali se ne koristi ni u jednom članku dok ne postoje prave fotografije; u README primer kako se ubacuje
-14. **Prazno stanje kategorije**: jedna rečenica ispod pilula („U ovoj kategoriji još nema tekstova.") — zaštita ako kategorija ostane bez objavljenih članaka
-15. **Snimak kuće**: seosko turističko domaćinstvo Milanović u Žuču kod Kuršumlije, izdaje se preko Booking-a; klijent i mesto se navode — u članku 2 i u naslovu primera na stranicama nekretnina i FPV-a (sr + en)
+1. **404 stranica**: header i footer sajta, centriran naslov, jedna rečenica, zeleno dugme „Nazad na početnu" i ispod dva tekstualna linka — Usluge i Kontakt
+2. **`/dev-ui` ostaje** (odstupanje od spec-a): na produkciji već vraća 404 (`notFound()` kad je `NODE_ENV === "production"`), pa je javno nedostupna; sa njom ostaju i `card`, `dialog` i `dropdown-menu` koje koristi samo ona
+3. **h2 u `prose` tekstu (blog, pravne stranice) ima weight 600** kao ostatak sajta (poglavlje 10.2), umesto 700 iz typography plugina; Outfit 700 se više ne učitava
+4. **Separator u traci ispod heroa ide uz prethodnu stavku**, kao u meta redu bloga — novi red na telefonu nikad ne počinje tačkom
+5. **Brojevi koraka (01–04) u `ProcessSteps` su zeleni**, ne zlatni kao u dizajnu — zlatna na `surface-warm` ima kontrast 2,84:1 (O nama, Promo video)
+6. **Deploy na Vercel vlasnik radi i opisuje sam** — README se o tome ne dopunjuje
+7. **Kontakt stranica se ne optimizuje dodatno**: ~116 kB JS-a više od ostalih stranica (gzip: `zod`, kalendar, Radix select/popover), Performance i dalje ≥ 90
+8. **Spisak za vlasnika** je u `context/todo-bitno/to-do-vlasnik.md`; `bitne-stvari.md` je premešten u isti folder
 
-### Odluke vlasnika (26.10.2026.) — posle review-a
+### Napomene iz implementacije
 
-16. **Stranica članka u dve centrirane kolone**: putanja, meta red, naslov, opis i naslovna fotografija u koloni ~880px; tekst članka i link „Nazad na blog" (u `<footer>` članka) u užoj koloni od **75ch**
-17. **Nigde let dronom iznad okupljenih ljudi** — pravilo važi za ceo sajt (upisano u overview, poglavlje 2): FPV prolet je kroz praznu salu, pre dolaska gostiju (Premium paket i primer na venčanjima, blok o dronu, članak 6); na događajima dron snima lokaciju sa strane i sa bezbedne udaljenosti, bez „mase iz vazduha"
-18. **Članak 6**: montiran snimak celog dana najčešće traje između jednog i tri sata — tačna dužina ne može unapred, a cilj je što više emocija; stavka „snimak celog događaja u punoj dužini" izbačena iz dodataka jer se sudarala sa montiranim snimkom celog dana
-19. **README** dobija uputstvo za blog: nov članak, frontmatter, linkovi, `<YouTube>` i `<Figure>`
+1. 404: `[locale]/(site)/[...rest]/page.tsx` poziva `notFound()`, a `[locale]/(site)/not-found.tsx` crta stranicu unutar headera i footera; status je 404 i Next sam dodaje `noindex`
+2. Next za `notFound()` u ovom projektu (root layout pod `[locale]`) šalje HTML ljusku `__next_error__` i stranicu iscrtava u browseru iz RSC podataka — isto je bilo i ranije za nepostojeći članak bloga; naslov taba je podrazumevani naslov sajta, jer se metapodaci rute u tom režimu ne primenjuju
+3. SEO je bio 92 zbog hreflang `Link` header-a koji next-intl šalje iz proxy-ja: dupliran sa HTML-om, sa hostom zahteva i pogrešnom adresom prevoda za članke bloga → `alternateLinks: false` u routing-u; SEO je sada 100
+4. Touch mete: putanja iznad naslova dobila `after:` proširenje na 44px, prekidač jezika 46px, checkbox saglasnosti 44×44, kratki linkovi u footeru `pointer-coarse:min-w-11`; pilule bloga, header i footer su to već imali (proveren pogodak 10px izvan elementa)
+5. Fontovi su varijabilni fajlovi (4 × woff2, ~134 kB ukupno), pa izbacivanje Outfit 700 nije smanjilo preuzimanje — samo je usklađeno sa tipografijom
+6. Bez teških klijentskih biblioteka: osnova je React/Next (~150 kB gzip), plus `cn` (~10 kB, zamena za `tailwind-merge`); YouTube nijedna od 44 adrese ne učitava pre klika
+7. Rezultati (mobilni Lighthouse, lokalni produkcijski build, 10 stranica): Performance 93–100 (kontakt najniži), Accessibility 100, Best Practices 100, SEO 100, CLS 0, LCP 0,9–1,2 s
+8. Automatska provera 44 adrese × 6 širina: bez horizontalnog skrola, jedan h1, bez JS grešaka; hero 9:16 tačan na svim širinama, paketi u jednoj koloni do 1024px; 582 Tab koraka sa vidljivim fokusom; mobilni meni zadržava fokus i vraća ga na Esc; `prefers-reduced-motion` gasi sve tranzicije i animacije
+9. README: pregled projekta, instalacija, komande (uklj. `next experimental-analyze`), ekipa, hero video, rešavanje problema; ispravljena zastarela rečenica o pravnim stranicama i u README-u i u `bitne-stvari.md`
 
 ### Testiranje
 
 <!-- If any testing, write here -->
 
-1. Lista i članci rade na obe lokalizacije; članak bez en verzije ne postoji na `/en/blog`
-2. `draft: true` ne izlazi u build; datumi formatirani po locale-u
-3. YouTubeLite radi unutar MDX-a
-4. Filter radi za svih 5 kategorija preko `?kategorija=`, URL je deljiv; članak sa više `tags` vrednosti pojavljuje se u svakoj svojoj kategoriji
-5. „Prikaži još tekstova" na listi „Sve" učitava preostala 2 članka i zatim nestaje
-6. `npm run lint`, `npm run test` i `npm run build` prolaze
+1. Cela kontrolna lista iz Goals prošla; `npm run build` bez upozorenja
+2. Spisak svih preostalih TODO stavki predat vlasniku
+3. `npm run lint`, `npm run test` i `npm run build` prolaze
 
-### DoD Faze 3 (zbirna provera)
+### DoD Faze 4 / projekta
 
-- [x] O nama kompletna, uključujući ekipu iz `team.ts` i sekciju „Kako radimo"
-- [x] Kontakt: forma šalje na Gmail, rate limit i honeypot rade, telefon skriven do klika
-- [x] Blog sa 9 članaka; build zelen
+1. SEO kompletno; pravne stranice povezane
+2. Lighthouse ciljevi ispunjeni; dev-ui obrisan
+3. README kompletan; spisak TODO stavki za vlasnika predat
 
 ### Reference
 
-- @context/project-overview.md (poglavlja 8, 13)
-- @context/features/18-blog.md
-- @context/features/03-i18n-i-tipizirane-rute-done.md
-- @context/design-reference/NOTES.md (artboard `2c`)
-- https://nextjs.org/docs (MDX u App Routeru — proveriti najnoviju verziju)
+- @context/project-overview.md (poglavlja 5, 10.4, 14)
+- @context/features/21-responzivnost-i-performanse.md
+- @context/features/06-hero-done.md, @context/features/19-seo-done.md
 
 ## History
 
@@ -172,3 +172,15 @@ Kontakt forma sada zaista šalje upite: posle provere podataka upit stiže vlasn
 ### Monday, 26.10.2026. | 12:43 — 18 Blog (MDX)
 
 Napravljen blog i time završena faza sadržaja i kontakta. Članci žive u repou kao MDX fajlovi, po jedan za svaki jezik, a isti naziv fajla povezuje srpsku i englesku verziju, pa prekidač jezika na članku vodi na prevod istog teksta. Engleska verzija nije obavezna: članak bez nje ne postoji na engleskoj listi. Podaci na vrhu svakog članka se proveravaju, pa pogrešan datum, nepoznata kategorija ili ponovljena adresa ruše build sa nazivom fajla, a članci označeni kao nacrt vide se samo u razvoju. Stranice članaka se prave unapred, pri build-u. Lista je po ekranu iz dizajna: naslov i uvod, pilule kategorija, istaknut najnoviji članak, grid od šest kartica, dugme za još tekstova i zeleni poziv na kontakt. Kategorija i strana idu kroz adresu, pa se filtrirana lista može podeliti linkom, a članak sa više kategorija pojavljuje se u svakoj. Vreme čitanja se računa iz dužine teksta, a datumi se ispisuju po jeziku. Linkovi u člancima se pišu preko ključeva umesto adresa, pa isti zapis radi na oba jezika, a pokvaren link ruši build. Napisano je devet članaka na srpskom i engleskom, po tezama vlasnika, sa linkovima ka uslugama i kontaktu; tekst o FPV proletu nosi snimak seoskog domaćinstva Milanović u Žuču, isti koji je sada i na stranicama nekretnina i FPV-a. Napravljena je i komponenta za sliku sa potpisom, koja čeka prave fotografije. Vlasnik je pre implementacije odlučio o petnaest stvari, među kojima su kraj liste sa pozivom na kontakt, zelena kategorija umesto zlatne zbog kontrasta, dugme za još tekstova bez skrola na vrh, prevod svih članaka i istaknut članak sa pitanjima za snimatelja. Tokom review-a stranica članka je centrirana i podeljena u dve kolone — šira za putanju, naslov, opis i naslovnu fotografiju, a uža od 75 znakova za tekst, zbog udobnijeg čitanja — a link za povratak na blog je dobio semantički okvir u dnu članka. Tekst je ostao levo poravnat, uz pravilo koje sprečava da poslednji red pasusa ostane sa jednom reči. Vlasnik je odlučio i da se nigde na sajtu ne opisuje let dronom iznad okupljenih ljudi, pa je FPV prolet na venčanjima sada kroz praznu salu, pre dolaska gostiju, a na događajima dron snima lokaciju sa strane; pravilo je upisano u opis projekta. U tekstu o ceni venčanja dodato je da montiran snimak dana najčešće traje između jednog i tri sata, a uklonjena je stavka koja se sa tim sudarala. README je dobio uputstvo za pisanje novog članka, linkove, video i sliku sa potpisom; primeri su provereni na privremenom članku. Lint, provera tipova, testovi i build prolaze; lista i članci provereni su na oba jezika i više širina — filteri za svih pet kategorija, dugme za još tekstova, prevodi i preusmeravanja rade, nema horizontalnog skrola, a video se ne učitava pre klika.
+
+### Monday, 02.11.2026. | 13:03 — 19 SEO i metapodaci
+
+Započeta završna faza: sajt je dobio kompletnu osnovu za pretraživače i deljenje linkova. Svaka stranica sada ima svoj naslov sa nastavkom „Camera Motion" i opis na oba jezika, sa ključnim frazama po usluzi, a podrazumevani naslov i opis više nisu upisani na srpskom u kodu nego idu kroz prevode. Svaka stranica pokazuje pretraživaču svoju glavnu adresu i adresu prevoda, sa srpskom verzijom kao podrazumevanom; članak bloga vodi na prevod istog teksta, koji ima svoju adresu, a članak bez prevoda pokazuje samo svoj jezik. Mapa sajta se pravi sama iz ruta i objavljenih članaka, sa vezama ka prevodima, a uputstvo za pretraživače sklanja internu razvojnu stranicu. Vlasnik je pre implementacije odlučio o sedam stvari: naslov i opis sajta idu kroz prevode na oba jezika, opisi se pišu za svih trinaest stranica, podrazumevane ikonice se zamenjuju generisanim, opis firme za pretraživače nosi adresu Novi Beograd, Beograd, bez ulice i sa zvaničnim nazivima na oba jezika, opis usluga se proverava u opštem validatoru jer ga Google ne prikazuje posebno, filtrirana lista bloga uvek upućuje na glavnu listu jer je „prikaži još" samo duža verzija iste liste, a pravne stranice se ne indeksiraju i nisu u mapi sajta dok ih sledeći feature ne napravi. Strukturirani podaci opisuju firmu na svakoj stranici, bez telefona, zatim usluge sa polaznom cenom sa jednog mesta, članke i putanju iznad naslova, isto kao vidljiva putanja. Za deljenje linka napravljena je privremena slika u bojama sajta sa logom i sloganom, a uz nju ikonica u tabu browsera, ikonica za početni ekran telefona i manifest sa bojom teme; svi su jasno označeni kao privremeni, a uputstvo za vlasnika i kratki podsetnik dobili su spisak fajlova sa dimenzijama za zamenu kad dizajner napravi prave. Provera semantike prošla je kroz sve stranice na oba jezika: svuda je jedan glavni naslov i sve slike imaju opis, a na pregledu usluga naslovi kartica su podignuti za nivo jer su preskakali jedan stepen, uz izgled koji je izmeren u browseru i ostao isti. Tokom rada otkriveno je da ikonica za telefon postavljena na uobičajeno mesto ruši razvojni server, jer projekat nema jedan zajednički osnovni raspored, pa je premeštena među javne fajlove i prijavljena kroz metapodatke; logo u zaglavlju se sada učitava odmah, jer je na kratkim stranicama najveći element ekrana. Tokom review-a jezik u osnovnom rasporedu čita se sa jednog mesta, podrazumevani jezik je postao jedna zajednička vrednost za rute i pretraživače, a dva članka su usklađena sa pravilima formatiranja. Lint, provera tipova, testovi i build prolaze; uživo su provereni naslovi, opisi, glavne adrese, veze ka prevodima, mapa sajta, strukturirani podaci i ikonice na oba jezika, a provera u Google alatima za bogate rezultate i pregled deljenja ostaju za posle objave sajta.
+
+### Wednesday, 04.11.2026. | 12:52 — 20 Pravne stranice
+
+Napravljene su politika privatnosti i uslovi korišćenja na oba jezika, jer kontakt forma prikuplja lične podatke. Dizajn nema ekran za ove stranice, pa su napravljene po obrascu blog članka: mirna centrirana kolona od oko 70 znakova, naslov, datum poslednje izmene i uvod, pa sekcije sa podnaslovima. Datum se menja na jednom mestu i ispisuje po jeziku, a email u tekstu se čita sa istog mesta kao u footeru. Politika navodi ko obrađuje podatke, da se prikuplja samo ono što posetilac unese u formu, zašto i na kom osnovu, koji pružaoci usluga učestvuju i gde čuvaju podatke, koliko dugo se podaci čuvaju, kako rade video snimci i koja prava posetilac ima, uz pozivanje na Zakon o zaštiti podataka o ličnosti i pravo na pritužbu Povereniku. Uslovi navode da je sadržaj sajta vlasništvo Camera Motion, da su cene „od" informativne a konačna cena stvar ponude, i da snimanje dronom zavisi od vremena i propisa, uz pilota registrovanog pri Direktoratu civilnog vazduhoplovstva; dodate su i kratke sekcije o sajtu, tačnosti informacija, privatnosti i merodavnom pravu. Vlasnik je pre implementacije odlučio o više stvari: širina teksta ostaje 70 znakova umesto širine bloga, uključuju se rok čuvanja i pozivanje na zakon, pružaoci usluga se navode kao obrađivači uz otvoreno naveden prenos podataka van Srbije, u spisak ulaze i hosting i YouTube jer bi tekst bez njih bio netačan, a rokovi čuvanja su do 48 sati za zaštitu od spama i do 12 meseci za upite. Tokom rada otkriveno je da biblioteka za jezike postavlja kolačić koji sajt ne koristi, pa je na odluku vlasnika isključen i sajt sada ne postavlja nijedan kolačić, što politika i kaže. Obe stranice se sada indeksiraju i nalaze se u mapi sajta, a privremena opcija za isključivanje indeksiranja je uklonjena jer je više ništa ne koristi. U kodu stoji napomena da je tekst šablon, a ne pravni savet, i podsetnik da se dopišu podaci o registraciji ako postoje; uputstvo za vlasnika dobilo je mesto gde se menjaju tekst i datum. Tokom review-a rok čuvanja je dopunjen zapisima kod servisa za slanje emaila, a stil fokusa za linkove u tekstu je spojen sa onim iz bloga umesto da postoji dvaput. Lint, provera tipova, testovi i build prolaze; obe stranice su proverene na oba jezika i pet širina — nema horizontalnog skrola, jedan je glavni naslov, nema animacija ni kolačića, a linkovi iz footera, iz saglasnosti na formi i iz uslova ka politici, kao i prekidač jezika, rade.
+
+### Thursday, 05.11.2026. | 15:19 — 21 Responzivnost, performanse i završna provera
+
+Završni prolaz kroz ceo sajt i time kraj projekta. Svaka stranica sajta, na oba jezika, automatski je proverena na šest širina, od telefona do širokog ekrana: nigde nema horizontalnog skrola, svuda je jedan glavni naslov, nema grešaka u browseru, hero zadržava uspravni odnos na svim širinama, a paketi na telefonu idu u jednu kolonu. Napravljena je stranica za nepostojeće adrese na oba jezika, sa headerom i footerom, naslovom, rečenicom, dugmetom za povratak na početnu i linkovima ka uslugama i kontaktu; vraća pravi status i ne indeksira se. Mobilni Lighthouse na produkcijskom build-u daje performanse od 93 do 100, a pristupačnost, dobre prakse i pretragu na 100, bez pomeranja sadržaja i sa najvećim elementom učitanim za oko jednu sekundu. Pretraga je bila na 92 zbog greške iz faze SEO-a: biblioteka za jezike je uz svaku stranicu slala i sopstvene veze ka prevodima, koje su duplirale one u stranici, a za članke bloga vodile na pogrešnu adresu prevoda; to slanje je isključeno. Mete za dodir su svuda bar 44 piksela — putanja iznad naslova, prekidač jezika, polje saglasnosti na formi i kratki linkovi u footeru dobili su nevidljivo proširenje, bez promene izgleda. Tastatura je proverena kroz deset stranica na desktopu i telefonu: svaki korak ima vidljiv fokus, mobilni meni zadržava fokus i vraća ga posle zatvaranja, a podešavanje za smanjeno kretanje gasi sve prelaze. Provera kontrasta cele palete pokazala je da sav tekst prolazi, osim zlatnih brojeva koraka saradnje, koji su na odluku vlasnika postali zeleni. Vlasnik je odlučio i da podnaslovi u člancima i pravnim stranicama budu iste debljine kao na ostatku sajta, pa se najdeblji rez naslovnog fonta više ne učitava, da se separator u traci ispod heroa lepi za poslednju reč pa nikad ne počinje novi red, da razvojna stranica sa pregledom komponenti ostaje jer je na produkciji ionako nedostupna, da se kontakt stranica, koja zbog forme i kalendara nosi najviše koda, ne optimizuje dodatno jer je iznad cilja, i da deploy opisuje sam. YouTube se ni na jednoj stranici ne učitava pre klika, a na sajtu nema teških biblioteka. README je dopunjen pregledom projekta, instalacijom, komandama, uputstvom za ekipu i hero video i tabelom za rešavanje čestih problema, a zastarela rečenica o pravnim stranicama ispravljena je i tu i u podsetniku. Svi preostali poslovi za vlasnika — video, fotografije, YouTube ID-jevi, logo i ikonice, domen za slanje emaila, pravni podaci i koraci posle objave — skupljeni su u numerisan spisak sa tačnim mestima u kodu, u novom folderu zajedno sa podsetnikom, a uz njega je napisano i uputstvo za asistenta koji pomaže vlasniku dok radi te stavke. Tokom review-a ispravljena je debljina fonta u opisu projekta, a naslovna slika članka dobila je toplu pozadinu dok se učitava. Lint, testovi i build prolaze bez upozorenja.

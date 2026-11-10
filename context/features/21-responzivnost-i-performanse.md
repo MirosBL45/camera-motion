@@ -39,4 +39,4 @@ Faza 4, fajl 3/3 (kraj projekta). Završni prolaz kroz ceo sajt + čišćenje + 
 ## Reference
 
 - @context/project-overview.md (poglavlja 5, 10.4, 14)
-- @context/features/06-hero.md, @context/features/19-seo.md
+- @context/features/06-hero-done.md, @context/features/19-seo-done.md

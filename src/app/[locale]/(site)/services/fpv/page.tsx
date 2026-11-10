@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { useLocale, useTranslations } from "next-intl";
 
 import {
@@ -18,6 +19,8 @@ import { ServiceDelivery } from "@/components/sections/service-page/ServiceDeliv
 import { ServiceFeatures } from "@/components/sections/service-page/ServiceFeatures";
 import { ServiceIntro } from "@/components/sections/service-page/ServiceIntro";
 import { ServiceWorks } from "@/components/sections/service-page/ServiceWorks";
+import { ServiceJsonLd } from "@/components/seo/ServiceJsonLd";
+import { getStaticPageMetadata } from "@/lib/page-metadata";
 import { formatPrice, getStartingPrice } from "@/lib/pricing";
 
 import { FPV_ADDON_PRICE } from "@/data/packages";
@@ -49,6 +52,10 @@ const SAFETY_ITEMS = [
 
 const WORK_ITEMS = ["first", "second"] as const;
 
+export function generateMetadata(): Promise<Metadata> {
+  return getStaticPageMetadata("servicesFpv");
+}
+
 export default function ServicesFpvPage() {
   const locale = useLocale();
   const t = useTranslations("services.fpv");
@@ -56,6 +63,7 @@ export default function ServicesFpvPage() {
 
   return (
     <>
+      <ServiceJsonLd service={service} />
       <ServiceIntro
         service={service}
         heading={t("heading")}

@@ -10,6 +10,7 @@ Faza 4, fajl 2/3. Politika privatnosti i uslovi korišćenja — obavezni jer fo
 - `/uslovi-koriscenja`: sadržaj sajta vlasništvo Camera Motion; cene "od" informativne — konačna ponuda dogovorom; snimanje dronom zavisi od vremenskih uslova i propisa DCV
 - Obe stranice: mirna tipografska stranica max ~70ch, datum poslednje izmene na vrhu; `// NAPOMENA: šablon teksta, nije pravni savet — vlasnik pregleda`
 - Linkovi iz footera i iz checkbox-a saglasnosti vode na ove stranice (proveriti da rade)
+- Feature 19 je obe stranice označio `noindex` i izostavio iz sitemap-a dok su skeleti (odluka vlasnika, 02.11.2026.) — kad su stranice gotove, skinuti `noindex` i vratiti ih u sitemap
 
 ## Testiranje
 
@@ -18,4 +19,4 @@ Faza 4, fajl 2/3. Politika privatnosti i uslovi korišćenja — obavezni jer fo
 ## Reference
 
 - @context/project-overview.md (poglavlja 7, 12)
-- @context/features/05-footer.md, @context/features/16-kontakt-stranica.md
+- @context/features/05-footer-done.md, @context/features/16-kontakt-stranica-done.md

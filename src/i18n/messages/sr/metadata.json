@@ -1,38 +1,56 @@
 {
+  "siteName": "Camera Motion",
+  "default": {
+    "title": "Camera Motion — snimanje dronom i kamerom",
+    "description": "Video produkcija iz Beograda: snimanje venčanja, nekretnina, događaja i proslava, promo video za firme i FPV snimci — dronom iz vazduha i kamerom sa zemlje."
+  },
+  "ogImageAlt": "Camera Motion — snimanje dronom i kamerom, Beograd",
   "home": {
-    "title": "Početna"
+    "title": "Snimanje dronom i kamerom u Beogradu",
+    "description": "Snimamo venčanja, nekretnine, proslave i promo video dronom i kamerom — u Beogradu i okolini. Filmski kadrovi, montaža i registrovan pilot pri DCV."
   },
   "services": {
-    "title": "Usluge"
+    "title": "Usluge snimanja dronom i kamerom",
+    "description": "Snimanje venčanja i nekretnina, događaji i proslave, promo video za firme i FPV snimci. Pogledajte šta snimamo i polazne cene — Beograd i okolina."
   },
   "servicesWeddings": {
-    "title": "Snimanje venčanja"
+    "title": "Snimanje venčanja dronom i kamerom",
+    "description": "Snimatelj za svadbu u Beogradu: snimanje venčanja kamerom i dronom, od pripreme do prvog plesa, i montaža koja čuva emociju dana. Paketi i polazne cene."
   },
   "servicesRealEstate": {
-    "title": "Snimanje nekretnina"
+    "title": "Snimanje nekretnina dronom",
+    "description": "Snimanje nekretnina dronom i kamerom: video za prodaju stana ili kuće i snimanje apartmana za Booking i Airbnb. Paketi i polazne cene, Beograd i okolina."
   },
   "servicesEvents": {
-    "title": "Događaji i proslave"
+    "title": "Snimanje događaja i proslava",
+    "description": "Snimanje rođendana, krštenja i punoletstava, sportskih i korporativnih događaja — kamerom sa zemlje i dronom iz vazduha. Video sa događaja u Beogradu."
   },
   "servicesPromo": {
-    "title": "Promo video"
+    "title": "Promo video za firme",
+    "description": "Promo video za restorane, hotele, teretane i mala preduzeća u Beogradu: snimanje dronom i kamerom, montaža i video spreman za sajt, mreže i oglase."
   },
   "servicesFpv": {
-    "title": "FPV snimci"
+    "title": "FPV snimanje dronom",
+    "description": "FPV dron snimci: prolet dronom kroz objekat u jednom neprekinutom kadru — za nekretnine, venčanja, lokale i sport. Samostalno ili kao dodatak uz uslugu."
   },
   "blog": {
-    "title": "Blog"
+    "title": "Blog o snimanju dronom i kamerom",
+    "description": "Saveti iz prve ruke — šta pitati snimatelja, kako se pripremiti za snimanje venčanja ili nekretnine i zašto neki kadrovi dronom ne mogu svuda."
   },
   "about": {
-    "title": "O nama"
+    "title": "O nama",
+    "description": "Upoznajte ekipu Camera Motion iz Beograda: kako radimo, od prvog razgovora do isporuke, kojom opremom snimamo i zašto letimo po pravilima."
   },
   "contact": {
-    "title": "Kontakt"
+    "title": "Kontakt i ponuda",
+    "description": "Zatražite ponudu za snimanje dronom i kamerom. Recite nam datum, lokaciju i šta vam je važno — odgovaramo u roku od 24 sata sa tačnom cenom."
   },
   "privacy": {
-    "title": "Politika privatnosti"
+    "title": "Politika privatnosti",
+    "description": "Kako Camera Motion obrađuje podatke koje pošaljete preko kontakt forme."
   },
   "terms": {
-    "title": "Uslovi korišćenja"
+    "title": "Uslovi korišćenja",
+    "description": "Uslovi korišćenja sajta Camera Motion."
   }
 }
